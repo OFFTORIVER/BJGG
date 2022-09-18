@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SpotViewController: UIViewController {
+class BbajiSpotViewController: UIViewController {
 
     private var liveCameraView = LiveCameraView()
     private var spotInfoView = SpotInfoView()
