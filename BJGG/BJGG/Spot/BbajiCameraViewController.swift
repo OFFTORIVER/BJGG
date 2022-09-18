@@ -10,10 +10,23 @@ import SnapKit
 
 class SpotViewController: UIViewController {
 
+    private var liveCameraView = LiveCameraView()
+    private var spotInfoView = SpotInfoView()
+    private var spotWeatherInfoView = SpotWeatherInfoView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        layoutConfigure()
         // Do any additional setup after loading the view.
+    }
+    
+    private func layoutConfigure() {
+        
+        view.addSubview(liveCameraView)
+        view.addSubview(spotInfoView)
+        view.addSubview(spotWeatherInfoView)
+        
     }
 
 }
