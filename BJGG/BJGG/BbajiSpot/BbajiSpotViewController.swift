@@ -23,9 +23,19 @@ class BbajiSpotViewController: UIViewController {
     
     private func layoutConfigure() {
         
+        let safeArea = view.safeAreaLayoutGuide
+        let viewWidth = UIScreen.main.bounds.width
+        
         view.addSubview(liveCameraView)
         view.addSubview(spotInfoView)
         view.addSubview(spotWeatherInfoView)
+        
+        liveCameraView.snp.makeConstraints({ make in
+            make.top.equalTo(safeArea.snp.top)
+            make.leading.equalTo(safeArea.snp.leading)
+            make.centerX.equalTo(safeArea.snp.centerX)
+            make.height.equalTo(viewWidth * 9 / 16)
+        })
         
     }
 
