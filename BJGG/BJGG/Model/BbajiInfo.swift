@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BbajiInfo: Codable {
+struct BbajiInfo: Encodable {
     
     private var name: String
     private var thumbnailImgName: String
