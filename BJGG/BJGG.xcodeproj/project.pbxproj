@@ -37,6 +37,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A7E3BE028D7657800F6416A /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				3A7E3BE128D765B500F6416A /* UI Component */,
+			);
+			path = Spot;
+			sourceTree = "<group>";
+		};
+		3A7E3BE128D765B500F6416A /* UI Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "UI Component";
+			sourceTree = "<group>";
+		};
 		55CB0A9B28BA4F9F0045644C = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +71,7 @@
 		55CB0AA628BA4F9F0045644C /* BJGG */ = {
 			isa = PBXGroup;
 			children = (
+				3A7E3BE028D7657800F6416A /* Spot */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
 				55CB0ABB28BB41C60045644C /* MainViewController.swift */,
