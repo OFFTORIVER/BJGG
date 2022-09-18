@@ -25,6 +25,8 @@ class BbajiSpotViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         let viewWidth = UIScreen.main.bounds.width
+        let defaultMargin = 16
+        let viewToViewMargin = 12
         
         view.addSubview(liveCameraView)
         view.addSubview(spotInfoView)
@@ -38,15 +40,15 @@ class BbajiSpotViewController: UIViewController {
         })
         
         spotInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(liveCameraView.snp.bottom).inset(-16)
-            make.leading.equalTo(safeArea.snp.leading).inset(16)
+            make.top.equalTo(liveCameraView.snp.bottom).inset(-viewToViewMargin)
+            make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(166)
         })
 
         spotWeatherInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(spotInfoView.snp.bottom).inset(-12)
-            make.leading.equalTo(safeArea.snp.leading).inset(16)
+            make.top.equalTo(spotInfoView.snp.bottom).inset(-viewToViewMargin)
+            make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(306)
         })
