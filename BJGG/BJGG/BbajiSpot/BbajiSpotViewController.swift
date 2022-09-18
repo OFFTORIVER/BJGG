@@ -37,8 +37,9 @@ class BbajiSpotViewController: UIViewController {
             make.height.equalTo(viewWidth * 9 / 16)
         })
         
+        
         spotInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(liveCameraView.snp.bottom).inset(-12)
+            make.top.equalTo(liveCameraView.snp.bottom).inset(-16)
             make.leading.equalTo(safeArea.snp.leading).inset(16)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(166)
@@ -55,7 +56,6 @@ class BbajiSpotViewController: UIViewController {
         liveCameraView.backgroundColor = .yellow
         spotInfoView.backgroundColor = .blue
         spotWeatherInfoView.backgroundColor = .red
-        
     }
     
 }
