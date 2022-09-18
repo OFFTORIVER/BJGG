@@ -35,6 +35,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A7E3BDB28D7427E00F6416A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		55CB0A9B28BA4F9F0045644C = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +61,7 @@
 		55CB0AA628BA4F9F0045644C /* BJGG */ = {
 			isa = PBXGroup;
 			children = (
+				3A7E3BDB28D7427E00F6416A /* Model */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
 				55CB0ABB28BB41C60045644C /* MainViewController.swift */,
@@ -275,6 +283,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BJGG/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -301,6 +310,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BJGG/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
