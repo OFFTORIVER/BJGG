@@ -9,12 +9,28 @@ import UIKit
 
 class SpotWeatherInfoView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    required override init(frame: CGRect) {
+        
+        super.init(frame: frame)
+        
+        let spotWeatherInfoViewDivideLine = UIView()
+        self.addSubview(spotWeatherInfoViewDivideLine)
+        spotWeatherInfoViewDivideLine.snp.makeConstraints({ make in
+            make.leading.equalTo(self.snp.leading)
+            make.top.equalTo(self.snp.top).inset(164)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(self.snp.width)
+            make.height.equalTo(2)
+        })
+        
+        spotWeatherInfoViewDivideLine.backgroundColor = .black
+        
+        self.layer.cornerRadius = 16
+        
     }
-    */
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 }
