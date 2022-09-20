@@ -70,6 +70,7 @@
 				3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */,
 			);
 			path = "UI Component";
+			sourceTree = "<group>";
 			};
 		3A7E3BDB28D7427E00F6416A /* Model */ = {
 			isa = PBXGroup;
