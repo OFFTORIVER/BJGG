@@ -75,10 +75,10 @@
 			children = (
 				3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */,
 				3A7E3BE828D7670000F6416A /* SpotInfoView.swift */,
-				3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */,
 				3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */,
-				3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */,
+				3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */,
 				3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */,
+				3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */,
 			);
 			path = "UI Component";
 			sourceTree = "<group>";
