@@ -44,7 +44,7 @@ final class SpotWeatherInfoView: UIView {
         self.addSubview(currentWeatherIconAndLabel)
         
         currentWeatherIconAndLabel.snp.makeConstraints({ make in
-            make.top.equalTo(weatherAddressLabel.snp.bottom).inset(-defaultMargin2)
+            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(defaultMargin2)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(160)
             make.height.equalTo(64)
