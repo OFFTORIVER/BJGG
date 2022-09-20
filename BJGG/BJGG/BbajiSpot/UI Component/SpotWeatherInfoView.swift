@@ -9,6 +9,8 @@ import UIKit
 
 class SpotWeatherInfoView: UIView {
     
+    private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
+    
     required override init(frame: CGRect) {
         
         super.init(frame: frame)
@@ -91,20 +93,76 @@ class SpotWeatherInfoView: UIView {
         
         self.layer.cornerRadius = 16
         
-        let spotTodayWeatherScrollView = SpotTodayWeatherScrollView()
-        self.addSubview(spotTodayWeatherScrollView)
-        spotTodayWeatherScrollView.snp.makeConstraints({ make in
+        let collectionViewLayer = UICollectionViewFlowLayout()
+        collectionViewLayer.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        collectionViewLayer.minimumLineSpacing = 10
+        collectionViewLayer.minimumInteritemSpacing = 10
+        collectionViewLayer.scrollDirection = .horizontal
+        
+        spotTodayWeatherCollectionView = SpotTodayWeatherCollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
+        
+        self.addSubview(spotTodayWeatherCollectionView)
+        spotTodayWeatherCollectionView.snp.makeConstraints({ make in
             make.top.equalTo(spotWeatherInfoViewDivideLine.snp.bottom)
             make.bottom.equalTo(self.snp.bottom)
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
         })
-        spotTodayWeatherScrollView.backgroundColor = .green
+        spotTodayWeatherCollectionView.backgroundColor = .green
         
+        registerCollectionView()
+        setupCollectionViewDelegate()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    private func registerCollectionView() {
+        spotTodayWeatherCollectionView.register(SpotTodayWeatherCollectionViewCell.self, forCellWithReuseIdentifier: SpotTodayWeatherCollectionViewCell.id)
+    }
+    
+    private func setupCollectionViewDelegate() {
+        spotTodayWeatherCollectionView.dataSource = self
+        spotTodayWeatherCollectionView.delegate = self
+    }
 }
+
+extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 48, height: 90)//UICollectionViewFlowLayout.automaticSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotTodayWeatherCollectionViewCell.id, for: indexPath) as! SpotTodayWeatherCollectionViewCell
+        
+        let idx = indexPath.row
+        cell.currentWeatherImgView = UIImageView()
+        cell.temperatureLabel.text = "23°"
+        cell.timeLabel.text = "오후12시"
+        
+        if idx == 0 {
+            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            cell.temperatureLabel.textAlignment = .center
+            cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            cell.timeLabel.textAlignment = .center
+        } else {
+            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            cell.temperatureLabel.textAlignment = .center
+            cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            cell.timeLabel.textAlignment = .center
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("CLICKED!")
+    }
+}
+
