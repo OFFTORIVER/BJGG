@@ -10,7 +10,7 @@ import SnapKit
 
 class BbajiSpotViewController: UIViewController {
 
-    private var liveCameraView = LiveCameraView()
+    private var liveCameraView = SpotLiveCameraView()
     private var spotInfoView: SpotInfoView!
     private var spotWeatherInfoView: SpotWeatherInfoView!
     
