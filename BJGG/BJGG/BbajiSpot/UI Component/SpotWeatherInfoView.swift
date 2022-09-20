@@ -8,13 +8,23 @@
 import UIKit
 
 class SpotWeatherInfoView: UIView {
-    
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
     
     required override init(frame: CGRect) {
         
         super.init(frame: frame)
         
+        layoutConfigure()
+        
+        registerCollectionView()
+        setupCollectionViewDelegate()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func layoutConfigure() {
         let defaultMargin: CGFloat = 20
         let defaultMargin2: CGFloat = 12
         
@@ -65,7 +75,6 @@ class SpotWeatherInfoView: UIView {
         labelSetting(label: currentWeatherLabel, text: "23°", size: 48, weight: .heavy, alignment: .center)
         
         currentWeatherLabel.backgroundColor = .yellow
-        
         currentWeatherIcon.backgroundColor = .cyan
         
         let rainInfoLabel = UILabel()
@@ -109,13 +118,6 @@ class SpotWeatherInfoView: UIView {
             make.centerX.equalTo(self.snp.centerX)
         })
         spotTodayWeatherCollectionView.backgroundColor = .green
-        
-        registerCollectionView()
-        setupCollectionViewDelegate()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func registerCollectionView() {
@@ -129,9 +131,8 @@ class SpotWeatherInfoView: UIView {
 }
 
 extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 48, height: 90)//UICollectionViewFlowLayout.automaticSize
+        return CGSize(width: 48, height: 90)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -157,7 +158,6 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
             cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             cell.timeLabel.textAlignment = .center
         }
-        
         return cell
     }
     

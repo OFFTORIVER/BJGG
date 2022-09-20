@@ -8,13 +8,10 @@
 import UIKit
 
 class SpotInfoView: UIView {
-
     required override init(frame: CGRect) {
-        
         super.init(frame: frame)
         
         layoutConfigure()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -22,14 +19,13 @@ class SpotInfoView: UIView {
     }
     
     private func layoutConfigure() {
-        
-        let info = InfoSample()
+        let info = BbajiInfo()
         
         let defaultMargin: CGFloat = 20
         
         let spotNameLabel = UILabel()
         self.addSubview(spotNameLabel)
-        labelSetting(label: spotNameLabel, text: info.name, size: 24, weight: .heavy, alignment: .center)
+        labelSetting(label: spotNameLabel, text: info.getName(), size: 24, weight: .heavy, alignment: .center)
         spotNameLabel.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(self.snp.top).inset(defaultMargin)
@@ -52,8 +48,8 @@ class SpotInfoView: UIView {
         
         self.layer.cornerRadius = 16
         
-        let addressInfoView = IconAndLabelView(text: info.address)
-        let contactInfoView = IconAndLabelView(text: info.contact)
+        let addressInfoView = IconAndLabelView(text: info.getAddress())
+        let contactInfoView = IconAndLabelView(text: info.getContact())
         
         [addressInfoView, contactInfoView].forEach({
             self.addSubview($0)
@@ -70,15 +66,11 @@ class SpotInfoView: UIView {
             make.top.equalTo(addressInfoView.snp.bottom).offset(12)
             make.height.equalTo(20)
         })
-        
     }
-    
 }
 
 func labelSetting(label: UILabel, text: String, size: CGFloat, weight: UIFont.Weight, alignment: NSTextAlignment) {
-    
     label.text = text
     label.font = UIFont.systemFont(ofSize: size, weight: weight)
     label.textAlignment = alignment
-    
 }

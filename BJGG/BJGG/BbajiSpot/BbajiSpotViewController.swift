@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 class BbajiSpotViewController: UIViewController {
-
     private var liveCameraView = SpotLiveCameraView()
     private var spotInfoView: SpotInfoView!
     private var spotWeatherInfoView: SpotWeatherInfoView!
@@ -18,7 +17,6 @@ class BbajiSpotViewController: UIViewController {
         super.viewDidLoad()
         
         layoutConfigure()
-        // Do any additional setup after loading the view.
     }
     
     private func layoutConfigure() {
@@ -60,7 +58,5 @@ class BbajiSpotViewController: UIViewController {
         liveCameraView.backgroundColor = .yellow
         spotInfoView.backgroundColor = .blue
         spotWeatherInfoView.backgroundColor = .red
-        
     }
-    
 }

@@ -8,9 +8,7 @@
 import UIKit
 
 class IconAndLabelView: UIView {
-    
     required init(text: String) {
-        
         super.init(frame: CGRect.zero)
         
         let addressImage = UIImageView()
@@ -34,7 +32,6 @@ class IconAndLabelView: UIView {
         })
         
         labelSetting(label: addressLabel, text: text, size: 15, weight: .medium, alignment: .left)
-        
     }
     
     required init?(coder: NSCoder) {

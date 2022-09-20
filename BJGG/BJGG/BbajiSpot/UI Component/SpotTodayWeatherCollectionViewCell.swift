@@ -58,5 +58,4 @@ class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         temperatureLabel.backgroundColor = .yellow
         timeLabel.backgroundColor = .blue
     }
-
 }
