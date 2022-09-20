@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */; };
+		3A124AB828D9E92E00D0EAA1 /* SpotTodayWeatherScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124AB728D9E92E00D0EAA1 /* SpotTodayWeatherScrollView.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
+		3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */; };
 		3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */; };
-		3A7E3BE528D766D700F6416A /* LiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE428D766D700F6416A /* LiveCameraView.swift */; };
+		3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */; };
 		3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */; };
 		3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE828D7670000F6416A /* SpotInfoView.swift */; };
 		3AD87FB028D8884600ABD2E4 /* TestDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FAF28D8884600ABD2E4 /* TestDataStructure.swift */; };
@@ -23,13 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A124AB728D9E92E00D0EAA1 /* SpotTodayWeatherScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherScrollView.swift; sourceTree = "<group>"; };
+		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
 		3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiSpotViewController.swift; sourceTree = "<group>"; };
-		3A7E3BE428D766D700F6416A /* LiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCameraView.swift; sourceTree = "<group>"; };
+		3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraView.swift; sourceTree = "<group>"; };
 		3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherInfoView.swift; sourceTree = "<group>"; };
 		3A7E3BE828D7670000F6416A /* SpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoView.swift; sourceTree = "<group>"; };
 		3AD87FAF28D8884600ABD2E4 /* TestDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataStructure.swift; sourceTree = "<group>"; };
 		3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconAndLabelView.swift; sourceTree = "<group>"; };
-		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
 		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BJGG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB0AA728BA4F9F0045644C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A7E3BDB28D7427E00F6416A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3A7E3BE028D7657800F6416A /* BbajiSpot */ = {
 			isa = PBXGroup;
 			children = (
@@ -63,21 +73,14 @@
 		3A7E3BE128D765B500F6416A /* UI Component */ = {
 			isa = PBXGroup;
 			children = (
-				3A7E3BE428D766D700F6416A /* LiveCameraView.swift */,
+				3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */,
 				3A7E3BE828D7670000F6416A /* SpotInfoView.swift */,
 				3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */,
 				3AD87FAF28D8884600ABD2E4 /* TestDataStructure.swift */,
 				3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */,
+				3A124AB728D9E92E00D0EAA1 /* SpotTodayWeatherScrollView.swift */,
 			);
 			path = "UI Component";
-			sourceTree = "<group>";
-			};
-		3A7E3BDB28D7427E00F6416A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		55CB0A9B28BA4F9F0045644C = {
@@ -187,7 +190,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A7E3BE528D766D700F6416A /* LiveCameraView.swift in Sources */,
+				3A124AB828D9E92E00D0EAA1 /* SpotTodayWeatherScrollView.swift in Sources */,
+				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
 				55CB0ABC28BB41C60045644C /* MainViewController.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */,

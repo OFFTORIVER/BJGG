@@ -91,6 +91,16 @@ class SpotWeatherInfoView: UIView {
         
         self.layer.cornerRadius = 16
         
+        let spotTodayWeatherScrollView = SpotTodayWeatherScrollView()
+        self.addSubview(spotTodayWeatherScrollView)
+        spotTodayWeatherScrollView.snp.makeConstraints({ make in
+            make.top.equalTo(spotWeatherInfoViewDivideLine.snp.bottom)
+            make.bottom.equalTo(self.snp.bottom)
+            make.leading.equalTo(self.snp.leading)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        spotTodayWeatherScrollView.backgroundColor = .green
+        
     }
     
     required init?(coder: NSCoder) {
