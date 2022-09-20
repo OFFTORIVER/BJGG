@@ -146,12 +146,12 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         cell.timeLabel.text = "오후12시"
         
         if idx == 0 {
-            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             cell.temperatureLabel.textAlignment = .center
             cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             cell.timeLabel.textAlignment = .center
         } else {
-            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
             cell.temperatureLabel.textAlignment = .center
             cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             cell.timeLabel.textAlignment = .center
