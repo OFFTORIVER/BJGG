@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
+final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
     
     var currentWeatherImgView = UIImageView()
     var temperatureLabel = UILabel()

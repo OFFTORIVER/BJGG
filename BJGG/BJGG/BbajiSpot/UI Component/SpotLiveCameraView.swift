@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotLiveCameraView: UIView {
+final class SpotLiveCameraView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.

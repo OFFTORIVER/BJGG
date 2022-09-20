@@ -7,4 +7,4 @@
 
 import UIKit
 
-class SpotTodayWeatherCollectionView: UICollectionView { }
+final class SpotTodayWeatherCollectionView: UICollectionView { }

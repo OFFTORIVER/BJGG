@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IconAndLabelView: UIView {
+final class IconAndLabelView: UIView {
     required init(text: String) {
         super.init(frame: CGRect.zero)
         
@@ -26,7 +26,7 @@ class IconAndLabelView: UIView {
         addressImage.backgroundColor = .black
         
         addressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(addressImage.snp.trailing).inset(-8)
+            make.leading.equalTo(addressImage.snp.trailing).offset(8)
             make.centerY.equalTo(addressImage.snp.centerY)
             make.height.equalTo(18)
         })

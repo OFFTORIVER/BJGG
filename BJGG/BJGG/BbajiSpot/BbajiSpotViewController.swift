@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BbajiSpotViewController: UIViewController {
+final class BbajiSpotViewController: UIViewController {
     private var liveCameraView = SpotLiveCameraView()
     private var spotInfoView: SpotInfoView!
     private var spotWeatherInfoView: SpotWeatherInfoView!
@@ -41,14 +41,14 @@ class BbajiSpotViewController: UIViewController {
         })
         
         spotInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(liveCameraView.snp.bottom).inset(-viewToViewMargin)
+            make.top.equalTo(liveCameraView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(166)
         })
 
         spotWeatherInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(spotInfoView.snp.bottom).inset(-viewToViewMargin)
+            make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(306)

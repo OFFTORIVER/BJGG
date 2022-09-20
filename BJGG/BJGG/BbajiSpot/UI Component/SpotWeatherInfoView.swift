@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotWeatherInfoView: UIView {
+final class SpotWeatherInfoView: UIView {
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
     
     required override init(frame: CGRect) {
@@ -81,7 +81,7 @@ class SpotWeatherInfoView: UIView {
         self.addSubview(rainInfoLabel)
         
         rainInfoLabel.snp.makeConstraints({ make in
-            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).inset(-defaultMargin2)
+            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(defaultMargin2)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(18)
         })
@@ -92,7 +92,7 @@ class SpotWeatherInfoView: UIView {
         self.addSubview(spotWeatherInfoViewDivideLine)
         spotWeatherInfoViewDivideLine.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading)
-            make.top.equalTo(rainInfoLabel.snp.bottom).inset(-defaultMargin)
+            make.top.equalTo(rainInfoLabel.snp.bottom).offset(defaultMargin)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(2)
@@ -104,8 +104,6 @@ class SpotWeatherInfoView: UIView {
         
         let collectionViewLayer = UICollectionViewFlowLayout()
         collectionViewLayer.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        collectionViewLayer.minimumLineSpacing = 10
-        collectionViewLayer.minimumInteritemSpacing = 10
         collectionViewLayer.scrollDirection = .horizontal
         
         spotTodayWeatherCollectionView = SpotTodayWeatherCollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
