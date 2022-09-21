@@ -10,8 +10,8 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     private var liveCameraView = SpotLiveCameraView()
-    private var spotInfoView: SpotInfoView!
-    private var spotWeatherInfoView: SpotWeatherInfoView!
+    private var spotInfoView = SpotInfoView()
+    private var spotWeatherInfoView = SpotWeatherInfoView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +25,6 @@ final class BbajiSpotViewController: UIViewController {
         let viewWidth = UIScreen.main.bounds.width
         let defaultMargin = 16
         let viewToViewMargin = 12
-        
-        spotInfoView = SpotInfoView()
-        spotWeatherInfoView = SpotWeatherInfoView()
         
         [liveCameraView, spotInfoView, spotWeatherInfoView].forEach({
             view.addSubview($0)
