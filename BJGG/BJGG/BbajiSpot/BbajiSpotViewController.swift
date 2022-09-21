@@ -26,14 +26,16 @@ final class BbajiSpotViewController: UIViewController {
         let defaultMargin = 16
         let viewToViewMargin = 12
         
-        [liveCameraView, spotInfoView, spotWeatherInfoView].forEach({
-            view.addSubview($0)
-        })
+        [
+            liveCameraView,
+            spotInfoView,
+            spotWeatherInfoView
+        ].forEach({ view.addSubview($0) })
         
         liveCameraView.snp.makeConstraints({ make in
             make.top.equalTo(safeArea.snp.top)
             make.leading.equalTo(safeArea.snp.leading)
-            make.centerX.equalTo(safeArea.snp.centerX)
+            make.trailing.equalTo(safeArea.snp.trailing)
             make.height.equalTo(viewWidth * 9 / 16)
         })
         
