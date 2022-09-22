@@ -9,19 +9,19 @@ import UIKit
 
 extension UIColor {
     // Colors
-//    static let bbagaBlue = UIColor(rgb:)
-//    static let bbagaGreen = UIColor(rgb:)
+    static let bbagaBlue = UIColor(rgb: 0x00ACBD)
+    static let bbagaGreen = UIColor(rgb: 0x18ECC6)
     
     // Grayscale
-//    static let bbagaGray1 = UIColor(rgb:)
-//    static let bbagaGray2 = UIColor(rgb:)
-//    static let bbagaGray3 = UIColor(rgb:)
-//    static let bbagaGray4 = UIColor(rgb:)
-//    static let bbagaBack = UIColor(rgb:)
+    static let bbagaGray1 = UIColor(rgb: 0x000000)
+    static let bbagaGray2 = UIColor(rgb: 0xA0A0A0)
+    static let bbagaGray3 = UIColor(rgb: 0xDFDFDF)
+    static let bbagaGray4 = UIColor(rgb: 0xFFFFFF)
+    static let bbagaBack = UIColor(rgb: 0xEAF2F3)
     
     // Icon Color
-//    static let bbagaSunny = UIColor(rgb:)
-//    static let bbagaRain = UIColor(rgb:)
+    static let bbagaSunny = UIColor(rgb: 0xFFA24B)
+    static let bbagaRain = UIColor(rgb: 0x609AF0)
     
     // alpha 1 고정, rgb값 입력 간소화 init
     convenience init(red: Int, green: Int, blue: Int, a: Int = 0xFF) {
