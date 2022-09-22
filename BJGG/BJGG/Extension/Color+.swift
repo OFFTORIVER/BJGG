@@ -23,6 +23,7 @@ extension UIColor {
 //    static let bbagaSunny = UIColor(rgb:)
 //    static let bbagaRain = UIColor(rgb:)
     
+    // alpha 1 고정, rgb값 입력 간소화 init
     convenience init(red: Int, green: Int, blue: Int, a: Int = 0xFF) {
         self.init(
             red: CGFloat(red) / 255.0,
@@ -32,6 +33,7 @@ extension UIColor {
         )
     }
     
+    // Hex값 rgb 변환 init
     convenience init(rgb: Int) {
         self.init(
             red: (rgb >> 16) & 0xFF,
