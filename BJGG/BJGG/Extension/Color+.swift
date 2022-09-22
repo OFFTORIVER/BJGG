@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-    // Colors
+    // Brading Colors
     static let bbagaBlue = UIColor(rgb: 0x00ACBD)
     static let bbagaGreen = UIColor(rgb: 0x18ECC6)
     
