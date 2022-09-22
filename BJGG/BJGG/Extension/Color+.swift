@@ -23,6 +23,14 @@ extension UIColor {
 //    static let bbagaSunny = UIColor(rgb:)
 //    static let bbagaRain = UIColor(rgb:)
     
+    convenience init(red: Int, green: Int, blue: Int, a: Int = 0xFF) {
+        self.init(
+            red: CGFloat(red) / 255.0,
+            green: CGFloat(green) / 255.0,
+            blue: CGFloat(blue) / 255.0,
+            alpha: CGFloat(a) / 255.0
+        )
+    }
 }
 
 
