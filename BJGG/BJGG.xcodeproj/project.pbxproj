@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */; };
+		558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */; };
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
 		3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
@@ -27,6 +29,8 @@
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionView.swift; sourceTree = "<group>"; };
 		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
+		553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Constraints.swift"; sourceTree = "<group>"; };
+		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiSpotViewController.swift; sourceTree = "<group>"; };
 		3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraView.swift; sourceTree = "<group>"; };
 		3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherInfoView.swift; sourceTree = "<group>"; };
@@ -61,6 +65,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		558CECEB28DC64FC00AFCF50 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */,
+				553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */,
+			);
+			path = Extension;
+      sourceTree = "<group>";
+    };
 		3A7E3BE028D7657800F6416A /* BbajiSpot */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +115,7 @@
 		55CB0AA628BA4F9F0045644C /* BJGG */ = {
 			isa = PBXGroup;
 			children = (
+				558CECEB28DC64FC00AFCF50 /* Extension */,
 				3A7E3BE028D7657800F6416A /* BbajiSpot */,
 				3A7E3BDB28D7427E00F6416A /* Model */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
@@ -194,12 +208,14 @@
 				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
 				55CB0ABC28BB41C60045644C /* MainViewController.swift in Sources */,
+				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */,
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,
 				3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */,
 				3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
+				553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
