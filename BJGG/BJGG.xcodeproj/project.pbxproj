@@ -96,11 +96,19 @@
 		553F0F6E28E2090300FD9CDA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				553F0F8028E20E7000FD9CDA /* EsamanruOTF */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		553F0F8028E20E7000FD9CDA /* EsamanruOTF */ = {
+			isa = PBXGroup;
+			children = (
 				553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */,
 				553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */,
 				553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */,
 			);
-			path = Fonts;
+			path = EsamanruOTF;
 			sourceTree = "<group>";
 		};
 		558CECEB28DC64FC00AFCF50 /* Extension */ = {
