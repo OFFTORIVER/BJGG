@@ -32,6 +32,7 @@ final class IconAndLabelView: UIView {
         })
         
         labelSetting(label: addressLabel, text: text, font: .bbajiFont(.button1), alignment: .left)
+        addressLabel.textColor = .bbagaBlue
     }
     
     required init?(coder: NSCoder) {

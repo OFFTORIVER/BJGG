@@ -53,9 +53,5 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(18)
             make.width.equalTo(64)
         })
-        
-        currentWeatherImgView.backgroundColor = .red
-        temperatureLabel.backgroundColor = .yellow
-        timeLabel.backgroundColor = .blue
     }
 }

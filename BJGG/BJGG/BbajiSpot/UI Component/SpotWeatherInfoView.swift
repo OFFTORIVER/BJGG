@@ -39,6 +39,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", font: .bbajiFont(.body1), alignment: .left)
+        weatherAddressLabel.textColor = .bbagaGray2
         
         let currentWeatherIconAndLabel = UIView()
         self.addSubview(currentWeatherIconAndLabel)
@@ -49,8 +50,6 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(160)
             make.height.equalTo(64)
         })
-        
-        currentWeatherIconAndLabel.backgroundColor = .black
         
         let currentWeatherIcon = UIImageView()
         let currentWeatherLabel = UILabel()
@@ -74,8 +73,7 @@ final class SpotWeatherInfoView: UIView {
         
         labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
         
-        currentWeatherLabel.backgroundColor = .yellow
-        currentWeatherIcon.backgroundColor = .cyan
+        currentWeatherLabel.textColor = .bbagaGray1
         
         let rainInfoLabel = UILabel()
         self.addSubview(rainInfoLabel)
@@ -98,7 +96,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(2)
         })
         
-        spotWeatherInfoViewDivideLine.backgroundColor = .black
+        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
         
         self.layer.cornerRadius = 16
         
@@ -115,7 +113,6 @@ final class SpotWeatherInfoView: UIView {
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
         })
-        spotTodayWeatherCollectionView.backgroundColor = .green
     }
     
     private func registerCollectionView() {
