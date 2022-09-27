@@ -44,7 +44,7 @@ final class SpotInfoView: UIView {
             make.height.equalTo(2)
         })
         
-        divideLine.backgroundColor = .black
+        divideLine.backgroundColor = .bbagaBack
         
         self.layer.cornerRadius = 16
         

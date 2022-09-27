@@ -39,6 +39,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", size: 15, weight: .medium, alignment: .left)
+        weatherAddressLabel.textColor = .bbagaGray2
         
         let currentWeatherIconAndLabel = UIView()
         self.addSubview(currentWeatherIconAndLabel)
@@ -49,8 +50,6 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(160)
             make.height.equalTo(64)
         })
-        
-        currentWeatherIconAndLabel.backgroundColor = .black
         
         let currentWeatherIcon = UIImageView()
         let currentWeatherLabel = UILabel()
@@ -74,8 +73,7 @@ final class SpotWeatherInfoView: UIView {
         
         labelSetting(label: currentWeatherLabel, text: "23°", size: 48, weight: .heavy, alignment: .center)
         
-        currentWeatherLabel.backgroundColor = .yellow
-        currentWeatherIcon.backgroundColor = .cyan
+        currentWeatherLabel.textColor = .bbagaGray1
         
         let rainInfoLabel = UILabel()
         self.addSubview(rainInfoLabel)
@@ -98,7 +96,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(2)
         })
         
-        spotWeatherInfoViewDivideLine.backgroundColor = .black
+        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
         
         self.layer.cornerRadius = 16
         
@@ -115,7 +113,6 @@ final class SpotWeatherInfoView: UIView {
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
         })
-        spotTodayWeatherCollectionView.backgroundColor = .green
     }
     
     private func registerCollectionView() {
@@ -150,11 +147,15 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
             cell.temperatureLabel.textAlignment = .center
             cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             cell.timeLabel.textAlignment = .center
+            cell.temperatureLabel.textColor = .bbagaGray1
+            cell.timeLabel.textColor = .bbagaGray1
         } else {
             cell.temperatureLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
             cell.temperatureLabel.textAlignment = .center
             cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             cell.timeLabel.textAlignment = .center
+            cell.temperatureLabel.textColor = .bbagaGray2
+            cell.timeLabel.textColor = .bbagaGray2
         }
         return cell
     }

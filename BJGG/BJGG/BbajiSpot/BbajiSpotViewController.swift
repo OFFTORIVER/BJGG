@@ -53,9 +53,8 @@ final class BbajiSpotViewController: UIViewController {
             make.height.equalTo(306)
         })
         
-        view.backgroundColor = .white
-        liveCameraView.backgroundColor = .yellow
-        spotInfoView.backgroundColor = .blue
-        spotWeatherInfoView.backgroundColor = .red
+        view.backgroundColor = .bbagaBack
+        spotInfoView.backgroundColor = .bbagaGray4
+        spotWeatherInfoView.backgroundColor = .bbagaGray4
     }
 }
