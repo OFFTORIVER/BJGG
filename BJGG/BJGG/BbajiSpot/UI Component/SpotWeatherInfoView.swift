@@ -98,7 +98,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(2)
         })
         
-        spotWeatherInfoViewDivideLine.backgroundColor = .black
+        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
         
         self.layer.cornerRadius = 16
         
@@ -115,7 +115,6 @@ final class SpotWeatherInfoView: UIView {
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
         })
-        spotTodayWeatherCollectionView.backgroundColor = .green
     }
     
     private func registerCollectionView() {
