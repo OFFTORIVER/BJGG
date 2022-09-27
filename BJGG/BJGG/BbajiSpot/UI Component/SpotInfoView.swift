@@ -25,7 +25,7 @@ final class SpotInfoView: UIView {
         
         let spotNameLabel = UILabel()
         self.addSubview(spotNameLabel)
-        labelSetting(label: spotNameLabel, text: info.getName(), size: 24, weight: .heavy, alignment: .center)
+        labelSetting(label: spotNameLabel, text: info.getName(), font: .bbajiFont(.heading2), alignment: .center)
         spotNameLabel.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(self.snp.top).inset(defaultMargin)
@@ -69,8 +69,8 @@ final class SpotInfoView: UIView {
     }
 }
 
-func labelSetting(label: UILabel, text: String, size: CGFloat, weight: UIFont.Weight, alignment: NSTextAlignment) {
+func labelSetting(label: UILabel, text: String, font: UIFont, alignment: NSTextAlignment) {
     label.text = text
-    label.font = UIFont.systemFont(ofSize: size, weight: weight)
+    label.font = font
     label.textAlignment = alignment
 }

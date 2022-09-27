@@ -31,7 +31,7 @@ final class IconAndLabelView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: addressLabel, text: text, size: 15, weight: .medium, alignment: .left)
+        labelSetting(label: addressLabel, text: text, font: .bbajiFont(.button1), alignment: .left)
         addressLabel.textColor = .bbagaBlue
     }
     
