@@ -51,7 +51,7 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         timeLabel.snp.makeConstraints({ make in
             make.top.equalTo(temperatureLabel.snp.bottom).offset(2)
             make.centerX.equalTo(temperatureLabel.snp.centerX)
-            make.height.equalTo(22)
+            make.height.equalTo(18)
             make.width.equalTo(58)
         })
     }
