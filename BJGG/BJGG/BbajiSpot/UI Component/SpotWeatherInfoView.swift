@@ -38,7 +38,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", size: 15, weight: .medium, alignment: .left)
+        labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", font: .bbajiFont(.body1), alignment: .left)
         
         let currentWeatherIconAndLabel = UIView()
         self.addSubview(currentWeatherIconAndLabel)
