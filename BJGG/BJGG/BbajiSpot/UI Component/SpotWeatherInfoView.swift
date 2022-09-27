@@ -66,9 +66,9 @@ final class SpotWeatherInfoView: UIView {
         })
         
         currentWeatherLabel.snp.makeConstraints({ make in
-            make.trailing.equalTo(currentWeatherIconAndLabel.snp.trailing)
+            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(CGFloat.iconOffset)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
-            make.width.equalTo(160 - 64)
+            make.width.equalTo(100)
         })
         
         labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
