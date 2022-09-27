@@ -51,8 +51,6 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(64)
         })
         
-        currentWeatherIconAndLabel.backgroundColor = .black
-        
         let currentWeatherIcon = UIImageView()
         let currentWeatherLabel = UILabel()
         
@@ -76,8 +74,6 @@ final class SpotWeatherInfoView: UIView {
         labelSetting(label: currentWeatherLabel, text: "23°", size: 48, weight: .heavy, alignment: .center)
         
         currentWeatherLabel.textColor = .bbagaGray1
-        currentWeatherLabel.backgroundColor = .yellow
-        currentWeatherIcon.backgroundColor = .cyan
         
         let rainInfoLabel = UILabel()
         self.addSubview(rainInfoLabel)
