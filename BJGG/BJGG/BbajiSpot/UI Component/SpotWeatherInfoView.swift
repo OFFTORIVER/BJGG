@@ -26,7 +26,7 @@ final class SpotWeatherInfoView: UIView {
     
     private func layoutConfigure() {
         let defaultMargin: CGFloat = 20
-        let defaultMargin2: CGFloat = 12
+        let defaultMargin2: CGFloat = .componentOffset
         
         let weatherAddressLabel = UILabel()
         
