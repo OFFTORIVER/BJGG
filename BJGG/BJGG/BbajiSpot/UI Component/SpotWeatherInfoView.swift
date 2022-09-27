@@ -142,9 +142,8 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         
         let idx = indexPath.row
         cell.currentWeatherImgView = UIImageView()
-        cell.temperatureLabel.text = "23°"
-        cell.timeLabel.text = "오후12시"
-        
+        labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
+        labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
             cell.temperatureLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             cell.temperatureLabel.textAlignment = .center
