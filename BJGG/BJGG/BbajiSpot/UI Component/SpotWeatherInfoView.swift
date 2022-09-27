@@ -153,3 +153,13 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
+extension SpotWeatherInfoView {
+    func makeTimeAsBlackColor(label: UILabel, time: Int) {
+        let attributedString = NSMutableAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray2])
+        let blackTextColorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray1]
+
+        attributedString.addAttributes(blackTextColorAttribute, range: NSRange(location:0, length: time / 10 == 0 ? 5 : 6))
+        label.attributedText = attributedString
+    }
+}
+
