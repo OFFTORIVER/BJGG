@@ -38,7 +38,8 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", size: 15, weight: .medium, alignment: .left)
+        labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", font: .bbajiFont(.body1), alignment: .left)
+        weatherAddressLabel.textColor = .bbagaGray2
         
         let currentWeatherIconAndLabel = UIView()
         self.addSubview(currentWeatherIconAndLabel)
@@ -49,8 +50,6 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(160)
             make.height.equalTo(64)
         })
-        
-        currentWeatherIconAndLabel.backgroundColor = .black
         
         let currentWeatherIcon = UIImageView()
         let currentWeatherLabel = UILabel()
@@ -72,10 +71,9 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(160 - 64)
         })
         
-        labelSetting(label: currentWeatherLabel, text: "23°", size: 48, weight: .heavy, alignment: .center)
+        labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
         
-        currentWeatherLabel.backgroundColor = .yellow
-        currentWeatherIcon.backgroundColor = .cyan
+        currentWeatherLabel.textColor = .bbagaGray1
         
         let rainInfoLabel = UILabel()
         self.addSubview(rainInfoLabel)
@@ -86,7 +84,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", size: 15, weight: .medium, alignment: .center)
+        labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", font: .bbajiFont(.body1), alignment: .center)
         
         let spotWeatherInfoViewDivideLine = UIView()
         self.addSubview(spotWeatherInfoViewDivideLine)
@@ -98,7 +96,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(2)
         })
         
-        spotWeatherInfoViewDivideLine.backgroundColor = .black
+        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
         
         self.layer.cornerRadius = 16
         
@@ -115,7 +113,6 @@ final class SpotWeatherInfoView: UIView {
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
         })
-        spotTodayWeatherCollectionView.backgroundColor = .green
     }
     
     private func registerCollectionView() {
@@ -142,19 +139,11 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         
         let idx = indexPath.row
         cell.currentWeatherImgView = UIImageView()
-        cell.temperatureLabel.text = "23°"
-        cell.timeLabel.text = "오후12시"
-        
+        labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
+        labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
-            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-            cell.temperatureLabel.textAlignment = .center
-            cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-            cell.timeLabel.textAlignment = .center
-        } else {
-            cell.temperatureLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-            cell.temperatureLabel.textAlignment = .center
-            cell.timeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-            cell.timeLabel.textAlignment = .center
+            cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
+            cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
         }
         return cell
     }
