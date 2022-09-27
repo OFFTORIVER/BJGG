@@ -69,8 +69,8 @@ final class SpotInfoView: UIView {
     }
 }
 
-func labelSetting(label: UILabel, text: String, size: CGFloat, weight: UIFont.Weight, alignment: NSTextAlignment) {
+func labelSetting(label: UILabel, text: String, font: UIFont, alignment: NSTextAlignment) {
     label.text = text
-    label.font = UIFont.systemFont(ofSize: size, weight: weight)
+    label.font = font
     label.textAlignment = alignment
 }
