@@ -86,7 +86,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", size: 15, weight: .medium, alignment: .center)
+        labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", font: .bbajiFont(.body1), alignment: .center)
         
         let spotWeatherInfoViewDivideLine = UIView()
         self.addSubview(spotWeatherInfoViewDivideLine)
