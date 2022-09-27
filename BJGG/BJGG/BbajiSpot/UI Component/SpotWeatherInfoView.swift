@@ -72,7 +72,7 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(160 - 64)
         })
         
-        labelSetting(label: currentWeatherLabel, text: "23°", size: 48, weight: .heavy, alignment: .center)
+        labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
         
         currentWeatherLabel.backgroundColor = .yellow
         currentWeatherIcon.backgroundColor = .cyan
