@@ -20,6 +20,8 @@ class BbajiListCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    private let shadowView = ShadowGradientView()
+    
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.text = "서울 광진구 강변북로 64"
@@ -65,6 +67,7 @@ extension BbajiListCollectionViewCell {
         
         [
             backgroundImageView,
+            shadowView,
             locationLabel,
             nameLabel,
             tempLabel,
@@ -72,6 +75,10 @@ extension BbajiListCollectionViewCell {
         ].forEach { addSubview($0) }
         
         backgroundImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        shadowView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
