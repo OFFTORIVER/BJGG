@@ -33,11 +33,12 @@ final class IconAndLabelView: UIView {
         
         labelSetting(label: addressLabel, text: text, font: .bbajiFont(.button1), alignment: .left)
         addressLabel.textColor = .bbagaBlue
+        
+        addressLabel.enableCopyLabelText()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
