@@ -157,3 +157,17 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
+extension SpotWeatherInfoView {
+    func makeTimeAsBlackColor(label: UILabel, time: Int) {
+        // label 전체 텍스트의 기본 컬러를 bbagaGray2로 설정
+        let attributedString = NSMutableAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray2])
+        // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
+        let blackTextColorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray1]
+
+        // 현재 시간(매개변수로 받은 time)의 자릿수에 따라 bbagaGray1 색상을 입힐 텍스트의 범위값을 다르게 설정
+        attributedString.addAttributes(blackTextColorAttribute, range: NSRange(location:0, length: time / 10 == 0 ? 5 : 6))
+        // label에 Color 입히기
+        label.attributedText = attributedString
+    }
+}
+
