@@ -25,8 +25,8 @@ final class SpotWeatherInfoView: UIView {
     }
     
     private func layoutConfigure() {
-        let defaultMargin: CGFloat = 20
-        let defaultMargin2: CGFloat = 12
+        let defaultMargin: CGFloat = .viewInset
+        let defaultMargin2: CGFloat = .componentOffset
         
         let weatherAddressLabel = UILabel()
         
@@ -66,9 +66,9 @@ final class SpotWeatherInfoView: UIView {
         })
         
         currentWeatherLabel.snp.makeConstraints({ make in
-            make.trailing.equalTo(currentWeatherIconAndLabel.snp.trailing)
+            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(CGFloat.iconOffset)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
-            make.width.equalTo(160 - 64)
+            make.width.equalTo(100)
         })
         
         labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
@@ -127,11 +127,15 @@ final class SpotWeatherInfoView: UIView {
 
 extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 48, height: 100)
+        return CGSize(width: 58, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 18
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -150,6 +154,20 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("CLICKED!")
+    }
+}
+
+extension SpotWeatherInfoView {
+    func makeTimeAsBlackColor(label: UILabel, time: Int) {
+        // label 전체 텍스트의 기본 컬러를 bbagaGray2로 설정
+        let attributedString = NSMutableAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray2])
+        // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
+        let blackTextColorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray1]
+
+        // 현재 시간(매개변수로 받은 time)의 자릿수에 따라 bbagaGray1 색상을 입힐 텍스트의 범위값을 다르게 설정
+        attributedString.addAttributes(blackTextColorAttribute, range: NSRange(location:0, length: time / 10 == 0 ? 5 : 6))
+        // label에 Color 입히기
+        label.attributedText = attributedString
     }
 }
 
