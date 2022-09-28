@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 class BbajiListCollectionView: UICollectionView {
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
