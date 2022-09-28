@@ -25,8 +25,8 @@ final class SpotWeatherInfoView: UIView {
     }
     
     private func layoutConfigure() {
-        let defaultMargin: CGFloat = 20
-        let defaultMargin2: CGFloat = 12
+        let defaultMargin: CGFloat = .viewInset
+        let defaultMargin2: CGFloat = .componentOffset
         
         let weatherAddressLabel = UILabel()
         
@@ -66,9 +66,9 @@ final class SpotWeatherInfoView: UIView {
         })
         
         currentWeatherLabel.snp.makeConstraints({ make in
-            make.trailing.equalTo(currentWeatherIconAndLabel.snp.trailing)
+            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(CGFloat.iconOffset)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
-            make.width.equalTo(160 - 64)
+            make.width.equalTo(100)
         })
         
         labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
@@ -127,11 +127,15 @@ final class SpotWeatherInfoView: UIView {
 
 extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 48, height: 100)
+        return CGSize(width: 58, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 18
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

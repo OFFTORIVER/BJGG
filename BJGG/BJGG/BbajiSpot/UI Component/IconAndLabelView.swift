@@ -26,7 +26,7 @@ final class IconAndLabelView: UIView {
         addressImage.backgroundColor = .black
         
         addressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(addressImage.snp.trailing).offset(8)
+            make.leading.equalTo(addressImage.snp.trailing).offset(CGFloat.iconOffset)
             make.centerY.equalTo(addressImage.snp.centerY)
             make.height.equalTo(18)
         })
