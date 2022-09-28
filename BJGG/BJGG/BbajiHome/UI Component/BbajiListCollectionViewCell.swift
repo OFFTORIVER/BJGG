@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 
 class BbajiListCollectionViewCell: UICollectionViewCell {
+    static var id: String {
+        return NSStringFromClass(Self.self).components(separatedBy: ".").last!
+    }
+    
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         
