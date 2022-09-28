@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
 		3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */; };
+		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
 		3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */; };
 		3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionView.swift; sourceTree = "<group>"; };
+		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
 		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
 		3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiSpotViewController.swift; sourceTree = "<group>"; };
 		3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */,
 				553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */,
 				553F0F8128E2100000FD9CDA /* UIFont+CustomFont.swift */,
+				3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */,
 				553F0F8228E2100000FD9CDA /* UIFont+CustomFont.swift in Sources */,
 				3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */,
+				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */,
