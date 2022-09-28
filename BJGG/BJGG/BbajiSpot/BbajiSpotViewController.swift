@@ -39,13 +39,15 @@ final class BbajiSpotViewController: UIViewController {
             make.height.equalTo(viewWidth * 9 / 16)
         })
         
+        self.addChild(liveCameraView.avpController)
+        
         spotInfoView.snp.makeConstraints({ make in
             make.top.equalTo(liveCameraView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(166)
         })
-
+        
         spotWeatherInfoView.snp.makeConstraints({ make in
             make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
