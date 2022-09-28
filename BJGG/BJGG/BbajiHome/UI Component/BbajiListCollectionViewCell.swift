@@ -59,11 +59,15 @@ class BbajiListCollectionViewCell: UICollectionViewCell {
 }
 
 extension BbajiListCollectionViewCell {
-    func configure() {
+    func configure(_ indexPathRow: Int) {
         layoutConfigure()
         
         layer.cornerRadius = 10.0
         layer.masksToBounds = true
+        
+        if indexPathRow != 1 {
+            previewView.isHidden = true
+        }
     }
     
     private func layoutConfigure() {

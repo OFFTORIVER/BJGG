@@ -57,7 +57,7 @@ extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCollectionViewCell.id, for: indexPath) as? BbajiListCollectionViewCell
         
-        cell?.configure()
+        cell?.configure(indexPath.row)
         
         return cell ?? UICollectionViewCell()
     }
