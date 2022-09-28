@@ -60,6 +60,9 @@ class BbajiListCollectionViewCell: UICollectionViewCell {
 extension BbajiListCollectionViewCell {
     func configure() {
         layoutConfigure()
+        
+        layer.cornerRadius = 10.0
+        layer.masksToBounds = true
     }
     
     private func layoutConfigure() {
