@@ -14,6 +14,7 @@ class BbajiListView: UIView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.register(BbajiListCollectionViewCell.self, forCellWithReuseIdentifier: BbajiListCollectionViewCell.id)
         
         return collectionView
     }()
