@@ -59,13 +59,16 @@ final class SpotInfoView: UIView {
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(divideLine.snp.bottom).offset(defaultMargin)
             make.height.equalTo(18)
+            make.width.equalTo(180)
         })
         
         contactInfoView.snp.makeConstraints({ make in
             make.leading.equalTo(addressInfoView.snp.leading)
             make.top.equalTo(addressInfoView.snp.bottom).offset(12)
             make.height.equalTo(18)
+            make.width.equalTo(180)
         })
+        
     }
 }
 
