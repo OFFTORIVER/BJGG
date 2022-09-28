@@ -15,7 +15,7 @@ class BbajiListCollectionViewCell: UICollectionViewCell {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        
+        imageView.backgroundColor = .bbagaBlue
         
         return imageView
     }()
@@ -67,8 +67,8 @@ extension BbajiListCollectionViewCell {
             backgroundImageView,
             locationLabel,
             nameLabel,
-            weatherImageView,
-            tempLabel
+            tempLabel,
+            weatherImageView
         ].forEach { addSubview($0) }
         
         backgroundImageView.snp.makeConstraints {
@@ -95,7 +95,7 @@ extension BbajiListCollectionViewCell {
         
         weatherImageView.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.top)
-            $0.trailing.equalTo(tempLabel.snp.leading).offset(CGFloat.labelOffset)
+            $0.trailing.equalTo(tempLabel.snp.leading).offset(-CGFloat.labelOffset)
             $0.width.equalTo(iconWidth)
             $0.height.equalTo(iconWidth)
         }
