@@ -21,6 +21,7 @@ class BbajiListCollectionViewCell: UICollectionViewCell {
     }()
     
     private let shadowView = ShadowGradientView()
+    private let previewView = PreviewView()
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
@@ -74,7 +75,8 @@ extension BbajiListCollectionViewCell {
             locationLabel,
             nameLabel,
             tempLabel,
-            weatherImageView
+            weatherImageView,
+            previewView
         ].forEach { addSubview($0) }
         
         backgroundImageView.snp.makeConstraints {
@@ -108,6 +110,10 @@ extension BbajiListCollectionViewCell {
             $0.trailing.equalTo(tempLabel.snp.leading).offset(-CGFloat.labelOffset)
             $0.width.equalTo(iconWidth)
             $0.height.equalTo(iconWidth)
+        }
+        
+        previewView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
     }
