@@ -55,7 +55,7 @@ class BbajiListCollectionViewCell: UICollectionViewCell {
     }()
 }
 
-private extension BbajiListCollectionViewCell {
+extension BbajiListCollectionViewCell {
     func layoutConfigure() {
         let iconWidth: CGFloat = 28.0
         
