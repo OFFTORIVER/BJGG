@@ -39,6 +39,10 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
         CGSize(width: collectionView.frame.width, height: 201.38)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: 0, bottom: .componentOffset, right: 0)
+    }
+    
 }
 
 extension BbajiListView: UICollectionViewDataSource {
