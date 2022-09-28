@@ -6,5 +6,27 @@
 //
 
 import UIKit
+import AVKit
 
-final class SpotLiveCameraView: UIView { }
+final class SpotLiveCameraView: UIView {
+    private var player: AVPlayer?
+    var avpController = AVPlayerViewController()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func liveCameraSetting(size: CGSize) {
+        let url = URL(string: "https://offtoriver.shop/hls/waterskii.m3u8")
+        player = AVPlayer(url: url!)
+        avpController.player = player
+        avpController.view.frame.size.height = size.height
+        avpController.view.frame.size.width = size.width
+        self.addSubview(avpController.view)
+        player?.play()
+    }
+}
