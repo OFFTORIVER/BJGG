@@ -155,11 +155,19 @@
 		553F0F9628E49D7F00FD9CDA /* BbajiHome */ = {
 			isa = PBXGroup;
 			children = (
+				553F0F9B28E49E2900FD9CDA /* UI Component */,
 				55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */,
+			);
+			path = BbajiHome;
+			sourceTree = "<group>";
+		};
+		553F0F9B28E49E2900FD9CDA /* UI Component */ = {
+			isa = PBXGroup;
+			children = (
 				553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */,
 				553F0F9928E49DF800FD9CDA /* BbajiListView.swift */,
 			);
-			path = BbajiHome;
+			path = "UI Component";
 			sourceTree = "<group>";
 		};
 		558CECEB28DC64FC00AFCF50 /* Extension */ = {
