@@ -16,6 +16,10 @@ class BbajiListView: UIView {
         collectionView.dataSource = self
         collectionView.register(BbajiListCollectionViewCell.self, forCellWithReuseIdentifier: BbajiListCollectionViewCell.id)
         
+        collectionView.layer.cornerRadius = 10.0
+        collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        collectionView.layer.masksToBounds = true
+        
         return collectionView
     }()
     
