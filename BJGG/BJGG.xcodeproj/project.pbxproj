@@ -35,7 +35,7 @@
 		55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */; };
 		55CB0AB128BA4FA10045644C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB028BA4FA10045644C /* Assets.xcassets */; };
 		55CB0AB428BA4FA10045644C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */; };
-		55CB0ABC28BB41C60045644C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* MainViewController.swift */; };
+		55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,7 +68,7 @@
 		55CB0AB028BA4FA10045644C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55CB0AB328BA4FA10045644C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55CB0AB528BA4FA10045644C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55CB0ABB28BB41C60045644C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +148,14 @@
 			path = Pretendard;
 			sourceTree = "<group>";
 		};
+		553F0F9628E49D7F00FD9CDA /* BbajiHome */ = {
+			isa = PBXGroup;
+			children = (
+				55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */,
+			);
+			path = BbajiHome;
+			sourceTree = "<group>";
+		};
 		558CECEB28DC64FC00AFCF50 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,10 +188,10 @@
 				553F0F6E28E2090300FD9CDA /* Fonts */,
 				558CECEB28DC64FC00AFCF50 /* Extension */,
 				3A7E3BE028D7657800F6416A /* BbajiSpot */,
+				553F0F9628E49D7F00FD9CDA /* BbajiHome */,
 				3A7E3BDB28D7427E00F6416A /* Model */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
-				55CB0ABB28BB41C60045644C /* MainViewController.swift */,
 				55CB0AB028BA4FA10045644C /* Assets.xcassets */,
 				55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */,
 				55CB0AB528BA4FA10045644C /* Info.plist */,
@@ -282,7 +290,7 @@
 				3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */,
 				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
-				55CB0ABC28BB41C60045644C /* MainViewController.swift in Sources */,
+				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */,
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,
