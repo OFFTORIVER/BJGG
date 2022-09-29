@@ -31,12 +31,18 @@
 		553F0F9228E212B300FD9CDA /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F8928E212B300FD9CDA /* Pretendard-Bold.otf */; };
 		553F0F9328E212B300FD9CDA /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F8A28E212B300FD9CDA /* Pretendard-ExtraBold.otf */; };
 		553F0F9428E212B300FD9CDA /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F8B28E212B300FD9CDA /* Pretendard-ExtraLight.otf */; };
+		553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */; };
+		553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9928E49DF800FD9CDA /* BbajiListView.swift */; };
+		553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */; };
+		553F0F9F28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */; };
+		553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */; };
+		553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */; };
 		558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */; };
 		55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0AA728BA4F9F0045644C /* AppDelegate.swift */; };
 		55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */; };
 		55CB0AB128BA4FA10045644C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB028BA4FA10045644C /* Assets.xcassets */; };
 		55CB0AB428BA4FA10045644C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */; };
-		55CB0ABC28BB41C60045644C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* MainViewController.swift */; };
+		55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +69,12 @@
 		553F0F8928E212B300FD9CDA /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		553F0F8A28E212B300FD9CDA /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		553F0F8B28E212B300FD9CDA /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiTitleView.swift; sourceTree = "<group>"; };
+		553F0F9928E49DF800FD9CDA /* BbajiListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListView.swift; sourceTree = "<group>"; };
+		553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCollectionView.swift; sourceTree = "<group>"; };
+		553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCollectionViewCell.swift; sourceTree = "<group>"; };
+		553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowGradientView.swift; sourceTree = "<group>"; };
+		553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BJGG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB0AA728BA4F9F0045644C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +82,7 @@
 		55CB0AB028BA4FA10045644C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55CB0AB328BA4FA10045644C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55CB0AB528BA4FA10045644C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55CB0ABB28BB41C60045644C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +162,28 @@
 			path = Pretendard;
 			sourceTree = "<group>";
 		};
+		553F0F9628E49D7F00FD9CDA /* BbajiHome */ = {
+			isa = PBXGroup;
+			children = (
+				553F0F9B28E49E2900FD9CDA /* UI Component */,
+				55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */,
+			);
+			path = BbajiHome;
+			sourceTree = "<group>";
+		};
+		553F0F9B28E49E2900FD9CDA /* UI Component */ = {
+			isa = PBXGroup;
+			children = (
+				553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */,
+				553F0F9928E49DF800FD9CDA /* BbajiListView.swift */,
+				553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */,
+				553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */,
+				553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */,
+				553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */,
+			);
+			path = "UI Component";
+			sourceTree = "<group>";
+		};
 		558CECEB28DC64FC00AFCF50 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,10 +217,10 @@
 				553F0F6E28E2090300FD9CDA /* Fonts */,
 				558CECEB28DC64FC00AFCF50 /* Extension */,
 				3A7E3BE028D7657800F6416A /* BbajiSpot */,
+				553F0F9628E49D7F00FD9CDA /* BbajiHome */,
 				3A7E3BDB28D7427E00F6416A /* Model */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
-				55CB0ABB28BB41C60045644C /* MainViewController.swift */,
 				55CB0AB028BA4FA10045644C /* Assets.xcassets */,
 				55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */,
 				55CB0AB528BA4FA10045644C /* Info.plist */,
@@ -285,18 +319,24 @@
 				3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */,
 				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
-				55CB0ABC28BB41C60045644C /* MainViewController.swift in Sources */,
+				553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */,
+				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
+				553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */,
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,
 				3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */,
 				553F0F8228E2100000FD9CDA /* UIFont+CustomFont.swift in Sources */,
 				3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */,
+				553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
+				553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
+				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
 				553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
+				553F0F9F28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
