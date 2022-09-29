@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BbajiHomeViewController: UIViewController {
+final class BbajiHomeViewController: UIViewController {
     private let bbajiTitleView = BbajiTitleView()
     private let bbajiListView = BbajiListView()
     

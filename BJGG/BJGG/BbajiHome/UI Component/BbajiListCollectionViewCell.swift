@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BbajiListCollectionViewCell: UICollectionViewCell {
+final class BbajiListCollectionViewCell: UICollectionViewCell {
     static var id: String {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last!
     }
