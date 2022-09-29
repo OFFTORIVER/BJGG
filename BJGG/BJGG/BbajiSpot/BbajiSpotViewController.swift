@@ -17,6 +17,7 @@ final class BbajiSpotViewController: UIViewController {
         super.viewDidLoad()
         
         layoutConfigure()
+        liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
     }
     
     private func layoutConfigure() {
@@ -39,13 +40,17 @@ final class BbajiSpotViewController: UIViewController {
             make.height.equalTo(viewWidth * 9 / 16)
         })
         
+        liveCameraView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth * 9 / 16)
+
+        self.addChild(liveCameraView.avpController)
+        
         spotInfoView.snp.makeConstraints({ make in
             make.top.equalTo(liveCameraView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.height.equalTo(166)
         })
-
+        
         spotWeatherInfoView.snp.makeConstraints({ make in
             make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(safeArea.snp.leading).inset(defaultMargin)
