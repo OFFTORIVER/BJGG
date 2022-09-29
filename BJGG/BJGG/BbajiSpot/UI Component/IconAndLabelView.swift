@@ -26,18 +26,19 @@ final class IconAndLabelView: UIView {
         addressImage.backgroundColor = .black
         
         addressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(addressImage.snp.trailing).offset(8)
+            make.leading.equalTo(addressImage.snp.trailing).offset(CGFloat.iconOffset)
             make.centerY.equalTo(addressImage.snp.centerY)
             make.height.equalTo(18)
         })
         
         labelSetting(label: addressLabel, text: text, font: .bbajiFont(.button1), alignment: .left)
         addressLabel.textColor = .bbagaBlue
+        
+        addressLabel.enableCopyLabelText()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
