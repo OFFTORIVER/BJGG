@@ -21,5 +21,5 @@ extension CGFloat {
     static let superViewInset: CGFloat = 16.0
     
     // view와 내부 component 간 간격 constraint
-    static let viewInset: CGFloat = 20.0
+    static let viewInset: CGFloat = UIDevice.current.hasNotch ? 20.0 : 16.0
 }
