@@ -10,8 +10,8 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     private let liveCameraView = SpotLiveCameraView()
-    private let scrollView = UIScrollView()
     private let scrollContentView = UIView()
+    private let infoScrollView = UIScrollView()
     private let spotInfoView = SpotInfoView()
     private let spotWeatherInfoView = SpotWeatherInfoView()
     
@@ -42,8 +42,8 @@ final class BbajiSpotViewController: UIViewController {
 
         self.addChild(liveCameraView.avpController)
         
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints({make in
+        view.addSubview(infoScrollView)
+        infoScrollView.snp.makeConstraints({make in
             make.top.equalTo(liveCameraView.snp.bottom)
             make.leading.equalTo(safeArea.snp.leading)
             make.trailing.equalTo(safeArea.snp.trailing)
@@ -54,11 +54,13 @@ final class BbajiSpotViewController: UIViewController {
         scrollContentView.snp.makeConstraints({ make in
             make.top.equalTo(scrollView.snp.top)
             make.bottom.equalTo(scrollView.snp.bottom)
+            make.top.equalTo(infoScrollView.snp.top)
+            make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width)
             make.height.equalTo(508)
         })
-        scrollView.showsVerticalScrollIndicator = false
+        infoScrollView.showsVerticalScrollIndicator = false
         
         [
             spotInfoView,
