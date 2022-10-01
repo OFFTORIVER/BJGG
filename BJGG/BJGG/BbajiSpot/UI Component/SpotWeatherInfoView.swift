@@ -113,6 +113,8 @@ final class SpotWeatherInfoView: UIView {
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
         })
+        
+        spotTodayWeatherCollectionView.layer.cornerRadius = 16
     }
     
     private func registerCollectionView() {
