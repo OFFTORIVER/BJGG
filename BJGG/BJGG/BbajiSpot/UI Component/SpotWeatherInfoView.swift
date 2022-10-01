@@ -52,9 +52,9 @@ final class SpotWeatherInfoView: UIView {
         })
         
         let currentWeatherIcon = UIImageView()
-        let currentWeatherLabel = UILabel()
+        let currentTemperatureLabel = UILabel()
         
-        [currentWeatherIcon, currentWeatherLabel].forEach({
+        [currentWeatherIcon, currentTemperatureLabel].forEach({
             currentWeatherIconAndLabel.addSubview($0)
         })
         
@@ -65,15 +65,15 @@ final class SpotWeatherInfoView: UIView {
             make.width.height.equalTo(64)
         })
         
-        currentWeatherLabel.snp.makeConstraints({ make in
+        currentTemperatureLabel.snp.makeConstraints({ make in
             make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(CGFloat.iconOffset)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
             make.width.equalTo(100)
         })
         
-        labelSetting(label: currentWeatherLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
+        labelSetting(label: currentTemperatureLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
         
-        currentWeatherLabel.textColor = .bbagaGray1
+        currentTemperatureLabel.textColor = .bbagaGray1
         
         let rainInfoLabel = UILabel()
         self.addSubview(rainInfoLabel)
