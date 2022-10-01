@@ -10,8 +10,8 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     private let liveCameraView = SpotLiveCameraView()
-    private let scrollContentView = UIView()
     private let infoScrollView = UIScrollView()
+    private let infoScrollContentView = UIView()
     private let spotInfoView = SpotInfoView()
     private let spotWeatherInfoView = SpotWeatherInfoView()
     
@@ -50,10 +50,8 @@ final class BbajiSpotViewController: UIViewController {
             make.bottom.equalTo(safeArea.snp.bottom)
         })
         
-        scrollView.addSubview(scrollContentView)
-        scrollContentView.snp.makeConstraints({ make in
-            make.top.equalTo(scrollView.snp.top)
-            make.bottom.equalTo(scrollView.snp.bottom)
+        infoScrollView.addSubview(infoScrollContentView)
+        infoScrollContentView.snp.makeConstraints({ make in
             make.top.equalTo(infoScrollView.snp.top)
             make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
@@ -65,19 +63,19 @@ final class BbajiSpotViewController: UIViewController {
         [
             spotInfoView,
             spotWeatherInfoView
-        ].forEach({ scrollContentView.addSubview($0) })
+        ].forEach({ infoScrollContentView.addSubview($0) })
 
         spotInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(scrollContentView.snp.top).inset(viewToViewMargin)
-            make.leading.equalTo(scrollContentView.snp.leading).inset(defaultMargin)
-            make.trailing.equalTo(scrollContentView.snp.trailing).inset(defaultMargin)
+            make.top.equalTo(infoScrollContentView.snp.top).inset(viewToViewMargin)
+            make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
+            make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
             make.height.equalTo(166)
         })
 
         spotWeatherInfoView.snp.makeConstraints({ make in
             make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
-            make.leading.equalTo(scrollContentView.snp.leading).inset(defaultMargin)
-            make.trailing.equalTo(scrollContentView.snp.trailing).inset(defaultMargin)
+            make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
+            make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
             make.height.equalTo(306)
         })
 
