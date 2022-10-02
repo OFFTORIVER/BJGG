@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct WeatherItem: Decodable {
+    let baseDate: String
+    let baseTime: String
+    let category: String
+    let fcstDate: String
+    let fcstTime: String
+    let fcstValue: String
+    let nx: Int
+    let ny: Int
+}
+
