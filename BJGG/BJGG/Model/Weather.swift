@@ -18,3 +18,7 @@ struct WeatherItem: Decodable {
     let ny: Int
 }
 
+struct WeatherItems: Decodable {
+    let item: [WeatherItem]
+}
+
