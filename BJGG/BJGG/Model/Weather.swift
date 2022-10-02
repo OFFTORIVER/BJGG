@@ -21,6 +21,10 @@ struct WeatherItem: Decodable {
         return convertCategoryName(self.category)
     }
     
+    var categoryValue: String {
+        return convertCategoryValue(self.category, self.fcstValue)
+    }
+    
     private func convertCategoryName(_ category: String) -> String {
         switch category {
         case "POP":
