@@ -8,11 +8,12 @@
 import UIKit
 
 final class IconAndLabelView: UIView {
+    let addressLabel = UILabel()
+    
     required init(text: String) {
         super.init(frame: CGRect.zero)
         
         let addressImage = UIImageView()
-        let addressLabel = UILabel()
         
         [addressImage, addressLabel].forEach({
             self.addSubview($0)
@@ -33,8 +34,6 @@ final class IconAndLabelView: UIView {
         
         labelSetting(label: addressLabel, text: text, font: .bbajiFont(.button1), alignment: .left)
         addressLabel.textColor = .bbagaBlue
-        
-        addressLabel.enableCopyLabelText()
     }
     
     required init?(coder: NSCoder) {
