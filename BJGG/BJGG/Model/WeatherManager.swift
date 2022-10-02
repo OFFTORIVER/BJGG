@@ -20,7 +20,7 @@ struct WeatherManager {
         let time = str.split(separator: " ").map{ Int($0)! }[1]
         
         switch time {
-        case 0..<200:
+        case 0..<300:
             let day = str.split(separator: " ").map{ Int($0)! }[0]
             return String(day-1)
         case 2300...2400:
@@ -43,19 +43,19 @@ struct WeatherManager {
         let time = str.split(separator: " ").map{ Int($0)! }[1]
         
         switch time {
-        case 200..<500:
+        case 300..<600:
             return "0200"
-        case 500..<800:
+        case 600..<900:
             return "0500"
-        case 800..<1100:
+        case 900..<1200:
             return "0800"
-        case 1100..<1400:
+        case 1200..<1500:
             return "1100"
-        case 1400..<1700:
+        case 1500..<1800:
             return "1400"
-        case 1700..<2000:
+        case 1800..<2100:
             return "1700"
-        case 2000..<2300:
+        case 2100...2400:
             return "2000"
         default:
             return "2300"
@@ -63,7 +63,7 @@ struct WeatherManager {
     }()
     
     func requestCurrentData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
-        requestData(nx: nx, ny: ny, numberOfRow: 1) { (success, data) in
+        requestData(nx: nx, ny: ny, numberOfRow: 36) { (success, data) in
             completionHandler(success, data)
         }
     }
