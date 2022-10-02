@@ -62,8 +62,20 @@ struct WeatherManager {
         }
     }()
     
-    func requestData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
-        let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=312&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
+    func requestCurrentData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+        requestData(nx: nx, ny: ny, numberOfRow: 1) { (success, data) in
+            completionHandler(success, data)
+        }
+    }
+    
+    func request24hData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+        requestData(nx: nx, ny: ny, numberOfRow: 312) { (success, data) in
+            completionHandler(success, data)
+        }
+    }
+    
+    private func requestData(nx: Int, ny: Int, numberOfRow: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+        let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
         
         guard let url = URL(string: url) else {
             print("Error: cannet create URL")
