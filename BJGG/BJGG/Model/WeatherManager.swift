@@ -61,4 +61,41 @@ struct WeatherManager {
             return "2300"
         }
     }()
+    
+    func requestData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+        let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=312&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
+        
+        guard let url = URL(string: url) else {
+            print("Error: cannet create URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                print("Error: error calling GET")
+                print(error!)
+                return
+            }
+            
+            guard let data = data else {
+                print("Error: Did not receive data")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
+                print("Error: HTTP request failed")
+                return
+            }
+            
+            guard let output = try? JSONDecoder().decode(Weather.self, from: data) else {
+                print("Error: JSON data Parsing failed")
+                return
+            }
+            
+            completionHandler(true, output.response)
+        }.resume()
+    }
 }
