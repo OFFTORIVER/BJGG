@@ -91,6 +91,19 @@ struct WeatherItem: Decodable {
             return "풍향 변환실패"
         }
     }
+    
+    private func convertSkyCondition(_ value: String) -> String {
+        switch value {
+        case "1":
+            return "맑음"
+        case "3":
+            return "구름많음"
+        case "4":
+            return "흐림"
+        default:
+            return "무언가 내림"
+        }
+    }
 }
 
 struct WeatherItems: Decodable {
