@@ -104,6 +104,19 @@ struct WeatherItem: Decodable {
             return "무언가 내림"
         }
     }
+    
+    private func convertSnowValue(_ value: String) -> String {
+        switch Double(value) ?? -1 {
+        case -1:
+            return "적설없음"
+        case 0..<1:
+            return "1cm 미만"
+        case 1..<5:
+            return "1cm 이상 5cm 미만"
+        default:
+            return "5cm 이상"
+        }
+    }
 }
 
 struct WeatherItems: Decodable {
