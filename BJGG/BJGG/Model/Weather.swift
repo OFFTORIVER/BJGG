@@ -22,3 +22,11 @@ struct WeatherItems: Decodable {
     let item: [WeatherItem]
 }
 
+struct WeatherBody: Decodable {
+    let dataType: String
+    let items: WeatherItems
+    let pageNo: Int
+    let numOfRows: Int
+    let totalCount: Int
+}
+
