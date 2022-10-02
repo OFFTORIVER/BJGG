@@ -117,6 +117,21 @@ struct WeatherItem: Decodable {
             return "5cm 이상"
         }
     }
+    
+    private func convertRainfallValue(_ value: String) -> String {
+        switch Int(value) ?? -1 {
+        case -1:
+            return "강수없음"
+        case 0..<1:
+            return "1mm 미만"
+        case 1..<30:
+            return "1mm 이상 30mm 미만"
+        case 30..<50:
+            return "30~50mm"
+        default:
+            return "50mm 이상"
+        }
+    }
 }
 
 struct WeatherItems: Decodable {
