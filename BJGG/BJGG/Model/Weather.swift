@@ -35,3 +35,8 @@ struct Header: Decodable {
     let resultMsg: String
 }
 
+struct Response: Decodable {
+    let header: Header
+    let body: WeatherBody
+}
+
