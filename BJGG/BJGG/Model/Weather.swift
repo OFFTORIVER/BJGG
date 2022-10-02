@@ -149,6 +149,32 @@ struct WeatherItem: Decodable {
             return "강수형태 변환오류"
         }
     }
+    
+    private func convertCategoryValue(_ category: String, _ value: String) -> String {
+        switch category {
+        case "POP", "REH":
+            return "\(value)%"
+        case "PTY":
+            return convertPrecipitaionFornValue(value)
+        case "PCP":
+            return convertRainfallValue(value)
+        case "SNO":
+            return convertSnowValue(value)
+        case "SKY":
+            return convertSkyCondition(value)
+        case "TMP":
+            return "\(value)도"
+        case "UUU", "VVV", "WSD":
+            return "\(value)m/s"
+        case "WAV":
+            return "\(value)m"
+        case "VEC":
+            return convertWindDirection(value)
+            
+        default:
+            return "예보항복 유형 판단오류"
+        }
+    }
 }
 
 struct WeatherItems: Decodable {
