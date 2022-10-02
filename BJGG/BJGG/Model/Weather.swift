@@ -132,6 +132,23 @@ struct WeatherItem: Decodable {
             return "50mm 이상"
         }
     }
+    
+    private func convertPrecipitaionFornValue(_ value: String) -> String {
+        switch Int(value) ?? -1 {
+        case 0:
+            return "강수없음"
+        case 1:
+            return "비"
+        case 2:
+            return "비/눈"
+        case 3:
+            return "눈"
+        case 4:
+            return "소나기"
+        default:
+            return "강수형태 변환오류"
+        }
+    }
 }
 
 struct WeatherItems: Decodable {
