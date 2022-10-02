@@ -55,6 +55,7 @@ final class SpotInfoView: UIView {
             self.addSubview($0)
         })
         
+        addressInfoView.addressLabel.enableCopyLabelText()
         addressInfoView.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(divideLine.snp.bottom).offset(defaultMargin)
@@ -69,6 +70,18 @@ final class SpotInfoView: UIView {
             make.width.equalTo(180)
         })
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showContactLinkOption(_:)))
+        
+        contactInfoView.addressLabel.isUserInteractionEnabled = true
+        contactInfoView.addressLabel.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func showContactLinkOption(_ sender: UITapGestureRecognizer) {
+        let phoneNumber:Int = 01000000000
+        if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
+           UIApplication.shared.canOpenURL(url as URL) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
     }
 }
 
