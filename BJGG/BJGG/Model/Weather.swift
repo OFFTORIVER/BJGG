@@ -30,3 +30,8 @@ struct WeatherBody: Decodable {
     let totalCount: Int
 }
 
+struct Header: Decodable {
+    let resultCode: String
+    let resultMsg: String
+}
+
