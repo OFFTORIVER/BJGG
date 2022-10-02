@@ -25,6 +25,23 @@ struct WeatherItem: Decodable {
         return convertCategoryValue(self.category, self.fcstValue)
     }
     
+    var timeValue: String {
+        let time = (Int(self.fcstTime) ?? -1) / 100
+        
+        switch time {
+        case 0:
+            return "오전 0시"
+        case 0..<12:
+            return "오전 \(time)시"
+        case 12:
+            return "오후 12시"
+        case 13..<24:
+            return "오후 \(time - 12)시"
+        default:
+            return "시간변환 실패"
+        }
+    }
+    
     private func convertCategoryName(_ category: String) -> String {
         switch category {
         case "POP":
