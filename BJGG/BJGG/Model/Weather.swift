@@ -40,3 +40,6 @@ struct Response: Decodable {
     let body: WeatherBody
 }
 
+struct Weather: Decodable {
+    let response: Response
+}
