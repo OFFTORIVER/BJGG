@@ -36,7 +36,7 @@ struct BbajiInfo: Encodable {
     
     func getThumbnailImgName() -> String { return thumbnailImgName }
     
-    func getAddress() -> String { return thumbnailImgName }
+    func getAddress() -> String { return address }
     
     func getContact() -> String { return thumbnailImgName }
     
