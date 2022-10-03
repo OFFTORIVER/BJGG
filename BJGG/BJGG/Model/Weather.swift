@@ -278,6 +278,30 @@ struct WeatherItems: Decodable {
         return filteredItem
     }
     
+    func requestRainInfoText() -> String {
+        let weatherItems = request24HourWeatherItem()
+        let (isRainingNow, status) = isRainingNow(weatherItems)
+        
+        if isRainingNow {
+            // '강수없음' 일 경우
+            
+        } else {
+            // '강수없음'이 아닐 경우
+            guard let status = status else { return "기상상태 변환 오류" }
+            
+            if willBecomeCleanIn24Hours(status: status, weatherItems: weatherItems) {
+                // 강수형태가 강수 없음으로 바뀔 예정이 있을 경우
+                // isTheDayTomorrow(_:)
+                
+            } else {
+                // 강수형태가 강수 없음으로 바뀔 예정이 없는 경우
+                // isTimeLeftIn3hours(_:)
+            }
+        }
+        
+        return "기상정보 텍스트를 제공할 예정입니다."
+    }
+    
     private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, String?) {
         var weatherItem: WeatherItem?
         var current: (day: String, time: Int) {
