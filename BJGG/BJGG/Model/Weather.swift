@@ -278,7 +278,7 @@ struct WeatherItems: Decodable {
         return filteredItem
     }
     
-    private func isRainingNow(_ weatherItems: [WeatherItem]) -> Bool {
+    private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, WeatherItem?) {
         var weatherItem: WeatherItem?
         var current: (day: String, time: Int) {
             let now = Date()
@@ -308,9 +308,9 @@ struct WeatherItems: Decodable {
         }
         
         if weatherItem?.categoryValue == "강수없음" {
-            return false
+            return (false, nil)
         } else {
-            return true
+            return (true, weatherItem)
         }
     }
 }
