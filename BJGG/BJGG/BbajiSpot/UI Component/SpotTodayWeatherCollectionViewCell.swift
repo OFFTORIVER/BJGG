@@ -9,6 +9,7 @@ import UIKit
 
 final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
     
+    var currentRainPercentLabel = UILabel()
     var currentWeatherImgView = UIImageView()
     var temperatureLabel = UILabel()
     var timeLabel = UILabel()
@@ -17,26 +18,38 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last!
     }
     
-    override init(frame: CGRect) {
+    required override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        layoutConfigure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("Not implemented required init?(coder: NSCoder)")
     }
 
-    private func layoutConfigure() {
-        
+    func layoutConfigure(isRain: Bool) {
+        self.addSubview(currentRainPercentLabel)
         self.addSubview(currentWeatherImgView)
-        currentWeatherImgView.snp.makeConstraints({ make in
-            make.top.equalTo(self.snp.top)
-            make.leading.equalTo(self.snp.leading)
-            make.centerX.equalTo(self.snp.centerX)
-            make.width.height.equalTo(48)
-            
-        })
+        if isRain {
+            currentRainPercentLabel.snp.makeConstraints({ make in
+                make.top.equalTo(self.snp.top)
+                make.leading.equalTo(self.snp.leading)
+                make.centerX.equalTo(self.snp.centerX)
+                make.width.equalTo(48)
+                make.height.equalTo(19)
+            })
+            currentWeatherImgView.snp.makeConstraints({ make in
+                make.top.equalTo(currentRainPercentLabel.snp.bottom)
+                make.centerX.equalTo(self.snp.centerX)
+                make.width.height.equalTo(28)
+            })
+        } else {
+            currentWeatherImgView.snp.makeConstraints({ make in
+                make.top.equalTo(self.snp.top)
+                make.leading.equalTo(self.snp.leading)
+                make.centerX.equalTo(self.snp.centerX)
+                make.width.height.equalTo(48)
+            })
+        }
         
         self.addSubview(temperatureLabel)
         temperatureLabel.snp.makeConstraints({ make in
