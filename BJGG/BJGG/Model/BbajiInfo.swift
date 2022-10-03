@@ -13,6 +13,7 @@ struct BbajiInfo: Encodable {
     private var thumbnailImgName: String
     private var address: String
     private var contact: String
+    private var compactAddress: String
     private var liveCameraURL: String
     
     // Quick Test Init
@@ -21,6 +22,7 @@ struct BbajiInfo: Encodable {
         thumbnailImgName = "thumbnailImg"
         address = "서울 광진구 강변북로64"
         contact = "02-498-9026"
+        compactAddress = "광진구 자양동"
         liveCameraURL = "https://offtoriver.shop/hls/waterskii.m3u8"
     }
     
@@ -29,6 +31,7 @@ struct BbajiInfo: Encodable {
         self.thumbnailImgName = thumbnailImgName
         self.address = address
         self.contact = contact
+        self.compactAddress = compactAddress
         self.liveCameraURL = liveCamURL
     }
     
@@ -40,6 +43,7 @@ struct BbajiInfo: Encodable {
     
     func getContact() -> String { return contact }
     
+    func getCompactAddress() -> String { return compactAddress }
     func getLiveCameraUrl() -> String { return liveCameraURL }
     
 }
