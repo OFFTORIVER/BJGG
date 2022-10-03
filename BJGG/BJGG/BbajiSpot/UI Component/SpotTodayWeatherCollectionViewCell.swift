@@ -52,7 +52,7 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(temperatureLabel.snp.bottom).offset(2)
             make.centerX.equalTo(temperatureLabel.snp.centerX)
             make.height.equalTo(18)
-            make.width.equalTo(58)
+            make.width.equalTo(60)
         })
     }
 }
