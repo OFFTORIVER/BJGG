@@ -43,7 +43,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", font: .bbajiFont(.body1), alignment: .left)
+        labelSetting(label: weatherAddressLabel, text: BbajiInfo().getCompactAddress(), font: .bbajiFont(.body1), alignment: .left)
         weatherAddressLabel.textColor = .bbagaGray2
         
         let currentWeatherIconAndLabel = UIView()
