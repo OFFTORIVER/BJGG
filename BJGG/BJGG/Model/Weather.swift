@@ -278,7 +278,7 @@ struct WeatherItems: Decodable {
         return filteredItem
     }
     
-    private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, WeatherItem?) {
+    private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, String?) {
         var weatherItem: WeatherItem?
         var current: (day: String, time: Int) {
             let now = Date()
@@ -310,8 +310,42 @@ struct WeatherItems: Decodable {
         if weatherItem?.categoryValue == "강수없음" {
             return (false, nil)
         } else {
-            return (true, weatherItem)
+            return (true, weatherItem?.categoryValue)
         }
+    }
+    
+    private func willBecomeCleanIn24Hours(status: String, weatherItems: [WeatherItem] ) -> Bool {
+        var current: (day: String, time: Int) {
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd HHmm"
+            formatter.locale = Locale(identifier: "ko_kr")
+            formatter.timeZone = TimeZone(abbreviation: "KST")
+
+            let currentDayAndTime = formatter.string(from: now).split(separator: " ")
+            let currentDay = String(currentDayAndTime[0])
+            let time = Int(currentDayAndTime[1])!
+
+            let calculatedTime = (time / 100) * 100
+
+            if calculatedTime < 1000 {
+                return (currentDay, calculatedTime)
+            } else {
+                return (currentDay, calculatedTime)
+            }
+        }
+        
+        var willBecomeClean = false
+        
+        for i in 4..<weatherItems.count {
+            if Int(weatherItems[i].fcstTime)! != current.time || weatherItems[i].fcstDate != current.day {
+                if weatherItems[i].categoryName == "강수형태" && weatherItems[i].categoryValue == "강수없음" {
+                    willBecomeClean = true
+                }
+            }
+        }
+        
+        return willBecomeClean
     }
 }
 
