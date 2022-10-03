@@ -277,6 +277,42 @@ struct WeatherItems: Decodable {
         
         return filteredItem
     }
+    
+    private func isRainingNow(_ weatherItems: [WeatherItem]) -> Bool {
+        var weatherItem: WeatherItem?
+        var current: (day: String, time: Int) {
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd HHmm"
+            formatter.locale = Locale(identifier: "ko_kr")
+            formatter.timeZone = TimeZone(abbreviation: "KST")
+
+            let currentDayAndTime = formatter.string(from: now).split(separator: " ")
+            let currentDay = String(currentDayAndTime[0])
+            let time = Int(currentDayAndTime[1])!
+
+            let calculatedTime = (time / 100) * 100
+
+            if calculatedTime < 1000 {
+                return (currentDay, calculatedTime)
+            } else {
+                return (currentDay, calculatedTime)
+            }
+        }
+        
+        for item in weatherItems {
+            if item.category == "PTY" && Int(item.fcstTime)! == current.time && item.fcstDate == current.day {
+                weatherItem = item
+                break
+            }
+        }
+        
+        if weatherItem?.categoryValue == "강수없음" {
+            return false
+        } else {
+            return true
+        }
+    }
 }
 
 struct WeatherBody: Decodable {
