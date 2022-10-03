@@ -22,6 +22,7 @@ final class IconAndLabelView: UIView {
         addressImage.snp.makeConstraints({ make in
             make.width.equalTo(20)
             make.height.equalTo(20)
+            make.centerY.equalTo(self.snp.centerY)
         })
         
         addressLabel.snp.makeConstraints({ make in
