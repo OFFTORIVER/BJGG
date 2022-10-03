@@ -8,6 +8,8 @@
 import UIKit
 
 final class SpotInfoView: UIView {
+    private let bbajiInfo = BbajiInfo()
+    
     required override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -19,13 +21,12 @@ final class SpotInfoView: UIView {
     }
     
     private func layoutConfigure() {
-        let info = BbajiInfo()
         
         let defaultMargin: CGFloat = .viewInset
         
         let spotNameLabel = UILabel()
         self.addSubview(spotNameLabel)
-        labelSetting(label: spotNameLabel, text: info.getName(), font: .bbajiFont(.heading2), alignment: .center)
+        labelSetting(label: spotNameLabel, text: bbajiInfo.getName(), font: .bbajiFont(.heading2), alignment: .center)
         spotNameLabel.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(self.snp.top).inset(defaultMargin)
@@ -48,8 +49,8 @@ final class SpotInfoView: UIView {
         
         self.layer.cornerRadius = 16
         
-        let addressInfoView = IconAndLabelView(text: info.getAddress())
-        let contactInfoView = IconAndLabelView(text: info.getContact())
+        let addressInfoView = IconAndLabelView(text: bbajiInfo.getAddress())
+        let contactInfoView = IconAndLabelView(text: bbajiInfo.getContact())
         
         [addressInfoView, contactInfoView].forEach({
             self.addSubview($0)
