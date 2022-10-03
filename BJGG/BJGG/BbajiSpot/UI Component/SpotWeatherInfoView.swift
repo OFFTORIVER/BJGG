@@ -43,7 +43,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: weatherAddressLabel, text: "땡땡구 댕댕동", font: .bbajiFont(.body1), alignment: .left)
+        labelSetting(label: weatherAddressLabel, text: BbajiInfo().getCompactAddress(), font: .bbajiFont(.body1), alignment: .left)
         weatherAddressLabel.textColor = .bbagaGray2
         
         let currentWeatherIconAndLabel = UIView()
@@ -157,11 +157,15 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotTodayWeatherCollectionViewCell.id, for: indexPath) as! SpotTodayWeatherCollectionViewCell
         
         let idx = indexPath.row
+        
+        cell.layoutConfigure(isRain: true)
+        
         cell.currentWeatherImgView = UIImageView()
-        let tempString = "\(currentTimeNTemperatureInfo[idx].temperature)°"
-        let timeString = currentTimeNTemperatureInfo[idx].time
-        labelSetting(label: cell.temperatureLabel, text: tempString, font: .bbajiFont(.heading5), alignment: .center)
-        labelSetting(label: cell.timeLabel, text: timeString, font: .bbajiFont(.body1), alignment: .center)
+        labelSetting(label: cell.currentRainPercentLabel, text: "60%", font: .bbajiFont(.rainyCaption), alignment: .center)
+        cell.currentRainPercentLabel.textColor = .bbagaRain
+        
+        labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
+        labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
             cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
             cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()

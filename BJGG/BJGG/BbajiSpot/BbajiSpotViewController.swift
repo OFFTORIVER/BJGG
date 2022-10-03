@@ -94,10 +94,10 @@ final class BbajiSpotViewController: UIViewController {
                 return
             }
             
-            let data = response.body.items
-            for i in 0...data.item.count-1 {
-                if data.item[i].category == "TMP" {
-                    timeNTempInfo.append((time: data.item[i].timeValue, temperature: data.item[i].fcstValue))
+            let data = response.body.items.request24HourWeatherItem()
+            for i in 0...data.count-1 {
+                if data[i].category == "TMP" {
+                    timeNTempInfo.append((time: data[i].timeValue, temperature: data[i].fcstValue))
                 }
             }
             

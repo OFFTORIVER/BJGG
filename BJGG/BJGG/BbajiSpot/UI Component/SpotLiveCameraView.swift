@@ -21,7 +21,7 @@ final class SpotLiveCameraView: UIView {
     }
     
     func liveCameraSetting(size: CGSize) {
-        let url = URL(string: "https://offtoriver.shop/hls/waterskii.m3u8")
+        let url = URL(string: BbajiInfo().getLiveCameraUrl())
         player = AVPlayer(url: url!)
         avpController.player = player
         avpController.view.frame.size.height = size.height

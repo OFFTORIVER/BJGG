@@ -69,7 +69,7 @@ struct WeatherManager {
     }
     
     func request24hData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
-        requestData(nx: nx, ny: ny, numberOfRow: 312) { (success, data) in
+        requestData(nx: nx, ny: ny, numberOfRow: 324) { (success, data) in
             completionHandler(success, data)
         }
     }
