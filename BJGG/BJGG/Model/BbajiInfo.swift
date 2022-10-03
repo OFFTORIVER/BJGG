@@ -17,11 +17,11 @@ struct BbajiInfo: Encodable {
     
     // Quick Test Init
     init() {
-        name = "뚝섬유원지 선스키"
+        name = "선스키"
         thumbnailImgName = "thumbnailImg"
         address = "서울 광진구 강변북로64"
-        contact = "02-498-9046"
-        liveCameraURL = "https://developer.apple.com/streaming/examples/basic-stream-osx-ios4-3.html"
+        contact = "02-498-9026"
+        liveCameraURL = "https://offtoriver.shop/hls/waterskii.m3u8"
     }
     
     init(name: String, thumbnailImgName: String, address: String, contact: String, liveCamURL: String) {
