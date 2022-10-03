@@ -78,7 +78,7 @@ final class SpotInfoView: UIView {
     }
     
     @objc func showContactLinkOption(_ sender: UITapGestureRecognizer) {
-        let phoneNumber:Int = 01000000000
+        let phoneNumber:Int = Int(bbajiInfo.getContact().components(separatedBy: ["-"]).joined()) ?? 01000000000
         if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
            UIApplication.shared.canOpenURL(url as URL) {
             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
