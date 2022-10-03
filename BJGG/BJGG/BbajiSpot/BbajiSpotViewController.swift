@@ -68,14 +68,14 @@ final class BbajiSpotViewController: UIViewController {
             make.top.equalTo(infoScrollContentView.snp.top).inset(viewToViewMargin)
             make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
             make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
-            make.height.equalTo(166)
+            make.height.equalTo(UIDevice.current.hasNotch ? 163 : 147)
         })
 
         spotWeatherInfoView.snp.makeConstraints({ make in
             make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
             make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
-            make.height.equalTo(306)
+            make.height.equalTo(UIDevice.current.hasNotch ? 306 : 290)
         })
 
         view.backgroundColor = .bbagaBack
