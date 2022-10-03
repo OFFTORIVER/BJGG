@@ -8,16 +8,21 @@
 import UIKit
 
 final class SpotWeatherInfoView: UIView {
-    private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
+    private let currentTemperatureLabel = UILabel()
     
-    required override init(frame: CGRect) {
+    private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
+    private var currentTimeNTemperatureInfo: [(String, String)]!
+    
+    required init(timeNTempInfo: [(String, String)]) {
         
-        super.init(frame: frame)
+        super.init(frame: CGRect.zero)
         
         layoutConfigure()
         
         registerCollectionView()
         setupCollectionViewDelegate()
+        
+        currentTimeNTemperatureInfo = timeNTempInfo
     }
     
     required init?(coder: NSCoder) {
@@ -52,7 +57,6 @@ final class SpotWeatherInfoView: UIView {
         })
         
         let currentWeatherIcon = UIImageView()
-        let currentTemperatureLabel = UILabel()
         
         [currentWeatherIcon, currentTemperatureLabel].forEach({
             currentWeatherIconAndLabel.addSubview($0)
@@ -71,7 +75,7 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(100)
         })
         
-        labelSetting(label: currentTemperatureLabel, text: "23°", font: .bbajiFont(.heading1), alignment: .center)
+        labelSetting(label: currentTemperatureLabel, text: "--°", font: .bbajiFont(.heading1), alignment: .center)
         
         currentTemperatureLabel.textColor = .bbagaGray1
         
@@ -125,6 +129,15 @@ final class SpotWeatherInfoView: UIView {
         spotTodayWeatherCollectionView.dataSource = self
         spotTodayWeatherCollectionView.delegate = self
     }
+    
+    func reloadData() {
+        
+        spotTodayWeatherCollectionView.reloadData()
+    }
+    
+    func setCurrentTemperatureLabelValue(temperatureStr: String) {
+        currentTemperatureLabel.text = "\(temperatureStr)°"
+    }
 }
 
 extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -145,8 +158,10 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         
         let idx = indexPath.row
         cell.currentWeatherImgView = UIImageView()
-        labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
-        labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
+        let tempString = "\(currentTimeNTemperatureInfo[idx].1)°"
+        let timeString = currentTimeNTemperatureInfo[idx].0
+        labelSetting(label: cell.temperatureLabel, text: tempString, font: .bbajiFont(.heading5), alignment: .center)
+        labelSetting(label: cell.timeLabel, text: timeString, font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
             cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
             cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
@@ -165,7 +180,7 @@ extension SpotWeatherInfoView {
         let attributedString = NSMutableAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray2])
         // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
         let blackTextColorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray1]
-
+        
         // 현재 시간(매개변수로 받은 time)의 자릿수에 따라 bbagaGray1 색상을 입힐 텍스트의 범위값을 다르게 설정
         attributedString.addAttributes(blackTextColorAttribute, range: NSRange(location:0, length: time / 10 == 0 ? 5 : 6))
         // label에 Color 입히기
