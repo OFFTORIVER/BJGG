@@ -11,9 +11,9 @@ final class SpotWeatherInfoView: UIView {
     private let currentTemperatureLabel = UILabel()
     
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
-    private var currentTimeNTemperatureInfo: [(String, String)]!
+    private var currentTimeNTemperatureInfo: [(time: String, temperature: String)]!
     
-    required init(timeNTempInfo: [(String, String)]) {
+    required init(timeNTempInfo: [(time: String, temperature: String)]) {
         
         super.init(frame: CGRect.zero)
         
@@ -158,8 +158,8 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         
         let idx = indexPath.row
         cell.currentWeatherImgView = UIImageView()
-        let tempString = "\(currentTimeNTemperatureInfo[idx].1)°"
-        let timeString = currentTimeNTemperatureInfo[idx].0
+        let tempString = "\(currentTimeNTemperatureInfo[idx].temperature)°"
+        let timeString = currentTimeNTemperatureInfo[idx].time
         labelSetting(label: cell.temperatureLabel, text: tempString, font: .bbajiFont(.heading5), alignment: .center)
         labelSetting(label: cell.timeLabel, text: timeString, font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
