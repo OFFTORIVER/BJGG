@@ -204,6 +204,39 @@ struct WeatherItem: Decodable {
 
 struct WeatherItems: Decodable {
     let item: [WeatherItem]
+    
+    func requestCurrentWeatherItem() -> [WeatherItem] {
+        var filteredItem = [WeatherItem]()
+        
+        var currentHour: String {
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd HHmm"
+            formatter.locale = Locale(identifier: "ko_kr")
+            formatter.timeZone = TimeZone(abbreviation: "KST")
+            
+            let str = formatter.string(from: now)
+            let time = str.split(separator: " ").map{ Int($0)! }[1]
+            
+            let calculatedTime = (time / 100) * 100
+            
+            if calculatedTime < 1000 {
+                return "0\(calculatedTime)"
+            } else {
+                return "\(calculatedTime)"
+            }
+        }
+        
+        item.forEach {
+            if $0.fcstTime == currentHour {
+                if $0.category == "TMP" || $0.category == "SKY" || $0.category == "POP" || $0.category == "PTY" {
+                    filteredItem.append($0)
+                }
+            }
+        }
+        
+        return filteredItem
+    }
 }
 
 struct WeatherBody: Decodable {
