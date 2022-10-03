@@ -148,6 +148,9 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         cell.layoutConfigure(isRain: true)
         
         cell.currentWeatherImgView = UIImageView()
+        labelSetting(label: cell.currentRainPercentLabel, text: "60%", font: .bbajiFont(.rainyCaption), alignment: .center)
+        cell.currentRainPercentLabel.textColor = .bbagaRain
+        
         labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
         labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
