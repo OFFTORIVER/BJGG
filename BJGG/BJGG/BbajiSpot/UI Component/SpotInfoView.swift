@@ -49,8 +49,8 @@ final class SpotInfoView: UIView {
         
         self.layer.cornerRadius = 16
         
-        let addressInfoView = IconAndLabelView(text: bbajiInfo.getAddress())
-        let contactInfoView = IconAndLabelView(text: bbajiInfo.getContact())
+        let addressInfoView = IconAndLabelView(imageName: "addressPin.png", text: bbajiInfo.getAddress())
+        let contactInfoView = IconAndLabelView(imageName: "telephone.png", text: bbajiInfo.getContact())
         
         [addressInfoView, contactInfoView].forEach({
             self.addSubview($0)

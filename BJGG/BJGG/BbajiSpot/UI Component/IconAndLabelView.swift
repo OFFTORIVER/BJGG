@@ -10,10 +10,10 @@ import UIKit
 final class IconAndLabelView: UIView {
     let addressLabel = UILabel()
     
-    required init(text: String) {
+    required init(imageName: String, text: String) {
         super.init(frame: CGRect.zero)
         
-        let addressImage = UIImageView()
+        let addressImage = UIImageView(image: UIImage(named: imageName))
         
         [addressImage, addressLabel].forEach({
             self.addSubview($0)
@@ -23,8 +23,6 @@ final class IconAndLabelView: UIView {
             make.width.equalTo(20)
             make.height.equalTo(20)
         })
-        
-        addressImage.backgroundColor = .black
         
         addressLabel.snp.makeConstraints({ make in
             make.leading.equalTo(addressImage.snp.trailing).offset(CGFloat.iconOffset)
