@@ -144,6 +144,9 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotTodayWeatherCollectionViewCell.id, for: indexPath) as! SpotTodayWeatherCollectionViewCell
         
         let idx = indexPath.row
+        
+        cell.layoutConfigure(isRain: true)
+        
         cell.currentWeatherImgView = UIImageView()
         labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
         labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
