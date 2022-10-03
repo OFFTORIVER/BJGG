@@ -12,14 +12,13 @@ final class BbajiSpotViewController: UIViewController {
     private let liveCameraView = SpotLiveCameraView()
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
-    private let spotInfoView = SpotInfoView()
-    private let spotWeatherInfoView = SpotWeatherInfoView()
+    private var spotInfoView = SpotInfoView()
+    private var spotWeatherInfoView: SpotWeatherInfoView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        layoutConfigure()
-        liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
+        configureLayoutWithAPI()
     }
     
     private func layoutConfigure() {
@@ -83,5 +82,32 @@ final class BbajiSpotViewController: UIViewController {
         spotInfoView.backgroundColor = .bbagaGray4
         spotWeatherInfoView.backgroundColor = .bbagaGray4
         
+    }
+    
+    private func configureLayoutWithAPI() {
+        var timeNTempInfo: [(time: String, temperature: String)] = []
+
+        let weatherManager = WeatherManager()
+        weatherManager.request24hData(nx: 61, ny: 126) { success, response in
+            guard let response = response as? Response else {
+                print("Error: API 호출 실패")
+                return
+            }
+            
+            let data = response.body.items
+            for i in 0...data.item.count-1 {
+                if data.item[i].category == "TMP" {
+                    timeNTempInfo.append((time: data.item[i].timeValue, temperature: data.item[i].fcstValue))
+                }
+            }
+            
+            DispatchQueue.main.async { [self] in
+                spotWeatherInfoView = SpotWeatherInfoView(timeNTempInfo: timeNTempInfo)
+                layoutConfigure()
+                liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
+                spotWeatherInfoView.reloadData()
+                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: timeNTempInfo[0].temperature)
+            }
+        }
     }
 }
