@@ -38,6 +38,9 @@
 		553F0F9F28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */; };
 		553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */; };
 		553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */; };
+		553F0FA528E9D4AE00FD9CDA /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA428E9D4AE00FD9CDA /* APIKey.swift */; };
+		553F0FA728E9E11E00FD9CDA /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA628E9E11E00FD9CDA /* Weather.swift */; };
+		553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */; };
 		558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */; };
 		55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0AA728BA4F9F0045644C /* AppDelegate.swift */; };
 		55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */; };
@@ -77,6 +80,9 @@
 		553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCollectionViewCell.swift; sourceTree = "<group>"; };
 		553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowGradientView.swift; sourceTree = "<group>"; };
 		553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		553F0FA428E9D4AE00FD9CDA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		553F0FA628E9E11E00FD9CDA /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BJGG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB0AA728BA4F9F0045644C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
+				553F0FA628E9E11E00FD9CDA /* Weather.swift */,
+				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 				3A7E3BDB28D7427E00F6416A /* Model */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
+				553F0FA428E9D4AE00FD9CDA /* APIKey.swift */,
 				55CB0AB028BA4FA10045644C /* Assets.xcassets */,
 				55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */,
 				55CB0AB528BA4FA10045644C /* Info.plist */,
@@ -319,12 +328,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553F0FA728E9E11E00FD9CDA /* Weather.swift in Sources */,
 				3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */,
 				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
 				553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */,
 				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
 				553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */,
+				553F0FA528E9D4AE00FD9CDA /* APIKey.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */,
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,
@@ -336,6 +347,7 @@
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
 				553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */,
+				553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
 				553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */,
