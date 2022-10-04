@@ -275,7 +275,7 @@ struct WeatherItems: Decodable {
     
     func requestRainInfoText() -> String {
         let weatherItems = request24HourWeatherItem()
-        let (isRainingNow, currentStatus) = isRainingNow(weatherItems)
+        let (isRainingNow, currentStatus, skyStatus) = isRainingNow(weatherItems)
         var day = ""
         
         if isRainingNow {
@@ -305,6 +305,19 @@ struct WeatherItems: Decodable {
                 return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 올 예정이에요!"
             } else {
                 // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 없을 경우
+                if isTimeLeftIn3hours(time) {
+                    // 하루의 남은 시간이 3시간 이하일 경우
+                    day = "내일"
+                } else {
+                    // 하루의 남은 시간이 3시간 이상일 경우
+                    day = "오늘"
+                }
+                
+                if skyStatus == "맑음" {
+                    return "\(day)은 계속 맑아요!"
+                } else {
+                    return "\(day)은 비소식이 없어요!!"
+                }
             }
             
         } else {
@@ -343,24 +356,26 @@ struct WeatherItems: Decodable {
                 return "\(day)은 계속\(status)\(postPosition) 와요!"
             }
         }
-        
-        return "기상정보 텍스트를 제공할 예정입니다."
     }
     
-    private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, String?) {
-        var weatherItem: WeatherItem?
+    private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, String?, String?) {
+        var weatherStatus: String?
+        var skyStatus: String?
         
         for item in weatherItems {
+            if item.category == "SKY" && Int(item.fcstTime)! == current.time && item.fcstDate == current.day {
+                skyStatus = item.categoryValue
+            }
             if item.category == "PTY" && Int(item.fcstTime)! == current.time && item.fcstDate == current.day {
-                weatherItem = item
+                weatherStatus = item.categoryValue
                 break
             }
         }
         
-        if weatherItem?.categoryValue == "강수없음" {
-            return (false, nil)
+        if weatherStatus == "강수없음" {
+            return (false, nil, skyStatus)
         } else {
-            return (true, weatherItem?.categoryValue)
+            return (true, weatherStatus, nil)
         }
     }
     
