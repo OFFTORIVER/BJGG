@@ -32,7 +32,6 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         if isRain {
             currentRainPercentLabel.snp.makeConstraints({ make in
                 make.top.equalTo(self.snp.top)
-                make.leading.equalTo(self.snp.leading)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.equalTo(48)
                 make.height.equalTo(19)
