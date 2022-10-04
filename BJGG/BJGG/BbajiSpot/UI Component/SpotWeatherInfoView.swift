@@ -120,6 +120,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         spotTodayWeatherCollectionView.layer.cornerRadius = 16
+        spotTodayWeatherCollectionView.backgroundColor = .bbagaGray4
     }
     
     private func registerCollectionView() {
