@@ -205,6 +205,21 @@ struct WeatherItem: Decodable {
 struct WeatherItems: Decodable {
     let item: [WeatherItem]
     
+    private var current: (day: String, time: Int) {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd HHmm"
+        formatter.locale = Locale(identifier: "ko_kr")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+
+        let currentDayAndTime = formatter.string(from: now).split(separator: " ")
+        let currentDay = String(currentDayAndTime[0])
+        let time = Int(currentDayAndTime[1])!
+        let calculatedTime = (time / 100) * 100
+        
+        return (currentDay, calculatedTime)
+    }
+    
     func requestCurrentWeatherItem() -> [WeatherItem] {
         var filteredItem = [WeatherItem]()
         
@@ -241,26 +256,6 @@ struct WeatherItems: Decodable {
     func request24HourWeatherItem() -> [WeatherItem] {
         var filteredItem = [WeatherItem]()
         
-        var current: (day: String, time: Int) {
-            let now = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMdd HHmm"
-            formatter.locale = Locale(identifier: "ko_kr")
-            formatter.timeZone = TimeZone(abbreviation: "KST")
-
-            let currentDayAndTime = formatter.string(from: now).split(separator: " ")
-            let currentDay = String(currentDayAndTime[0])
-            let time = Int(currentDayAndTime[1])!
-
-            let calculatedTime = (time / 100) * 100
-
-            if calculatedTime < 1000 {
-                return (currentDay, calculatedTime)
-            } else {
-                return (currentDay, calculatedTime)
-            }
-        }
-        
         item.forEach {
             if $0.category == "TMP" || $0.category == "SKY" || $0.category == "POP" || $0.category == "PTY" {
                 if $0.fcstDate == current.day {
@@ -276,6 +271,183 @@ struct WeatherItems: Decodable {
         }
         
         return filteredItem
+    }
+    
+    func requestRainInfoText() -> String {
+        let weatherItems = request24HourWeatherItem()
+        let (isRainingNow, currentStatus, skyStatus) = isRainingNow(weatherItems)
+        var day = ""
+        
+        if isRainingNow {
+            // '강수없음' 일 경우
+             let (willBecomePrecipitation, time, status) = willBecomePrecipitationIn24Hours(weatherItems)
+            
+            if willBecomePrecipitation {
+                // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 있을 경우
+                guard let status = status else { return "기상상태 변환 오류" }
+                var postPosition: String {
+                    if status == "눈" || status == "비/눈" {
+                        return "이"
+                    } else {
+                        return "가"
+                    }
+                }
+                
+                if isTheDayTomorrow(time) {
+                    // 다른 강수상태로 바뀔 예정일 시간이 내일인 경우
+                    day = "내일"
+                    
+                } else {
+                    // 다른 강수상태로 바뀔 예정일 시간이 오늘인 경우
+                    day = "오늘"
+                }
+                
+                return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 올 예정이에요!"
+            } else {
+                // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 없을 경우
+                if isTimeLeftIn3hours(time) {
+                    // 하루의 남은 시간이 3시간 이하일 경우
+                    day = "내일"
+                } else {
+                    // 하루의 남은 시간이 3시간 이상일 경우
+                    day = "오늘"
+                }
+                
+                if skyStatus == "맑음" {
+                    return "\(day)은 계속 맑아요!"
+                } else {
+                    return "\(day)은 비소식이 없어요!"
+                }
+            }
+            
+        } else {
+            // '강수없음'이 아닐 경우
+            guard let status = currentStatus else { return "기상상태 변환 오류" }
+            let (willBecomeClean, time) = willBecomeCleanIn24Hours(weatherItems)
+            var postPosition: String {
+                if status == "눈" || status == "비/눈" {
+                    return "이"
+                } else {
+                    return "가"
+                }
+            }
+            
+            if willBecomeClean {
+                // 강수형태가 강수 없음으로 바뀔 예정이 있을 경우
+                if isTheDayTomorrow(time) {
+                    // 강수없음으로 바뀔 예정일 시간이 내일인 경우
+                    day = "내일"
+                } else {
+                    // 강수없음으로 바뀔 예정일 시간이 오늘인 경우
+                    day = "오늘"
+                }
+                
+                return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 그칠 예정이에요!"
+            } else {
+                // 강수형태가 강수 없음으로 바뀔 예정이 없는 경우
+                if isTimeLeftIn3hours(time) {
+                    // 하루의 남은 시간이 3시간 이하일 경우
+                    day = "내일"
+                } else {
+                    // 하루의 남은 시간이 3시간 이상일 경우
+                    day = "오늘"
+                }
+                
+                return "\(day)은 계속 \(status)\(postPosition) 와요!"
+            }
+        }
+    }
+    
+    private func isRainingNow(_ weatherItems: [WeatherItem]) -> (Bool, String?, String?) {
+        var weatherStatus: String?
+        var skyStatus: String?
+        
+        for item in weatherItems {
+            if item.category == "SKY" && Int(item.fcstTime)! == current.time && item.fcstDate == current.day {
+                skyStatus = item.categoryValue
+            }
+            if item.category == "PTY" && Int(item.fcstTime)! == current.time && item.fcstDate == current.day {
+                weatherStatus = item.categoryValue
+                break
+            }
+        }
+        
+        if weatherStatus == "강수없음" {
+            return (true, nil, skyStatus)
+        } else {
+            return (false, weatherStatus, nil)
+        }
+    }
+    
+    private func willBecomePrecipitationIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String, String?) {
+        var status: String?
+        
+        var willBecomePrecipitation = false
+        var time = ""
+        
+        for i in 4..<weatherItems.count {
+            if Int(weatherItems[i].fcstTime)! != current.time || weatherItems[i].fcstDate != current.day {
+                if weatherItems[i].categoryName == "강수형태" && weatherItems[i].categoryValue != "강수없음" {
+                    willBecomePrecipitation = true
+                    status = weatherItems[i].categoryValue
+                    time = weatherItems[i].fcstTime
+                    break
+                }
+            }
+        }
+        
+        if time == "" {
+            if current.time < 1000 {
+                time = "0\(current.time)"
+            } else {
+                time = "\(current.time)"
+            }
+        }
+        
+        return (willBecomePrecipitation, time, status)
+    }
+    
+    private func willBecomeCleanIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String) {
+        var willBecomeClean = false
+        var time = ""
+        
+        for i in 4..<weatherItems.count {
+            if Int(weatherItems[i].fcstTime)! != current.time || weatherItems[i].fcstDate != current.day {
+                if weatherItems[i].categoryName == "강수형태" && weatherItems[i].categoryValue == "강수없음" {
+                    willBecomeClean = true
+                    time = weatherItems[i].fcstTime
+                    break
+                }
+            }
+        }
+        
+        if time == "" {
+            if current.time < 1000 {
+                time = "0\(current.time)"
+            } else {
+                time = "\(current.time)"
+            }
+        }
+        
+        return (willBecomeClean, time)
+    }
+    
+    private func isTheDayTomorrow(_ time: String) -> Bool {
+        if Int(time)! <= current.time {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isTimeLeftIn3hours(_ time: String) -> Bool {
+        let hour = Int(time)! / 100
+        
+        if (24 - hour) <= 3 {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
