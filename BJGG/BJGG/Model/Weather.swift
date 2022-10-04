@@ -205,6 +205,14 @@ struct WeatherItem: Decodable {
 struct WeatherItems: Decodable {
     let item: [WeatherItem]
     
+    func requestWeatherIconNames(_ weatherItems: [WeatherItem]) -> [(String, String)] {
+        var iconNames = [(time: String, iconName: String)]()
+        
+        //SKY와 PTY, fcstTime을 통해 날씨아이콘 이름을 판단하는 함수
+        
+        return iconNames
+    }
+    
     func requestCurrentWeatherItem() -> [WeatherItem] {
         var filteredItem = [WeatherItem]()
         
