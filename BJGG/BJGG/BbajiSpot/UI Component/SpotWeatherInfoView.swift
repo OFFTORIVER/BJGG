@@ -88,8 +88,7 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(18)
         })
         
-        labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", font: .bbajiFont(.body1), alignment: .center)
-        rainInfoLabel.textColor = .bbagaGray1
+        labelSetting(label: rainInfoLabel, text: "", font: .bbajiFont(.body1), alignment: .center)
         
         let spotWeatherInfoViewDivideLine = UIView()
         self.addSubview(spotWeatherInfoViewDivideLine)
@@ -140,6 +139,13 @@ final class SpotWeatherInfoView: UIView {
     func setCurrentTemperatureLabelValue(temperatureStr: String) {
         currentTemperatureLabel.text = "\(temperatureStr)°"
     }
+    
+    func setRainInfoLabelTextAndColor(text: String) {
+        rainInfoLabel.text = text
+        let rainInfoLabelSplitText = rainInfoLabel.text?.components(separatedBy: "시")
+        guard let timeDataStr = rainInfoLabelSplitText?[0] else { return }
+        makeTimeAsBlackColor(label: rainInfoLabel, timeStr: timeDataStr)
+    }
 }
 
 extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -188,14 +194,15 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
 }
 
 extension SpotWeatherInfoView {
-    func makeTimeAsBlackColor(label: UILabel, time: Int) {
+    func makeTimeAsBlackColor(label: UILabel, timeStr: String) {
         // label 전체 텍스트의 기본 컬러를 bbagaGray2로 설정
-        let attributedString = NSMutableAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray2])
-        // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
-        let blackTextColorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.bbagaGray1]
+        label.textColor = .bbagaGray2
+        guard let text = label.text else { return }
+        let attributedString = NSMutableAttributedString(string: text)
         
-        // 현재 시간(매개변수로 받은 time)의 자릿수에 따라 bbagaGray1 색상을 입힐 텍스트의 범위값을 다르게 설정
-        attributedString.addAttributes(blackTextColorAttribute, range: NSRange(location:0, length: time / 10 == 0 ? 5 : 6))
+        // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
+        attributedString.addAttribute(.foregroundColor, value: UIColor.bbagaGray1, range: (text as NSString).range(of: "\(timeStr)시"))
+        
         // label에 Color 입히기
         label.attributedText = attributedString
     }

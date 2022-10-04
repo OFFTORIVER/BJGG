@@ -108,7 +108,7 @@ final class BbajiSpotViewController: UIViewController {
                 liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
                 spotWeatherInfoView.reloadData()
                 spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: timeNTempInfo[0].temperature)
-                spotWeatherInfoView.rainInfoLabel.text = rainData
+                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }
         }
     }
