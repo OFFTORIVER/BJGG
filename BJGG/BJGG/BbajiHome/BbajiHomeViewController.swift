@@ -17,6 +17,7 @@ final class BbajiHomeViewController: UIViewController {
         view.backgroundColor = .bbagaBack
         
         layoutConfigure()
+        delegateConfigure()
     }
 }
 
@@ -40,5 +41,15 @@ private extension BbajiHomeViewController {
             $0.trailing.equalToSuperview().inset(CGFloat.superViewInset)
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    func delegateConfigure() {
+        bbajiListView.delegate = self
+    }
+}
+
+extension BbajiHomeViewController: BbajiListViewDelegate {
+    func pushBbajiSpotViewController() {
+        self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
     }
 }
