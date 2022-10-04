@@ -29,11 +29,8 @@ extension UILabel {
         
         let margin = CGFloat.superViewInset * 1.4
         
-        // Case: Opacity 조정
         toastLabel.frame = CGRect(x: margin, y: height * 0.88, width: width - margin * 2, height: 45)
-        
-        // Case: Position 조정
-//        toastLabel.frame = CGRect(x: margin, y: height * 1.12, width: width - margin * 2, height: 45)
+
         toastLabel.text = "클립보드에 복사되었습니다."
         toastLabel.textColor = UIColor.bbagaGray4
         toastLabel.backgroundColor = UIColor.bbagaGray1
@@ -44,24 +41,13 @@ extension UILabel {
         toastLabel.layer.opacity = 0
         self.window?.rootViewController?.view.addSubview(toastLabel)
         
-        // Case: Opacity 조정
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
-            toastLabel.layer.opacity = 1
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            toastLabel.layer.opacity = 0.9
         }, completion: {_ in
-            UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.6, options: .curveEaseOut, animations: {
                 toastLabel.layer.opacity = 0
             })
         })
-        
-        // Case: Position 조정
-//        toastLabel.layer.opacity = 1
-//        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
-//            toastLabel.frame = CGRect(x: margin, y: height * 0.88, width: width - margin * 2, height: 45)
-//        }, completion: {_ in
-//            UIView.animate(withDuration: 0.4, delay: 0.6, options: .curveEaseOut, animations: {
-//                toastLabel.frame = CGRect(x: margin, y: height * 1.12, width: width - margin * 2, height: 45)
-//            })
-//        })
 
     }
 }

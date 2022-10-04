@@ -89,6 +89,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", font: .bbajiFont(.body1), alignment: .center)
+        rainInfoLabel.textColor = .bbagaGray1
         
         let spotWeatherInfoViewDivideLine = UIView()
         self.addSubview(spotWeatherInfoViewDivideLine)
@@ -119,6 +120,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         spotTodayWeatherCollectionView.layer.cornerRadius = 16
+        spotTodayWeatherCollectionView.backgroundColor = .bbagaGray4
     }
     
     private func registerCollectionView() {
@@ -164,11 +166,18 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         labelSetting(label: cell.currentRainPercentLabel, text: "60%", font: .bbajiFont(.rainyCaption), alignment: .center)
         cell.currentRainPercentLabel.textColor = .bbagaRain
         
-        labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
-        labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
+        let temperatureStr = "\(currentTimeNTemperatureInfo[idx].temperature)°"
+        let timeStr = currentTimeNTemperatureInfo[idx].time
+        labelSetting(label: cell.temperatureLabel, text: temperatureStr, font: .bbajiFont(.heading5), alignment: .center)
+        labelSetting(label: cell.timeLabel, text: timeStr, font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
             cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
             cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
+            cell.temperatureLabel.textColor = .bbagaGray1
+            cell.timeLabel.textColor = .bbagaGray1
+        } else {
+            cell.temperatureLabel.textColor = .bbagaGray2
+            cell.timeLabel.textColor = .bbagaGray2
         }
         return cell
     }

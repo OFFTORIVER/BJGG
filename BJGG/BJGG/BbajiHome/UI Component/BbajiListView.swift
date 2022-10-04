@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol BbajiListViewDelegate {
+    func pushBbajiSpotViewController()
+}
+
 class BbajiListView: UIView {
+    var delegate: BbajiListViewDelegate?
+    
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = BbajiListCollectionView(frame: .zero, collectionViewLayout: layout)
@@ -62,5 +68,10 @@ extension BbajiListView: UICollectionViewDataSource {
         return cell ?? UICollectionViewCell()
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let idx = indexPath.row
+        if idx == 0 {
+            delegate?.pushBbajiSpotViewController()
+        }
+    }
 }
