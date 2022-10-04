@@ -279,6 +279,7 @@ struct WeatherItems: Decodable {
         
         if isRainingNow {
             // '강수없음' 일 경우
+             let (willBecomePrecipitation, time) = willBecomePrecipitationIn24Hours(weatherItems)
             
         } else {
             // '강수없음'이 아닐 경우
@@ -336,6 +337,31 @@ struct WeatherItems: Decodable {
         } else {
             return (true, weatherItem?.categoryValue)
         }
+    }
+    
+    private func willBecomePrecipitationIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String) {
+        var willBecomePrecipitation = false
+        var time = ""
+        
+        for i in 4..<weatherItems.count {
+            if Int(weatherItems[i].fcstTime)! != current.time || weatherItems[i].fcstDate != current.day {
+                if weatherItems[i].categoryName == "강수형태" && weatherItems[i].categoryValue != "강수없음" {
+                    willBecomePrecipitation = true
+                    time = weatherItems[i].fcstTime
+                    break
+                }
+            }
+        }
+        
+        if time == "" {
+            if current.time < 1000 {
+                time = "0\(current.time)"
+            } else {
+                time = "\(current.time)"
+            }
+        }
+        
+        return (willBecomePrecipitation, time)
     }
     
     private func willBecomeCleanIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String) {
