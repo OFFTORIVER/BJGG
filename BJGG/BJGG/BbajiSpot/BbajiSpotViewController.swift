@@ -95,6 +95,7 @@ final class BbajiSpotViewController: UIViewController {
             }
             
             let data = response.body.items.request24HourWeatherItem()
+            let rainData = response.body.items.requestRainInfoText()
             for i in 0...data.count-1 {
                 if data[i].category == "TMP" {
                     timeNTempInfo.append((time: data[i].timeValue, temperature: data[i].fcstValue))
@@ -107,6 +108,7 @@ final class BbajiSpotViewController: UIViewController {
                 liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
                 spotWeatherInfoView.reloadData()
                 spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: timeNTempInfo[0].temperature)
+                spotWeatherInfoView.rainInfoLabel.text = rainData
             }
         }
     }
