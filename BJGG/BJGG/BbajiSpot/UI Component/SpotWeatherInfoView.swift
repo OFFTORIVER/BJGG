@@ -164,8 +164,10 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         labelSetting(label: cell.currentRainPercentLabel, text: "60%", font: .bbajiFont(.rainyCaption), alignment: .center)
         cell.currentRainPercentLabel.textColor = .bbagaRain
         
-        labelSetting(label: cell.temperatureLabel, text: "23°", font: .bbajiFont(.heading5), alignment: .center)
-        labelSetting(label: cell.timeLabel, text: "오후12시", font: .bbajiFont(.body1), alignment: .center)
+        let temperatureStr = "\(currentTimeNTemperatureInfo[idx].temperature)°"
+        let timeStr = currentTimeNTemperatureInfo[idx].time
+        labelSetting(label: cell.temperatureLabel, text: temperatureStr, font: .bbajiFont(.heading5), alignment: .center)
+        labelSetting(label: cell.timeLabel, text: timeStr, font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
             cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
             cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
