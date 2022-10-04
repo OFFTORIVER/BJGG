@@ -139,6 +139,13 @@ final class SpotWeatherInfoView: UIView {
     func setCurrentTemperatureLabelValue(temperatureStr: String) {
         currentTemperatureLabel.text = "\(temperatureStr)°"
     }
+    
+    func setRainInfoLabelTextAndColor(text: String) {
+        rainInfoLabel.text = text
+        let rainInfoLabelSplitText = rainInfoLabel.text?.components(separatedBy: "시")
+        guard let timeDataStr = rainInfoLabelSplitText?[0] else { return }
+        makeTimeAsBlackColor(label: rainInfoLabel, timeStr: timeDataStr)
+    }
 }
 
 extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
