@@ -169,6 +169,11 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         if idx == 0 {
             cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
             cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
+            cell.temperatureLabel.textColor = .bbagaGray1
+            cell.timeLabel.textColor = .bbagaGray1
+        } else {
+            cell.temperatureLabel.textColor = .bbagaGray2
+            cell.timeLabel.textColor = .bbagaGray2
         }
         return cell
     }
