@@ -14,7 +14,6 @@ final class SpotWeatherInfoView: UIView {
     
     var rainInfoLabel = UILabel()
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
-    //private var currentTimeNTemperatureInfo: [(time: String, temperature: String)]!
     private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)]!
     
     required init(weatherInfo: [(time: String, iconName: String, temp: String, probability: String)]) {

@@ -85,7 +85,6 @@ final class BbajiSpotViewController: UIViewController {
     }
     
     private func configureLayoutWithAPI() {
-//        var timeNTempInfo: [(time: String, temperature: String)] = []
 
         let weatherManager = WeatherManager()
         weatherManager.request24hData(nx: 61, ny: 126) { success, response in
@@ -97,12 +96,6 @@ final class BbajiSpotViewController: UIViewController {
             let data = response.body.items.request24HourWeatherItem()
             let rainData = response.body.items.requestRainInfoText()
             let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
-            
-//            for i in 0...data.count-1 {
-//                if data[i].category == "TMP" {
-//                    timeNTempInfo.append((time: data[i].timeValue, temperature: data[i].fcstValue))
-//                }
-//            }
             
             DispatchQueue.main.async { [self] in
                 spotWeatherInfoView = SpotWeatherInfoView(weatherInfo: weatherDataTuple)
