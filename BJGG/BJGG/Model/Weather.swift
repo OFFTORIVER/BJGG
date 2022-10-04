@@ -205,6 +205,91 @@ struct WeatherItem: Decodable {
 struct WeatherItems: Decodable {
     let item: [WeatherItem]
     
+
+    func requestWeatherDataSet(_ weatherItems: [WeatherItem]) -> [(time: String, iconName: String, temp: String, probability: String)] {
+        var weatherData = [(time: String, iconName: String, temp: String, probability: String)]()
+        
+        var status: (time: String?, timeText: String?, sky: String?, pty: String?, tmp: String?, prob: String?)
+        
+        func classifyIconName(pty: String, sky: String, time: String) -> String {
+            if pty == "강수없음" {
+                let time = Int(status.time ?? "") ?? 0
+                
+                if 600 <= time && time <= 1800 {
+                    if sky == "맑음" {
+                        return "sunny"
+                    } else if sky == "구름많음" {
+                        return "cloudy"
+                    } else if sky == "흐림" {
+                        return "fade"
+                    } else {
+                        return "sunny"
+                    }
+                } else {
+                    if sky == "맑음" {
+                        return "night"
+                    } else if sky == "구름많음" {
+                        return "cloudyNight"
+                    } else if sky == "흐림" {
+                        return "fade"
+                    } else {
+                        return "night"
+                    }
+                }
+            } else if pty == "비" || pty == "소나기" {
+                return "rainy"
+            } else if pty == "비/눈" {
+                return "sleet"
+            } else if pty == "눈" {
+                return "snowy"
+            } else {
+                return "sunny"
+            }
+        }
+        
+        weatherItems.forEach {
+            if status.time != nil && status.sky != nil && status.pty != nil && status.tmp != nil && status.prob != nil {
+                var data = (time: status.timeText ?? "오후 00시", iconName: "", temp: status.tmp ?? "00", probability: status.prob ?? "0%")
+                
+                data.iconName = classifyIconName(pty: status.pty ?? "", sky: status.sky ?? "", time: status.time ?? "")
+                
+                weatherData.append(data)
+                
+                status.time = nil
+                status.timeText = nil
+                status.sky = nil
+                status.pty = nil
+                status.tmp = nil
+                status.prob = nil
+            }
+            
+            if status.time == nil {
+                status.time = $0.fcstTime
+                status.timeText = $0.timeValue
+            }
+            
+            if $0.category == "SKY" {
+                status.sky = $0.categoryValue
+            } else if $0.category == "TMP" {
+                status.tmp = $0.fcstValue
+            } else if $0.category == "PTY" {
+                status.pty = $0.categoryValue
+            } else if $0.category == "POP" {
+                status.prob = $0.categoryValue
+            }
+        }
+        
+        if status.time != nil && status.sky != nil && status.pty != nil && status.tmp != nil && status.prob != nil {
+            var data = (time: status.timeText ?? "오후 00시", iconName: "", temp: status.tmp ?? "00", probability: status.prob ?? "0%")
+            
+            data.iconName = classifyIconName(pty: status.pty ?? "", sky: status.sky ?? "", time: status.time ?? "")
+            
+            weatherData.append(data)
+        }
+        
+        return weatherData
+    }
+    
     private var current: (day: String, time: Int) {
         let now = Date()
         let formatter = DateFormatter()
