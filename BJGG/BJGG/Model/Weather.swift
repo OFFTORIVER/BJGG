@@ -316,7 +316,7 @@ struct WeatherItems: Decodable {
                 if skyStatus == "맑음" {
                     return "\(day)은 계속 맑아요!"
                 } else {
-                    return "\(day)은 비소식이 없어요!!"
+                    return "\(day)은 비소식이 없어요!"
                 }
             }
             
@@ -353,7 +353,7 @@ struct WeatherItems: Decodable {
                     day = "오늘"
                 }
                 
-                return "\(day)은 계속\(status)\(postPosition) 와요!"
+                return "\(day)은 계속 \(status)\(postPosition) 와요!"
             }
         }
     }
@@ -373,9 +373,9 @@ struct WeatherItems: Decodable {
         }
         
         if weatherStatus == "강수없음" {
-            return (false, nil, skyStatus)
+            return (true, nil, skyStatus)
         } else {
-            return (true, weatherStatus, nil)
+            return (false, weatherStatus, nil)
         }
     }
     
