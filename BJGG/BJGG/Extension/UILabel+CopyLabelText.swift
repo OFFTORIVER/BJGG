@@ -45,10 +45,10 @@ extension UILabel {
         self.window?.rootViewController?.view.addSubview(toastLabel)
         
         // Case: Opacity 조정
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
-            toastLabel.layer.opacity = 1
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            toastLabel.layer.opacity = 0.9
         }, completion: {_ in
-            UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.6, options: .curveEaseOut, animations: {
                 toastLabel.layer.opacity = 0
             })
         })
