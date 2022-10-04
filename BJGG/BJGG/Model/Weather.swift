@@ -284,7 +284,25 @@ struct WeatherItems: Decodable {
             
             if willBecomePrecipitation {
                 // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 있을 경우
+                guard let status = status else { return "기상상태 변환 오류" }
+                var postPosition: String {
+                    if status == "눈" || status == "비/눈" {
+                        return "이"
+                    } else {
+                        return "가"
+                    }
+                }
                 
+                if isTheDayTomorrow(time) {
+                    // 다른 강수상태로 바뀔 예정일 시간이 내일인 경우
+                    day = "내일"
+                    
+                } else {
+                    // 다른 강수상태로 바뀔 예정일 시간이 오늘인 경우
+                    day = "오늘"
+                }
+                
+                return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 올 예정이에요!"
             } else {
                 // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 없을 경우
             }
