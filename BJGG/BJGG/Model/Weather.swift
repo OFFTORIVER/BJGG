@@ -276,16 +276,23 @@ struct WeatherItems: Decodable {
     func requestRainInfoText() -> String {
         let weatherItems = request24HourWeatherItem()
         let (isRainingNow, currentStatus) = isRainingNow(weatherItems)
+        var day = ""
         
         if isRainingNow {
             // '강수없음' 일 경우
-             let (willBecomePrecipitation, time) = willBecomePrecipitationIn24Hours(weatherItems)
+             let (willBecomePrecipitation, time, status) = willBecomePrecipitationIn24Hours(weatherItems)
+            
+            if willBecomePrecipitation {
+                // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 있을 경우
+                
+            } else {
+                // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 없을 경우
+            }
             
         } else {
             // '강수없음'이 아닐 경우
             guard let status = currentStatus else { return "기상상태 변환 오류" }
             let (willBecomeClean, time) = willBecomeCleanIn24Hours(weatherItems)
-            var day = ""
             var postPosition: String {
                 if status == "눈" || status == "비/눈" {
                     return "이"
@@ -339,7 +346,9 @@ struct WeatherItems: Decodable {
         }
     }
     
-    private func willBecomePrecipitationIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String) {
+    private func willBecomePrecipitationIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String, String?) {
+        var status: String?
+        
         var willBecomePrecipitation = false
         var time = ""
         
@@ -347,6 +356,7 @@ struct WeatherItems: Decodable {
             if Int(weatherItems[i].fcstTime)! != current.time || weatherItems[i].fcstDate != current.day {
                 if weatherItems[i].categoryName == "강수형태" && weatherItems[i].categoryValue != "강수없음" {
                     willBecomePrecipitation = true
+                    status = weatherItems[i].categoryValue
                     time = weatherItems[i].fcstTime
                     break
                 }
@@ -361,7 +371,7 @@ struct WeatherItems: Decodable {
             }
         }
         
-        return (willBecomePrecipitation, time)
+        return (willBecomePrecipitation, time, status)
     }
     
     private func willBecomeCleanIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String) {
