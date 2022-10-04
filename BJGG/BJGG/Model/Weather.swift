@@ -306,7 +306,15 @@ struct WeatherItems: Decodable {
                 return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 그칠 예정이에요!"
             } else {
                 // 강수형태가 강수 없음으로 바뀔 예정이 없는 경우
-                // isTimeLeftIn3hours(_:)
+                if isTimeLeftIn3hours(time) {
+                    // 하루의 남은 시간이 3시간 이하일 경우
+                    day = "내일"
+                } else {
+                    // 하루의 남은 시간이 3시간 이상일 경우
+                    day = "오늘"
+                }
+                
+                return "\(day)은 계속\(status)\(postPosition) 와요!"
             }
         }
         
@@ -357,6 +365,16 @@ struct WeatherItems: Decodable {
     
     private func isTheDayTomorrow(_ time: String) -> Bool {
         if Int(time)! <= current.time {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isTimeLeftIn3hours(_ time: String) -> Bool {
+        let hour = Int(time)! / 100
+        
+        if (24 - hour) <= 3 {
             return true
         } else {
             return false
