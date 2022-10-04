@@ -10,6 +10,7 @@ import UIKit
 final class SpotWeatherInfoView: UIView {
     private let currentTemperatureLabel = UILabel()
     
+    var rainInfoLabel = UILabel()
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
     private var currentTimeNTemperatureInfo: [(time: String, temperature: String)]!
     
@@ -79,7 +80,6 @@ final class SpotWeatherInfoView: UIView {
         
         currentTemperatureLabel.textColor = .bbagaGray1
         
-        let rainInfoLabel = UILabel()
         self.addSubview(rainInfoLabel)
         
         rainInfoLabel.snp.makeConstraints({ make in
