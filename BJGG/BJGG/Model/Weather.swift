@@ -284,11 +284,26 @@ struct WeatherItems: Decodable {
             // '강수없음'이 아닐 경우
             guard let status = status else { return "기상상태 변환 오류" }
             let (willBecomeClean, time) = willBecomeCleanIn24Hours(weatherItems)
+            var day = ""
+            var postPosition: String {
+                if status == "눈" || status == "비/눈" {
+                    return "이"
+                } else {
+                    return "가"
+                }
+            }
             
             if willBecomeClean {
                 // 강수형태가 강수 없음으로 바뀔 예정이 있을 경우
-                // isTheDayTomorrow(_:)
+                if isTheDayTomorrow(time) {
+                    // 강수없음으로 바뀔 예정일 시간이 내일인 경우
+                    day = "내일"
+                } else {
+                    // 강수없음으로 바뀔 예정일 시간이 오늘인 경우
+                    day = "오늘"
+                }
                 
+                return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 그칠 예정이에요!"
             } else {
                 // 강수형태가 강수 없음으로 바뀔 예정이 없는 경우
                 // isTimeLeftIn3hours(_:)
@@ -338,6 +353,14 @@ struct WeatherItems: Decodable {
         }
         
         return (willBecomeClean, time)
+    }
+    
+    private func isTheDayTomorrow(_ time: String) -> Bool {
+        if Int(time)! <= current.time {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
