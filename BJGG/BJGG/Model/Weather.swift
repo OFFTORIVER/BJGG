@@ -288,8 +288,9 @@ struct WeatherItems: Decodable {
         } else {
             // '강수없음'이 아닐 경우
             guard let status = status else { return "기상상태 변환 오류" }
+            let (willBecomeClean, time) = willBecomeCleanIn24Hours(weatherItems)
             
-            if willBecomeCleanIn24Hours(weatherItems: weatherItems) {
+            if willBecomeClean {
                 // 강수형태가 강수 없음으로 바뀔 예정이 있을 경우
                 // isTheDayTomorrow(_:)
                 
@@ -338,7 +339,7 @@ struct WeatherItems: Decodable {
         }
     }
     
-    private func willBecomeCleanIn24Hours(weatherItems: [WeatherItem] ) -> Bool {
+    private func willBecomeCleanIn24Hours(_ weatherItems: [WeatherItem]) -> (Bool, String) {
         var current: (day: String, time: Int) {
             let now = Date()
             let formatter = DateFormatter()
@@ -360,16 +361,27 @@ struct WeatherItems: Decodable {
         }
         
         var willBecomeClean = false
+        var time = ""
         
         for i in 4..<weatherItems.count {
             if Int(weatherItems[i].fcstTime)! != current.time || weatherItems[i].fcstDate != current.day {
                 if weatherItems[i].categoryName == "강수형태" && weatherItems[i].categoryValue == "강수없음" {
                     willBecomeClean = true
+                    time = weatherItems[i].fcstTime
+                    break
                 }
             }
         }
         
-        return willBecomeClean
+        if time == "" {
+            if current.time < 1000 {
+                time = "0\(current.time)"
+            } else {
+                time = "\(current.time)"
+            }
+        }
+        
+        return (willBecomeClean, time)
     }
 }
 
