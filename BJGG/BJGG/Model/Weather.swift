@@ -275,14 +275,14 @@ struct WeatherItems: Decodable {
     
     func requestRainInfoText() -> String {
         let weatherItems = request24HourWeatherItem()
-        let (isRainingNow, status) = isRainingNow(weatherItems)
+        let (isRainingNow, currentStatus) = isRainingNow(weatherItems)
         
         if isRainingNow {
             // '강수없음' 일 경우
             
         } else {
             // '강수없음'이 아닐 경우
-            guard let status = status else { return "기상상태 변환 오류" }
+            guard let status = currentStatus else { return "기상상태 변환 오류" }
             let (willBecomeClean, time) = willBecomeCleanIn24Hours(weatherItems)
             var day = ""
             var postPosition: String {
