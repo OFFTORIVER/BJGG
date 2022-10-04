@@ -89,6 +89,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         labelSetting(label: rainInfoLabel, text: "오후 12시 경에 비가 올 예정이에요!", font: .bbajiFont(.body1), alignment: .center)
+        rainInfoLabel.textColor = .bbagaGray1
         
         let spotWeatherInfoViewDivideLine = UIView()
         self.addSubview(spotWeatherInfoViewDivideLine)
@@ -119,6 +120,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         spotTodayWeatherCollectionView.layer.cornerRadius = 16
+        spotTodayWeatherCollectionView.backgroundColor = .bbagaGray4
     }
     
     private func registerCollectionView() {

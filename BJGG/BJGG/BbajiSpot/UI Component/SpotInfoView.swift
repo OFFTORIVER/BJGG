@@ -27,6 +27,7 @@ final class SpotInfoView: UIView {
         let spotNameLabel = UILabel()
         self.addSubview(spotNameLabel)
         labelSetting(label: spotNameLabel, text: bbajiInfo.getName(), font: .bbajiFont(.heading2), alignment: .center)
+        spotNameLabel.textColor = .bbagaGray1
         spotNameLabel.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(self.snp.top).inset(defaultMargin)
