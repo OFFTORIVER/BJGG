@@ -29,7 +29,6 @@ class PreviewView: UIView {
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         
-        // TODO: 타이틀 로고 이미지 삽입
         imageView.image = UIImage(named: "subLogo")
         
         return imageView
