@@ -14,6 +14,8 @@ protocol BbajiListViewDelegate {
 class BbajiListView: UIView {
     var delegate: BbajiListViewDelegate?
     
+    var weatherData: (iconName: String?, temp: String?)
+    
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = BbajiListCollectionView(frame: .zero, collectionViewLayout: layout)
@@ -63,7 +65,7 @@ extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCollectionViewCell.id, for: indexPath) as? BbajiListCollectionViewCell
         
-        cell?.configure(indexPath.row)
+        cell?.configure(indexPath.row, iconName: weatherData.iconName, temp: weatherData.temp)
         
         return cell ?? UICollectionViewCell()
     }
