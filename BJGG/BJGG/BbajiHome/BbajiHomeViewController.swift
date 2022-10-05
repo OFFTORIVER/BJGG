@@ -12,11 +12,18 @@ final class BbajiHomeViewController: UIViewController {
     private let bbajiTitleView = BbajiTitleView()
     private let bbajiListView = BbajiListView()
     
+    private lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "homeBackgroundImage")
+        
+        return imageView
+    }()
+
     private var weatherManager: WeatherManager?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .bbagaBack
         
         layoutConfigure()
         delegateConfigure()
@@ -46,9 +53,14 @@ final class BbajiHomeViewController: UIViewController {
 private extension BbajiHomeViewController {
     func layoutConfigure() {
         [
+            backgroundImageView,
             bbajiTitleView,
             bbajiListView
         ].forEach { view.addSubview($0) }
+        
+        backgroundImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         bbajiTitleView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(51.0)
