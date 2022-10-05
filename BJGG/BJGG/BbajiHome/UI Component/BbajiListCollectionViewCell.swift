@@ -15,6 +15,7 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "bbajiDefaultBackgroundImage")
         
         return imageView
     }()
