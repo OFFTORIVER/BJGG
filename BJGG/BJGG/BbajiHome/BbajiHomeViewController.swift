@@ -77,9 +77,13 @@ private extension BbajiHomeViewController {
             $0.trailing.equalToSuperview().inset(CGFloat.superViewInset)
             $0.bottom.equalToSuperview()
         }
+        
+        if !UIDevice.current.hasNotch {
+            layoutConfigureForNotNotch()
+        }
     }
     
-    func layoutConfigureForNotNotch() {
+    private func layoutConfigureForNotNotch() {
         let noticeLabel: UILabel = {
             let label = UILabel()
             label.text = "다음 빠지는 어디로 가까?"
