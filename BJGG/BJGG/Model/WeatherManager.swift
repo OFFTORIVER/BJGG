@@ -79,6 +79,7 @@ struct WeatherManager {
         
         guard let url = URL(string: url) else {
             print("Error: cannet create URL")
+            completionHandler(false, [])
             return
         }
         
@@ -88,22 +89,26 @@ struct WeatherManager {
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 print("Error: error calling GET")
+                completionHandler(false, [])
                 print(error!)
                 return
             }
             
             guard let data = data else {
                 print("Error: Did not receive data")
+                completionHandler(false, [])
                 return
             }
             
             guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
                 print("Error: HTTP request failed")
+                completionHandler(false, [])
                 return
             }
             
             guard let output = try? JSONDecoder().decode(Weather.self, from: data) else {
                 print("Error: JSON data Parsing failed")
+                completionHandler(false, [])
                 return
             }
             
