@@ -50,7 +50,9 @@ class BbajiListView: UIView {
 
 extension BbajiListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 201.38)
+        let height: CGFloat = UIDevice.current.hasNotch ? 201.38 : 196.0
+        
+        return CGSize(width: collectionView.frame.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -61,7 +63,7 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
 
 extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return UIDevice.current.hasNotch ? 2 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -14,7 +14,9 @@ final class BbajiHomeViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "homeBackgroundImage")
+        let backgroundImageName = UIDevice.current.hasNotch ? "homeBackgroundImage" : "homeBackgroundImageNotNotch"
+        
+        imageView.image = UIImage(named: backgroundImageName)
         
         return imageView
     }()
@@ -80,6 +82,47 @@ private extension BbajiHomeViewController {
             $0.trailing.equalToSuperview().inset(CGFloat.superViewInset)
             $0.bottom.equalToSuperview()
         }
+        
+        if !UIDevice.current.hasNotch {
+            layoutConfigureForNotNotch()
+        }
+    }
+    
+    private func layoutConfigureForNotNotch() {
+        let noticeLabel: UILabel = {
+            let label = UILabel()
+            label.text = "다음 빠지는 어디로 가까?"
+            label.font = .bbajiFont(.heading4)
+            label.textColor = .bbagaBlue
+            
+            return label
+        }()
+        
+        let logoImageView: UIImageView = {
+            let imageView = UIImageView()
+            
+            imageView.image = UIImage(named: "subLogo")
+            
+            return imageView
+        }()
+        
+        [
+            noticeLabel,
+            logoImageView
+        ].forEach { view.addSubview($0) }
+        
+        noticeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(42.0)
+        }
+        
+        logoImageView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(63.0)
+            $0.width.equalTo(71.0)
+            $0.height.equalTo(24.0)
+            $0.bottom.equalTo(noticeLabel.snp.top)
+        }
+        
     }
     
     func delegateConfigure() {
