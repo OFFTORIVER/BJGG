@@ -86,6 +86,10 @@ final class BbajiSpotViewController: UIViewController {
     
     private func configureLayoutWithAPI() {
 
+        spotWeatherInfoView = SpotWeatherInfoView()
+        layoutConfigure()
+        liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
+        
         let weatherManager = WeatherManager()
         weatherManager.request24hData(nx: 61, ny: 126) { success, response in
             guard let response = response as? Response else {
@@ -98,12 +102,8 @@ final class BbajiSpotViewController: UIViewController {
             let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
             
             DispatchQueue.main.async { [self] in
-                spotWeatherInfoView = SpotWeatherInfoView(weatherInfo: weatherDataTuple)
-                layoutConfigure()
-                liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
-                spotWeatherInfoView.reloadData()
+                spotWeatherInfoView.reloadWeatherData(apiStatus: APIStatus.success, weatherInfoTuple: weatherDataTuple)
                 spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherDataTuple[0].temp)
-                spotWeatherInfoView.setCurrentWeatherImg()
                 spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }
         }

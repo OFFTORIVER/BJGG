@@ -43,14 +43,13 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     
     private lazy var weatherImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .bbagaSunny
         
         return imageView
     }()
     
     private lazy var tempLabel: UILabel = {
         let label = UILabel()
-        label.text = "23℃"
+        label.text = "-"
         label.font = .bbajiFont(.heading3)
         label.textColor = .bbagaGray4
         
@@ -59,11 +58,19 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
 }
 
 extension BbajiListCollectionViewCell {
-    func configure(_ indexPathRow: Int) {
+    func configure(_ indexPathRow: Int, iconName: String?, temp: String?) {
         layoutConfigure()
         
         layer.cornerRadius = 10.0
         layer.masksToBounds = true
+        
+        if let iconName = iconName {
+            weatherImageView.image = UIImage(named: iconName)
+        }
+        
+        if let temp = temp {
+            tempLabel.text = "\(temp)º"
+        }
         
         if indexPathRow != 1 {
             previewView.isHidden = true

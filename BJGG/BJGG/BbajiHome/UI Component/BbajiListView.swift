@@ -14,6 +14,8 @@ protocol BbajiListViewDelegate {
 class BbajiListView: UIView {
     var delegate: BbajiListViewDelegate?
     
+    private var weatherData: [(iconName: String?, temp: String?)]?
+    
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = BbajiListCollectionView(frame: .zero, collectionViewLayout: layout)
@@ -62,8 +64,13 @@ extension BbajiListView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCollectionViewCell.id, for: indexPath) as? BbajiListCollectionViewCell
-        
-        cell?.configure(indexPath.row)
+        if indexPath.row < weatherData?.count ?? 0 {
+            let data = weatherData?[indexPath.row]
+            
+            cell?.configure(indexPath.row, iconName: data?.iconName, temp: data?.temp)
+        } else {
+            cell?.configure(indexPath.row, iconName: nil, temp: nil)
+        }
         
         return cell ?? UICollectionViewCell()
     }
@@ -73,5 +80,24 @@ extension BbajiListView: UICollectionViewDataSource {
         if idx == 0 {
             delegate?.pushBbajiSpotViewController()
         }
+    }
+}
+
+extension BbajiListView {
+    func updateWeatherData(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)]) {
+        var sortedTupleArray = [(iconName: String?, temp: String?)]()
+        
+        weatherData.forEach {
+            var tuple: (iconName: String?, temp: String?)
+            tuple.iconName = $0.iconName
+            tuple.temp = $0.temp
+            sortedTupleArray.append(tuple)
+        }
+        
+        self.weatherData = sortedTupleArray
+    }
+    
+    func reloadCollectionView() {
+        bbajiListCollectionView.reloadData()
     }
 }
