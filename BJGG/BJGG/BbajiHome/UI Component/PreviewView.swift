@@ -63,7 +63,7 @@ class PreviewView: UIView {
         
         logoImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(64.0)
-            $0.leading.equalToSuperview().inset(62.0)
+            $0.leading.equalToSuperview().inset(54.0)
             $0.width.equalTo(71.0)
             $0.height.equalTo(24.0)
             $0.bottom.equalTo(noticeLabel.snp.top)
