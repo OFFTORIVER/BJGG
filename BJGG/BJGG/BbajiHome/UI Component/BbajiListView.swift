@@ -27,6 +27,7 @@ class BbajiListView: UIView {
         collectionView.layer.cornerRadius = 10.0
         collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         collectionView.layer.masksToBounds = true
+        collectionView.showsVerticalScrollIndicator = false
         
         return collectionView
     }()
