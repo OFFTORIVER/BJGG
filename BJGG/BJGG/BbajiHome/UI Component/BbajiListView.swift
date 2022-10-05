@@ -30,6 +30,8 @@ class BbajiListView: UIView {
         collectionView.layer.masksToBounds = true
         collectionView.showsVerticalScrollIndicator = false
         
+        collectionView.backgroundColor = .bbagaGray4
+        
         return collectionView
     }()
     
