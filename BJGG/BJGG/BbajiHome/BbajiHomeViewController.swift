@@ -12,12 +12,34 @@ final class BbajiHomeViewController: UIViewController {
     private let bbajiTitleView = BbajiTitleView()
     private let bbajiListView = BbajiListView()
     
+    private var weatherManager: WeatherManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .bbagaBack
         
         layoutConfigure()
         delegateConfigure()
+        
+        weatherManager = WeatherManager()
+        
+        weatherManager?.requestCurrentData(nx: 61, ny: 126) { [weak self] success, reponse in
+            guard let self = self else { return }
+            guard let response = reponse as? Response else {
+                print("Error : API 호출 실패")
+                return
+            }
+            
+            let body = response.body
+            let items = body.items
+            let weatherItem = items.requestCurrentWeatherItem()
+            let data = items.requestWeatherDataSet(weatherItem)
+            
+            DispatchQueue.main.async {
+                self.bbajiListView.updateWeatherData(data)
+                self.bbajiListView.reloadCollectionView()
+            }
+        }
     }
 }
 
