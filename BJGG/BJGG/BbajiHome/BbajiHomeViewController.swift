@@ -23,7 +23,8 @@ final class BbajiHomeViewController: UIViewController {
         
         weatherManager = WeatherManager()
         
-        weatherManager?.requestCurrentData(nx: 61, ny: 126) { success, reponse in
+        weatherManager?.requestCurrentData(nx: 61, ny: 126) { [weak self] success, reponse in
+            guard let self = self else { return }
             guard let response = reponse as? Response else {
                 print("Error : API 호출 실패")
                 return
@@ -33,6 +34,12 @@ final class BbajiHomeViewController: UIViewController {
             let items = body.items
             let weatherItem = items.requestCurrentWeatherItem()
             let data = items.requestWeatherDataSet(weatherItem)
+            let weatherData = data.first
+            
+            DispatchQueue.main.async {
+                self.bbajiListView.updateWeatherData(iconName: weatherData?.iconName, temp: weatherData?.temp)
+                self.bbajiListView.reloadCollectionView()
+            }
         }
     }
 }

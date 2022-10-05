@@ -14,7 +14,7 @@ protocol BbajiListViewDelegate {
 class BbajiListView: UIView {
     var delegate: BbajiListViewDelegate?
     
-    var weatherData: (iconName: String?, temp: String?)
+    private var weatherData: (iconName: String?, temp: String?)
     
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -75,5 +75,16 @@ extension BbajiListView: UICollectionViewDataSource {
         if idx == 0 {
             delegate?.pushBbajiSpotViewController()
         }
+    }
+}
+
+extension BbajiListView {
+    func updateWeatherData(iconName: String?, temp: String?) {
+        weatherData.iconName = iconName
+        weatherData.temp = temp
+    }
+    
+    func reloadCollectionView() {
+        bbajiListCollectionView.reloadData()
     }
 }
