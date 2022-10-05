@@ -59,7 +59,7 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
 
 extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return UIDevice.current.hasNotch ? 2 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
