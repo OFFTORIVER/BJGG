@@ -34,10 +34,9 @@ final class BbajiHomeViewController: UIViewController {
             let items = body.items
             let weatherItem = items.requestCurrentWeatherItem()
             let data = items.requestWeatherDataSet(weatherItem)
-            let weatherData = data.first
             
             DispatchQueue.main.async {
-                self.bbajiListView.updateWeatherData(iconName: weatherData?.iconName, temp: weatherData?.temp)
+                self.bbajiListView.updateWeatherData(data)
                 self.bbajiListView.reloadCollectionView()
             }
         }
