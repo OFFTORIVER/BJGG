@@ -14,7 +14,9 @@ final class BbajiHomeViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "homeBackgroundImage")
+        let backgroundImageName = UIDevice.current.hasNotch ? "homeBackgroundImage" : "homeBackgroundImageNotNotch"
+        
+        imageView.image = UIImage(named: backgroundImageName)
         
         return imageView
     }()
