@@ -82,6 +82,8 @@ extension BbajiListCollectionViewCell {
         
         if indexPathRow != 1 {
             previewView.isHidden = true
+        } else {
+            tempLabel.isHidden = true
         }
     }
     
