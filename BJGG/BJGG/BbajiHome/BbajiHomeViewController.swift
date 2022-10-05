@@ -20,7 +20,7 @@ final class BbajiHomeViewController: UIViewController {
     }()
 
     private var weatherManager: WeatherManager?
-    private let bbajiInfo = BbajiInfo()
+    private let bbajiInfo = [BbajiInfo()]
 
     
     override func viewDidLoad() {
@@ -31,8 +31,8 @@ final class BbajiHomeViewController: UIViewController {
         
         weatherManager = WeatherManager()
         
-        let bbajiCoorX = bbajiInfo.getCoordinate().0
-        let bbajiCoorY = bbajiInfo.getCoordinate().1
+        let bbajiCoorX = bbajiInfo[0].getCoordinate().0
+        let bbajiCoorY = bbajiInfo[0].getCoordinate().1
         
         weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
             guard let self = self else { return }
@@ -48,6 +48,7 @@ final class BbajiHomeViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.bbajiListView.updateWeatherData(data)
+                self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
                 self.bbajiListView.reloadCollectionView()
             }
         }

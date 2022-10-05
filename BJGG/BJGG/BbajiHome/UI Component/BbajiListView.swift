@@ -15,6 +15,7 @@ class BbajiListView: UIView {
     var delegate: BbajiListViewDelegate?
     
     private var weatherData: [(iconName: String?, temp: String?)]?
+    private var bbajiInfo: [BbajiInfo]?
     
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -64,12 +65,13 @@ extension BbajiListView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCollectionViewCell.id, for: indexPath) as? BbajiListCollectionViewCell
-        if indexPath.row < weatherData?.count ?? 0 {
+        if indexPath.row < weatherData?.count ?? 0 && indexPath.row < bbajiInfo?.count ?? 0 {
             let data = weatherData?[indexPath.row]
+            let bbaji = bbajiInfo?[indexPath.row]
             
-            cell?.configure(indexPath.row, iconName: data?.iconName, temp: data?.temp)
+            cell?.configure(indexPath.row, bbajiInfo: bbaji, iconName: data?.iconName, temp: data?.temp)
         } else {
-            cell?.configure(indexPath.row, iconName: nil, temp: nil)
+            cell?.configure(indexPath.row, bbajiInfo: nil, iconName: nil, temp: nil)
         }
         
         return cell ?? UICollectionViewCell()
@@ -95,6 +97,10 @@ extension BbajiListView {
         }
         
         self.weatherData = sortedTupleArray
+    }
+    
+    func updateBbajiInfo(_ bbajiInfo: [BbajiInfo]) {
+        self.bbajiInfo = bbajiInfo
     }
     
     func reloadCollectionView() {

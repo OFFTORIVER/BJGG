@@ -15,7 +15,6 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .bbagaBlue
         
         return imageView
     }()
@@ -25,7 +24,6 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.text = "서울 광진구 강변북로 64"
         label.font = .bbajiFont(.body1)
         label.textColor = .bbagaGray2
         
@@ -34,7 +32,6 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "뚝섬유원지 선스키"
         label.font = .bbajiFont(.heading2)
         label.textColor = .bbagaGray4
         
@@ -58,11 +55,21 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
 }
 
 extension BbajiListCollectionViewCell {
-    func configure(_ indexPathRow: Int, iconName: String?, temp: String?) {
+    func configure(_ indexPathRow: Int, bbajiInfo: BbajiInfo?, iconName: String?, temp: String?) {
         layoutConfigure()
         
         layer.cornerRadius = 10.0
         layer.masksToBounds = true
+        
+        if let bbajiInfo = bbajiInfo {
+            let backgroundImageName = bbajiInfo.getThumbnailImgName()
+            let locationName = bbajiInfo.getAddress()
+            let name = bbajiInfo.getName()
+            
+            backgroundImageView.image = UIImage(named: backgroundImageName)
+            locationLabel.text = locationName
+            nameLabel.text = name
+        }
         
         if let iconName = iconName {
             weatherImageView.image = UIImage(named: iconName)
