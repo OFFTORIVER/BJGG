@@ -194,9 +194,7 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         var timeStr: String = ""
         var currentWeatherImgName: String = ""
         var currentRainPercentStr: String = ""
-        
-//        print("FFFFFFF\(currentWeatherInfo.count)")
-//        print("FFFF_\(idx)")
+
         if currentWeatherInfo.count > 0 {
             temperatureStr = "\(currentWeatherInfo[idx].temp)°"
             timeStr = currentWeatherInfo[idx].time
