@@ -10,7 +10,7 @@ import AVKit
 
 final class SpotLiveCameraView: UIView {
     private var player: AVPlayer?
-    var avpController = RotatableAVPlayerViewController()
+    var avpController = AVPlayerViewController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,19 +30,4 @@ final class SpotLiveCameraView: UIView {
         player?.play()
     }
 
-}
-
-class RotatableAVPlayerViewController: AVPlayerViewController {
-    
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-             return .landscapeRight
-          }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .landscapeRight
-    }
 }
