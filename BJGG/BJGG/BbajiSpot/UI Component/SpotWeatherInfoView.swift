@@ -18,6 +18,8 @@ final class SpotWeatherInfoView: UIView {
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
     private var currentTimeNTemperatureInfo: [(time: String, temperature: String)]!
     
+    private var spotWeatherAPIInfoView: SpotWeatherAPIInfoView!
+    
     required init(timeNTempInfo: [(time: String, temperature: String)]) {
         
         super.init(frame: CGRect.zero)
@@ -120,6 +122,15 @@ final class SpotWeatherInfoView: UIView {
         
         spotTodayWeatherCollectionView.layer.cornerRadius = 16
         spotTodayWeatherCollectionView.backgroundColor = .bbagaGray4
+        
+        spotWeatherAPIInfoView = SpotWeatherAPIInfoView()
+        self.addSubview(spotWeatherAPIInfoView)
+        
+        spotWeatherAPIInfoView.snp.makeConstraints({ make in
+            make.left.right.top.bottom.equalTo(self)
+        })
+        
+        spotWeatherAPIInfoView.setCurrentUI(apiStatus: APIStatus.loading)
     }
     
     private func registerCollectionView() {
@@ -131,9 +142,17 @@ final class SpotWeatherInfoView: UIView {
         spotTodayWeatherCollectionView.delegate = self
     }
     
-    func reloadData() {
+    func reloadWeatherData(apiStatus: APIStatus, timeNTempInfo: [(time: String, temperature: String)]) {
         
+        currentTimeNTemperatureInfo = timeNTempInfo
         spotTodayWeatherCollectionView.reloadData()
+        spotTodayWeatherCollectionView.reloadItems(at: spotTodayWeatherCollectionView.indexPathsForVisibleItems)
+        if apiStatus == .success {
+            UIView.animate(withDuration: 0.1, delay: 0.2, animations: {
+                self.spotWeatherInfoViewComponentHidden(isHidden: false)
+            })
+        }
+        spotWeatherAPIInfoView.setCurrentUI(apiStatus: apiStatus)
     }
     
     func setCurrentTemperatureLabelValue(temperatureStr: String) {
