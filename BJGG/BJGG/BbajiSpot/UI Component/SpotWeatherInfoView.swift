@@ -30,6 +30,8 @@ final class SpotWeatherInfoView: UIView {
         setupCollectionViewDelegate()
         
         currentTimeNTemperatureInfo = timeNTempInfo
+        
+        spotWeatherInfoViewComponentHidden(isHidden: true)
     }
     
     required init?(coder: NSCoder) {
@@ -196,8 +198,16 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         labelSetting(label: cell.currentRainPercentLabel, text: "60%", font: .bbajiFont(.rainyCaption), alignment: .center)
         cell.currentRainPercentLabel.textColor = .bbagaRain
         
-        let temperatureStr = "\(currentTimeNTemperatureInfo[idx].temperature)°"
-        let timeStr = currentTimeNTemperatureInfo[idx].time
+        var temperatureStr: String = ""
+        var timeStr: String = ""
+        if currentTimeNTemperatureInfo.count > 0 {
+            temperatureStr = "\(currentTimeNTemperatureInfo[idx].temperature)°"
+            timeStr = currentTimeNTemperatureInfo[idx].time
+        } else {
+            temperatureStr = "--°"
+            timeStr = "--"
+        }
+        
         labelSetting(label: cell.temperatureLabel, text: temperatureStr, font: .bbajiFont(.heading5), alignment: .center)
         labelSetting(label: cell.timeLabel, text: timeStr, font: .bbajiFont(.body1), alignment: .center)
         if idx == 0 {
