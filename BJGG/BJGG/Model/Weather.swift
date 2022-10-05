@@ -387,7 +387,9 @@ struct WeatherItems: Decodable {
                     day = "오늘"
                 }
                 
-                return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 올 예정이에요!"
+                let timeValue = Int(time)! / 100
+                
+                return "\(day) \(timeValue)시 경에 \(status)\(postPosition) 올 예정이에요!"
             } else {
                 // 강수형태가 강수 없음에서 다른 형태로 바뀔 예정이 없을 경우
                 if isTimeLeftIn3hours(time) {
@@ -427,7 +429,9 @@ struct WeatherItems: Decodable {
                     day = "오늘"
                 }
                 
-                return "\(day) \(Int(time)!)시 경에 \(status)\(postPosition) 그칠 예정이에요!"
+                let timeValue = Int(time)! / 100
+                
+                return "\(day) \(timeValue)시 경에 \(status)\(postPosition) 그칠 예정이에요!"
             } else {
                 // 강수형태가 강수 없음으로 바뀔 예정이 없는 경우
                 if isTimeLeftIn3hours(time) {
