@@ -320,7 +320,9 @@ struct WeatherItems: Decodable {
             
             let calculatedTime = (time / 100) * 100
             
-            if calculatedTime < 1000 {
+            if calculatedTime == 0 {
+                return "0000"
+            } else if calculatedTime < 1000 {
                 return "0\(calculatedTime)"
             } else {
                 return "\(calculatedTime)"
