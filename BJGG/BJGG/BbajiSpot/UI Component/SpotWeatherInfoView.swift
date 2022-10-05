@@ -10,6 +10,10 @@ import UIKit
 final class SpotWeatherInfoView: UIView {
     private let currentTemperatureLabel = UILabel()
     
+    private let currentWeatherIconAndLabel = UIView()
+    private let currentWeatherIcon = UIImageView()
+    private let spotWeatherInfoViewDivideLine = UIView()
+    
     var rainInfoLabel = UILabel()
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
     private var currentTimeNTemperatureInfo: [(time: String, temperature: String)]!
@@ -47,7 +51,6 @@ final class SpotWeatherInfoView: UIView {
         labelSetting(label: weatherAddressLabel, text: BbajiInfo().getCompactAddress(), font: .bbajiFont(.body1), alignment: .left)
         weatherAddressLabel.textColor = .bbagaGray2
         
-        let currentWeatherIconAndLabel = UIView()
         self.addSubview(currentWeatherIconAndLabel)
         
         currentWeatherIconAndLabel.snp.makeConstraints({ make in
@@ -56,8 +59,6 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(160)
             make.height.equalTo(64)
         })
-        
-        let currentWeatherIcon = UIImageView()
         
         [currentWeatherIcon, currentTemperatureLabel].forEach({
             currentWeatherIconAndLabel.addSubview($0)
@@ -90,7 +91,6 @@ final class SpotWeatherInfoView: UIView {
         
         labelSetting(label: rainInfoLabel, text: "", font: .bbajiFont(.body1), alignment: .center)
         
-        let spotWeatherInfoViewDivideLine = UIView()
         self.addSubview(spotWeatherInfoViewDivideLine)
         spotWeatherInfoViewDivideLine.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading)
@@ -145,6 +145,11 @@ final class SpotWeatherInfoView: UIView {
         let rainInfoLabelSplitText = rainInfoLabel.text?.components(separatedBy: "시")
         guard let timeDataStr = rainInfoLabelSplitText?[0] else { return }
         makeTimeAsBlackColor(label: rainInfoLabel, timeStr: timeDataStr)
+    }
+    
+    func spotWeatherInfoViewComponentHidden(isHidden: Bool) {
+        [currentTemperatureLabel, currentWeatherIconAndLabel,
+         rainInfoLabel,currentWeatherIcon, spotWeatherInfoViewDivideLine,  spotTodayWeatherCollectionView].forEach({ $0?.isHidden = isHidden})
     }
 }
 
