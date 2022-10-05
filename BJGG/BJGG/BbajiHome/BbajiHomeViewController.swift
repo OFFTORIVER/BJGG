@@ -20,6 +20,7 @@ final class BbajiHomeViewController: UIViewController {
     }()
 
     private var weatherManager: WeatherManager?
+    private let bbajiInfo = [BbajiInfo()]
 
     
     override func viewDidLoad() {
@@ -30,7 +31,10 @@ final class BbajiHomeViewController: UIViewController {
         
         weatherManager = WeatherManager()
         
-        weatherManager?.requestCurrentData(nx: 61, ny: 126) { [weak self] success, reponse in
+        let bbajiCoorX = bbajiInfo[0].getCoordinate().0
+        let bbajiCoorY = bbajiInfo[0].getCoordinate().1
+        
+        weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
             guard let self = self else { return }
             guard let response = reponse as? Response else {
                 print("Error : API 호출 실패")
@@ -44,6 +48,7 @@ final class BbajiHomeViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.bbajiListView.updateWeatherData(data)
+                self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
                 self.bbajiListView.reloadCollectionView()
             }
         }
