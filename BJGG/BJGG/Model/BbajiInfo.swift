@@ -21,7 +21,7 @@ struct BbajiInfo: Encodable {
     // Quick Test Init
     init() {
         name = "선스키"
-        thumbnailImgName = "thumbnailImg"
+        thumbnailImgName = "bbajiThumbnailImage"
         address = "서울 광진구 강변북로64"
         contact = "02-498-9026"
         compactAddress = "광진구 자양동"
