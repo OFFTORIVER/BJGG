@@ -8,6 +8,8 @@
 import UIKit
 
 final class SpotWeatherInfoView: UIView {
+    
+    let currentWeatherIcon = UIImageView()
     private let currentTemperatureLabel = UILabel()
     
     private let currentWeatherIconAndLabel = UIView()
@@ -16,11 +18,11 @@ final class SpotWeatherInfoView: UIView {
     
     var rainInfoLabel = UILabel()
     private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
-    private var currentTimeNTemperatureInfo: [(time: String, temperature: String)]!
+    private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)]!
     
     private var spotWeatherAPIInfoView: SpotWeatherAPIInfoView!
-    
-    required init(timeNTempInfo: [(time: String, temperature: String)]) {
+
+    required init(weatherInfo: [(time: String, iconName: String, temp: String, probability: String)]) {
         
         super.init(frame: CGRect.zero)
         
@@ -29,9 +31,10 @@ final class SpotWeatherInfoView: UIView {
         registerCollectionView()
         setupCollectionViewDelegate()
         
-        currentTimeNTemperatureInfo = timeNTempInfo
+        // currentTimeNTemperatureInfo = timeNTempInfo
         
         spotWeatherInfoViewComponentHidden(isHidden: true)
+        currentWeatherInfo = weatherInfo
     }
     
     required init?(coder: NSCoder) {
@@ -192,11 +195,18 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
         
         let idx = indexPath.row
         
-        cell.layoutConfigure(isRain: true)
+        let currentRainPercent = currentWeatherInfo[idx].probability
+        if currentRainPercent == "0" {
+            cell.layoutConfigure(isRain: false)
+        } else {
+            cell.layoutConfigure(isRain: true)
+            let currentRainPercentStr = currentWeatherInfo[idx].probability
+            labelSetting(label: cell.currentRainPercentLabel, text: currentRainPercentStr, font: .bbajiFont(.rainyCaption), alignment: .center)
+            cell.currentRainPercentLabel.textColor = .bbagaRain
+        }
         
-        cell.currentWeatherImgView = UIImageView()
-        labelSetting(label: cell.currentRainPercentLabel, text: "60%", font: .bbajiFont(.rainyCaption), alignment: .center)
-        cell.currentRainPercentLabel.textColor = .bbagaRain
+        let currentWeatherImgName = "\(currentWeatherInfo[idx].iconName)"
+        cell.currentWeatherImgView.image = UIImage(named: currentWeatherImgName)
         
         var temperatureStr: String = ""
         var timeStr: String = ""
@@ -236,9 +246,15 @@ extension SpotWeatherInfoView {
         
         // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
         attributedString.addAttribute(.foregroundColor, value: UIColor.bbagaGray1, range: (text as NSString).range(of: "\(timeStr)시"))
-        
+        let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
+        currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
         // label에 Color 입히기
         label.attributedText = attributedString
+    }
+    
+    func setCurrentWeatherImg() {
+        let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
+        currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
     }
 }
 
