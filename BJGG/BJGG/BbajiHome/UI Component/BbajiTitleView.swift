@@ -13,7 +13,7 @@ class BbajiTitleView: UIView {
         let imageView = UIImageView()
         
         // TODO: 타이틀 로고 이미지 삽입
-        imageView.backgroundColor = .bbagaBlue
+        imageView.image = UIImage(named: "mainLogo")
         
         return imageView
     }()
