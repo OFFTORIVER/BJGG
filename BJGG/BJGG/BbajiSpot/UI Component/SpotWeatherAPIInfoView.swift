@@ -59,6 +59,7 @@ final class SpotWeatherAPIInfoView: UIView {
         currentAPIInfoLabelDeco.isHidden = true
         currentAPIInfoLabel.text = "오늘의 날씨는..."
     }
+    
     func setCurrentUI(weatherAPIIsSuccess: Bool) {
         if weatherAPIIsSuccess {
             UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
