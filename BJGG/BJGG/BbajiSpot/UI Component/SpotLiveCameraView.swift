@@ -11,9 +11,11 @@ import AVKit
 final class SpotLiveCameraView: UIView {
     private var player: AVPlayer?
     var avpController = AVPlayerViewController()
+    private var url: URL!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        url = URL(string: BbajiInfo().getLiveCameraUrl())
     }
     
     required init?(coder: NSCoder) {
@@ -21,7 +23,6 @@ final class SpotLiveCameraView: UIView {
     }
     
     func liveCameraSetting(size: CGSize) {
-        let url = URL(string: BbajiInfo().getLiveCameraUrl())
         player = AVPlayer(url: url!)
         avpController.player = player
         avpController.view.frame.size.height = size.height
