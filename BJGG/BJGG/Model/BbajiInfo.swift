@@ -27,7 +27,18 @@ struct BbajiInfo: Encodable {
         compactAddress = "광진구 자양동"
         coordinateX = 61
         coordinateY = 126
-        liveCameraURL = "https://offtoriver.shop/hls/waterskii.m3u8"
+        liveCameraURL = ""
+        
+        guard let temp = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
+            return
+        }
+        
+        guard let dictionary = NSDictionary(contentsOf: temp) else {
+            return
+        }
+        
+        let link:String = dictionary["hlsLink"] as! String
+        liveCameraURL = link
     }
     
     init(name: String, thumbnailImgName: String, address: String, contact: String, compactAddress: String, coordinateX: Int, coordinateY: Int, liveCamURL: String) {

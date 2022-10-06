@@ -10,6 +10,7 @@
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
 		3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
+		3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A81FC28EEF86800D1FA20 /* Private.plist */; };
 		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
 		3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
@@ -54,6 +55,7 @@
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionView.swift; sourceTree = "<group>"; };
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
+		3A4A81FC28EEF86800D1FA20 /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
 		3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+DeviceCheck.swift"; sourceTree = "<group>"; };
 		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				55CB0AB028BA4FA10045644C /* Assets.xcassets */,
 				55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */,
 				55CB0AB528BA4FA10045644C /* Info.plist */,
+				3A4A81FC28EEF86800D1FA20 /* Private.plist */,
 			);
 			path = BJGG;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				553F0F9428E212B300FD9CDA /* Pretendard-ExtraLight.otf in Resources */,
 				553F0F7F28E20DDA00FD9CDA /* esamanru OTF Medium.otf in Resources */,
+				3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */,
 				553F0F9228E212B300FD9CDA /* Pretendard-Bold.otf in Resources */,
 				553F0F8C28E212B300FD9CDA /* Pretendard-Regular.otf in Resources */,
 				553F0F8D28E212B300FD9CDA /* Pretendard-SemiBold.otf in Resources */,
