@@ -102,7 +102,7 @@ final class BbajiSpotViewController: UIViewController {
             let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
             
             DispatchQueue.main.async { [self] in
-                spotWeatherInfoView.reloadWeatherData(apiStatus: APIStatus.success, weatherInfoTuple: weatherDataTuple)
+                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: success, weatherInfoTuple: weatherDataTuple)
                 spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherDataTuple[0].temp)
                 spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }
