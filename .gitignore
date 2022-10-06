@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/swift,macos,xcode,swiftpackagemanager
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,macos,xcode,swiftpackagemanager
 
+#API KEY#
+BJGG/BJGG/APIKey.swift
+BJGG/BJGG/Private.plist
+
 ### macOS ###
 # General
 .DS_Store
@@ -117,12 +121,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
-
-### SwiftPackageManager ###
-Packages
-xcuserdata
-*.xcodeproj
-
 
 ### Xcode ###
 
