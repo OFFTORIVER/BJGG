@@ -53,17 +53,19 @@ final class SpotWeatherAPIInfoView: UIView {
         self.layer.cornerRadius = 16
         self.clipsToBounds = true
     }
-    func setCurrentUI(apiStatus: APIStatus) {
-        switch apiStatus {
-        case .success:
+    
+    func setDefaultUI() {
+        self.backgroundColor = .black.withAlphaComponent(0.7)
+        currentAPIInfoLabelDeco.isHidden = true
+        currentAPIInfoLabel.text = "오늘의 날씨는..."
+    }
+    
+    func setCurrentUI(weatherAPIIsSuccess: Bool) {
+        if weatherAPIIsSuccess {
             UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
                 self.alpha = 0
             }, completion: {_ in self.isHidden = true})
-        case .loading:
-            self.backgroundColor = .black.withAlphaComponent(0.7)
-            currentAPIInfoLabelDeco.isHidden = true
-            currentAPIInfoLabel.text = "오늘의 날씨는..."
-        case .failure:
+        } else {
             UIView.animate(withDuration: 0.3, delay: 0.0, animations: { [self] in
                 backgroundColor = .bbagaGray4
                 currentAPIInfoLabelDeco.alpha = 1

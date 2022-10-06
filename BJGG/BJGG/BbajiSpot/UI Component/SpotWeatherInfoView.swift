@@ -130,7 +130,7 @@ final class SpotWeatherInfoView: UIView {
             make.left.right.top.bottom.equalTo(self)
         })
         
-        spotWeatherAPIInfoView.setCurrentUI(apiStatus: APIStatus.loading)
+        spotWeatherAPIInfoView.setDefaultUI()
     }
     
     private func registerCollectionView() {
@@ -142,17 +142,17 @@ final class SpotWeatherInfoView: UIView {
         spotTodayWeatherCollectionView.delegate = self
     }
     
-    func reloadWeatherData(apiStatus: APIStatus, weatherInfoTuple:  [(time: String, iconName: String, temp: String, probability: String)]) {
+    func reloadWeatherData(weatherAPIIsSuccess: Bool, weatherInfoTuple:  [(time: String, iconName: String, temp: String, probability: String)]) {
         
         currentWeatherInfo = weatherInfoTuple
-        if apiStatus == .success {
+        if weatherAPIIsSuccess {
             UIView.animate(withDuration: 0.1, delay: 0.2, animations: {
                 self.spotWeatherInfoViewComponentHidden(isHidden: false)
             })
         }
         setCurrentWeatherImg()
         spotTodayWeatherCollectionView.reloadData()
-        spotWeatherAPIInfoView.setCurrentUI(apiStatus: apiStatus)
+        spotWeatherAPIInfoView.setCurrentUI(weatherAPIIsSuccess: weatherAPIIsSuccess)
     }
     
     func setCurrentTemperatureLabelValue(temperatureStr: String) {
