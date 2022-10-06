@@ -29,11 +29,11 @@ struct BbajiInfo: Encodable {
         coordinateY = 126
         liveCameraURL = ""
         
-        guard let temp = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
+        guard let cameraUrl = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
             return
         }
         
-        guard let dictionary = NSDictionary(contentsOf: temp) else {
+        guard let dictionary = NSDictionary(contentsOf: cameraUrl) else {
             return
         }
         
