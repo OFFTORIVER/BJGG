@@ -14,11 +14,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
+        
+        let launchScreen = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         let bbajiHomeViewController = BbajiHomeViewController()
+        let navigationController = UINavigationController(rootViewController: bbajiHomeViewController)
+        
+        bbajiHomeViewController.requestAPI()
         
         self.window = window
-        window.rootViewController = UINavigationController(rootViewController: bbajiHomeViewController)
+        window.rootViewController = launchScreen
         window.makeKeyAndVisible()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            self.window?.rootViewController = navigationController
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

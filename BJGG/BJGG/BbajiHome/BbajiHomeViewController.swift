@@ -23,37 +23,30 @@ final class BbajiHomeViewController: UIViewController {
 
     private var weatherManager: WeatherManager?
     private let bbajiInfo = [BbajiInfo()]
-
+    private var weatherData: [(time: String, iconName: String, temp: String, probability: String)]? {
+        didSet {
+            if weatherData != nil {
+                DispatchQueue.main.async {
+                    self.bbajiListView.updateWeatherData(self.weatherData!)
+                    self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
+                    self.bbajiListView.reloadCollectionView()
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let weatherData = weatherData {
+            self.bbajiListView.updateWeatherData(weatherData)
+        }
+        
+        self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
+        self.bbajiListView.reloadCollectionView()
+        
         layoutConfigure()
         delegateConfigure()
-        
-        weatherManager = WeatherManager()
-        
-        let bbajiCoorX = bbajiInfo[0].getCoordinate().0
-        let bbajiCoorY = bbajiInfo[0].getCoordinate().1
-        
-        weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
-            guard let self = self else { return }
-            guard let response = reponse as? Response else {
-                print("Error : API 호출 실패")
-                return
-            }
-            
-            let body = response.body
-            let items = body.items
-            let weatherItem = items.requestCurrentWeatherItem()
-            let data = items.requestWeatherDataSet(weatherItem)
-            
-            DispatchQueue.main.async {
-                self.bbajiListView.updateWeatherData(data)
-                self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
-                self.bbajiListView.reloadCollectionView()
-            }
-        }
     }
 }
 
@@ -133,5 +126,31 @@ private extension BbajiHomeViewController {
 extension BbajiHomeViewController: BbajiListViewDelegate {
     func pushBbajiSpotViewController() {
         self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
+    }
+}
+
+extension BbajiHomeViewController {
+    func requestAPI() {
+        weatherManager = WeatherManager()
+        
+        let bbajiCoorX = bbajiInfo[0].getCoordinate().0
+        let bbajiCoorY = bbajiInfo[0].getCoordinate().1
+        
+        weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
+            guard let self = self else {
+                return
+            }
+            guard let response = reponse as? Response else {
+                print("Error : API 호출 실패")
+                return
+            }
+            
+            let body = response.body
+            let items = body.items
+            let weatherItem = items.requestCurrentWeatherItem()
+            let data = items.requestWeatherDataSet(weatherItem)
+
+            self.weatherData = data
+        }
     }
 }
