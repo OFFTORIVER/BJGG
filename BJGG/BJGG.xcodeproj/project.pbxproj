@@ -22,7 +22,7 @@
 		3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */; };
 		42600D5928EF200B00D114BC /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5828EF200B00D114BC /* Private.plist */; };
 		42600D5B28EF201D00D114BC /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42600D5A28EF201D00D114BC /* APIKey.swift */; };
-		42600D5D28EF207A00D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5C28EF207A00D114BC /* Settings.bundle */; };
+		42600D5F28EF322500D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5E28EF322500D114BC /* Settings.bundle */; };
 		553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */; };
 		553F0F7D28E20DD600FD9CDA /* esamanru OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */; };
 		553F0F7E28E20DD800FD9CDA /* esamanru OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */; };
@@ -69,7 +69,7 @@
 		3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconAndLabelView.swift; sourceTree = "<group>"; };
 		42600D5828EF200B00D114BC /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		42600D5A28EF201D00D114BC /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		42600D5C28EF207A00D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		42600D5E28EF322500D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Constraints.swift"; sourceTree = "<group>"; };
 		553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Light.otf"; sourceTree = "<group>"; };
 		553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Medium.otf"; sourceTree = "<group>"; };
@@ -220,6 +220,7 @@
 		55CB0A9B28BA4F9F0045644C = {
 			isa = PBXGroup;
 			children = (
+				42600D5E28EF322500D114BC /* Settings.bundle */,
 				55CB0AA628BA4F9F0045644C /* BJGG */,
 				55CB0AA528BA4F9F0045644C /* Products */,
 			);
@@ -250,7 +251,6 @@
 				55CB0AB528BA4FA10045644C /* Info.plist */,
 				42600D5828EF200B00D114BC /* Private.plist */,
 				3A4A81FC28EEF86800D1FA20 /* Private.plist */,
-				42600D5C28EF207A00D114BC /* Settings.bundle */,
 			);
 			path = BJGG;
 			sourceTree = "<group>";
@@ -319,7 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42600D5D28EF207A00D114BC /* Settings.bundle in Resources */,
+				42600D5F28EF322500D114BC /* Settings.bundle in Resources */,
 				553F0F9428E212B300FD9CDA /* Pretendard-ExtraLight.otf in Resources */,
 				553F0F7F28E20DDA00FD9CDA /* esamanru OTF Medium.otf in Resources */,
 				42600D5928EF200B00D114BC /* Private.plist in Resources */,
