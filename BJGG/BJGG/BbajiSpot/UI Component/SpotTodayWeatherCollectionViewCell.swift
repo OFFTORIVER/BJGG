@@ -30,28 +30,27 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         self.addSubview(currentRainPercentLabel)
         self.addSubview(currentWeatherImgView)
         if isRain {
-            currentRainPercentLabel.snp.makeConstraints({ make in
+            currentRainPercentLabel.snp.remakeConstraints({ make in
                 make.top.equalTo(self.snp.top)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.equalTo(48)
                 make.height.equalTo(19)
             })
-            currentWeatherImgView.snp.makeConstraints({ make in
+            currentWeatherImgView.snp.remakeConstraints({ make in
                 make.top.equalTo(currentRainPercentLabel.snp.bottom)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.height.equalTo(28)
             })
         } else {
-            currentWeatherImgView.snp.makeConstraints({ make in
+            currentWeatherImgView.snp.remakeConstraints({ make in
                 make.top.equalTo(self.snp.top)
-                make.leading.equalTo(self.snp.leading)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.height.equalTo(48)
             })
         }
         
         self.addSubview(temperatureLabel)
-        temperatureLabel.snp.makeConstraints({ make in
+        temperatureLabel.snp.remakeConstraints({ make in
             make.top.equalTo(currentWeatherImgView.snp.bottom).offset(CGFloat.iconOffset)
             make.centerX.equalTo(currentWeatherImgView.snp.centerX)
             make.height.equalTo(22)
@@ -59,7 +58,7 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         })
         
         self.addSubview(timeLabel)
-        timeLabel.snp.makeConstraints({ make in
+        timeLabel.snp.remakeConstraints({ make in
             make.top.equalTo(temperatureLabel.snp.bottom).offset(2)
             make.centerX.equalTo(temperatureLabel.snp.centerX)
             make.height.equalTo(18)
