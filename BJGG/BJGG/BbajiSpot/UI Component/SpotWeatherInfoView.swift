@@ -205,8 +205,9 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
             timeStr = "--"
         }
         
-        if currentRainPercentStr == "0" {
+        if currentRainPercentStr == "0%" {
             cell.layoutConfigure(isRain: false)
+            cell.currentRainPercentLabel.text = ""
         } else {
             cell.layoutConfigure(isRain: true)
             labelSetting(label: cell.currentRainPercentLabel, text: currentRainPercentStr, font: .bbajiFont(.rainyCaption), alignment: .center)
