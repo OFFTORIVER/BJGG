@@ -23,9 +23,6 @@ struct WeatherManager {
         case 0..<300:
             let day = str.split(separator: " ").map{ Int($0)! }[0]
             return String(day-1)
-        case 2300...2400:
-            let day = str.split(separator: " ").map{ Int($0)! }[0]
-            return String(day-1)
             
         default:
             return str.split(separator: " ").map{ String($0) }[0]
