@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum WeatherManagerError: Error {
+    case urlError
+    case clientError
+    case apiError
+}
+
 struct WeatherManager {
     private let today: String = {
         let now = Date()
@@ -58,6 +64,45 @@ struct WeatherManager {
             return "2300"
         }
     }()
+    
+    private func requestWeather(nx: Int, ny: Int, numberOfRow: Int) async throws -> Weather {
+        let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
+        
+        guard let url = URL(string: urlString) else {
+            throw WeatherManagerError.urlError
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let (data, httpResponse) = try await URLSession.shared.data(for: request)
+        
+        guard let httpURLResponse = httpResponse as? HTTPURLResponse else {
+            throw WeatherManagerError.apiError
+        }
+        
+        switch httpURLResponse.statusCode {
+        case (200..<300):
+            let weatherData = try JSONDecoder().decode(Weather.self, from: data)
+            return weatherData
+        case (300..<500):
+            throw WeatherManagerError.clientError
+        default:
+            throw WeatherManagerError.apiError
+        }
+    }
+    
+    func requestCurrentTimeWeather(nx: Int, ny: Int) async throws -> Weather {
+        let weather = try await requestWeather(nx: nx, ny: ny, numberOfRow: 36)
+        
+        return weather
+    }
+    
+    func request24HWeather(nx: Int, ny: Int) async throws -> Weather {
+        let weather = try await requestWeather(nx: nx, ny: ny, numberOfRow: 324)
+        
+        return weather
+    }
     
     func requestCurrentData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
         requestData(nx: nx, ny: ny, numberOfRow: 36) { (success, data) in
