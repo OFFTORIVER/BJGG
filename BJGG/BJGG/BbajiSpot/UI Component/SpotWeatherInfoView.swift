@@ -214,7 +214,9 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
             cell.currentRainPercentLabel.textColor = .bbagaRain
         }
         
-        cell.currentWeatherImgView.image = UIImage(named: currentWeatherImgName)
+        if currentWeatherImgName != "" {
+            cell.currentWeatherImgView.image = UIImage(named: currentWeatherImgName)
+        }
         
         labelSetting(label: cell.temperatureLabel, text: temperatureStr, font: .bbajiFont(.heading5), alignment: .center)
         labelSetting(label: cell.timeLabel, text: timeStr, font: .bbajiFont(.body1), alignment: .center)
