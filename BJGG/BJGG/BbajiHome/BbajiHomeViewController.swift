@@ -140,7 +140,7 @@ extension BbajiHomeViewController {
             guard let self = self else {
                 return
             }
-            guard let response = reponse as? Response else {
+            guard let response = reponse as? WeatherResponse else {
                 print("Error : API 호출 실패")
                 return
             }

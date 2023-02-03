@@ -92,7 +92,7 @@ final class BbajiSpotViewController: UIViewController {
         
         let weatherManager = WeatherManager()
         weatherManager.request24hData(nx: 61, ny: 126) { success, response in
-            guard let response = response as? Response else {
+            guard let response = response as? WeatherResponse else {
                 print("Error: API 호출 실패")
                 return
             }
