@@ -136,6 +136,28 @@ extension BbajiHomeViewController {
         let bbajiCoorX = bbajiInfo[0].getCoordinate().0
         let bbajiCoorY = bbajiInfo[0].getCoordinate().1
         
+        Task {
+            do {
+                if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
+                    let weatherSet = weatherItems.requestCurrentWeatherItem()
+                    let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
+                    
+                    self.weatherData = weatherData
+                }
+            } catch WeatherManagerError.urlError {
+                print("WeatherManager Error: cannet create WeatherURL.")
+            } catch WeatherManagerError.apiError {
+                
+            } catch WeatherManagerError.clientError {
+                print("WeatherManager Error: HTTP request failed,")
+            } catch  DecodingError.dataCorrupted(let message) {
+                print("WeatherManager Error: Weather JSON data parsing failed.")
+                print("[Weather JSON ErrorMeassge] \(message)")
+            }
+        }
+        
+        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
+        /*
         weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
             guard let self = self else {
                 return
@@ -144,7 +166,7 @@ extension BbajiHomeViewController {
                 print("Error : API 호출 실패")
                 return
             }
-            
+
             let body = response.body
             let items = body.items
             let weatherItem = items.requestCurrentWeatherItem()
@@ -152,5 +174,6 @@ extension BbajiHomeViewController {
 
             self.weatherData = data
         }
+         */
     }
 }
