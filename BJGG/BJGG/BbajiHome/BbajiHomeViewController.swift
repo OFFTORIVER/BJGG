@@ -26,11 +26,9 @@ final class BbajiHomeViewController: UIViewController {
     private var weatherData: [(time: String, iconName: String, temp: String, probability: String)]? {
         didSet {
             if weatherData != nil {
-                DispatchQueue.main.async {
-                    self.bbajiListView.updateWeatherData(self.weatherData!)
-                    self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
-                    self.bbajiListView.reloadCollectionView()
-                }
+                self.bbajiListView.updateWeatherData(self.weatherData!)
+                self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
+                self.bbajiListView.reloadCollectionView()
             }
         }
     }
