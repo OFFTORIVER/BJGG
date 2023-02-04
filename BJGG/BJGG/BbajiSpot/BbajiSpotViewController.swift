@@ -91,21 +91,58 @@ final class BbajiSpotViewController: UIViewController {
         liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
         
         let weatherManager = WeatherManager()
-        weatherManager.request24hData(nx: 61, ny: 126) { success, response in
-            guard let response = response as? WeatherResponse else {
-                print("Error: API 호출 실패")
-                return
-            }
-            
-            let data = response.body.items.request24HourWeatherItem()
-            let rainData = response.body.items.requestRainInfoText()
-            let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
-            
-            DispatchQueue.main.async { [self] in
-                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: success, weatherInfoTuple: weatherDataTuple)
-                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherDataTuple[0].temp)
+        
+        Task {
+            do {
+                let weatherItems = try await weatherManager.request24HWeather(nx: 61, ny: 126).response.body.items
+                let weatherSet = weatherItems.request24HourWeatherItem()
+                let rainData = weatherItems.requestRainInfoText()
+                let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
+                
+                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherInfoTuple: weatherData)
+                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
                 spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
+            } catch {
+                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: false, weatherInfoTuple: [])
+                
+                if let weatherManagerError = error as? WeatherManagerError {
+                    switch weatherManagerError {
+                    case .urlError:
+                        print("WeaherManager Error : URL 변환 실패")
+                    case .clientError:
+                        print("WeaherManager Error : 기상청 API 요청 실패")
+                    case .apiError:
+                        print("WeaherManager Error : 네트워크 응답 실패")
+                    }
+                } else if let decodingError = error as? DecodingError {
+                    switch decodingError {
+                    case .dataCorrupted(let context):
+                        print(context.codingPath, context.debugDescription, context.underlyingError ?? "", separator: "\n")
+                    default:
+                        print(decodingError.localizedDescription)
+                    }
+                } else {
+                    print(error.localizedDescription)
+                }
             }
         }
+        
+        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
+//        weatherManager.request24hData(nx: 61, ny: 126) { success, response in
+//            guard let response = response as? WeatherResponse else {
+//                print("Error: API 호출 실패")
+//                return
+//            }
+//
+//            let data = response.body.items.request24HourWeatherItem()
+//            let rainData = response.body.items.requestRainInfoText()
+//            let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
+//
+//            DispatchQueue.main.async { [self] in
+//                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: success, weatherInfoTuple: weatherDataTuple)
+//                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherDataTuple[0].temp)
+//                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
+//            }
+//        }
     }
 }
