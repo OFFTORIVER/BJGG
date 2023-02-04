@@ -104,57 +104,58 @@ struct WeatherManager {
         return weather
     }
     
-    func requestCurrentData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
-        requestData(nx: nx, ny: ny, numberOfRow: 36) { (success, data) in
-            completionHandler(success, data)
-        }
-    }
-    
-    func request24hData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
-        requestData(nx: nx, ny: ny, numberOfRow: 324) { (success, data) in
-            completionHandler(success, data)
-        }
-    }
-    
-    private func requestData(nx: Int, ny: Int, numberOfRow: Int, completionHandler: @escaping (Bool, Any) -> Void) {
-        let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
-        
-        guard let url = URL(string: url) else {
-            print("Error: cannet create URL")
-            completionHandler(false, [])
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                print("Error: error calling GET")
-                completionHandler(false, [])
-                print(error!)
-                return
-            }
-            
-            guard let data = data else {
-                print("Error: Did not receive data")
-                completionHandler(false, [])
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
-                print("Error: HTTP request failed")
-                completionHandler(false, [])
-                return
-            }
-            
-            guard let output = try? JSONDecoder().decode(Weather.self, from: data) else {
-                print("Error: JSON data Parsing failed")
-                completionHandler(false, [])
-                return
-            }
-            
-            completionHandler(true, output.response)
-        }.resume()
-    }
+    //[Deprecated] completionHandler를 사용한 Weather 전달
+//    func requestCurrentData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+//        requestData(nx: nx, ny: ny, numberOfRow: 36) { (success, data) in
+//            completionHandler(success, data)
+//        }
+//    }
+//
+//    func request24hData(nx: Int, ny: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+//        requestData(nx: nx, ny: ny, numberOfRow: 324) { (success, data) in
+//            completionHandler(success, data)
+//        }
+//    }
+//
+//    private func requestData(nx: Int, ny: Int, numberOfRow: Int, completionHandler: @escaping (Bool, Any) -> Void) {
+//        let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
+//
+//        guard let url = URL(string: url) else {
+//            print("Error: cannet create URL")
+//            completionHandler(false, [])
+//            return
+//        }
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "GET"
+//
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard error == nil else {
+//                print("Error: error calling GET")
+//                completionHandler(false, [])
+//                print(error!)
+//                return
+//            }
+//
+//            guard let data = data else {
+//                print("Error: Did not receive data")
+//                completionHandler(false, [])
+//                return
+//            }
+//
+//            guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
+//                print("Error: HTTP request failed")
+//                completionHandler(false, [])
+//                return
+//            }
+//
+//            guard let output = try? JSONDecoder().decode(Weather.self, from: data) else {
+//                print("Error: JSON data Parsing failed")
+//                completionHandler(false, [])
+//                return
+//            }
+//
+//            completionHandler(true, output.response)
+//        }.resume()
+//    }
 }
