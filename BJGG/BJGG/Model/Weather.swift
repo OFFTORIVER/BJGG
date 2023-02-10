@@ -550,16 +550,16 @@ struct WeatherBody: Decodable {
     let totalCount: Int
 }
 
-struct Header: Decodable {
+struct WeatherHeader: Decodable {
     let resultCode: String
     let resultMsg: String
 }
 
-struct Response: Decodable {
-    let header: Header
+struct WeatherResponse: Decodable {
+    let header: WeatherHeader
     let body: WeatherBody
 }
 
 struct Weather: Decodable {
-    let response: Response
+    let response: WeatherResponse
 }

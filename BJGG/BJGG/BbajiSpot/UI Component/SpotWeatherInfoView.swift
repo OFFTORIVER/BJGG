@@ -149,9 +149,10 @@ final class SpotWeatherInfoView: UIView {
             UIView.animate(withDuration: 0.1, delay: 0.2, animations: {
                 self.spotWeatherInfoViewComponentHidden(isHidden: false)
             })
+            
+            setCurrentWeatherImg()
+            spotTodayWeatherCollectionView.reloadData()
         }
-        setCurrentWeatherImg()
-        spotTodayWeatherCollectionView.reloadData()
         spotWeatherAPIInfoView.setCurrentUI(weatherAPIIsSuccess: weatherAPIIsSuccess)
     }
     

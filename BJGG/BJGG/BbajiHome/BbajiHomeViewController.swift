@@ -26,11 +26,9 @@ final class BbajiHomeViewController: UIViewController {
     private var weatherData: [(time: String, iconName: String, temp: String, probability: String)]? {
         didSet {
             if weatherData != nil {
-                DispatchQueue.main.async {
-                    self.bbajiListView.updateWeatherData(self.weatherData!)
-                    self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
-                    self.bbajiListView.reloadCollectionView()
-                }
+                self.bbajiListView.updateWeatherData(self.weatherData!)
+                self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
+                self.bbajiListView.reloadCollectionView()
             }
         }
     }
@@ -136,15 +134,38 @@ extension BbajiHomeViewController {
         let bbajiCoorX = bbajiInfo[0].getCoordinate().0
         let bbajiCoorY = bbajiInfo[0].getCoordinate().1
         
+        Task {
+            do {
+                if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
+                    let weatherSet = weatherItems.requestCurrentWeatherItem()
+                    let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
+                    
+                    self.weatherData = weatherData
+                }
+            } catch WeatherManagerError.urlError {
+                print("WeaherManager Error : URL 변환 실패")
+            } catch WeatherManagerError.apiError {
+                print("WeaherManager Error : 기상청 API 요청 실패")
+            } catch WeatherManagerError.clientError {
+                print("WeaherManager Error : 네트워크 응답 실패")
+            } catch DecodingError.dataCorrupted(let description) {
+                print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
+        /*
         weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
             guard let self = self else {
                 return
             }
-            guard let response = reponse as? Response else {
+            guard let response = reponse as? WeatherResponse else {
                 print("Error : API 호출 실패")
                 return
             }
-            
+
             let body = response.body
             let items = body.items
             let weatherItem = items.requestCurrentWeatherItem()
@@ -152,5 +173,6 @@ extension BbajiHomeViewController {
 
             self.weatherData = data
         }
+         */
     }
 }
