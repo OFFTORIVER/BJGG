@@ -107,12 +107,12 @@ final class BbajiSpotViewController: UIViewController {
                 
                 if let weatherManagerError = error as? WeatherManagerError {
                     switch weatherManagerError {
-                    case .urlError:
-                        print("WeaherManager Error : URL 변환 실패")
-                    case .clientError:
-                        print("WeaherManager Error : 기상청 API 요청 실패")
-                    case .apiError:
-                        print("WeaherManager Error : 네트워크 응답 실패")
+                    case .urlError(let message):
+                        print(message)
+                    case .clientError(let message):
+                        print(message)
+                    case .apiError(let message):
+                        print(message)
                     }
                 } else if let decodingError = error as? DecodingError {
                     switch decodingError {
