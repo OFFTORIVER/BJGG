@@ -23,7 +23,6 @@
 		42600D5928EF200B00D114BC /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5828EF200B00D114BC /* Private.plist */; };
 		42600D5B28EF201D00D114BC /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42600D5A28EF201D00D114BC /* APIKey.swift */; };
 		42600D5F28EF322500D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5E28EF322500D114BC /* Settings.bundle */; };
-		553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */; };
 		553F0F7D28E20DD600FD9CDA /* esamanru OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */; };
 		553F0F7E28E20DD800FD9CDA /* esamanru OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */; };
 		553F0F7F28E20DDA00FD9CDA /* esamanru OTF Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */; };
@@ -71,7 +70,6 @@
 		42600D5828EF200B00D114BC /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		42600D5A28EF201D00D114BC /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		42600D5E28EF322500D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Constraints.swift"; sourceTree = "<group>"; };
 		553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Light.otf"; sourceTree = "<group>"; };
 		553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Medium.otf"; sourceTree = "<group>"; };
 		553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Bold.otf"; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */,
-				553F0F6C28DCE2BA00FD9CDA /* CGFloat+Constraints.swift */,
 				553F0F8128E2100000FD9CDA /* UIFont+CustomFont.swift */,
 				3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */,
 				3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */,
@@ -382,7 +379,6 @@
 				553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
-				553F0F6D28DCE2BA00FD9CDA /* CGFloat+Constraints.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
 				553F0F9F28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift in Sources */,
 			);
