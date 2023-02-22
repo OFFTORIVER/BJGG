@@ -7,11 +7,6 @@
 
 import UIKit
 
-// API Test Enum
-enum APIStatus {
-    case success, loading, failure
-}
-
 final class SpotWeatherAPIInfoView: UIView {
     private let currentAPIInfoLabel = UILabel()
     private let currentAPIInfoLabelDeco = UIImageView()
