@@ -19,6 +19,7 @@
 		3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */; };
 		3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */; };
 		3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE828D7670000F6416A /* SpotInfoView.swift */; };
+		3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA6369F29A65F3F006BB5EF /* PlistError.swift */; };
 		3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */; };
 		42600D5928EF200B00D114BC /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5828EF200B00D114BC /* Private.plist */; };
 		42600D5B28EF201D00D114BC /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42600D5A28EF201D00D114BC /* APIKey.swift */; };
@@ -66,6 +67,7 @@
 		3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraView.swift; sourceTree = "<group>"; };
 		3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherInfoView.swift; sourceTree = "<group>"; };
 		3A7E3BE828D7670000F6416A /* SpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoView.swift; sourceTree = "<group>"; };
+		3AA6369F29A65F3F006BB5EF /* PlistError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistError.swift; sourceTree = "<group>"; };
 		3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconAndLabelView.swift; sourceTree = "<group>"; };
 		42600D5828EF200B00D114BC /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		42600D5A28EF201D00D114BC /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
 				553F0FA628E9E11E00FD9CDA /* Weather.swift */,
 				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
+				3AA6369F29A65F3F006BB5EF /* PlistError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */,
 				3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */,
 				553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */,
+				3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
