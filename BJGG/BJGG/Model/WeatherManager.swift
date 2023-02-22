@@ -8,9 +8,9 @@
 import Foundation
 
 enum WeatherManagerError: Error {
-    case urlError
-    case clientError
-    case apiError
+    case urlError(String)
+    case clientError(String)
+    case apiError(String)
 }
 
 struct WeatherManager {
@@ -69,7 +69,7 @@ struct WeatherManager {
         let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
         
         guard let url = URL(string: urlString) else {
-            throw WeatherManagerError.urlError
+            throw WeatherManagerError.urlError("WeaherManager Error : URL 변환 실패")
         }
         
         var request = URLRequest(url: url)
@@ -78,7 +78,7 @@ struct WeatherManager {
         let (data, httpResponse) = try await URLSession.shared.data(for: request)
         
         guard let httpURLResponse = httpResponse as? HTTPURLResponse else {
-            throw WeatherManagerError.apiError
+            throw WeatherManagerError.apiError("WeaherManager Error : HTTP URL 요청 실패")
         }
         
         switch httpURLResponse.statusCode {
@@ -86,9 +86,9 @@ struct WeatherManager {
             let weatherData = try JSONDecoder().decode(Weather.self, from: data)
             return weatherData
         case (300..<500):
-            throw WeatherManagerError.clientError
+            throw WeatherManagerError.clientError("WeaherManager Error : 네트워크 응답 실패")
         default:
-            throw WeatherManagerError.apiError
+            throw WeatherManagerError.apiError("WeaherManager Error : 기상청 API 요청 실패")
         }
     }
     
