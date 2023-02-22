@@ -17,13 +17,5 @@ extension UIDevice {
             
             return window.safeAreaInsets.top > 20
         }
-        
-        if #available(iOS 11.0, *) {
-            let top = UIApplication.shared.windows[0].safeAreaInsets.top
-            return top > 20
-        } else {
-            // Fallback on earlier versions
-            return false
-        }
     }
 }
