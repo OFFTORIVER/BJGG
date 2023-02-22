@@ -62,7 +62,7 @@ struct BbajiInfo: Encodable {
     
     func getCompactAddress() -> String { return compactAddress }
     
-    func getCoordinate() -> (Int, Int) { return (coordinateX, coordinateY) }
+    func getCoordinate() -> (x: Int, y: Int) { return (coordinateX, coordinateY) }
     
     func getLiveCameraUrl() -> String { return liveCameraURL }
     
