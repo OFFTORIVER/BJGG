@@ -10,12 +10,10 @@ import UIKit
 // https://developer.apple.com/forums/thread/709997
 extension UIDevice {
     var hasNotch: Bool {
-        if #available(iOS 13.0, *) {
-            let scenes = UIApplication.shared.connectedScenes
-            let windowScene = scenes.first as? UIWindowScene
-            guard let window = windowScene?.windows.first else { return false }
-            
-            return window.safeAreaInsets.top > 20
-        }
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        guard let window = windowScene?.windows.first else { return false }
+        
+        return window.safeAreaInsets.top > 20
     }
 }
