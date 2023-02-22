@@ -18,8 +18,8 @@ struct BbajiInfo: Encodable {
     private var coordinateY: Int
     private var liveCameraURL: String
     
-    // Quick Test Init
     init() {
+        
         name = "선스키"
         thumbnailImgName = "bbajiThumbnailImage"
         address = "서울 광진구 강변북로64"
@@ -29,16 +29,16 @@ struct BbajiInfo: Encodable {
         coordinateY = 126
         liveCameraURL = ""
         
-        guard let cameraUrl = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
-            return
+        do {
+            let link = try liveCameraURLInitialize()
+            liveCameraURL = link
+        } catch {
+            if let error = error as? PlistError {
+                print(error.rawValue)
+            }
         }
         
-        guard let dictionary = NSDictionary(contentsOf: cameraUrl) else {
-            return
-        }
         
-        let link:String = dictionary["hlsLink"] as! String
-        liveCameraURL = link
     }
     
     init(name: String, thumbnailImgName: String, address: String, contact: String, compactAddress: String, coordinateX: Int, coordinateY: Int, liveCamURL: String) {
