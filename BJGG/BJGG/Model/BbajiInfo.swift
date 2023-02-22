@@ -51,6 +51,22 @@ struct BbajiInfo: Encodable {
         self.coordinateY = coordinateY
         self.liveCameraURL = liveCamURL
     }
+        
+    private func liveCameraURLInitialize() throws -> String {
+        guard let cameraUrl = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
+            throw PlistError.bundleError
+        }
+        
+        guard let dictionary = NSDictionary(contentsOf: cameraUrl) else {
+            throw PlistError.dictionaryCastingError
+        }
+        
+        guard let link: String = dictionary["hlsLink"] as? String else {
+            throw PlistError.stringCastingError
+        }
+        
+        return link
+    }
     
     func getName() -> String { return name }
     
