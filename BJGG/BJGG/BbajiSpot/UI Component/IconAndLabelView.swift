@@ -26,7 +26,7 @@ final class IconAndLabelView: UIView {
         })
         
         addressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(addressImage.snp.trailing).offset(CGFloat.iconOffset)
+            make.leading.equalTo(addressImage.snp.trailing).offset(BbajiConstraints.iconOffset)
             make.centerY.equalTo(addressImage.snp.centerY)
             make.height.equalTo(18)
         })
