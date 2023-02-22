@@ -53,11 +53,11 @@ struct BbajiInfo: Encodable {
     }
         
     private func liveCameraURLInitialize() throws -> String {
-        guard let cameraUrl = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
+        guard let privatePlist = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
             throw PlistError.bundleError
         }
         
-        guard let dictionary = NSDictionary(contentsOf: cameraUrl) else {
+        guard let dictionary = NSDictionary(contentsOf: privatePlist) else {
             throw PlistError.dictionaryCastingError
         }
         
