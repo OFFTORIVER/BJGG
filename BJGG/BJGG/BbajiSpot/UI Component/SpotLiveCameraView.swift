@@ -37,8 +37,9 @@ final class SpotLiveCameraView: UIView {
     
     var controlStatus: ControlStatus = .hidden
     
-    var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     var videoPlayerControlView: SpotLiveCameraControlView = SpotLiveCameraControlView()
+    private var stanbyView: SpotLiveCameraStanbyView = SpotLiveCameraStanbyView()
+    private var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
     private let videoURL = BbajiInfo().getLiveCameraUrl()
     private lazy var reloadButton: UIButton = {
@@ -125,6 +126,14 @@ final class SpotLiveCameraView: UIView {
         activityIndicatorView.style = .large
         activityIndicatorView.color = .white
         activityIndicatorStatus(isActive: true)
+        
+        addSubview(stanbyView)
+        stanbyView.snp.makeConstraints({ make in
+            make.top.equalTo(self.snp.top)
+            make.bottom.equalTo(self.snp.bottom)
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+        })
     }
     
     private func componentConfigure() {
@@ -175,6 +184,7 @@ final class SpotLiveCameraView: UIView {
                 status = .unknown
             }
             
+            stanbyView.changeStandbyView(as: status)
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
