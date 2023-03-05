@@ -15,31 +15,81 @@ final class BbajiSpotViewController: UIViewController {
     private var spotInfoView = SpotInfoView()
     private var spotWeatherInfoView: SpotWeatherInfoView!
     
+    private var liveMarkLeadingConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    private var liveMarkTopConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    private var videoPlayerWidthConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    private var videoPlayerHeightConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    
+    private var liveMarkView: LiveMarkView = LiveMarkView()
+    
+    private var screenWidth: CGFloat = CGFloat()
+    private var firstAttempt: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureLayoutWithAPI()
+        delegateConfigure()
+        notificationConfigure()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        switch liveCameraView.videoPlayerControlView.screenSizeControlButton.screenSizeStatus {
+        case .full:
+            return true
+        case .normal:
+            return false
+        }
+    }
+    
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        switch liveCameraView.videoPlayerControlView.screenSizeControlButton.screenSizeStatus {
+        case .full:
+            print("HERE")
+            return true
+        case .normal:
+            return false
+        }
     }
     
     private func layoutConfigure() {
         
         let safeArea = view.safeAreaLayoutGuide
         let viewWidth = UIScreen.main.bounds.width
+        screenWidth = viewWidth
         let defaultMargin = CGFloat.superViewInset
         let viewToViewMargin = CGFloat.componentOffset
         
         view.addSubview(liveCameraView)
         
-        liveCameraView.snp.makeConstraints({ make in
-            make.top.equalTo(safeArea.snp.top)
-            make.leading.equalTo(safeArea.snp.leading)
-            make.trailing.equalTo(safeArea.snp.trailing)
-            make.height.equalTo(viewWidth * 9 / 16)
-        })
+        let liveCameraViewHeight = screenWidth * 9 / 16
         
-        liveCameraView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth * 9 / 16)
+        videoPlayerWidthConstraint = liveCameraView.widthAnchor.constraint(equalToConstant: screenWidth)
+        videoPlayerHeightConstraint = liveCameraView.heightAnchor.constraint(equalToConstant: liveCameraViewHeight)
+        
+        view.addSubview(liveCameraView)
+        liveCameraView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            liveCameraView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            liveCameraView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            videoPlayerWidthConstraint,
+            videoPlayerHeightConstraint
+        ])
 
-        self.addChild(liveCameraView.avpController)
+        liveMarkLeadingConstraint = liveMarkView.leadingAnchor.constraint(equalTo: liveCameraView.leadingAnchor, constant: 8)
+        liveMarkTopConstraint = liveMarkView.topAnchor.constraint(equalTo: liveCameraView.topAnchor, constant: 8)
+        
+        view.addSubview(liveMarkView)
+        liveMarkView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            liveMarkLeadingConstraint,
+            liveMarkTopConstraint,
+            liveMarkView.widthAnchor.constraint(equalToConstant: screenWidth / 8),
+            liveMarkView.heightAnchor.constraint(equalToConstant: screenWidth / 18)
+        ])
+        
+        liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
+        liveMarkView.liveMarkColorActive(to: false)
         
         view.addSubview(infoScrollView)
         infoScrollView.snp.makeConstraints({make in
@@ -55,7 +105,7 @@ final class BbajiSpotViewController: UIViewController {
             make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width)
-            make.height.equalTo(UIDevice.current.hasNotch ? 508 : 508 - 32)
+//            make.height.equalTo(UIDevice.current.hasNotch ? 508 : 508 - 32)
         })
         infoScrollView.showsVerticalScrollIndicator = false
         
@@ -88,7 +138,6 @@ final class BbajiSpotViewController: UIViewController {
 
         spotWeatherInfoView = SpotWeatherInfoView()
         layoutConfigure()
-        liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
         
         let weatherManager = WeatherManager()
         
@@ -144,5 +193,100 @@ final class BbajiSpotViewController: UIViewController {
 //                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
 //            }
 //        }
+    }
+    
+    func delegateConfigure() {
+        liveCameraView.delegate = self
+        liveCameraView.videoPlayerControlView.screenSizeControlButton.delegate = self
+    }
+    
+    func notificationConfigure() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(toBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(toForeground),name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc private func toBackground() {
+        firstAttempt = false
+        liveMarkView.liveMarkColorActive(to: false)
+    }
+    
+    @objc private func toForeground() {
+        if !firstAttempt {
+            liveCameraView.playVideo()
+        }
+    }
+    
+}
+
+extension BbajiSpotViewController: SpotLiveCameraViewDelegate {
+    func videoIsReadyToPlay() {
+        liveMarkView.liveMarkColorActive(to: true)
+    }
+}
+
+extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
+{
+    func changeScreenSize(screenSizeStatus: ScreenSizeStatus) {
+        var infoViewAlphaValue: CGFloat = 0.0
+        var backgroundColor: UIColor = .bbagaBack
+        switch screenSizeStatus {
+        case .normal:
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = .portrait
+            }
+            
+            if #available(iOS 16.0, *) {
+                self.setNeedsUpdateOfSupportedInterfaceOrientations()
+            } else {
+                UIDevice.current.setValue("landscapeRight", forKey: "orientation")
+            }
+            
+            let liveCameraViewHeight = screenWidth * 9 / 16
+            
+            videoPlayerWidthConstraint.constant = screenWidth
+            videoPlayerHeightConstraint.constant = liveCameraViewHeight
+            
+            liveCameraView.videoPlayerControlView.screenSizeControlButtonTrailingConstraint.constant = -4
+            liveCameraView.videoPlayerControlView.screenSizeControlButtonBottomConstraint.constant = -4
+            liveMarkLeadingConstraint.constant = 8
+            liveMarkTopConstraint.constant = 8
+            infoViewAlphaValue = 1.0
+            
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            
+        case .full:
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = .landscapeRight
+            }
+            if #available(iOS 16.0, *) {
+                self.setNeedsUpdateOfSupportedInterfaceOrientations()
+            } else {
+                UIDevice.current.setValue("landscapeRight", forKey: "orientation")
+            }
+            
+            let liveCameraViewHeight = UIScreen.main.bounds.width
+            let liveCameraViewWidth = liveCameraViewHeight * 16 / 9
+            
+            videoPlayerWidthConstraint.constant = liveCameraViewWidth
+            videoPlayerHeightConstraint.constant = liveCameraViewHeight
+            liveMarkLeadingConstraint.constant = 16
+            liveMarkTopConstraint.constant = 16
+            liveCameraView.videoPlayerControlView.screenSizeControlButtonTrailingConstraint.constant = -16
+            liveCameraView.videoPlayerControlView.screenSizeControlButtonBottomConstraint
+                .constant = -16
+            NSLayoutConstraint.activate([
+                liveCameraView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+            infoViewAlphaValue = 0.0
+            backgroundColor = .black
+            
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+        UIView.animate(withDuration: 0.3, delay: TimeInterval(0.0), animations: { [self] in
+            infoScrollView.alpha = infoViewAlphaValue
+            view.backgroundColor = backgroundColor
+            view.layoutIfNeeded()
+        })
     }
 }
