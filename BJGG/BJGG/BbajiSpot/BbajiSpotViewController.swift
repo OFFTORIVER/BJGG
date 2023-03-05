@@ -201,6 +201,7 @@ final class BbajiSpotViewController: UIViewController {
     @objc private func toForeground() {
         if !firstAttempt {
             liveCameraView.playVideo()
+            liveCameraView.stanbyView.configureLayout()
         }
     }
     
@@ -231,7 +232,6 @@ final class BbajiSpotViewController: UIViewController {
             
             let liveCameraviewHeight = UIScreen.main.bounds.width
             let liveCameraViewWidth = liveCameraviewHeight * 16 / 9
-            print(liveCameraViewWidth)
 
             liveCameraView.snp.makeConstraints({ make in
                 make.top.equalTo(view.snp.top)

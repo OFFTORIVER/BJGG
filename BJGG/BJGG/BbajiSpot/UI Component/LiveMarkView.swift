@@ -40,6 +40,7 @@ final class LiveMarkView: UIView {
         liveLabel.textAlignment = .center
         liveLabel.text = "LIVE"
         liveLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        liveLabel.textColor = .clear
         
     }
 
@@ -49,18 +50,22 @@ final class LiveMarkView: UIView {
     
     func liveMarkActive(to active: Bool) {
         let currentColor = backgroundColor
-        var targetColor: UIColor? = currentColor
+        var targetBackgroundColor: UIColor? = currentColor
+        var targetLabelColor: UIColor?
         
         if active {
-            targetColor = UIColor(rgb: 0xE17481)
+            targetBackgroundColor = UIColor(rgb: 0xE17481)
+            targetLabelColor = .white
         } else {
-            targetColor = .clear
+            targetBackgroundColor = .clear
+            targetLabelColor = .clear
+            liveLabel.textColor = targetLabelColor
         }
         
         UIView.animate(withDuration: 0.7, delay: 0.3, animations: {
-            self.backgroundColor = targetColor
+            self.backgroundColor = targetBackgroundColor
+            self.liveLabel.textColor = targetLabelColor
             self.isHidden = !active
-            self.liveLabel.isHidden = !active
         })
     }
 }

@@ -38,7 +38,7 @@ final class SpotLiveCameraView: UIView {
     var controlStatus: ControlStatus = .hidden
     
     var videoPlayerControlView: SpotLiveCameraControlView = SpotLiveCameraControlView()
-    private var stanbyView: SpotLiveCameraStanbyView = SpotLiveCameraStanbyView()
+    var stanbyView: SpotLiveCameraStanbyView = SpotLiveCameraStanbyView()
     
     private let videoURL = BbajiInfo().getLiveCameraUrl()
     private lazy var reloadButton: UIButton = {
@@ -239,6 +239,7 @@ final class SpotLiveCameraView: UIView {
     @objc private func pressedReloadButton() {
         self.playVideo()
         changeReloadButtonActiveStatus(as: false)
+        stanbyView.configureLayout()
     }
     
     

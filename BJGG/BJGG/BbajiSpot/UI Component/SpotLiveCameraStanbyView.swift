@@ -44,8 +44,10 @@ final class SpotLiveCameraStanbyView: UIView {
         })
     }
     
-    private func configureLayout() {
+    func configureLayout() {
+        self.alpha = 1.0
         self.backgroundColor = .black.withAlphaComponent(0.3)
+        
         mainLabel.font = UIFont(name: "esamanruOTFBold", size: 100)
         mainLabel.textColor = .bbagaBlue
         mainLabel.textAlignment = .center
@@ -62,8 +64,6 @@ final class SpotLiveCameraStanbyView: UIView {
         case .readyToPlay:
             UIView.animate(withDuration: 0.7, animations: {
                 self.alpha = 0.0
-            }, completion: { _ in
-                self.isHidden = true
             })
         default:
             backgroundColor = UIColor(rgb: 0x4C4C4C)
