@@ -5,8 +5,9 @@
 //  Created by 황정현 on 2022/09/18.
 //
 
+import AVFoundation
+import SnapKit
 import UIKit
-import AVKit
 
 protocol SpotLiveCameraViewDelegate: AnyObject {
     func videoIsReadyToPlay()
@@ -95,35 +96,32 @@ final class SpotLiveCameraView: UIView {
         self.backgroundColor = .black
         
         addSubview(videoPlayerControlView)
-        videoPlayerControlView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            videoPlayerControlView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            videoPlayerControlView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            videoPlayerControlView.topAnchor.constraint(equalTo: self.topAnchor),
-            videoPlayerControlView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-        ])
+        videoPlayerControlView.snp.makeConstraints({ make in
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+            make.top.equalTo(self.snp.top)
+            make.bottom.equalTo(self.snp.bottom)
+        })
         
         videoPlayerControlView.alpha = 0.0
         videoPlayerControlView.isUserInteractionEnabled = true
         
         addSubview(reloadButton)
-        reloadButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            reloadButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            reloadButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            reloadButton.widthAnchor.constraint(equalToConstant: 100),
-            reloadButton.heightAnchor.constraint(equalToConstant: 100)
-        ])
+        reloadButton.snp.makeConstraints({ make in
+            make.centerX.equalTo(self.snp.centerX)
+            make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+        })
         changeReloadButtonActiveStatus(as: false)
         
         addSubview(activityIndicatorView)
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activityIndicatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            activityIndicatorView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            activityIndicatorView.topAnchor.constraint(equalTo: self.topAnchor),
-            activityIndicatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
+        activityIndicatorView.snp.makeConstraints({ make in
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+            make.top.equalTo(self.snp.top)
+            make.bottom.equalTo(self.snp.bottom)
+        })
         activityIndicatorView.style = .large
         activityIndicatorView.color = .white
         activityIndicatorStatus(isActive: true)

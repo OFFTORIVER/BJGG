@@ -6,13 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 final class SpotLiveCameraControlView: UIView {
 
-    var shadowView: SpotLiveCameraGradientView = SpotLiveCameraGradientView()
+    var gradientView: SpotLiveCameraGradientView = SpotLiveCameraGradientView()
     var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton()
-    var screenSizeControlButtonTrailingConstraint: NSLayoutConstraint = NSLayoutConstraint()
-    var screenSizeControlButtonBottomConstraint: NSLayoutConstraint = NSLayoutConstraint()
     
     override init(frame: CGRect  =  CGRect()) {
         super.init(frame: frame)
@@ -26,26 +25,23 @@ final class SpotLiveCameraControlView: UIView {
     private func setUpLayout() {
         
         let shadowHeight = UIScreen.main.bounds.width * 9 / 16 / 2
-        addSubview(shadowView)
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(gradientView)
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            shadowView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            shadowView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            shadowView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            shadowView.heightAnchor.constraint(equalToConstant: shadowHeight),
+            gradientView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            gradientView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            gradientView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            gradientView.heightAnchor.constraint(equalToConstant: shadowHeight),
         ])
         
         let screenSizeControlButtonSize = UIScreen.main.bounds.width / 12
         addSubview(screenSizeControlButton)
-        screenSizeControlButton.translatesAutoresizingMaskIntoConstraints = false
-        screenSizeControlButtonTrailingConstraint = screenSizeControlButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4)
-        screenSizeControlButtonBottomConstraint = screenSizeControlButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4)
-        NSLayoutConstraint.activate([
-            screenSizeControlButton.widthAnchor.constraint(equalToConstant: screenSizeControlButtonSize),
-            screenSizeControlButton.heightAnchor.constraint(equalToConstant: screenSizeControlButtonSize),
-            screenSizeControlButtonTrailingConstraint,
-            screenSizeControlButtonBottomConstraint
-        ])
+        screenSizeControlButton.snp.makeConstraints({ make in
+            make.bottom.equalTo(self.snp.bottom).offset(-4)
+            make.trailing.equalTo(self.snp.trailing).offset(-4)
+            make.width.equalTo(screenSizeControlButtonSize)
+            make.height.equalTo(screenSizeControlButtonSize)
+        })
     }
 }
 
