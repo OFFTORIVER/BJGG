@@ -39,7 +39,6 @@ final class SpotLiveCameraView: UIView {
     
     var videoPlayerControlView: SpotLiveCameraControlView = SpotLiveCameraControlView()
     private var stanbyView: SpotLiveCameraStanbyView = SpotLiveCameraStanbyView()
-    private var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
     private let videoURL = BbajiInfo().getLiveCameraUrl()
     private lazy var reloadButton: UIButton = {
@@ -105,27 +104,8 @@ final class SpotLiveCameraView: UIView {
         })
         
         videoPlayerControlView.alpha = 0.0
-        videoPlayerControlView.isUserInteractionEnabled = true
-        
-        addSubview(reloadButton)
-        reloadButton.snp.makeConstraints({ make in
-            make.centerX.equalTo(self.snp.centerX)
-            make.centerY.equalTo(self.snp.centerY)
-            make.width.equalTo(100)
-            make.height.equalTo(100)
-        })
         changeReloadButtonActiveStatus(as: false)
-        
-        addSubview(activityIndicatorView)
-        activityIndicatorView.snp.makeConstraints({ make in
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.top.equalTo(self.snp.top)
-            make.bottom.equalTo(self.snp.bottom)
-        })
-        activityIndicatorView.style = .large
-        activityIndicatorView.color = .white
-        activityIndicatorStatus(isActive: true)
+        interactionEnableStatus(isActive: true)
         
         addSubview(stanbyView)
         stanbyView.snp.makeConstraints({ make in
@@ -133,6 +113,14 @@ final class SpotLiveCameraView: UIView {
             make.bottom.equalTo(self.snp.bottom)
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing)
+        })
+        
+        addSubview(reloadButton)
+        reloadButton.snp.makeConstraints({ make in
+            make.centerX.equalTo(self.snp.centerX)
+            make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
         })
     }
     
@@ -188,16 +176,16 @@ final class SpotLiveCameraView: UIView {
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
-                activityIndicatorStatus(isActive: false)
+                interactionEnableStatus(isActive: false)
                 delegate?.videoIsReadyToPlay()
                 player?.play()
             case .failed:
-                activityIndicatorStatus(isActive: false)
+                interactionEnableStatus(isActive: false)
                 changeReloadButtonActiveStatus(as: true)
                 print(".failed")
             case .unknown:
                 print(".unknown")
-                activityIndicatorStatus(isActive: false)
+                interactionEnableStatus(isActive: false)
                 changeReloadButtonActiveStatus(as: true)
             @unknown default:
                 print("@unknown default")
@@ -213,7 +201,7 @@ final class SpotLiveCameraView: UIView {
     
     func playVideo() {
         
-        activityIndicatorStatus(isActive: true)
+        interactionEnableStatus(isActive: true)
         
         guard let url = URL(string: videoURL) else { return }
         self.play(with: url)
@@ -227,14 +215,10 @@ final class SpotLiveCameraView: UIView {
         playerLayer.player?.play()
     }
     
-    func activityIndicatorStatus(isActive: Bool) {
+    func interactionEnableStatus(isActive: Bool) {
         if isActive == true {
-            activityIndicatorView.startAnimating()
-            activityIndicatorView.isHidden = false
             self.isUserInteractionEnabled = false
         } else {
-            activityIndicatorView.stopAnimating()
-            activityIndicatorView.isHidden = true
             self.isUserInteractionEnabled = true
         }
         
