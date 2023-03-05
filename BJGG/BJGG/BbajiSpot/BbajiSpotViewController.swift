@@ -76,7 +76,7 @@ final class BbajiSpotViewController: UIViewController {
         })
         
         liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
-        liveMarkView.liveMarkColorActive(to: false)
+        liveMarkView.liveMarkActive(to: false)
         
         view.addSubview(infoScrollView)
         infoScrollView.snp.makeConstraints({make in
@@ -195,7 +195,7 @@ final class BbajiSpotViewController: UIViewController {
     
     @objc private func toBackground() {
         firstAttempt = false
-        liveMarkView.liveMarkColorActive(to: false)
+        liveMarkView.liveMarkActive(to: false)
     }
     
     @objc private func toForeground() {
@@ -252,7 +252,7 @@ final class BbajiSpotViewController: UIViewController {
 
 extension BbajiSpotViewController: SpotLiveCameraViewDelegate {
     func videoIsReadyToPlay() {
-        liveMarkView.liveMarkColorActive(to: true)
+        liveMarkView.liveMarkActive(to: true)
     }
 }
 

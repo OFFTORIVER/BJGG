@@ -34,31 +34,33 @@ final class LiveMarkView: UIView {
             liveLabel.widthAnchor.constraint(equalTo: self.widthAnchor),
             liveLabel.heightAnchor.constraint(equalTo: self.heightAnchor)
         ])
-        
     }
     
     private func componentConfigure() {
         liveLabel.textAlignment = .center
         liveLabel.text = "LIVE"
         liveLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        
     }
 
     func setUpLiveLabelRadius(to: CGFloat) {
         self.layer.cornerRadius = to
     }
     
-    func liveMarkColorActive(to active: Bool) {
+    func liveMarkActive(to active: Bool) {
         let currentColor = backgroundColor
         var targetColor: UIColor? = currentColor
         
         if active {
             targetColor = UIColor(rgb: 0xE17481)
         } else {
-            targetColor = UIColor.lightGray
+            targetColor = .clear
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.3, animations: {
             self.backgroundColor = targetColor
+            self.isHidden = !active
+            self.liveLabel.isHidden = !active
         })
     }
 }
