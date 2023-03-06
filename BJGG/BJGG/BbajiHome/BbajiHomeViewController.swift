@@ -131,8 +131,8 @@ extension BbajiHomeViewController {
     func requestAPI() {
         weatherManager = WeatherManager()
         
-        let bbajiCoorX = bbajiInfo[0].getCoordinate().0
-        let bbajiCoorY = bbajiInfo[0].getCoordinate().1
+        let bbajiCoorX = bbajiInfo[0].getCoordinate().x
+        let bbajiCoorY = bbajiInfo[0].getCoordinate().y
         
         Task {
             do {
