@@ -51,7 +51,7 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         
         self.addSubview(temperatureLabel)
         temperatureLabel.snp.remakeConstraints({ make in
-            make.top.equalTo(currentWeatherImgView.snp.bottom).offset(CGFloat.iconOffset)
+            make.top.equalTo(currentWeatherImgView.snp.bottom).offset(BbajiConstraints.iconOffset)
             make.centerX.equalTo(currentWeatherImgView.snp.centerX)
             make.height.equalTo(22)
             make.width.equalTo(60)

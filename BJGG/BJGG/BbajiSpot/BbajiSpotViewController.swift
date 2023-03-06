@@ -25,8 +25,8 @@ final class BbajiSpotViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         let viewWidth = UIScreen.main.bounds.width
-        let defaultMargin = CGFloat.superViewInset
-        let viewToViewMargin = CGFloat.componentOffset
+        let defaultMargin = BbajiConstraints.superViewInset
+        let viewToViewMargin = BbajiConstraints.componentOffset
         
         view.addSubview(liveCameraView)
         

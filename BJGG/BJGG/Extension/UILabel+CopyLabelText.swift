@@ -27,7 +27,7 @@ extension UILabel {
         
         let toastLabel = UILabel()
         
-        let margin = CGFloat.superViewInset * 1.4
+        let margin = BbajiConstraints.superViewInset * 1.4
         
         toastLabel.frame = CGRect(x: margin, y: height * 0.88, width: width - margin * 2, height: 45)
 

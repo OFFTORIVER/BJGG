@@ -1,13 +1,14 @@
 //
-//  CGFloat+Constraints.swift
+//  Constraints.swift
 //  BJGG
 //
-//  Created by 이재웅 on 2022/09/23.
+//  Created by 이재웅 on 2023/02/22.
 //
 
+import Foundation
 import UIKit
 
-extension CGFloat {
+struct BbajiConstraints {
     // label 간 간격 constraint
     static let labelOffset: CGFloat = 4.0
     
