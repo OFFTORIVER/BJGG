@@ -153,19 +153,17 @@ final class SpotLiveCameraView: UIView {
             }
             
             stanbyView.changeStandbyView(as: status)
+            interactionEnableStatus(as: true)
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
-                interactionEnableStatus(as: true)
                 delegate?.videoIsReadyToPlay()
                 player?.play()
             case .failed:
-                interactionEnableStatus(as: false)
                 changeReloadButtonActiveStatus(as: true)
                 print(".failed")
             case .unknown:
                 print(".unknown")
-                interactionEnableStatus(as: false)
                 changeReloadButtonActiveStatus(as: true)
             @unknown default:
                 print("@unknown default")
@@ -200,11 +198,7 @@ final class SpotLiveCameraView: UIView {
     }
     
     func changeReloadButtonActiveStatus(as active: Bool) {
-        if active {
-            reloadButton.isHidden = false
-        } else {
-            reloadButton.isHidden = true
-        }
+        reloadButton.isHidden = !active
     }
     
     @objc private func touchVideoPlayerScreen() {
