@@ -37,7 +37,7 @@ final class SpotLiveCameraStanbyView: UIView {
         
         self.addSubview(subLabel)
         subLabel.snp.makeConstraints({ make in
-            make.top.equalTo(mainLabel.snp.bottom).inset(CGFloat.iconOffset)
+            make.top.equalTo(mainLabel.snp.bottom).inset(BbajiConstraints.iconOffset)
             make.centerX.equalTo(mainLabel)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(36)
