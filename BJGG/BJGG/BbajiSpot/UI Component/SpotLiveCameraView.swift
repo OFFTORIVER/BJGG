@@ -13,26 +13,6 @@ protocol SpotLiveCameraViewDelegate: AnyObject {
     func videoIsReadyToPlay()
 }
 
-enum ControlStatus {
-    case exist
-    case hidden
-    
-    mutating func changeControlStatus(view: UIView) {
-        switch self {
-        case .exist:
-            UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
-                view.alpha = 0.0
-            })
-            self = .hidden
-        case .hidden:
-            UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
-                view.alpha = 1.0
-            })
-            self = .exist
-        }
-    }
-}
-
 final class SpotLiveCameraView: UIView {
     
     var controlStatus: ControlStatus = .hidden
@@ -236,6 +216,26 @@ final class SpotLiveCameraView: UIView {
         changeReloadButtonActiveStatus(as: false)
         stanbyView.configureLayout()
     }
-    
-    
+}
+
+extension SpotLiveCameraView {
+    enum ControlStatus {
+        case exist
+        case hidden
+        
+        mutating func changeControlStatus(view: UIView) {
+            switch self {
+            case .exist:
+                UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
+                    view.alpha = 0.0
+                })
+                self = .hidden
+            case .hidden:
+                UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
+                    view.alpha = 1.0
+                })
+                self = .exist
+            }
+        }
+    }
 }
