@@ -142,12 +142,12 @@ extension BbajiHomeViewController {
                     
                     self.weatherData = weatherData
                 }
-            } catch WeatherManagerError.urlError {
-                print("WeaherManager Error : URL 변환 실패")
-            } catch WeatherManagerError.apiError {
-                print("WeaherManager Error : 기상청 API 요청 실패")
-            } catch WeatherManagerError.clientError {
-                print("WeaherManager Error : 네트워크 응답 실패")
+            } catch WeatherManagerError.urlError(let message) {
+                print(message)
+            } catch WeatherManagerError.apiError(let message) {
+                print(message)
+            } catch WeatherManagerError.clientError(let message) {
+                print(message)
             } catch DecodingError.dataCorrupted(let description) {
                 print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
             } catch {

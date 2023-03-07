@@ -122,7 +122,6 @@
 			children = (
 				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
 				553F0FA628E9E11E00FD9CDA /* Weather.swift */,
-				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
 				3AA6369F29A65F3F006BB5EF /* PlistError.swift */,
 			);
 			path = Model;
@@ -225,6 +224,14 @@
 				558D99D829A5D8F900D633BF /* Constraints.swift */,
 			);
 			path = Utilities;
+            sourceTree = "<group>";
+        };
+		558D99DB29A5FF1800D633BF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		55CB0A9B28BA4F9F0045644C = {
@@ -252,6 +259,7 @@
 				3A7E3BE028D7657800F6416A /* BbajiSpot */,
 				553F0F9628E49D7F00FD9CDA /* BbajiHome */,
 				3A7E3BDB28D7427E00F6416A /* Model */,
+				558D99DB29A5FF1800D633BF /* Network */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				558D99DA29A5D8FE00D633BF /* Utilities */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
