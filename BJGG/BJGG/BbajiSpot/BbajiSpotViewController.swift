@@ -53,6 +53,8 @@ final class BbajiSpotViewController: UIViewController {
         let defaultMargin = BbajiConstraints.superViewInset
         let viewToViewMargin = BbajiConstraints.componentOffset
         
+        screenWidth = viewWidth
+        
         view.addSubview(liveCameraView)
         
         // MARK: NSLayoutConstraints
