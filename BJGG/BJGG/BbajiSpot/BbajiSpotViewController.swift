@@ -15,10 +15,35 @@ final class BbajiSpotViewController: UIViewController {
     private var spotInfoView = SpotInfoView()
     private var spotWeatherInfoView: SpotWeatherInfoView!
     
+    private var liveMarkView: LiveMarkView = LiveMarkView()
+    
+    private var screenWidth: CGFloat = CGFloat()
+    private var firstAttempt: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureLayoutWithAPI()
+        delegateConfigure()
+        notificationConfigure()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        switch liveCameraView.videoPlayerControlView.screenSizeControlButton.screenSizeStatus {
+        case .full:
+            return true
+        case .normal:
+            return false
+        }
+    }
+    
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        switch liveCameraView.videoPlayerControlView.screenSizeControlButton.screenSizeStatus {
+        case .full:
+            return true
+        case .normal:
+            return false
+        }
     }
     
     private func layoutConfigure() {
@@ -28,18 +53,31 @@ final class BbajiSpotViewController: UIViewController {
         let defaultMargin = BbajiConstraints.superViewInset
         let viewToViewMargin = BbajiConstraints.componentOffset
         
+        screenWidth = viewWidth
+        
         view.addSubview(liveCameraView)
         
+        // MARK: NSLayoutConstraints
+        let liveCameraViewHeight = screenWidth * 9 / 16
+
+        view.addSubview(liveCameraView)
         liveCameraView.snp.makeConstraints({ make in
+            make.centerX.equalTo(safeArea.snp.centerX)
             make.top.equalTo(safeArea.snp.top)
-            make.leading.equalTo(safeArea.snp.leading)
-            make.trailing.equalTo(safeArea.snp.trailing)
-            make.height.equalTo(viewWidth * 9 / 16)
+            make.width.equalTo(safeArea.snp.width)
+            make.height.equalTo(liveCameraViewHeight)
         })
         
-        liveCameraView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewWidth * 9 / 16)
-
-        self.addChild(liveCameraView.avpController)
+        view.addSubview(liveMarkView)
+        liveMarkView.snp.makeConstraints({ make in
+            make.leading.equalTo(liveCameraView.snp.leading).inset(8)
+            make.top.equalTo(liveCameraView.snp.top).inset(8)
+            make.width.equalTo(screenWidth / 8)
+            make.height.equalTo(screenWidth / 18)
+        })
+        
+        liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
+        liveMarkView.liveMarkActive(to: false)
         
         view.addSubview(infoScrollView)
         infoScrollView.snp.makeConstraints({make in
@@ -88,7 +126,6 @@ final class BbajiSpotViewController: UIViewController {
 
         spotWeatherInfoView = SpotWeatherInfoView()
         layoutConfigure()
-        liveCameraView.liveCameraSetting(size: liveCameraView.frame.size)
         
         let weatherManager = WeatherManager()
         
@@ -144,5 +181,118 @@ final class BbajiSpotViewController: UIViewController {
 //                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
 //            }
 //        }
+    }
+    
+    func delegateConfigure() {
+        liveCameraView.delegate = self
+        liveCameraView.videoPlayerControlView.screenSizeControlButton.delegate = self
+    }
+    
+    func notificationConfigure() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(toBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(toForeground),name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc private func toBackground() {
+        firstAttempt = false
+        liveMarkView.liveMarkActive(to: false)
+    }
+    
+    @objc private func toForeground() {
+        if !firstAttempt {
+            liveCameraView.playVideo()
+            liveCameraView.stanbyView.configureLayout()
+        }
+    }
+    
+    func setUpLiveCameraViewConstraints(screenStatus: ScreenSizeStatus) {
+        
+        let safeArea = view.safeAreaLayoutGuide
+        liveCameraView.snp.removeConstraints()
+        liveMarkView.snp.removeConstraints()
+        
+        switch screenStatus {
+        case .normal:
+            let liveCameraViewHeight = screenWidth * 9 / 16
+            
+            liveCameraView.snp.makeConstraints({ make in
+                make.centerX.equalTo(safeArea.snp.centerX)
+                make.top.equalTo(safeArea.snp.top)
+                make.width.equalTo(safeArea.snp.width)
+                make.height.equalTo(liveCameraViewHeight)
+            })
+            
+            liveMarkView.snp.makeConstraints({ make in
+                make.leading.equalTo(liveCameraView.snp.leading).offset(8)
+                make.top.equalTo(liveCameraView.snp.top).offset(8)
+                make.width.equalTo(screenWidth / 8)
+                make.height.equalTo(screenWidth / 18)
+            })
+        case .full:
+            
+            let liveCameraviewHeight = UIScreen.main.bounds.width
+            let liveCameraViewWidth = liveCameraviewHeight * 16 / 9
+
+            liveCameraView.snp.makeConstraints({ make in
+                make.top.equalTo(view.snp.top)
+                make.bottom.equalTo(view.snp.bottom)
+                make.centerX.equalTo(safeArea.snp.centerX)
+                make.width.equalTo(liveCameraViewWidth)
+            })
+            
+            liveMarkView.snp.makeConstraints({ make in
+                make.leading.equalTo(liveCameraView.snp.leading).offset(16)
+                make.top.equalTo(liveCameraView.snp.top).offset(16)
+                make.width.equalTo(screenWidth / 8)
+                make.height.equalTo(screenWidth / 18)
+            })
+        }
+    }
+}
+
+extension BbajiSpotViewController: SpotLiveCameraViewDelegate {
+    func videoIsReadyToPlay() {
+        liveMarkView.liveMarkActive(to: true)
+    }
+}
+
+extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
+{
+    func changeScreenSize(screenSizeStatus: ScreenSizeStatus) {
+        var infoViewAlphaValue: CGFloat = 1.0
+        var backgroundColor: UIColor = .bbagaBack
+        var orientationValue: String = "portrait"
+        var navigationBarHiddenStatus: Bool = false
+        switch screenSizeStatus {
+        case .normal:
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = .portrait
+            }
+        case .full:
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = .landscapeRight
+            }
+
+            infoViewAlphaValue = 0.0
+            orientationValue = "landscapeRight"
+            backgroundColor = .black
+            navigationBarHiddenStatus = true
+        }
+        
+        if #available(iOS 16.0, *) {
+            self.setNeedsUpdateOfSupportedInterfaceOrientations()
+        } else {
+            UIDevice.current.setValue(orientationValue, forKey: "orientation")
+        }
+        
+        navigationController?.setNavigationBarHidden(navigationBarHiddenStatus, animated: true)
+        setUpLiveCameraViewConstraints(screenStatus: screenSizeStatus)
+        UIView.animate(withDuration: 0.3, delay: TimeInterval(0.0), animations: { [self] in
+            infoScrollView.alpha = infoViewAlphaValue
+            view.backgroundColor = backgroundColor
+            view.layoutIfNeeded()
+        })
     }
 }
