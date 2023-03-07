@@ -38,11 +38,7 @@ class BbajiListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(bbajiListCollectionView)
-        
-        bbajiListCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +87,15 @@ extension BbajiListView: UICollectionViewDataSource {
 }
 
 extension BbajiListView {
+    private func configureLayout() {
+        addSubview(bbajiListCollectionView)
+        
+        bbajiListCollectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    
     func updateWeatherData(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)]) {
         var sortedTupleArray = [(iconName: String?, temp: String?)]()
         
