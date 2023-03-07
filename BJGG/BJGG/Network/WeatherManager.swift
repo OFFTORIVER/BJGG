@@ -66,10 +66,19 @@ struct WeatherManager {
     }()
     
     private func requestWeather(nx: Int, ny: Int, numberOfRow: Int) async throws -> Weather {
-        let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(APIKey.key)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
+        guard let privatePlist = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
+            throw PlistError.bundleError
+        }
+        
+        guard let dictionary = NSDictionary(contentsOf: privatePlist) else {
+            throw PlistError.dictionaryCastingError
+        }
+        
+        let weatherAPIKey = dictionary["weatherAPIKey"] as! String
+        let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(weatherAPIKey)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
         
         guard let url = URL(string: urlString) else {
-            throw WeatherManagerError.urlError("WeatherManager Error : URL 변환 실패")
+            throw PlistError.stringCastingError
         }
         
         var request = URLRequest(url: url)
