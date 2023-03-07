@@ -105,7 +105,7 @@ final class SpotLiveCameraView: UIView {
         
         videoPlayerControlView.alpha = 0.0
         changeReloadButtonActiveStatus(as: false)
-        interactionEnableStatus(isActive: true)
+        interactionEnableStatus(as: true)
         
         addSubview(stanbyView)
         stanbyView.snp.makeConstraints({ make in
@@ -176,16 +176,16 @@ final class SpotLiveCameraView: UIView {
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
-                interactionEnableStatus(isActive: false)
+                interactionEnableStatus(as: true)
                 delegate?.videoIsReadyToPlay()
                 player?.play()
             case .failed:
-                interactionEnableStatus(isActive: false)
+                interactionEnableStatus(as: false)
                 changeReloadButtonActiveStatus(as: true)
                 print(".failed")
             case .unknown:
                 print(".unknown")
-                interactionEnableStatus(isActive: false)
+                interactionEnableStatus(as: false)
                 changeReloadButtonActiveStatus(as: true)
             @unknown default:
                 print("@unknown default")
@@ -201,7 +201,7 @@ final class SpotLiveCameraView: UIView {
     
     func playVideo() {
         
-        interactionEnableStatus(isActive: true)
+        interactionEnableStatus(as: true)
         
         guard let url = URL(string: videoURL) else { return }
         self.play(with: url)
@@ -215,13 +215,8 @@ final class SpotLiveCameraView: UIView {
         playerLayer.player?.play()
     }
     
-    func interactionEnableStatus(isActive: Bool) {
-        if isActive == true {
-            self.isUserInteractionEnabled = false
-        } else {
-            self.isUserInteractionEnabled = true
-        }
-        
+    func interactionEnableStatus(as isActive: Bool) {
+        self.isUserInteractionEnabled = isActive
     }
     
     func changeReloadButtonActiveStatus(as active: Bool) {
