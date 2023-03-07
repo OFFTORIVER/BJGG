@@ -11,8 +11,6 @@ import SnapKit
 class BbajiTitleView: UIView {
     private lazy var bbajiTitleLogoImage: UIImageView = {
         let imageView = UIImageView()
-        
-        // TODO: 타이틀 로고 이미지 삽입
         imageView.image = UIImage(named: "mainLogo")
         
         return imageView
@@ -39,7 +37,7 @@ class BbajiTitleView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layoutConfigure()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -47,7 +45,7 @@ class BbajiTitleView: UIView {
     }
     
     
-    private func layoutConfigure() {
+    private func configureLayout() {
         [
             bbajiTitleLogoImage,
             bbajiTitleNameLabel,

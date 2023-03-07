@@ -43,13 +43,17 @@ final class BbajiHomeViewController: UIViewController {
         self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
         self.bbajiListView.reloadCollectionView()
         
-        layoutConfigure()
-        delegateConfigure()
+        configure()
     }
 }
 
 private extension BbajiHomeViewController {
-    func layoutConfigure() {
+    func configure() {
+        configureLayout()
+        configureDelegate()
+    }
+    
+    func configureLayout() {
         [
             backgroundImageView,
             bbajiTitleView,
@@ -75,11 +79,11 @@ private extension BbajiHomeViewController {
         }
         
         if !UIDevice.current.hasNotch {
-            layoutConfigureForNotNotch()
+            configureLayoutForNotNotch()
         }
     }
     
-    private func layoutConfigureForNotNotch() {
+    private func configureLayoutForNotNotch() {
         let noticeLabel: UILabel = {
             let label = UILabel()
             label.text = "다음 빠지는 어디로 가까?"
@@ -116,7 +120,7 @@ private extension BbajiHomeViewController {
         
     }
     
-    func delegateConfigure() {
+    func configureDelegate() {
         bbajiListView.delegate = self
     }
 }

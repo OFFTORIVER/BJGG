@@ -57,7 +57,7 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
 
 extension BbajiListCollectionViewCell {
     func configure(_ indexPathRow: Int, bbajiInfo: BbajiInfo?, iconName: String?, temp: String?) {
-        layoutConfigure()
+        configureLayout()
         
         layer.cornerRadius = 10.0
         layer.masksToBounds = true
@@ -87,7 +87,7 @@ extension BbajiListCollectionViewCell {
         }
     }
     
-    private func layoutConfigure() {
+    private func configureLayout() {
         let iconWidth: CGFloat = 28.0
         
         [
