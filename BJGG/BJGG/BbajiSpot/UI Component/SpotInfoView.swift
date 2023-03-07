@@ -22,7 +22,7 @@ final class SpotInfoView: UIView {
     
     private func layoutConfigure() {
         
-        let defaultMargin: CGFloat = .viewInset
+        let defaultMargin: CGFloat = BbajiConstraints.viewInset
         
         let spotNameLabel = UILabel()
         self.addSubview(spotNameLabel)

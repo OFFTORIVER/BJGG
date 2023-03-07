@@ -62,15 +62,15 @@ private extension BbajiHomeViewController {
         
         bbajiTitleView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(51.0)
-            $0.leading.equalToSuperview().inset(CGFloat.superViewInset)
-            $0.trailing.equalToSuperview().inset(CGFloat.superViewInset)
+            $0.leading.equalToSuperview().inset(BbajiConstraints.superViewInset)
+            $0.trailing.equalToSuperview().inset(BbajiConstraints.superViewInset)
             $0.height.equalTo(90.0)
         }
         
         bbajiListView.snp.makeConstraints {
             $0.top.equalTo(bbajiTitleView.snp.bottom).offset(198.0)
-            $0.leading.equalToSuperview().inset(CGFloat.superViewInset)
-            $0.trailing.equalToSuperview().inset(CGFloat.superViewInset)
+            $0.leading.equalToSuperview().inset(BbajiConstraints.superViewInset)
+            $0.trailing.equalToSuperview().inset(BbajiConstraints.superViewInset)
             $0.bottom.equalToSuperview()
         }
         
@@ -131,8 +131,8 @@ extension BbajiHomeViewController {
     func requestAPI() {
         weatherManager = WeatherManager()
         
-        let bbajiCoorX = bbajiInfo[0].getCoordinate().0
-        let bbajiCoorY = bbajiInfo[0].getCoordinate().1
+        let bbajiCoorX = bbajiInfo[0].getCoordinate().x
+        let bbajiCoorY = bbajiInfo[0].getCoordinate().y
         
         Task {
             do {
@@ -142,12 +142,12 @@ extension BbajiHomeViewController {
                     
                     self.weatherData = weatherData
                 }
-            } catch WeatherManagerError.urlError {
-                print("WeaherManager Error : URL 변환 실패")
-            } catch WeatherManagerError.apiError {
-                print("WeaherManager Error : 기상청 API 요청 실패")
-            } catch WeatherManagerError.clientError {
-                print("WeaherManager Error : 네트워크 응답 실패")
+            } catch WeatherManagerError.urlError(let message) {
+                print(message)
+            } catch WeatherManagerError.apiError(let message) {
+                print(message)
+            } catch WeatherManagerError.clientError(let message) {
+                print(message)
             } catch DecodingError.dataCorrupted(let description) {
                 print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
             } catch {

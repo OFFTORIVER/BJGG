@@ -110,25 +110,25 @@ extension BbajiListCollectionViewCell {
         
         locationLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(130.0)
-            $0.leading.equalToSuperview().inset(CGFloat.viewInset)
-            $0.trailing.equalToSuperview().inset(CGFloat.viewInset)
+            $0.leading.equalToSuperview().inset(BbajiConstraints.viewInset)
+            $0.trailing.equalToSuperview().inset(BbajiConstraints.viewInset)
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(CGFloat.labelOffset)
+            $0.top.equalTo(locationLabel.snp.bottom).offset(BbajiConstraints.labelOffset)
             $0.leading.equalTo(locationLabel.snp.leading)
-            $0.bottom.equalToSuperview().inset(CGFloat.viewInset)
+            $0.bottom.equalToSuperview().inset(BbajiConstraints.viewInset)
         }
         
         tempLabel.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.top)
-            $0.trailing.equalToSuperview().inset(CGFloat.viewInset)
+            $0.trailing.equalToSuperview().inset(BbajiConstraints.viewInset)
             $0.bottom.equalTo(nameLabel.snp.bottom)
         }
         
         weatherImageView.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.top)
-            $0.trailing.equalTo(tempLabel.snp.leading).offset(-CGFloat.labelOffset)
+            $0.trailing.equalTo(tempLabel.snp.leading).offset(-BbajiConstraints.labelOffset)
             $0.width.equalTo(iconWidth)
             $0.height.equalTo(iconWidth)
         }

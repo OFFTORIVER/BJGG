@@ -37,8 +37,8 @@ final class SpotWeatherInfoView: UIView {
     }
     
     private func layoutConfigure() {
-        let defaultMargin: CGFloat = .viewInset
-        let defaultMargin2: CGFloat = .componentOffset
+        let defaultMargin: CGFloat = BbajiConstraints.viewInset
+        let defaultMargin2: CGFloat = BbajiConstraints.componentOffset
         
         let weatherAddressLabel = UILabel()
         
@@ -74,7 +74,7 @@ final class SpotWeatherInfoView: UIView {
         })
         
         currentTemperatureLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(CGFloat.iconOffset)
+            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(BbajiConstraints.iconOffset)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
             make.width.equalTo(100)
         })

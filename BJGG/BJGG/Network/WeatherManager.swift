@@ -8,9 +8,9 @@
 import Foundation
 
 enum WeatherManagerError: Error {
-    case urlError
-    case clientError
-    case apiError
+    case urlError(String)
+    case clientError(String)
+    case apiError(String)
 }
 
 struct WeatherManager {
@@ -67,18 +67,18 @@ struct WeatherManager {
     
     private func requestWeather(nx: Int, ny: Int, numberOfRow: Int) async throws -> Weather {
         guard let privatePlist = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
-            throw WeatherManagerError.urlError
+            throw PlistError.bundleError
         }
         
         guard let dictionary = NSDictionary(contentsOf: privatePlist) else {
-            throw WeatherManagerError.urlError
+            throw PlistError.dictionaryCastingError
         }
         
         let weatherAPIKey = dictionary["weatherAPIKey"] as! String
         let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(weatherAPIKey)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
         
         guard let url = URL(string: urlString) else {
-            throw WeatherManagerError.urlError
+            throw PlistError.stringCastingError
         }
         
         var request = URLRequest(url: url)
@@ -87,7 +87,7 @@ struct WeatherManager {
         let (data, httpResponse) = try await URLSession.shared.data(for: request)
         
         guard let httpURLResponse = httpResponse as? HTTPURLResponse else {
-            throw WeatherManagerError.apiError
+            throw WeatherManagerError.apiError("WeatherManager Error : HTTP URL 요청 실패")
         }
         
         switch httpURLResponse.statusCode {
@@ -95,9 +95,9 @@ struct WeatherManager {
             let weatherData = try JSONDecoder().decode(Weather.self, from: data)
             return weatherData
         case (300..<500):
-            throw WeatherManagerError.clientError
+            throw WeatherManagerError.clientError("WeatherManager Error : 네트워크 응답 실패")
         default:
-            throw WeatherManagerError.apiError
+            throw WeatherManagerError.apiError("WeatherManager Error : 기상청 API 요청 실패")
         }
     }
     
