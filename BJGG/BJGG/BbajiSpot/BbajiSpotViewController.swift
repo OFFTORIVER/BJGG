@@ -92,6 +92,7 @@ final class BbajiSpotViewController: UIViewController {
             make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width)
+            make.height.equalTo(UIDevice.current.hasNotch ? 508 : 508 - 32)
         })
         infoScrollView.showsVerticalScrollIndicator = false
         
