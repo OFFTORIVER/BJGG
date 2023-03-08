@@ -91,13 +91,17 @@ struct WeatherManager {
         }
         
         switch httpURLResponse.statusCode {
-        case (200..<300):
+        case 200..<300:
             let weatherData = try JSONDecoder().decode(Weather.self, from: data)
             return weatherData
-        case (300..<500):
-            throw WeatherManagerError.clientError("WeatherManager Error : 네트워크 응답 실패")
+        case 100..<200:
+            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 100")
+        case 300..<400:
+            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 300")
+        case 400..<500:
+            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 400")
         default:
-            throw WeatherManagerError.apiError("WeatherManager Error : 기상청 API 요청 실패")
+            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 500")
         }
     }
     
