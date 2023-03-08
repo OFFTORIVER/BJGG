@@ -23,4 +23,6 @@ struct BbajiConstraints {
     
     // view와 내부 component 간 간격 constraint
     static let viewInset: CGFloat = UIDevice.current.hasNotch ? 20.0 : 16.0
+    
+    private init() { }
 }
