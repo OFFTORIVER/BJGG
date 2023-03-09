@@ -144,9 +144,7 @@ final class BbajiSpotViewController: UIViewController {
                 
                 if let weatherManagerError = error as? WeatherManagerError {
                     switch weatherManagerError {
-                    case .urlError(let message):
-                        print(message)
-                    case .clientError(let message):
+                    case .networkError(let message):
                         print(message)
                     case .apiError(let message):
                         print(message)

@@ -8,8 +8,7 @@
 import Foundation
 
 enum WeatherManagerError: Error {
-    case urlError(String)
-    case clientError(String)
+    case networkError(String)
     case apiError(String)
 }
 
