@@ -86,21 +86,15 @@ struct WeatherManager {
         let (data, httpResponse) = try await URLSession.shared.data(for: request)
         
         guard let httpURLResponse = httpResponse as? HTTPURLResponse else {
-            throw WeatherManagerError.apiError("WeatherManager Error : HTTP URL 요청 실패")
+            throw WeatherManagerError.networkError("WeatherManager Network Error : HTTP URL 응답 실패")
         }
         
         switch httpURLResponse.statusCode {
         case 200..<300:
             let weatherData = try JSONDecoder().decode(Weather.self, from: data)
             return weatherData
-        case 100..<200:
-            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 100")
-        case 300..<400:
-            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 300")
-        case 400..<500:
-            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 400")
         default:
-            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code 500")
+            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code \(httpURLResponse.statusCode)")
         }
     }
     
