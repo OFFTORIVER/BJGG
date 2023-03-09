@@ -5,10 +5,9 @@
 //  Created by 이재웅 on 2023/02/22.
 //
 
-import Foundation
 import UIKit
 
-struct BbajiConstraints {
+final class BbajiConstraints {
     // label 간 간격 constraint
     static let labelOffset: CGFloat = 4.0
     
