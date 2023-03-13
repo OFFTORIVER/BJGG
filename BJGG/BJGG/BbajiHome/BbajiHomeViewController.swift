@@ -146,11 +146,9 @@ extension BbajiHomeViewController {
                     
                     self.weatherData = weatherData
                 }
-            } catch WeatherManagerError.urlError(let message) {
-                print(message)
             } catch WeatherManagerError.apiError(let message) {
                 print(message)
-            } catch WeatherManagerError.clientError(let message) {
+            } catch WeatherManagerError.networkError(let message) {
                 print(message)
             } catch DecodingError.dataCorrupted(let description) {
                 print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")

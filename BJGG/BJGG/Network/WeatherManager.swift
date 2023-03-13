@@ -8,8 +8,7 @@
 import Foundation
 
 enum WeatherManagerError: Error {
-    case urlError(String)
-    case clientError(String)
+    case networkError(String)
     case apiError(String)
 }
 
@@ -87,17 +86,15 @@ struct WeatherManager {
         let (data, httpResponse) = try await URLSession.shared.data(for: request)
         
         guard let httpURLResponse = httpResponse as? HTTPURLResponse else {
-            throw WeatherManagerError.apiError("WeatherManager Error : HTTP URL 요청 실패")
+            throw WeatherManagerError.networkError("WeatherManager Network Error : HTTP URL 응답 실패")
         }
         
         switch httpURLResponse.statusCode {
-        case (200..<300):
+        case 200..<300:
             let weatherData = try JSONDecoder().decode(Weather.self, from: data)
             return weatherData
-        case (300..<500):
-            throw WeatherManagerError.clientError("WeatherManager Error : 네트워크 응답 실패")
         default:
-            throw WeatherManagerError.apiError("WeatherManager Error : 기상청 API 요청 실패")
+            throw WeatherManagerError.apiError("WeatherManager API Error : Statue Code \(httpURLResponse.statusCode)")
         }
     }
     
