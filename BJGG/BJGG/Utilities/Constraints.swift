@@ -5,10 +5,9 @@
 //  Created by 이재웅 on 2023/02/22.
 //
 
-import Foundation
 import UIKit
 
-struct BbajiConstraints {
+final class BbajiConstraints {
     // label 간 간격 constraint
     static let labelOffset: CGFloat = 4.0
     
@@ -23,4 +22,6 @@ struct BbajiConstraints {
     
     // view와 내부 component 간 간격 constraint
     static let viewInset: CGFloat = UIDevice.current.hasNotch ? 20.0 : 16.0
+    
+    private init() { }
 }
