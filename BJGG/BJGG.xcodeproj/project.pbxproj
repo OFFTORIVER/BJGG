@@ -57,6 +57,7 @@
 		55CB0AB428BA4FA10045644C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */; };
 		55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */; };
 		55F0AE6129BF5DE4003B5EEE /* Date+Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */; };
+		55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE6429C04C50003B5EEE /* WeatherTime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,7 @@
 		55CB0AB528BA4FA10045644C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewController.swift; sourceTree = "<group>"; };
 		55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Weather.swift"; sourceTree = "<group>"; };
+		55F0AE6429C04C50003B5EEE /* WeatherTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			children = (
 				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
 				553F0FA628E9E11E00FD9CDA /* Weather.swift */,
+				55F0AE6429C04C50003B5EEE /* WeatherTime.swift */,
 				3AA6369F29A65F3F006BB5EF /* PlistError.swift */,
 			);
 			path = Model;
@@ -401,6 +404,7 @@
 				3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
+				55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
 				553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */,
 				553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */,
