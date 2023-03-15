@@ -18,8 +18,7 @@ final class BbajiHomeViewController: UIViewController {
     private var weatherData: [(time: String, iconName: String, temp: String, probability: String)]? {
         didSet {
             if weatherData != nil {
-                self.bbajiListView.updateWeatherData(self.weatherData!)
-                self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
+                bbajiListView.configure(weatherData!, bbajiInfo: bbajiInfo)
                 self.bbajiListView.reloadCollectionView()
             }
         }
@@ -28,14 +27,13 @@ final class BbajiHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configure()
+        
         if let weatherData = weatherData {
-            self.bbajiListView.updateWeatherData(weatherData)
+            bbajiListView.configure(weatherData, bbajiInfo: bbajiInfo)
         }
         
-        self.bbajiListView.updateBbajiInfo(self.bbajiInfo)
         self.bbajiListView.reloadCollectionView()
-        
-        configure()
     }
 }
 

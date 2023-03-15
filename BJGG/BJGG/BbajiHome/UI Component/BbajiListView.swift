@@ -17,6 +17,13 @@ class BbajiListView: UIView {
     private var weatherData: [(iconName: String?, temp: String?)]?
     private var bbajiInfo: [BbajiInfo]?
     
+    func configure(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)], bbajiInfo: [BbajiInfo]) {
+        configureLayout()
+        
+        updateWeatherData(weatherData)
+        updateBbajiInfo(bbajiInfo)
+    }
+    
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = BbajiListCollectionView(frame: .zero, collectionViewLayout: layout)
@@ -34,16 +41,6 @@ class BbajiListView: UIView {
         
         return collectionView
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 extension BbajiListView: UICollectionViewDelegateFlowLayout {
@@ -87,6 +84,10 @@ extension BbajiListView: UICollectionViewDataSource {
 }
 
 extension BbajiListView {
+    func reloadCollectionView() {
+        bbajiListCollectionView.reloadData()
+    }
+    
     private func configureLayout() {
         addSubview(bbajiListCollectionView)
         
@@ -95,8 +96,7 @@ extension BbajiListView {
         }
     }
     
-    
-    func updateWeatherData(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)]) {
+    private func updateWeatherData(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)]) {
         var sortedTupleArray = [(iconName: String?, temp: String?)]()
         
         weatherData.forEach {
@@ -109,11 +109,7 @@ extension BbajiListView {
         self.weatherData = sortedTupleArray
     }
     
-    func updateBbajiInfo(_ bbajiInfo: [BbajiInfo]) {
+    private func updateBbajiInfo(_ bbajiInfo: [BbajiInfo]) {
         self.bbajiInfo = bbajiInfo
-    }
-    
-    func reloadCollectionView() {
-        bbajiListCollectionView.reloadData()
     }
 }
