@@ -14,14 +14,15 @@ protocol BbajiListViewDelegate {
 class BbajiListView: UIView {
     var delegate: BbajiListViewDelegate?
     
-    private var weatherArray: [(iconName: String?, temp: String?)] = []
-    private var bbajiInfoArray: [BbajiInfo?] = []
+    private var listWeatherArray: [ListWeather] = []
+    private var listInfoArray: [ListInfo] = []
     
-    func configure(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)], bbajiInfo: [BbajiInfo]) {
+    func configure(_ listWeatherArray: [ListWeather], listInfoArray: [ListInfo]) {
         configureLayout()
         
-        updateWeatherData(weatherData)
-        updateBbajiInfo(bbajiInfo)
+        configureWeatherArray(listWeatherArray)
+        configureInfoArray(listInfoArray)
+        bbajiListCollectionView.reloadData()
     }
     
     private lazy var bbajiListCollectionView: BbajiListCollectionView = {
@@ -64,11 +65,11 @@ extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCell.id, for: indexPath) as? BbajiListCell else { return UICollectionViewCell() }
         
-        if indexPath.row < weatherArray.count && indexPath.row < bbajiInfoArray.count {
-            let weatherData = weatherArray[indexPath.row]
-            let bbaji = bbajiInfoArray[indexPath.row]
+        if indexPath.row < listWeatherArray.count && indexPath.row < listInfoArray.count {
+            let weatherData = listWeatherArray[indexPath.row]
+            let info = listInfoArray[indexPath.row]
             
-            cell.configure(indexPath.row, locationName: bbaji?.getAddress(), bbajiName: bbaji?.getName(), backgroundImageName: bbaji?.getThumbnailImgName(), iconName: weatherData.iconName, temp: weatherData.temp)
+            cell.configure(indexPath.row, locationName: info.locationName, bbajiName: info.name, backgroundImageName: info.backgroundImageName, iconName: weatherData.iconName, temp: weatherData.temp)
         } else {
             cell.configure(indexPath.row)
         }
@@ -97,20 +98,14 @@ extension BbajiListView {
         }
     }
     
-    private func updateWeatherData(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)]) {
-        var sortedTupleArray = [(iconName: String?, temp: String?)]()
-        
-        weatherData.forEach {
-            var tuple: (iconName: String?, temp: String?)
-            tuple.iconName = $0.iconName
-            tuple.temp = $0.temp
-            sortedTupleArray.append(tuple)
-        }
-        
-        self.weatherArray = sortedTupleArray
+    private func configureWeatherArray(_ listWeatherArray: [(ListWeather)]) {
+        self.listWeatherArray = listWeatherArray
     }
     
-    private func updateBbajiInfo(_ bbajiInfo: [BbajiInfo]) {
-        self.bbajiInfoArray = bbajiInfo
+    private func configureInfoArray(_ infoArray: [ListInfo]) {
+        self.listInfoArray = infoArray
     }
 }
+
+typealias ListInfo = (locationName: String, name: String, backgroundImageName: String)
+typealias ListWeather = (iconName: String, temp: String)

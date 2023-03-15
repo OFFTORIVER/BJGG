@@ -15,25 +15,12 @@ final class BbajiHomeViewController: UIViewController {
 
     private var weatherManager: WeatherManager?
     private let bbajiInfo = [BbajiInfo()]
-    private var weatherData: [(time: String, iconName: String, temp: String, probability: String)]? {
-        didSet {
-            if weatherData != nil {
-                bbajiListView.configure(weatherData!, bbajiInfo: bbajiInfo)
-                self.bbajiListView.reloadCollectionView()
-            }
-        }
-    }
+    private var weatherData: [(time: String, iconName: String, temp: String, probability: String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
-        
-        if let weatherData = weatherData {
-            bbajiListView.configure(weatherData, bbajiInfo: bbajiInfo)
-        }
-        
-        self.bbajiListView.reloadCollectionView()
     }
 }
 
@@ -69,6 +56,26 @@ extension BbajiHomeViewController {
             }
         }
     }
+    
+    private func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [ListInfo] {
+        var listInfoArray: [ListInfo] = []
+        for info in bbajiInfoArray {
+            let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
+            listInfoArray.append(listInfo)
+        }
+        
+        return listInfoArray
+    }
+    
+    private func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [ListWeather] {
+        var listWeatherArray: [ListWeather] = []
+        for weather in weatherData {
+            let listWeather = ListWeather(weather.iconName, weather.temp)
+            listWeatherArray.append(listWeather)
+        }
+        
+        return listWeatherArray
+    }
 }
 
 
@@ -76,6 +83,8 @@ private extension BbajiHomeViewController {
     func configure() {
         configureLayout()
         configureDelegate()
+        
+        bbajiListView.configure(convertToListWeatherArray(from: weatherData), listInfoArray: convertToListInfoArray(from: bbajiInfo))
     }
     
     func configureDelegate() {
