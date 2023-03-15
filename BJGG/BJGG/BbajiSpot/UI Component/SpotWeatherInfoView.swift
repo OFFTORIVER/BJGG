@@ -166,10 +166,13 @@ final class SpotWeatherInfoView: UIView {
     }
     
     func setRainInfoLabelTextAndColor(text: String) {
+        let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
+        currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
+        
         rainInfoLabel.text = text
         let rainInfoLabelSplitText = rainInfoLabel.text?.components(separatedBy: "시")
         guard let timeDataStr = rainInfoLabelSplitText?[0] else { return }
-        makeTimeAsBlackColor(label: rainInfoLabel, timeStr: timeDataStr)
+        setRainInfoLabelColor(label: rainInfoLabel, timeStr: timeDataStr)
     }
     
     func spotWeatherInfoViewComponentHidden(isHidden: Bool) {
@@ -221,17 +224,14 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
 }
 
 extension SpotWeatherInfoView {
-    func makeTimeAsBlackColor(label: UILabel, timeStr: String) {
-        // label 전체 텍스트의 기본 컬러를 bbagaGray2로 설정
+    func setRainInfoLabelColor(label: UILabel, timeStr: String) {
+        
         label.textColor = .bbagaGray2
         guard let text = label.text else { return }
         let attributedString = NSMutableAttributedString(string: text)
         
-        // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
         attributedString.addAttribute(.foregroundColor, value: UIColor.bbagaGray1, range: (text as NSString).range(of: "\(timeStr)시"))
-        let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
-        currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
-        // label에 Color 입히기
+
         label.attributedText = attributedString
     }
     
