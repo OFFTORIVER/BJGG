@@ -9,9 +9,8 @@ import UIKit
 import SnapKit
 
 final class BbajiHomeViewController: UIViewController {
-    private let bbajiTitleView = BbajiTitleView()
-    private let bbajiListView = BbajiListView()
-    
+    private lazy var bbajiTitleView = BbajiTitleView()
+    private lazy var bbajiListView = BbajiListView()
     private lazy var backgroundImageView = HomeBackgroundImageView()
 
     private var weatherManager: WeatherManager?
