@@ -8,6 +8,7 @@
 import UIKit
 
 final class SpotInfoView: UIView {
+    
     private let bbajiInfo = BbajiInfo()
     
     private let spotNameLabel = UILabel()

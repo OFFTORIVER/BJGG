@@ -8,6 +8,7 @@
 import UIKit
 
 final class SpotLiveCameraGradientView: UIView {
+    
     let color1 = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6)
     let color2 = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
     
