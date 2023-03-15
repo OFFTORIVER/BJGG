@@ -13,7 +13,7 @@ final class BbajiListCell: UICollectionViewCell {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last!
     }
     
-    func configure(_ indexPathRow: Int, locationName: String?, bbajiName: String?, backgroundImageName: String?, iconName: String?, temp: String?) {
+    func configure(_ indexPathRow: Int, locationName: String? = nil, bbajiName: String? = nil, backgroundImageName: String? = nil, iconName: String? = nil, temp: String? = nil) {
         configureLayout()
         configureStyle()
         

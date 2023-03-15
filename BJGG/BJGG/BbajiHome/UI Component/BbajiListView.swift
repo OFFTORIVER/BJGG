@@ -14,8 +14,8 @@ protocol BbajiListViewDelegate {
 class BbajiListView: UIView {
     var delegate: BbajiListViewDelegate?
     
-    private var weatherData: [(iconName: String?, temp: String?)]?
-    private var bbajiInfo: [BbajiInfo]?
+    private var weatherArray: [(iconName: String?, temp: String?)] = []
+    private var bbajiInfoArray: [BbajiInfo?] = []
     
     func configure(_ weatherData: [(time: String, iconName: String, temp: String, probability: String)], bbajiInfo: [BbajiInfo]) {
         configureLayout()
@@ -30,7 +30,7 @@ class BbajiListView: UIView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(BbajiListCollectionViewCell.self, forCellWithReuseIdentifier: BbajiListCollectionViewCell.id)
+        collectionView.register(BbajiListCell.self, forCellWithReuseIdentifier: BbajiListCell.id)
         
         collectionView.layer.cornerRadius = 10.0
         collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -62,17 +62,18 @@ extension BbajiListView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCell.id, for: indexPath) as? BbajiListCell
-        if indexPath.row < weatherData?.count ?? 0 && indexPath.row < bbajiInfo?.count ?? 0 {
-            let data = weatherData?[indexPath.row]
-            let bbaji = bbajiInfo?[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCell.id, for: indexPath) as? BbajiListCell else { return UICollectionViewCell() }
+        
+        if indexPath.row < weatherArray.count && indexPath.row < bbajiInfoArray.count {
+            let weatherData = weatherArray[indexPath.row]
+            let bbaji = bbajiInfoArray[indexPath.row]
             
-            cell?.configure(indexPath.row, locationName: bbaji?.getAddress(), bbajiName: bbaji?.getName(), backgroundImageName: bbaji?.getThumbnailImgName(), iconName: data?.iconName, temp: data?.temp)
+            cell.configure(indexPath.row, locationName: bbaji?.getAddress(), bbajiName: bbaji?.getName(), backgroundImageName: bbaji?.getThumbnailImgName(), iconName: weatherData.iconName, temp: weatherData.temp)
         } else {
-            cell?.configure(indexPath.row, locationName: nil, bbajiName: nil, backgroundImageName: nil, iconName: nil, temp: nil)
+            cell.configure(indexPath.row)
         }
         
-        return cell ?? UICollectionViewCell()
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -106,10 +107,10 @@ extension BbajiListView {
             sortedTupleArray.append(tuple)
         }
         
-        self.weatherData = sortedTupleArray
+        self.weatherArray = sortedTupleArray
     }
     
     private func updateBbajiInfo(_ bbajiInfo: [BbajiInfo]) {
-        self.bbajiInfo = bbajiInfo
+        self.bbajiInfoArray = bbajiInfo
     }
 }
