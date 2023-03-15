@@ -30,7 +30,7 @@ class BbajiListView: UIView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(BbajiListCell.self, forCellWithReuseIdentifier: BbajiListCell.id)
+        collectionView.register(BbajiListCollectionViewCell.self, forCellWithReuseIdentifier: BbajiListCollectionViewCell.id)
         
         collectionView.layer.cornerRadius = 10.0
         collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -67,9 +67,9 @@ extension BbajiListView: UICollectionViewDataSource {
             let data = weatherData?[indexPath.row]
             let bbaji = bbajiInfo?[indexPath.row]
             
-            cell?.configure(indexPath.row, bbajiInfo: bbaji, iconName: data?.iconName, temp: data?.temp)
+            cell?.configure(indexPath.row, locationName: bbaji?.getAddress(), bbajiName: bbaji?.getName(), backgroundImageName: bbaji?.getThumbnailImgName(), iconName: data?.iconName, temp: data?.temp)
         } else {
-            cell?.configure(indexPath.row, bbajiInfo: nil, iconName: nil, temp: nil)
+            cell?.configure(indexPath.row, locationName: nil, bbajiName: nil, backgroundImageName: nil, iconName: nil, temp: nil)
         }
         
         return cell ?? UICollectionViewCell()
