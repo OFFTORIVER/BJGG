@@ -21,16 +21,7 @@ final class SpotLiveCameraView: UIView {
     var stanbyView: SpotLiveCameraStanbyView = SpotLiveCameraStanbyView()
     
     private let videoURL = BbajiInfo().getLiveCameraUrl()
-    private lazy var reloadButton: UIButton = {
-        let button = UIButton()
-        
-        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .medium)
-        let image = UIImage(systemName: "arrow.clockwise", withConfiguration: config)?
-            .withTintColor(.white, renderingMode: .alwaysOriginal)
-        button.setImage(image, for: .normal)
-        return button
-    }()
-    
+    private let reloadButton: UIButton = UIButton()
     
     weak var delegate: SpotLiveCameraViewDelegate?
     
@@ -72,12 +63,21 @@ final class SpotLiveCameraView: UIView {
     
     private func configure() {
         configureLayout()
+        configureStyle()
         configureComponent()
     }
     
-    private func configureLayout() {
-        
+    private func configureStyle() {
         self.backgroundColor = .black
+        videoPlayerControlView.alpha = 0.0
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .medium)
+        let image = UIImage(systemName: "arrow.clockwise", withConfiguration: config)?
+            .withTintColor(.white, renderingMode: .alwaysOriginal)
+        reloadButton.setImage(image, for: .normal)
+    }
+    
+    private func configureLayout() {
         
         addSubview(videoPlayerControlView)
         videoPlayerControlView.snp.makeConstraints({ make in
@@ -86,10 +86,6 @@ final class SpotLiveCameraView: UIView {
             make.top.equalTo(self.snp.top)
             make.bottom.equalTo(self.snp.bottom)
         })
-        
-        videoPlayerControlView.alpha = 0.0
-        changeReloadButtonActiveStatus(as: false)
-        interactionEnableStatus(as: true)
         
         addSubview(stanbyView)
         stanbyView.snp.makeConstraints({ make in
@@ -109,13 +105,16 @@ final class SpotLiveCameraView: UIView {
     }
     
     private func configureComponent() {
-        let touchGesture = UITapGestureRecognizer(target: self, action: #selector(touchVideoPlayerScreen))
+        let touchGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoPlayerScreen))
         self.addGestureRecognizer(touchGesture)
         
-        reloadButton.addTarget(self, action: #selector(pressedReloadButton), for: .touchUpInside)
+        reloadButton.addTarget(self, action: #selector(didPressReloadButton), for: .touchUpInside)
         
         self.player?.rate = 30
         playerLayer.player?.currentItem?.automaticallyPreservesTimeOffsetFromLive = true
+        
+        changeReloadButtonActiveStatus(as: false)
+        interactionEnableStatus(as: true)
     }
     
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
@@ -182,15 +181,9 @@ final class SpotLiveCameraView: UIView {
     }
     
     func playVideo() {
-        
         interactionEnableStatus(as: true)
-        
         guard let url = URL(string: videoURL) else { return }
         self.play(with: url)
-    }
-    
-    func pause() {
-        playerLayer.player?.pause()
     }
     
     func replay() {
@@ -205,11 +198,11 @@ final class SpotLiveCameraView: UIView {
         reloadButton.isHidden = !active
     }
     
-    @objc private func touchVideoPlayerScreen() {
+    @objc private func didTapVideoPlayerScreen() {
         controlStatus.changeControlStatus(view: videoPlayerControlView)
     }
     
-    @objc private func pressedReloadButton() {
+    @objc private func didPressReloadButton() {
         self.playVideo()
         changeReloadButtonActiveStatus(as: false)
         stanbyView.configureLayout()
