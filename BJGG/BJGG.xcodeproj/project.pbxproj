@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
-		3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
 		3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A81FC28EEF86800D1FA20 /* Private.plist */; };
 		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
@@ -19,12 +18,12 @@
 		3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */; };
 		3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */; };
 		3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E3BE828D7670000F6416A /* SpotInfoView.swift */; };
+		3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA6369F29A65F3F006BB5EF /* PlistError.swift */; };
 		3AA636E129B390B6006BB5EF /* SpotLiveCameraControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E029B390B6006BB5EF /* SpotLiveCameraControlView.swift */; };
 		3AA636E329B390EE006BB5EF /* ScreenSizeControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E229B390EE006BB5EF /* ScreenSizeControlButton.swift */; };
 		3AA636E529B391FF006BB5EF /* LiveMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E429B391FF006BB5EF /* LiveMarkView.swift */; };
 		3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E629B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift */; };
 		3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStanbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStanbyView.swift */; };
-		3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA6369F29A65F3F006BB5EF /* PlistError.swift */; };
 		3AD87FB228D892D300ABD2E4 /* IconAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */; };
 		42600D5928EF200B00D114BC /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5828EF200B00D114BC /* Private.plist */; };
 		42600D5F28EF322500D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5E28EF322500D114BC /* Settings.bundle */; };
@@ -60,7 +59,6 @@
 
 /* Begin PBXFileReference section */
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
-		3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionView.swift; sourceTree = "<group>"; };
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
 		3A4A81FC28EEF86800D1FA20 /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
@@ -70,12 +68,12 @@
 		3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraView.swift; sourceTree = "<group>"; };
 		3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherInfoView.swift; sourceTree = "<group>"; };
 		3A7E3BE828D7670000F6416A /* SpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoView.swift; sourceTree = "<group>"; };
+		3AA6369F29A65F3F006BB5EF /* PlistError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistError.swift; sourceTree = "<group>"; };
 		3AA636E029B390B6006BB5EF /* SpotLiveCameraControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraControlView.swift; sourceTree = "<group>"; };
 		3AA636E229B390EE006BB5EF /* ScreenSizeControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSizeControlButton.swift; sourceTree = "<group>"; };
 		3AA636E429B391FF006BB5EF /* LiveMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMarkView.swift; sourceTree = "<group>"; };
 		3AA636E629B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraGradientView.swift; sourceTree = "<group>"; };
 		3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStanbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraStanbyView.swift; sourceTree = "<group>"; };
-		3AA6369F29A65F3F006BB5EF /* PlistError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistError.swift; sourceTree = "<group>"; };
 		3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconAndLabelView.swift; sourceTree = "<group>"; };
 		42600D5828EF200B00D114BC /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		42600D5E28EF322500D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				3AD87FB128D892D300ABD2E4 /* IconAndLabelView.swift */,
 				3A7E3BE628D766EC00F6416A /* SpotWeatherInfoView.swift */,
 				3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */,
-				3A124ABD28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift */,
 				3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */,
 			);
 			path = "UI Component";
@@ -375,7 +372,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				553F0FA728E9E11E00FD9CDA /* Weather.swift in Sources */,
-				3A124ABE28DA04A300D0EAA1 /* SpotTodayWeatherCollectionView.swift in Sources */,
 				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
 				3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStanbyView.swift in Sources */,
