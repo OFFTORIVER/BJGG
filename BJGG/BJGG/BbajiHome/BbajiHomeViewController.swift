@@ -71,26 +71,6 @@ extension BbajiHomeViewController {
                 print(error.localizedDescription)
             }
         }
-        
-        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
-        /*
-        weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
-            guard let self = self else {
-                return
-            }
-            guard let response = reponse as? WeatherResponse else {
-                print("Error : API 호출 실패")
-                return
-            }
-
-            let body = response.body
-            let items = body.items
-            let weatherItem = items.requestCurrentWeatherItem()
-            let data = items.requestWeatherDataSet(weatherItem)
-
-            self.weatherData = data
-        }
-         */
     }
 }
 
