@@ -98,11 +98,11 @@ extension BbajiListView {
         }
     }
     
-    private func configureWeatherArray(_ listWeatherArray: [(ListWeather)]) {
+    func configureWeatherArray(_ listWeatherArray: [(ListWeather)]) {
         self.listWeatherArray = listWeatherArray
     }
     
-    private func configureInfoArray(_ infoArray: [ListInfo]) {
+    func configureInfoArray(_ infoArray: [ListInfo]) {
         self.listInfoArray = infoArray
     }
 }

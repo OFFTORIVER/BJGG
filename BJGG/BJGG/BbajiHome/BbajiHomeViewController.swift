@@ -31,7 +31,7 @@ extension BbajiHomeViewController: BbajiListViewDelegate {
 }
 
 extension BbajiHomeViewController {
-    func requestAPI() {
+    func requestWeatherItems() {
         weatherManager = WeatherManager()
         
         let bbajiCoorX = bbajiInfo[0].getCoordinate().x
@@ -44,6 +44,8 @@ extension BbajiHomeViewController {
                     let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
                     
                     self.weatherData = weatherData
+                    bbajiListView.configureWeatherArray(convertToListWeatherArray(from: self.weatherData))
+                    bbajiListView.reloadCollectionView()
                 }
             } catch WeatherManagerError.apiError(let message) {
                 print(message)
