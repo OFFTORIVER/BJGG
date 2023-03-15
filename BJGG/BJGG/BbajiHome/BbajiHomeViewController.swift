@@ -12,14 +12,7 @@ final class BbajiHomeViewController: UIViewController {
     private let bbajiTitleView = BbajiTitleView()
     private let bbajiListView = BbajiListView()
     
-    private lazy var backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        let backgroundImageName = UIDevice.current.hasNotch ? "homeBackgroundImage" : "homeBackgroundImageNotNotch"
-        
-        imageView.image = UIImage(named: backgroundImageName)
-        
-        return imageView
-    }()
+    private lazy var backgroundImageView = HomeBackgroundImageView()
 
     private var weatherManager: WeatherManager?
     private let bbajiInfo = [BbajiInfo()]
