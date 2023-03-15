@@ -40,10 +40,69 @@ final class BbajiHomeViewController: UIViewController {
     }
 }
 
+extension BbajiHomeViewController: BbajiListViewDelegate {
+    func pushBbajiSpotViewController() {
+        self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
+    }
+}
+
+extension BbajiHomeViewController {
+    func requestAPI() {
+        weatherManager = WeatherManager()
+        
+        let bbajiCoorX = bbajiInfo[0].getCoordinate().x
+        let bbajiCoorY = bbajiInfo[0].getCoordinate().y
+        
+        Task {
+            do {
+                if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
+                    let weatherSet = weatherItems.requestCurrentWeatherItem()
+                    let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
+                    
+                    self.weatherData = weatherData
+                }
+            } catch WeatherManagerError.apiError(let message) {
+                print(message)
+            } catch WeatherManagerError.networkError(let message) {
+                print(message)
+            } catch DecodingError.dataCorrupted(let description) {
+                print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
+        /*
+        weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
+            guard let self = self else {
+                return
+            }
+            guard let response = reponse as? WeatherResponse else {
+                print("Error : API 호출 실패")
+                return
+            }
+
+            let body = response.body
+            let items = body.items
+            let weatherItem = items.requestCurrentWeatherItem()
+            let data = items.requestWeatherDataSet(weatherItem)
+
+            self.weatherData = data
+        }
+         */
+    }
+}
+
+
 private extension BbajiHomeViewController {
     func configure() {
         configureLayout()
         configureDelegate()
+    }
+    
+    func configureDelegate() {
+        bbajiListView.delegate = self
     }
     
     func configureLayout() {
@@ -111,63 +170,5 @@ private extension BbajiHomeViewController {
             $0.bottom.equalTo(noticeLabel.snp.top)
         }
         
-    }
-    
-    func configureDelegate() {
-        bbajiListView.delegate = self
-    }
-}
-
-extension BbajiHomeViewController: BbajiListViewDelegate {
-    func pushBbajiSpotViewController() {
-        self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
-    }
-}
-
-extension BbajiHomeViewController {
-    func requestAPI() {
-        weatherManager = WeatherManager()
-        
-        let bbajiCoorX = bbajiInfo[0].getCoordinate().x
-        let bbajiCoorY = bbajiInfo[0].getCoordinate().y
-        
-        Task {
-            do {
-                if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
-                    let weatherSet = weatherItems.requestCurrentWeatherItem()
-                    let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
-                    
-                    self.weatherData = weatherData
-                }
-            } catch WeatherManagerError.apiError(let message) {
-                print(message)
-            } catch WeatherManagerError.networkError(let message) {
-                print(message)
-            } catch DecodingError.dataCorrupted(let description) {
-                print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        
-        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
-        /*
-        weatherManager?.requestCurrentData(nx: bbajiCoorX, ny: bbajiCoorY) { [weak self] success, reponse in
-            guard let self = self else {
-                return
-            }
-            guard let response = reponse as? WeatherResponse else {
-                print("Error : API 호출 실패")
-                return
-            }
-
-            let body = response.body
-            let items = body.items
-            let weatherItem = items.requestCurrentWeatherItem()
-            let data = items.requestWeatherDataSet(weatherItem)
-
-            self.weatherData = data
-        }
-         */
     }
 }
