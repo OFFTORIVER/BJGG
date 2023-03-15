@@ -16,17 +16,19 @@ final class SpotLiveCameraStanbyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        configureConstraints()
-        configureLayout()
+        configure()
     }
 
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureConstraints() {
+    private func configure() {
+        configureLayout()
+        configureStyle()
+    }
+    
+    func configureLayout() {
         self.addSubview(mainLabel)
         mainLabel.snp.makeConstraints({ make in
             make.centerX.equalTo(self.snp.centerX)
@@ -44,7 +46,7 @@ final class SpotLiveCameraStanbyView: UIView {
         })
     }
     
-    func configureLayout() {
+    private func configureStyle() {
         self.alpha = 1.0
         self.backgroundColor = .black.withAlphaComponent(0.3)
         

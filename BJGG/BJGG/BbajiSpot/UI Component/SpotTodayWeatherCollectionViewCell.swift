@@ -26,7 +26,7 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         fatalError("Not implemented required init?(coder: NSCoder)")
     }
 
-    func layoutConfigure(isRain: Bool) {
+    func configureLayout(isRain: Bool) {
         self.addSubview(currentRainPercentLabel)
         self.addSubview(currentWeatherImgView)
         if isRain {

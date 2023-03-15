@@ -8,35 +8,49 @@
 import UIKit
 
 final class IconAndLabelView: UIView {
-    let addressLabel = UILabel()
+    let descriptionLabel = UILabel()
+    private let descriptionImageView = UIImageView()
     
-    required init(imageName: String, text: String) {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        let addressImage = UIImageView(image: UIImage(named: imageName))
-        
-        [addressImage, addressLabel].forEach({
+        configure()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        configureLayout()
+        configureStyle()
+    }
+    
+    private func configureLayout() {
+        [descriptionImageView, descriptionLabel].forEach({
             self.addSubview($0)
         })
         
-        addressImage.snp.makeConstraints({ make in
+        descriptionImageView.snp.makeConstraints({ make in
             make.width.equalTo(20)
             make.height.equalTo(20)
             make.centerY.equalTo(self.snp.centerY)
         })
         
-        addressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(addressImage.snp.trailing).offset(BbajiConstraints.iconOffset)
-            make.centerY.equalTo(addressImage.snp.centerY)
+        descriptionLabel.snp.makeConstraints({ make in
+            make.leading.equalTo(descriptionImageView.snp.trailing).offset(BbajiConstraints.iconOffset)
+            make.centerY.equalTo(descriptionImageView.snp.centerY)
             make.height.equalTo(18)
         })
-        
-        labelSetting(label: addressLabel, text: text, font: .bbajiFont(.button1), alignment: .left)
-        addressLabel.textColor = .bbagaBlue
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func configureStyle() {
+        descriptionLabel.textColor = .bbagaBlue
+        descriptionLabel.configureLabelStyle(font: .bbajiFont(.button1), alignment: .left)
+    }
+    
+    func configureComponent(imageName: String, description: String) {
+        descriptionImageView.image = UIImage(named: imageName)
+        descriptionLabel.text = description
     }
 }
 

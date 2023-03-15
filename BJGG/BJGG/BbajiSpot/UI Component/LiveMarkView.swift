@@ -17,15 +17,19 @@ final class LiveMarkView: UIView {
         super.init(frame: frame)
 
         backgroundColor = UIColor.lightGray
-        setUpLayout()
-        componentConfigure()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUpLayout() {
+    private func configure() {
+        configureLayout()
+        configureComponent()
+    }
+
+    private func configureLayout() {
         addSubview(liveLabel)
         liveLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -36,7 +40,8 @@ final class LiveMarkView: UIView {
         ])
     }
     
-    private func componentConfigure() {
+    
+    private func configureComponent() {
         liveLabel.textAlignment = .center
         liveLabel.text = "LIVE"
         liveLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)

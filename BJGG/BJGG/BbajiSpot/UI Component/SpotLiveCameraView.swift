@@ -54,8 +54,7 @@ final class SpotLiveCameraView: UIView {
     override init(frame: CGRect  =  CGRect()) {
         super.init(frame: frame)
 
-        setUpLayout()
-        componentConfigure()
+        configure()
         playVideo()
     }
     
@@ -71,7 +70,12 @@ final class SpotLiveCameraView: UIView {
         return AVPlayerLayer.self
     }
     
-    private func setUpLayout() {
+    private func configure() {
+        configureLayout()
+        configureComponent()
+    }
+    
+    private func configureLayout() {
         
         self.backgroundColor = .black
         
@@ -104,7 +108,7 @@ final class SpotLiveCameraView: UIView {
         })
     }
     
-    private func componentConfigure() {
+    private func configureComponent() {
         let touchGesture = UITapGestureRecognizer(target: self, action: #selector(touchVideoPlayerScreen))
         self.addGestureRecognizer(touchGesture)
         
