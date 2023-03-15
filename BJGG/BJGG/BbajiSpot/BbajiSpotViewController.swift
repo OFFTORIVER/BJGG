@@ -161,26 +161,6 @@ final class BbajiSpotViewController: UIViewController {
                 }
             }
         }
-        
-        
-        // MARK: 메소드명 수정 후 삭제 예정
-        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
-//        weatherManager.request24hData(nx: 61, ny: 126) { success, response in
-//            guard let response = response as? WeatherResponse else {
-//                print("Error: API 호출 실패")
-//                return
-//            }
-//
-//            let data = response.body.items.request24HourWeatherItem()
-//            let rainData = response.body.items.requestRainInfoText()
-//            let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
-//
-//            DispatchQueue.main.async { [self] in
-//                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: success, weatherInfoTuple: weatherDataTuple)
-//                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherDataTuple[0].temp)
-//                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
-//            }
-//        }
     }
     
     private func configureDelegate() {

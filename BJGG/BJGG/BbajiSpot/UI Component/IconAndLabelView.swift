@@ -8,6 +8,7 @@
 import UIKit
 
 final class IconAndLabelView: UIView {
+    
     let descriptionLabel = UILabel()
     private let descriptionImageView = UIImageView()
     

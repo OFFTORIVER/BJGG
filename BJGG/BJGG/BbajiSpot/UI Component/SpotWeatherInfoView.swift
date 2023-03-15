@@ -7,7 +7,6 @@
 
 import UIKit
 
-// MARK: 비상. 코드 짱 더러움
 final class SpotWeatherInfoView: UIView {
     
     private let currentTemperatureLabel = UILabel()
@@ -17,12 +16,12 @@ final class SpotWeatherInfoView: UIView {
     
     var rainInfoLabel = UILabel()
     private let weatherAddressLabel = UILabel()
-    private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
+    private var spotTodayWeatherCollectionView: UICollectionView!
     private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)] = []
     
     private var spotWeatherAPIInfoView: SpotWeatherAPIInfoView!
 
-    required init() {
+    override init(frame: CGRect) {
         
         super.init(frame: CGRect.zero)
         
@@ -79,7 +78,10 @@ final class SpotWeatherInfoView: UIView {
             make.height.equalTo(64)
         })
         
-        [currentWeatherIcon, currentTemperatureLabel].forEach({
+        [
+            currentWeatherIcon,
+            currentTemperatureLabel]
+            .forEach({
             currentWeatherIconAndLabel.addSubview($0)
         })
         currentWeatherIcon.snp.makeConstraints({ make in
@@ -115,7 +117,7 @@ final class SpotWeatherInfoView: UIView {
         collectionViewLayer.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         collectionViewLayer.scrollDirection = .horizontal
         
-        spotTodayWeatherCollectionView = SpotTodayWeatherCollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
+        spotTodayWeatherCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
         
         self.addSubview(spotTodayWeatherCollectionView)
         spotTodayWeatherCollectionView.snp.makeConstraints({ make in
@@ -176,8 +178,15 @@ final class SpotWeatherInfoView: UIView {
     }
     
     func spotWeatherInfoViewComponentHidden(isHidden: Bool) {
-        [currentTemperatureLabel, currentWeatherIconAndLabel,
-         rainInfoLabel,currentWeatherIcon, spotWeatherInfoViewDivideLine,  spotTodayWeatherCollectionView].forEach({ $0?.isHidden = isHidden})
+        [
+            currentTemperatureLabel,
+            currentWeatherIconAndLabel,
+            rainInfoLabel,currentWeatherIcon,
+            spotWeatherInfoViewDivideLine,
+            spotTodayWeatherCollectionView
+        ].forEach({
+            $0?.isHidden = isHidden
+        })
     }
 }
 

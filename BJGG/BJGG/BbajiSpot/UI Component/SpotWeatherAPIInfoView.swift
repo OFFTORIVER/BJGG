@@ -8,6 +8,7 @@
 import UIKit
 
 final class SpotWeatherAPIInfoView: UIView {
+    
     private let currentAPIInfoLabel = UILabel()
     private let currentAPIInfoLabelDeco = UIImageView()
     
@@ -27,20 +28,6 @@ final class SpotWeatherAPIInfoView: UIView {
         configureComponent()
     }
     
-    private func configureStyle() {
-        self.layer.cornerRadius = 16
-        self.clipsToBounds = true
-        
-        currentAPIInfoLabelDeco.image = UIImage(named: "subLogo")
-        currentAPIInfoLabelDeco.alpha = 0
-        
-        currentAPIInfoLabel.textColor = .bbagaBlue
-    }
-    
-    private func configureComponent() {
-        currentAPIInfoLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
-    }
-    
     private func configureLayout() {
         self.addSubview(currentAPIInfoLabel)
         currentAPIInfoLabel.snp.makeConstraints({ make in
@@ -57,6 +44,20 @@ final class SpotWeatherAPIInfoView: UIView {
             make.width.equalTo(71)
             make.height.equalTo(24)
         })
+    }
+    
+    private func configureStyle() {
+        self.layer.cornerRadius = 16
+        self.clipsToBounds = true
+        
+        currentAPIInfoLabelDeco.image = UIImage(named: "subLogo")
+        currentAPIInfoLabelDeco.alpha = 0
+        
+        currentAPIInfoLabel.textColor = .bbagaBlue
+    }
+    
+    private func configureComponent() {
+        currentAPIInfoLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
     }
     
     func setDefaultUI() {
