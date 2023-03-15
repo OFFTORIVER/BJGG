@@ -63,21 +63,17 @@ final class SpotWeatherInfoView: UIView {
     }
     
     private func configureLayout() {
-        let defaultMargin: CGFloat = BbajiConstraints.viewInset
-        let defaultMargin2: CGFloat = BbajiConstraints.componentOffset
-        
-        
         
         self.addSubview(weatherAddressLabel)
         weatherAddressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(self.snp.leading).inset(defaultMargin)
-            make.top.equalTo(self.snp.top).inset(defaultMargin)
+            make.leading.equalTo(self.snp.leading).inset(BbajiConstraints.viewInset)
+            make.top.equalTo(self.snp.top).inset(BbajiConstraints.viewInset)
             make.height.equalTo(18)
         })
         
         self.addSubview(currentWeatherIconAndLabel)
         currentWeatherIconAndLabel.snp.makeConstraints({ make in
-            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(defaultMargin2)
+            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(160)
             make.height.equalTo(64)
@@ -101,7 +97,7 @@ final class SpotWeatherInfoView: UIView {
         
         self.addSubview(rainInfoLabel)
         rainInfoLabel.snp.makeConstraints({ make in
-            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(defaultMargin2)
+            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(18)
         })
@@ -109,7 +105,7 @@ final class SpotWeatherInfoView: UIView {
         self.addSubview(spotWeatherInfoViewDivideLine)
         spotWeatherInfoViewDivideLine.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading)
-            make.top.equalTo(rainInfoLabel.snp.bottom).offset(defaultMargin)
+            make.top.equalTo(rainInfoLabel.snp.bottom).offset(BbajiConstraints.viewInset)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(2)
