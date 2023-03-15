@@ -211,36 +211,11 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
             timeStr = "--"
         }
         
-        if currentRainPercentStr == "0%" {
-            cell.configureLayout(isRain: false)
-            cell.currentRainPercentLabel.text = ""
-        } else {
-            cell.configureLayout(isRain: true)
-            
-            cell.currentRainPercentLabel.configureLabelStyle(font: .bbajiFont(.rainyCaption), alignment: .center)
-            cell.currentRainPercentLabel.text = currentRainPercentStr
-            cell.currentRainPercentLabel.textColor = .bbagaRain
-            
-        }
-        
-        if currentWeatherImgName != "" {
-            cell.currentWeatherImgView.image = UIImage(named: currentWeatherImgName)
-        }
-        
-        cell.temperatureLabel.configureLabelStyle(font: .bbajiFont(.heading5), alignment: .center)
-        cell.temperatureLabel.text = temperatureStr
-        cell.timeLabel.configureLabelStyle(font: .bbajiFont(.body1), alignment: .center)
-        cell.timeLabel.text = timeStr
-
-        if idx == 0 {
-            cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
-            cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
-            cell.temperatureLabel.textColor = .bbagaGray1
-            cell.timeLabel.textColor = .bbagaGray1
-        } else {
-            cell.temperatureLabel.textColor = .bbagaGray2
-            cell.timeLabel.textColor = .bbagaGray2
-        }
+        let isRain = currentRainPercentStr != "0%"
+        let rainText = isRain ? currentRainPercentStr : ""
+        cell.configureLayout(isRain: isRain)
+        cell.componentConfigure(rainPercentText: rainText, tempText: temperatureStr, timeText: timeStr, weatherImage: currentWeatherImgName)
+        cell.configureLabelStyle(index: idx)
         return cell
     }
 }
