@@ -1,5 +1,5 @@
 //
-//  BbajiListCollectionViewCell.swift
+//  BbajiListCell.swift
 //  BJGG
 //
 //  Created by 이재웅 on 2022/09/29.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class BbajiListCollectionViewCell: UICollectionViewCell {
+final class BbajiListCell: UICollectionViewCell {
     static var id: String {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last!
     }
@@ -55,7 +55,7 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     }()
 }
 
-extension BbajiListCollectionViewCell {
+extension BbajiListCell {
     func configure(_ indexPathRow: Int, bbajiInfo: BbajiInfo?, iconName: String?, temp: String?) {
         configureLayout()
         
