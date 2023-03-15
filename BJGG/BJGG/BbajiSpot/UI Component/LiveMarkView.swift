@@ -6,8 +6,7 @@
 //
 
 import UIKit
-
-import UIKit
+import SnapKit
 
 final class LiveMarkView: UIView {
 
@@ -31,13 +30,12 @@ final class LiveMarkView: UIView {
 
     private func configureLayout() {
         addSubview(liveLabel)
-        liveLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            liveLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            liveLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            liveLabel.widthAnchor.constraint(equalTo: self.widthAnchor),
-            liveLabel.heightAnchor.constraint(equalTo: self.heightAnchor)
-        ])
+        liveLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(self.snp.centerX)
+            make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(self.snp.width)
+            make.height.equalTo(self.snp.height)
+        }
     }
     
     
