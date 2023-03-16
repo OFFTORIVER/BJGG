@@ -26,6 +26,7 @@ final class SpotLiveCameraStanbyView: UIView {
     private func configure() {
         configureLayout()
         configureStyle()
+        configureComponent()
     }
     
     func configureLayout() {
