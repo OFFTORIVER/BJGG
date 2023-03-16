@@ -45,7 +45,7 @@ extension BbajiHomeViewController {
                     
                     self.weatherData = weatherData
                     bbajiListView.configureWeatherArray(convertToListWeatherArray(from: self.weatherData))
-                    bbajiListView.reloadCollectionView()
+                    bbajiListView.reloadData()
                 }
             } catch WeatherManagerError.apiError(let message) {
                 print(message)
@@ -90,7 +90,7 @@ private extension BbajiHomeViewController {
     }
     
     func configureDelegate() {
-        bbajiListView.delegate = self
+        bbajiListView.bbajiListViewDelegate = self
     }
     
     func configureLayout() {

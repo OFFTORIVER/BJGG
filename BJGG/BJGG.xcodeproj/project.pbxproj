@@ -43,7 +43,6 @@
 		553F0F9428E212B300FD9CDA /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F8B28E212B300FD9CDA /* Pretendard-ExtraLight.otf */; };
 		553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */; };
 		553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9928E49DF800FD9CDA /* BbajiListView.swift */; };
-		553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */; };
 		553F0F9F28E4AEA300FD9CDA /* BbajiListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9E28E4AEA300FD9CDA /* BbajiListCell.swift */; };
 		553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */; };
 		553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */; };
@@ -95,7 +94,6 @@
 		553F0F8B28E212B300FD9CDA /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiTitleView.swift; sourceTree = "<group>"; };
 		553F0F9928E49DF800FD9CDA /* BbajiListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListView.swift; sourceTree = "<group>"; };
-		553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCollectionView.swift; sourceTree = "<group>"; };
 		553F0F9E28E4AEA300FD9CDA /* BbajiListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCell.swift; sourceTree = "<group>"; };
 		553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowGradientView.swift; sourceTree = "<group>"; };
 		553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				553F0F9928E49DF800FD9CDA /* BbajiListView.swift */,
 				553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */,
 				553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */,
-				553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */,
 				553F0F9E28E4AEA300FD9CDA /* BbajiListCell.swift */,
 			);
 			path = "UI Component";
@@ -401,7 +398,6 @@
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
-				553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */,
 				553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,

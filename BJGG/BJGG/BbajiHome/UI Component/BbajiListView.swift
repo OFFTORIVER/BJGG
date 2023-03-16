@@ -11,37 +11,34 @@ protocol BbajiListViewDelegate {
     func pushBbajiSpotViewController()
 }
 
-class BbajiListView: UIView {
-    var delegate: BbajiListViewDelegate?
+typealias ListInfo = (locationName: String, name: String, backgroundImageName: String)
+typealias ListWeather = (iconName: String, temp: String)
+
+final class BbajiListView: UICollectionView {
+    var bbajiListViewDelegate: BbajiListViewDelegate?
     
     private var listWeatherArray: [ListWeather] = []
     private var listInfoArray: [ListInfo] = []
     
     func configure(_ listWeatherArray: [ListWeather], listInfoArray: [ListInfo]) {
-        configureLayout()
-        
+        configureStyle()
         configureWeatherArray(listWeatherArray)
         configureInfoArray(listInfoArray)
-        bbajiListCollectionView.reloadData()
+        reloadData()
     }
     
-    private lazy var bbajiListCollectionView: BbajiListCollectionView = {
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
-        let collectionView = BbajiListCollectionView(frame: .zero, collectionViewLayout: layout)
+        super.init(frame: frame, collectionViewLayout: layout)
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(BbajiListCell.self, forCellWithReuseIdentifier: BbajiListCell.id)
-        
-        collectionView.layer.cornerRadius = 10.0
-        collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        collectionView.layer.masksToBounds = true
-        collectionView.showsVerticalScrollIndicator = false
-        
-        collectionView.backgroundColor = .bbagaGray4
-        
-        return collectionView
-    }()
+        delegate = self
+        dataSource = self
+        register(BbajiListCell.self, forCellWithReuseIdentifier: BbajiListCell.id)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension BbajiListView: UICollectionViewDelegateFlowLayout {
@@ -54,7 +51,6 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 0, bottom: BbajiConstraints.componentOffset, right: 0)
     }
-    
 }
 
 extension BbajiListView: UICollectionViewDataSource {
@@ -80,24 +76,12 @@ extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.row
         if idx == 0 {
-            delegate?.pushBbajiSpotViewController()
+            bbajiListViewDelegate?.pushBbajiSpotViewController()
         }
     }
 }
 
 extension BbajiListView {
-    func reloadCollectionView() {
-        bbajiListCollectionView.reloadData()
-    }
-    
-    private func configureLayout() {
-        addSubview(bbajiListCollectionView)
-        
-        bbajiListCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
-    
     func configureWeatherArray(_ listWeatherArray: [(ListWeather)]) {
         self.listWeatherArray = listWeatherArray
     }
@@ -105,7 +89,13 @@ extension BbajiListView {
     func configureInfoArray(_ infoArray: [ListInfo]) {
         self.listInfoArray = infoArray
     }
+    
+    private func configureStyle() {
+        layer.cornerRadius = 10.0
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        layer.masksToBounds = true
+        showsVerticalScrollIndicator = false
+        
+        backgroundColor = .bbagaGray4
+    }
 }
-
-typealias ListInfo = (locationName: String, name: String, backgroundImageName: String)
-typealias ListWeather = (iconName: String, temp: String)
