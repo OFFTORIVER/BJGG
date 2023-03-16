@@ -28,7 +28,6 @@ final class PreviewView: UIView {
     
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.image = UIImage(named: "subLogo")
         
         return imageView
@@ -43,7 +42,9 @@ final class PreviewView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension PreviewView {
     private func configureLayout() {
         [
             fadeView,
