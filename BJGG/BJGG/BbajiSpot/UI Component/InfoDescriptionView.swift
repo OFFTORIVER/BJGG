@@ -1,5 +1,5 @@
 //
-//  IconAndLabelView.swift
+//  InfoDescriptionView.swift
 //  BJGG
 //
 //  Created by 황정현 on 2022/09/19.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class IconAndLabelView: UIView {
+final class InfoDescriptionView: UIView {
     
     let descriptionLabel = UILabel()
     private let descriptionImageView = UIImageView()

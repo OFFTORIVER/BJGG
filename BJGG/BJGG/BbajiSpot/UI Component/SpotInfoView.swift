@@ -13,8 +13,8 @@ final class SpotInfoView: UIView {
     
     private let spotNameLabel = UILabel()
     private let divideLine = UIView()
-    private let addressInfoView = IconAndLabelView()
-    private let contactInfoView = IconAndLabelView()
+    private let addressInfoView = InfoDescriptionView()
+    private let contactInfoView = InfoDescriptionView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
