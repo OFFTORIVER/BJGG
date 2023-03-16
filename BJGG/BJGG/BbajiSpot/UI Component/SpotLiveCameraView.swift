@@ -18,7 +18,7 @@ final class SpotLiveCameraView: UIView {
     var controlStatus: ControlStatus = .hidden
     
     var videoPlayerControlView: SpotLiveCameraControlView = SpotLiveCameraControlView()
-    var stanbyView: SpotLiveCameraStanbyView = SpotLiveCameraStanbyView()
+    var stanbyView: SpotLiveCameraStandbyView = SpotLiveCameraStandbyView()
     
     private let videoURL = BbajiInfo().getLiveCameraUrl()
     private let reloadButton: UIButton = UIButton()

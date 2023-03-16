@@ -1,5 +1,5 @@
 //
-//  SpotLiveCameraStanbyView.swift
+//  SpotLiveCameraStandbyView.swift
 //  BJGG
 //
 //  Created by 황정현 on 2023/03/05.
@@ -9,7 +9,7 @@ import AVFoundation
 import SnapKit
 import UIKit
 
-final class SpotLiveCameraStanbyView: UIView {
+final class SpotLiveCameraStandbyView: UIView {
     
     private let mainLabel = UILabel()
     private let subLabel = UILabel()
