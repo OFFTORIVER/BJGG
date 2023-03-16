@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BbajiTitleView: UIView {
+final class BbajiTitleView: UIView {
     private lazy var bbajiTitleLogoImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainLogo")

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PreviewView: UIView {
+final class PreviewView: UIView {
     private lazy var fadeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(rgb: 0x272727)
