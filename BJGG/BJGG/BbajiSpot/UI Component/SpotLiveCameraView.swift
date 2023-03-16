@@ -209,7 +209,7 @@ final class SpotLiveCameraView: UIView {
     @objc private func didPressReloadButton() {
         self.playVideo()
         changeReloadButtonActiveStatus(as: false)
-        stanbyView.configureLayout()
+        stanbyView.reloadStandbyView()
     }
 }
 

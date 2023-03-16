@@ -63,12 +63,18 @@ final class SpotLiveCameraStanbyView: UIView {
     
     private func configureComponent() {
         mainLabel.text = "물"
-        subLabel.text = "이 들어오는 중이예요"
         subLabel.text = "이 들어오는 중이에요"
         
         makeLoadingAnimation()
     }
     
+    func reloadStandbyView() {
+        self.alpha = 1.0
+        mainLabel.textColor = .bbagaBlue
+        UIView.animate(withDuration: 0.7, animations: {
+            self.backgroundColor = .black.withAlphaComponent(0.3)
+        })
+        makeLoadingAnimation()
     }
     
     func changeStandbyView(as status: AVPlayerItem.Status) {

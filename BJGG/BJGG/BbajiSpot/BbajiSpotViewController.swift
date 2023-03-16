@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
+    
     private let liveCameraView = SpotLiveCameraView()
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
@@ -178,12 +179,15 @@ final class BbajiSpotViewController: UIViewController {
     @objc private func toBackground() {
         firstAttempt = false
         liveMarkView.liveMarkActive(to: false)
+        liveCameraView.stanbyView.stopLoadingAnimation()
     }
     
     @objc private func toForeground() {
         if !firstAttempt {
             liveCameraView.playVideo()
-            liveCameraView.stanbyView.configureLayout()
+            liveCameraView.changeReloadButtonActiveStatus(as: false)
+            liveCameraView.stanbyView.reloadStandbyView()
+            
         }
     }
     
