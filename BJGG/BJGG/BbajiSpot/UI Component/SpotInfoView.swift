@@ -75,18 +75,22 @@ final class SpotInfoView: UIView {
     
     private func configureStyle() {
         self.layer.cornerRadius = 16
+        
         divideLine.backgroundColor = .bbagaBack
-        spotNameLabel.text = bbajiInfo.getName()
-        spotNameLabel.textColor = .bbagaGray1
+        
         spotNameLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        spotNameLabel.textColor = .bbagaGray1
     }
     
     private func configureComponent() {
+        spotNameLabel.text = bbajiInfo.getName()
+        
         addressInfoView.descriptionLabel.enableCopyLabelText()
         
         addressInfoView.configureComponent(imageName: "addressPin.png", description: bbajiInfo.getAddress())
         contactInfoView.configureComponent(imageName: "telephone.png", description: bbajiInfo.getContact())
         
+        // MARK: Gesture Recognizer
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showContactLinkOption(_:)))
         contactInfoView.descriptionLabel.addGestureRecognizer(tapGestureRecognizer)
         contactInfoView.descriptionLabel.isUserInteractionEnabled = true

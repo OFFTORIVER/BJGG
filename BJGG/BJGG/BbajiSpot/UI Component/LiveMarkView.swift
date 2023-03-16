@@ -25,6 +25,7 @@ final class LiveMarkView: UIView {
     
     private func configure() {
         configureLayout()
+        configureStyle()
         configureComponent()
     }
 
@@ -39,12 +40,13 @@ final class LiveMarkView: UIView {
     }
     
     
-    private func configureComponent() {
-        liveLabel.textAlignment = .center
-        liveLabel.text = "LIVE"
-        liveLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+    private func configureStyle() {
+        liveLabel.configureLabelStyle(font: .systemFont(ofSize: 12, weight: .medium), alignment: .center)
         liveLabel.textColor = .clear
-        
+    }
+    
+    private func configureComponent() {
+        liveLabel.text = "LIVE"
     }
 
     func setUpLiveLabelRadius(to: CGFloat) {

@@ -14,7 +14,7 @@ final class SpotWeatherInfoView: UIView {
     private let currentWeatherIcon = UIImageView()
     private let spotWeatherInfoViewDivideLine = UIView()
     
-    var rainInfoLabel = UILabel()
+    private var rainInfoLabel = UILabel()
     private let weatherAddressLabel = UILabel()
     private var spotTodayWeatherCollectionView: UICollectionView!
     private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)] = []
@@ -43,24 +43,6 @@ final class SpotWeatherInfoView: UIView {
         configureComponent()
     }
     
-    private func configureComponent() {
-        self.layer.cornerRadius = 16
-        
-        weatherAddressLabel.text = BbajiInfo().getCompactAddress()
-        weatherAddressLabel.textColor = .bbagaGray2
-        
-        currentTemperatureLabel.text =  "--°"
-        currentTemperatureLabel.textColor = .bbagaGray1
-        
-        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
-    }
-    
-    private func configureStyle() {
-        weatherAddressLabel.configureLabelStyle(font: .bbajiFont(.body1), alignment: .left)
-        currentTemperatureLabel.configureLabelStyle(font: .bbajiFont(.heading1), alignment: .center)
-        rainInfoLabel.configureLabelStyle( font: .bbajiFont(.body1), alignment: .center)
-    }
-    
     private func configureLayout() {
         
         self.addSubview(weatherAddressLabel)
@@ -80,10 +62,11 @@ final class SpotWeatherInfoView: UIView {
         
         [
             currentWeatherIcon,
-            currentTemperatureLabel]
-            .forEach({
+            currentTemperatureLabel
+        ].forEach {
             currentWeatherIconAndLabel.addSubview($0)
-        })
+        }
+        
         currentWeatherIcon.snp.makeConstraints({ make in
             make.leading.equalTo(currentWeatherIconAndLabel.snp.leading)
             make.top.equalTo(currentWeatherIconAndLabel.snp.top)
@@ -138,6 +121,26 @@ final class SpotWeatherInfoView: UIView {
         })
         
         spotWeatherAPIInfoView.setDefaultUI()
+    }
+    
+    private func configureComponent() {
+        self.layer.cornerRadius = 16
+        
+        weatherAddressLabel.text = BbajiInfo().getCompactAddress()
+        currentTemperatureLabel.text =  "--°"
+
+    }
+    
+    private func configureStyle() {
+        weatherAddressLabel.configureLabelStyle(font: .bbajiFont(.body1), alignment: .left)
+        weatherAddressLabel.textColor = .bbagaGray2
+        
+        currentTemperatureLabel.configureLabelStyle(font: .bbajiFont(.heading1), alignment: .center)
+        currentTemperatureLabel.textColor = .bbagaGray1
+        
+        rainInfoLabel.configureLabelStyle( font: .bbajiFont(.body1), alignment: .center)
+        
+        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
     }
     
     private func registerCollectionView() {

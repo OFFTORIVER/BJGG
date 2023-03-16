@@ -67,16 +67,6 @@ final class SpotLiveCameraView: UIView {
         configureComponent()
     }
     
-    private func configureStyle() {
-        self.backgroundColor = .black
-        videoPlayerControlView.alpha = 0.0
-        
-        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .medium)
-        let image = UIImage(systemName: "arrow.clockwise", withConfiguration: config)?
-            .withTintColor(.white, renderingMode: .alwaysOriginal)
-        reloadButton.setImage(image, for: .normal)
-    }
-    
     private func configureLayout() {
         
         addSubview(videoPlayerControlView)
@@ -104,17 +94,28 @@ final class SpotLiveCameraView: UIView {
         })
     }
     
+    private func configureStyle() {
+        self.backgroundColor = .black
+        videoPlayerControlView.alpha = 0.0
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .medium)
+        let image = UIImage(systemName: "arrow.clockwise", withConfiguration: config)?
+            .withTintColor(.white, renderingMode: .alwaysOriginal)
+        reloadButton.setImage(image, for: .normal)
+    }
+    
     private func configureComponent() {
-        let touchGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoPlayerScreen))
-        self.addGestureRecognizer(touchGesture)
-        
-        reloadButton.addTarget(self, action: #selector(didPressReloadButton), for: .touchUpInside)
-        
         self.player?.rate = 30
         playerLayer.player?.currentItem?.automaticallyPreservesTimeOffsetFromLive = true
         
         changeReloadButtonActiveStatus(as: false)
         interactionEnableStatus(as: true)
+        
+        // MARK: Gesture Recognizer
+        let touchGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoPlayerScreen))
+        self.addGestureRecognizer(touchGesture)
+        
+        reloadButton.addTarget(self, action: #selector(didPressReloadButton), for: .touchUpInside)
     }
     
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {

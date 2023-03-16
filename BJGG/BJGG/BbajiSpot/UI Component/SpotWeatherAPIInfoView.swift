@@ -25,7 +25,6 @@ final class SpotWeatherAPIInfoView: UIView {
     private func configure() {
         configureLayout()
         configureStyle()
-        configureComponent()
     }
     
     private func configureLayout() {
@@ -53,11 +52,8 @@ final class SpotWeatherAPIInfoView: UIView {
         currentAPIInfoLabelDeco.image = UIImage(named: "subLogo")
         currentAPIInfoLabelDeco.alpha = 0
         
-        currentAPIInfoLabel.textColor = .bbagaBlue
-    }
-    
-    private func configureComponent() {
         currentAPIInfoLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        currentAPIInfoLabel.textColor = .bbagaBlue
     }
     
     func setDefaultUI() {
