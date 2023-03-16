@@ -8,22 +8,26 @@
 import UIKit
 
 final class SpotWeatherAPIInfoView: UIView {
+    
     private let currentAPIInfoLabel = UILabel()
     private let currentAPIInfoLabelDeco = UIImageView()
     
-    required init() {
-        
+    override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
         
-        layoutConfigure()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func layoutConfigure() {
-        
+    private func configure() {
+        configureLayout()
+        configureStyle()
+    }
+    
+    private func configureLayout() {
         self.addSubview(currentAPIInfoLabel)
         currentAPIInfoLabel.snp.makeConstraints({ make in
             make.centerX.equalToSuperview()
@@ -31,8 +35,6 @@ final class SpotWeatherAPIInfoView: UIView {
             make.width.equalTo(300)
             make.height.equalTo(30)
         })
-        labelSetting(label: currentAPIInfoLabel, text: "", font: .bbajiFont(.heading2), alignment: .center)
-        currentAPIInfoLabel.textColor = .bbagaBlue
         
         self.addSubview(currentAPIInfoLabelDeco)
         currentAPIInfoLabelDeco.snp.makeConstraints({ make in
@@ -41,16 +43,21 @@ final class SpotWeatherAPIInfoView: UIView {
             make.width.equalTo(71)
             make.height.equalTo(24)
         })
-
+    }
+    
+    private func configureStyle() {
+        self.layer.cornerRadius = 16
+        self.clipsToBounds = true
+        
         currentAPIInfoLabelDeco.image = UIImage(named: "subLogo")
         currentAPIInfoLabelDeco.alpha = 0
         
-        self.layer.cornerRadius = 16
-        self.clipsToBounds = true
+        currentAPIInfoLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        currentAPIInfoLabel.textColor = .bbagaBlue
     }
     
     func setDefaultUI() {
-        self.backgroundColor = .black.withAlphaComponent(0.7)
+        backgroundColor = .black.withAlphaComponent(0.7)
         currentAPIInfoLabelDeco.isHidden = true
         currentAPIInfoLabel.text = "오늘의 날씨는..."
     }

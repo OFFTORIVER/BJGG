@@ -8,26 +8,35 @@
 import UIKit
 
 final class SpotInfoView: UIView {
+    
     private let bbajiInfo = BbajiInfo()
     
-    required override init(frame: CGRect) {
+    private let spotNameLabel = UILabel()
+    private let divideLine = UIView()
+    private let addressInfoView = InfoDescriptionView()
+    private let contactInfoView = InfoDescriptionView()
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layoutConfigure()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func layoutConfigure() {
+    private func configure() {
+        configureLayout()
+        configureStyle()
+        configureComponent()
+    }
+    
+    private func configureLayout() {
         
         let defaultMargin: CGFloat = BbajiConstraints.viewInset
         
-        let spotNameLabel = UILabel()
         self.addSubview(spotNameLabel)
-        labelSetting(label: spotNameLabel, text: bbajiInfo.getName(), font: .bbajiFont(.heading2), alignment: .center)
-        spotNameLabel.textColor = .bbagaGray1
         spotNameLabel.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(self.snp.top).inset(defaultMargin)
@@ -35,7 +44,6 @@ final class SpotInfoView: UIView {
             make.height.equalTo(32)
         })
         
-        let divideLine = UIView()
         self.addSubview(divideLine)
         
         divideLine.snp.makeConstraints({ make in
@@ -46,18 +54,10 @@ final class SpotInfoView: UIView {
             make.height.equalTo(2)
         })
         
-        divideLine.backgroundColor = .bbagaBack
-        
-        self.layer.cornerRadius = 16
-        
-        let addressInfoView = IconAndLabelView(imageName: "addressPin.png", text: bbajiInfo.getAddress())
-        let contactInfoView = IconAndLabelView(imageName: "telephone.png", text: bbajiInfo.getContact())
-        
         [addressInfoView, contactInfoView].forEach({
             self.addSubview($0)
         })
         
-        addressInfoView.addressLabel.enableCopyLabelText()
         addressInfoView.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(divideLine.snp.bottom).offset(defaultMargin)
@@ -71,11 +71,29 @@ final class SpotInfoView: UIView {
             make.height.equalTo(18)
             make.width.equalTo(180)
         })
+    }
+    
+    private func configureStyle() {
+        self.layer.cornerRadius = 16
         
+        divideLine.backgroundColor = .bbagaBack
+        
+        spotNameLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        spotNameLabel.textColor = .bbagaGray1
+    }
+    
+    private func configureComponent() {
+        spotNameLabel.text = bbajiInfo.getName()
+        
+        addressInfoView.descriptionLabel.enableCopyLabelText()
+        
+        addressInfoView.configureComponent(imageName: "addressPin.png", description: bbajiInfo.getAddress())
+        contactInfoView.configureComponent(imageName: "telephone.png", description: bbajiInfo.getContact())
+        
+        // MARK: Gesture Recognizer
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showContactLinkOption(_:)))
-        
-        contactInfoView.addressLabel.isUserInteractionEnabled = true
-        contactInfoView.addressLabel.addGestureRecognizer(tapGestureRecognizer)
+        contactInfoView.descriptionLabel.addGestureRecognizer(tapGestureRecognizer)
+        contactInfoView.descriptionLabel.isUserInteractionEnabled = true
     }
     
     @objc func showContactLinkOption(_ sender: UITapGestureRecognizer) {
@@ -85,10 +103,4 @@ final class SpotInfoView: UIView {
             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
         }
     }
-}
-
-func labelSetting(label: UILabel, text: String, font: UIFont, alignment: NSTextAlignment) {
-    label.text = text
-    label.font = font
-    label.textAlignment = alignment
 }

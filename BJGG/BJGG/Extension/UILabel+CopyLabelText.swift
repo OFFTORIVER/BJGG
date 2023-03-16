@@ -48,6 +48,10 @@ extension UILabel {
                 toastLabel.layer.opacity = 0
             })
         })
-
+    }
+    
+    func configureLabelStyle(font: UIFont, alignment: NSTextAlignment) {
+        self.font = font
+        self.textAlignment = alignment
     }
 }

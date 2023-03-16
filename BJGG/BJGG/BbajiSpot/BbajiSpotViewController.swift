@@ -13,7 +13,7 @@ final class BbajiSpotViewController: UIViewController {
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
     private var spotInfoView = SpotInfoView()
-    private var spotWeatherInfoView: SpotWeatherInfoView!
+    private var spotWeatherInfoView = SpotWeatherInfoView()
     
     private var liveMarkView: LiveMarkView = LiveMarkView()
     
@@ -23,9 +23,7 @@ final class BbajiSpotViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureLayoutWithAPI()
-        delegateConfigure()
-        notificationConfigure()
+        configure()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -46,19 +44,22 @@ final class BbajiSpotViewController: UIViewController {
         }
     }
     
-    private func layoutConfigure() {
+    private func configure() {
+        configureLayout()
+        configureStyle()
+        configureComponent()
+        configureDelegate()
+        configureNotification()
+    }
+    
+    private func configureLayout() {
         
         let safeArea = view.safeAreaLayoutGuide
         let viewWidth = UIScreen.main.bounds.width
         let defaultMargin = BbajiConstraints.superViewInset
         let viewToViewMargin = BbajiConstraints.componentOffset
-        
+        let liveCameraViewHeight = viewWidth * 9 / 16
         screenWidth = viewWidth
-        
-        view.addSubview(liveCameraView)
-        
-        // MARK: NSLayoutConstraints
-        let liveCameraViewHeight = screenWidth * 9 / 16
 
         view.addSubview(liveCameraView)
         liveCameraView.snp.makeConstraints({ make in
@@ -75,9 +76,6 @@ final class BbajiSpotViewController: UIViewController {
             make.width.equalTo(screenWidth / 8)
             make.height.equalTo(screenWidth / 18)
         })
-        
-        liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
-        liveMarkView.liveMarkActive(to: false)
         
         view.addSubview(infoScrollView)
         infoScrollView.snp.makeConstraints({make in
@@ -115,17 +113,19 @@ final class BbajiSpotViewController: UIViewController {
             make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
             make.height.equalTo(UIDevice.current.hasNotch ? 306 : 290)
         })
-
+    }
+    
+    private func configureStyle() {
         view.backgroundColor = .bbagaBack
         spotInfoView.backgroundColor = .bbagaGray4
         spotWeatherInfoView.backgroundColor = .bbagaGray4
         
+        liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
     }
     
-    private func configureLayoutWithAPI() {
-
-        spotWeatherInfoView = SpotWeatherInfoView()
-        layoutConfigure()
+    private func configureComponent() {
+        
+        liveMarkView.liveMarkActive(to: false)
         
         let weatherManager = WeatherManager()
         
@@ -161,32 +161,14 @@ final class BbajiSpotViewController: UIViewController {
                 }
             }
         }
-        
-        //[Deprecated] completionHandler를 사용한 WeatherManger 사용
-//        weatherManager.request24hData(nx: 61, ny: 126) { success, response in
-//            guard let response = response as? WeatherResponse else {
-//                print("Error: API 호출 실패")
-//                return
-//            }
-//
-//            let data = response.body.items.request24HourWeatherItem()
-//            let rainData = response.body.items.requestRainInfoText()
-//            let weatherDataTuple = response.body.items.requestWeatherDataSet(data)
-//
-//            DispatchQueue.main.async { [self] in
-//                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: success, weatherInfoTuple: weatherDataTuple)
-//                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherDataTuple[0].temp)
-//                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
-//            }
-//        }
     }
     
-    func delegateConfigure() {
+    private func configureDelegate() {
         liveCameraView.delegate = self
         liveCameraView.videoPlayerControlView.screenSizeControlButton.delegate = self
     }
     
-    func notificationConfigure() {
+    private func configureNotification() {
         let notificationCenter = NotificationCenter.default
         
         notificationCenter.addObserver(self, selector: #selector(toBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -205,7 +187,7 @@ final class BbajiSpotViewController: UIViewController {
         }
     }
     
-    func setUpLiveCameraViewConstraints(screenStatus: ScreenSizeStatus) {
+    private func setUpLiveCameraViewConstraints(screenStatus: ScreenSizeStatus) {
         
         let safeArea = view.safeAreaLayoutGuide
         liveCameraView.snp.removeConstraints()

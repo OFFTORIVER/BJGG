@@ -16,17 +16,20 @@ final class SpotLiveCameraStanbyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        configureConstraints()
-        configureLayout()
+        configure()
     }
 
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureConstraints() {
+    private func configure() {
+        configureLayout()
+        configureStyle()
+        configureComponent()
+    }
+    
+    func configureLayout() {
         self.addSubview(mainLabel)
         mainLabel.snp.makeConstraints({ make in
             make.centerX.equalTo(self.snp.centerX)
@@ -44,18 +47,21 @@ final class SpotLiveCameraStanbyView: UIView {
         })
     }
     
-    func configureLayout() {
+    private func configureStyle() {
         self.alpha = 1.0
         self.backgroundColor = .black.withAlphaComponent(0.3)
         
-        mainLabel.font = UIFont(name: "esamanruOTFBold", size: 100)
-        mainLabel.textColor = .bbagaBlue
-        mainLabel.textAlignment = .center
-        mainLabel.text = "물"
+        guard let mainLabelFont = UIFont(name: "esamanruOTFBold", size: 100), let subLabelFont = UIFont(name: "esamanruOTFBold", size: 20) else { return }
         
-        subLabel.font = UIFont(name: "esamanruOTFBold", size: 20)
+        mainLabel.configureLabelStyle(font: mainLabelFont, alignment: .center)
+        mainLabel.textColor = .bbagaBlue
+        
+        subLabel.configureLabelStyle(font: subLabelFont, alignment: .center)
         subLabel.textColor = .bbagaGray3
-        subLabel.textAlignment = .center
+    }
+    
+    private func configureComponent() {
+        mainLabel.text = "물"
         subLabel.text = "이 들어오는 중이예요"
     }
     

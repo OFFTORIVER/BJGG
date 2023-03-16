@@ -8,11 +8,10 @@
 import UIKit
 
 final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
-    
-    var currentRainPercentLabel = UILabel()
-    var currentWeatherImgView = UIImageView()
-    var temperatureLabel = UILabel()
-    var timeLabel = UILabel()
+    private let currentRainPercentLabel = UILabel()
+    private let currentWeatherImgView = UIImageView()
+    private let temperatureLabel = UILabel()
+    private let timeLabel = UILabel()
     
     static var id: String {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last!
@@ -26,7 +25,7 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         fatalError("Not implemented required init?(coder: NSCoder)")
     }
 
-    func layoutConfigure(isRain: Bool) {
+    func configureLayout(isRain: Bool) {
         self.addSubview(currentRainPercentLabel)
         self.addSubview(currentWeatherImgView)
         if isRain {
@@ -64,5 +63,36 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(18)
             make.width.equalTo(60)
         })
+    }
+    
+    func componentConfigure(rainPercentText: String, tempText: String, timeText: String, weatherImage: String) {
+        currentRainPercentLabel.text = rainPercentText
+        temperatureLabel.text = tempText
+        timeLabel.text = timeText
+        
+        if weatherImage != "" {
+            currentWeatherImgView.image = UIImage(named: weatherImage)
+        }
+        
+    }
+    
+    
+    func configureLabelStyle(index: Int) {
+        var textColor: UIColor = .bbagaGray2
+        if index == 0 {
+            textColor = .bbagaGray1
+            temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
+            timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
+        } else {
+            timeLabel.configureLabelStyle(font: .bbajiFont(.body1), alignment: .center)
+            temperatureLabel.configureLabelStyle(font: .bbajiFont(.heading5), alignment: .center)
+        }
+        
+        currentRainPercentLabel.textColor = .bbagaRain
+        currentRainPercentLabel.configureLabelStyle(font: .bbajiFont(.rainyCaption), alignment: .center)
+        
+        temperatureLabel.textColor = textColor
+        timeLabel.textColor = textColor
+        
     }
 }
