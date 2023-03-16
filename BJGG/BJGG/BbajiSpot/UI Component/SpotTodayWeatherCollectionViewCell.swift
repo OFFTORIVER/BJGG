@@ -8,6 +8,7 @@
 import UIKit
 
 final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
+    
     private let currentRainPercentLabel = UILabel()
     private let currentWeatherImgView = UIImageView()
     private let temperatureLabel = UILabel()

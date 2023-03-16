@@ -147,8 +147,9 @@ final class SpotLiveCameraView: UIView {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-            
+        
         if keyPath == #keyPath(AVPlayerItem.status) {
+            
             let status: AVPlayerItem.Status
             if let statusNumber = change?[.newKey] as? NSNumber {
                 status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
@@ -164,10 +165,12 @@ final class SpotLiveCameraView: UIView {
                 delegate?.videoIsReadyToPlay()
                 player?.play()
             case .failed:
+                stanbyView.stopLoadingAnimation()
                 changeReloadButtonActiveStatus(as: true)
                 print(".failed")
             case .unknown:
                 print(".unknown")
+                stanbyView.stopLoadingAnimation()
                 changeReloadButtonActiveStatus(as: true)
             @unknown default:
                 print("@unknown default")
