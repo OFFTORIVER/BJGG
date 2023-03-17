@@ -19,8 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let bbajiHomeViewController = BbajiHomeViewController()
         let navigationController = UINavigationController(rootViewController: bbajiHomeViewController)
         
-        bbajiHomeViewController.requestWeatherItems()
-        
         self.window = window
         window.rootViewController = launchScreen
         window.makeKeyAndVisible()
