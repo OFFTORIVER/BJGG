@@ -1,5 +1,5 @@
 //
-//  HomeBackgroundImageView.swift
+//  BbajiHomeBackgroundImageView.swift
 //  BJGG
 //
 //  Created by 이재웅 on 2023/03/15.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeBackgroundImageView: UIImageView {
+final class BbajiHomeBackgroundImageView: UIImageView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         

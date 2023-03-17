@@ -51,8 +51,8 @@ final class BbajiListCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let shadowView = ShadowGradientView()
-    private let previewView = PreviewView()
+    private let shadowView = BbajiListCellShadowView()
+    private let previewView = BbajiListCellPreviewView()
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()

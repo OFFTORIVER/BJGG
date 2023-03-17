@@ -1,5 +1,5 @@
 //
-//  PreviewView.swift
+//  BbajiListCellPreviewView.swift
 //  BJGG
 //
 //  Created by 이재웅 on 2022/09/29.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class PreviewView: UIView {
+final class BbajiListCellPreviewView: UIView {
     private lazy var fadeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(rgb: 0x272727)
@@ -44,7 +44,7 @@ final class PreviewView: UIView {
     }
 }
 
-extension PreviewView {
+extension BbajiListCellPreviewView {
     private func configureLayout() {
         [
             fadeView,

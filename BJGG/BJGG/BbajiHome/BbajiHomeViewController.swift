@@ -11,7 +11,7 @@ import SnapKit
 final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiTitleView = BbajiTitleView()
     private lazy var bbajiListView = BbajiListView()
-    private lazy var backgroundImageView = HomeBackgroundImageView()
+    private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
 
     private var weatherManager: WeatherManager?
     private let bbajiInfo = [BbajiInfo()]

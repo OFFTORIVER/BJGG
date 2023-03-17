@@ -1,5 +1,5 @@
 //
-//  ShadowGradientView.swift
+//  BbajiListCellShadowView.swift
 //  BJGG
 //
 //  Created by 이재웅 on 2022/09/29.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShadowGradientView: UIView {
+class BbajiListCellShadowView: UIView {
     let color1 = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     let color2 = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6708)
     let color3 = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
