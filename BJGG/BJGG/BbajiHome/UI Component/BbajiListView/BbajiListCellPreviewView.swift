@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class BbajiListCellPreviewView: UIView {
-    private lazy var fadeView: UIView = {
+    private let fadeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(rgb: 0x272727)
         view.layer.opacity = 0.9
@@ -17,7 +17,7 @@ final class BbajiListCellPreviewView: UIView {
         return view
     }()
     
-    private lazy var noticeLabel: UILabel = {
+    private let noticeLabel: UILabel = {
         let label = UILabel()
         label.text = "다음 빠지는 어디로 가까?"
         label.font = .bbajiFont(.heading4)
@@ -26,7 +26,7 @@ final class BbajiListCellPreviewView: UIView {
         return label
     }()
     
-    private lazy var logoImageView: UIImageView = {
+    private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "subLogo")
         

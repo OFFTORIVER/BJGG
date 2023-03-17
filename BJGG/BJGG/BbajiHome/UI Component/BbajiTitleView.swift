@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 final class BbajiTitleView: UIView {
-    private lazy var bbajiTitleLogoImage: UIImageView = {
+    private let bbajiTitleLogoImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainLogo")
         
         return imageView
     }()
     
-    private lazy var bbajiTitleNameLabel: UILabel = {
+    private let bbajiTitleNameLabel: UILabel = {
         let label = UILabel()
         label.text = "빠지가까"
         label.font = .bbajiFont(.heading2)
@@ -25,7 +25,7 @@ final class BbajiTitleView: UIView {
         return label
     }()
     
-    private lazy var bbajiTitleDescriptionLabel: UILabel = {
+    private let bbajiTitleDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "지금 빠지의 물 상태를 확인해보세요!"
         label.font = .bbajiFont(.body1)
