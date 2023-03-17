@@ -1,5 +1,5 @@
 //
-//  SpotLiveCameraStanbyView.swift
+//  SpotLiveCameraStandbyView.swift
 //  BJGG
 //
 //  Created by 황정현 on 2023/03/05.
@@ -9,16 +9,17 @@ import AVFoundation
 import SnapKit
 import UIKit
 
-final class SpotLiveCameraStanbyView: UIView {
-
+final class SpotLiveCameraStandbyView: UIView {
+    
     private let mainLabel = UILabel()
     private let subLabel = UILabel()
+    private var timer: Timer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -62,7 +63,18 @@ final class SpotLiveCameraStanbyView: UIView {
     
     private func configureComponent() {
         mainLabel.text = "물"
-        subLabel.text = "이 들어오는 중이예요"
+        subLabel.text = "이 들어오는 중이에요"
+        
+        makeLoadingAnimation()
+    }
+    
+    func reloadStandbyView() {
+        self.alpha = 1.0
+        mainLabel.textColor = .bbagaBlue
+        UIView.animate(withDuration: 0.7, animations: {
+            self.backgroundColor = .black.withAlphaComponent(0.3)
+        })
+        makeLoadingAnimation()
     }
     
     func changeStandbyView(as status: AVPlayerItem.Status) {
@@ -76,5 +88,26 @@ final class SpotLiveCameraStanbyView: UIView {
             mainLabel.textColor = UIColor(rgb: 0x626262)
             subLabel.text = "을 불러오지 못했어요"
         }
+    }
+    
+    private func makeLoadingAnimation() {
+        let text = "이 들어오는 중이에요"
+        subLabel.text = "\(text)."
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [self] (timer) in
+            var string: String {
+                switch subLabel.text {
+                case "\(text).":       return "\(text).."
+                case "\(text)..":      return "\(text)..."
+                case "\(text)...":     return "\(text)."
+                default:                return "\(text)"
+                }
+            }
+            subLabel.text = string
+        }
+    }
+    
+    func stopLoadingAnimation() {
+        timer?.invalidate()
     }
 }
