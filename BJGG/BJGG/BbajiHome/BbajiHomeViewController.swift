@@ -22,6 +22,12 @@ final class BbajiHomeViewController: UIViewController {
         
         configure()
     }
+    
+    private func configure() {
+        configureLayout()
+        configureDelegate()
+        configureComponent()
+    }
 }
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
@@ -30,8 +36,8 @@ extension BbajiHomeViewController: BbajiListViewDelegate {
     }
 }
 
-extension BbajiHomeViewController {
-    func requestWeatherData() async throws -> [BbajiHomeWeather] {
+private extension BbajiHomeViewController {
+    private func requestWeatherData() async throws -> [BbajiHomeWeather] {
         weatherManager = WeatherManager()
 
         let bbajiCoorX = bbajiInfoArray[0].getCoordinate().x
@@ -64,35 +70,6 @@ extension BbajiHomeViewController {
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    private func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [ListInfo] {
-        var listInfoArray: [ListInfo] = []
-        for info in bbajiInfoArray {
-            let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
-            listInfoArray.append(listInfo)
-        }
-        
-        return listInfoArray
-    }
-    
-    private func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [ListWeather] {
-        var listWeatherArray: [ListWeather] = []
-        for weather in weatherData {
-            let listWeather = ListWeather(weather.iconName, weather.temp)
-            listWeatherArray.append(listWeather)
-        }
-        
-        return listWeatherArray
-    }
-}
-
-
-private extension BbajiHomeViewController {
-    func configure() {
-        configureLayout()
-        configureDelegate()
-        configureComponent()
     }
     
     func configureDelegate() {
@@ -129,7 +106,7 @@ private extension BbajiHomeViewController {
         }
     }
     
-    private func configureLayoutForNotNotch() {
+    func configureLayoutForNotNotch() {
         let noticeLabel: UILabel = {
             let label = UILabel()
             label.text = "다음 빠지는 어디로 가까?"
@@ -163,7 +140,26 @@ private extension BbajiHomeViewController {
             $0.height.equalTo(24.0)
             $0.bottom.equalTo(noticeLabel.snp.top)
         }
+    }
+    
+    func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [ListInfo] {
+        var listInfoArray: [ListInfo] = []
+        for info in bbajiInfoArray {
+            let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
+            listInfoArray.append(listInfo)
+        }
         
+        return listInfoArray
+    }
+    
+    func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [ListWeather] {
+        var listWeatherArray: [ListWeather] = []
+        for weather in weatherData {
+            let listWeather = ListWeather(weather.iconName, weather.temp)
+            listWeatherArray.append(listWeather)
+        }
+        
+        return listWeatherArray
     }
 }
 
