@@ -10,7 +10,7 @@ import SnapKit
 
 final class BbajiHomeViewController: UIViewController {
     private let bbajiTitleView = BbajiTitleView()
-    private let bbajiListView = BbajiListView()
+    let bbajiListView = BbajiListView()
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()

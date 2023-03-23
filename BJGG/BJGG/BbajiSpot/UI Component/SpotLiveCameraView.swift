@@ -156,8 +156,7 @@ final class SpotLiveCameraView: UIView {
             } else {
                 status = .unknown
             }
-            
-            stanbyView.changeStandbyView(as: status)
+
             interactionEnableStatus(as: true)
             switch status {
             case .readyToPlay:
@@ -175,6 +174,7 @@ final class SpotLiveCameraView: UIView {
             @unknown default:
                 print("@unknown default")
             }
+            stanbyView.changeStandbyView(as: status)
         }
     }
     
@@ -202,14 +202,18 @@ final class SpotLiveCameraView: UIView {
         reloadButton.isHidden = !active
     }
     
+    func reloadLiveCameraView() {
+        self.playVideo()
+        changeReloadButtonActiveStatus(as: false)
+        stanbyView.reloadStandbyView()
+    }
+    
     @objc private func didTapVideoPlayerScreen() {
         controlStatus.changeControlStatus(view: videoPlayerControlView)
     }
     
     @objc private func didPressReloadButton() {
-        self.playVideo()
-        changeReloadButtonActiveStatus(as: false)
-        stanbyView.reloadStandbyView()
+        reloadLiveCameraView()
     }
 }
 

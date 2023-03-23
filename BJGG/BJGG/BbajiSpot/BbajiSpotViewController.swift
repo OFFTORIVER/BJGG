@@ -10,7 +10,7 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     
-    private let liveCameraView = SpotLiveCameraView()
+    let liveCameraView = SpotLiveCameraView()
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
     private var spotInfoView = SpotInfoView()
@@ -124,7 +124,7 @@ final class BbajiSpotViewController: UIViewController {
         liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
     }
     
-    private func configureComponent() {
+    func configureComponent() {
         
         liveMarkView.liveMarkActive(to: false)
         
