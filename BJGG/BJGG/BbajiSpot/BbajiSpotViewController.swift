@@ -13,10 +13,23 @@ final class BbajiSpotViewController: UIViewController {
     private let liveCameraView = SpotLiveCameraView()
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
-    private var spotInfoView = SpotInfoView()
-    private var spotWeatherInfoView = SpotWeatherInfoView()
+    private var spotInfoView: SpotInfoView = {
+        let view = SpotInfoView()
+        view.backgroundColor = .bbagaGray4
+        return view
+    }()
     
-    private var liveMarkView: LiveMarkView = LiveMarkView()
+    private var spotWeatherInfoView: SpotWeatherInfoView = {
+        let view = SpotWeatherInfoView()
+        view.backgroundColor = .bbagaGray4
+        return view
+    }()
+    
+    private lazy var liveMarkView: LiveMarkView = {
+        let view = LiveMarkView()
+        view.setUpLiveLabelRadius(to: screenWidth / 36)
+        return view
+    }()
     
     private var screenWidth: CGFloat = CGFloat()
     private var firstAttempt: Bool = true
@@ -118,10 +131,6 @@ final class BbajiSpotViewController: UIViewController {
     
     private func configureStyle() {
         view.backgroundColor = .bbagaBack
-        spotInfoView.backgroundColor = .bbagaGray4
-        spotWeatherInfoView.backgroundColor = .bbagaGray4
-        
-        liveMarkView.setUpLiveLabelRadius(to: screenWidth / 36)
     }
     
     private func configureComponent() {

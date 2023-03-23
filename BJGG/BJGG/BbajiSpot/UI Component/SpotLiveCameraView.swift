@@ -17,11 +17,24 @@ final class SpotLiveCameraView: UIView {
     
     var controlStatus: ControlStatus = .hidden
     
-    var videoPlayerControlView: SpotLiveCameraControlView = SpotLiveCameraControlView()
+    
+    var videoPlayerControlView: SpotLiveCameraControlView = {
+        let view = SpotLiveCameraControlView()
+        view.alpha = 0.0
+        return view
+    }()
+    
     var stanbyView: SpotLiveCameraStandbyView = SpotLiveCameraStandbyView()
     
     private let videoURL = BbajiInfo().getLiveCameraUrl()
-    private let reloadButton: UIButton = UIButton()
+    private let reloadButton: UIButton = {
+       let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .medium)
+        let image = UIImage(systemName: "arrow.clockwise", withConfiguration: config)?
+            .withTintColor(.white, renderingMode: .alwaysOriginal)
+        button.setImage(image, for: .normal)
+        return button
+    }()
     
     weak var delegate: SpotLiveCameraViewDelegate?
     
@@ -65,6 +78,7 @@ final class SpotLiveCameraView: UIView {
         configureLayout()
         configureStyle()
         configureComponent()
+        configureAction()
     }
     
     private func configureLayout() {
@@ -96,12 +110,6 @@ final class SpotLiveCameraView: UIView {
     
     private func configureStyle() {
         self.backgroundColor = .black
-        videoPlayerControlView.alpha = 0.0
-        
-        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .medium)
-        let image = UIImage(systemName: "arrow.clockwise", withConfiguration: config)?
-            .withTintColor(.white, renderingMode: .alwaysOriginal)
-        reloadButton.setImage(image, for: .normal)
     }
     
     private func configureComponent() {
@@ -110,11 +118,11 @@ final class SpotLiveCameraView: UIView {
         
         changeReloadButtonActiveStatus(as: false)
         interactionEnableStatus(as: true)
-        
-        // MARK: Gesture Recognizer
+    }
+    
+    private func configureAction() {
         let touchGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoPlayerScreen))
         self.addGestureRecognizer(touchGesture)
-        
         reloadButton.addTarget(self, action: #selector(didPressReloadButton), for: .touchUpInside)
     }
     

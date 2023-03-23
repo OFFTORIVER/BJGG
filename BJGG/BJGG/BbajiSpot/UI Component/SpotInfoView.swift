@@ -11,10 +11,32 @@ final class SpotInfoView: UIView {
     
     private let bbajiInfo = BbajiInfo()
     
-    private let spotNameLabel = UILabel()
-    private let divideLine = UIView()
-    private let addressInfoView = InfoDescriptionView()
-    private let contactInfoView = InfoDescriptionView()
+    private lazy var spotNameLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        label.textColor = .bbagaGray1
+        label.text = bbajiInfo.getName()
+        return label
+    }()
+    
+    private let divideLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .bbagaBack
+        return view
+    }()
+    
+    private lazy var addressInfoView: InfoDescriptionView = {
+        let view = InfoDescriptionView()
+        view.descriptionLabel.enableCopyLabelText()
+        view.configureComponent(imageName: "addressPin.png", description: bbajiInfo.getAddress())
+        return view
+    }()
+    
+    private lazy var contactInfoView: InfoDescriptionView = {
+        let view = InfoDescriptionView()
+        view.configureComponent(imageName: "telephone.png", description: bbajiInfo.getContact())
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +51,7 @@ final class SpotInfoView: UIView {
     private func configure() {
         configureLayout()
         configureStyle()
-        configureComponent()
+        configureAction()
     }
     
     private func configureLayout() {
@@ -75,22 +97,9 @@ final class SpotInfoView: UIView {
     
     private func configureStyle() {
         self.layer.cornerRadius = 16
-        
-        divideLine.backgroundColor = .bbagaBack
-        
-        spotNameLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
-        spotNameLabel.textColor = .bbagaGray1
     }
     
-    private func configureComponent() {
-        spotNameLabel.text = bbajiInfo.getName()
-        
-        addressInfoView.descriptionLabel.enableCopyLabelText()
-        
-        addressInfoView.configureComponent(imageName: "addressPin.png", description: bbajiInfo.getAddress())
-        contactInfoView.configureComponent(imageName: "telephone.png", description: bbajiInfo.getContact())
-        
-        // MARK: Gesture Recognizer
+    private func configureAction() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showContactLinkOption(_:)))
         contactInfoView.descriptionLabel.addGestureRecognizer(tapGestureRecognizer)
         contactInfoView.descriptionLabel.isUserInteractionEnabled = true
