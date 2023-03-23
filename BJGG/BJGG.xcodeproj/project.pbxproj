@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
+		3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
 		3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A81FC28EEF86800D1FA20 /* Private.plist */; };
 		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
 		3A4A81FC28EEF86800D1FA20 /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
+				3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,
 				3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */,
 				3AA636E129B390B6006BB5EF /* SpotLiveCameraControlView.swift in Sources */,
+				3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */,
 				553F0F8228E2100000FD9CDA /* UIFont+CustomFont.swift in Sources */,
 				3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */,
 				3AA636E329B390EE006BB5EF /* ScreenSizeControlButton.swift in Sources */,
