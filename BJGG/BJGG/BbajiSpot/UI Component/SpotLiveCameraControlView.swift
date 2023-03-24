@@ -10,20 +10,19 @@ import SnapKit
 
 final class SpotLiveCameraControlView: UIView {
 
-    var gradientView: SpotLiveCameraGradientView = SpotLiveCameraGradientView()
+    private var gradientView: SpotLiveCameraGradientView = SpotLiveCameraGradientView()
     var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton()
     
-    override init(frame: CGRect  =  CGRect()) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpLayout()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setUpLayout() {
-        
+
+    private func configureLayout() {
         let shadowHeight = UIScreen.main.bounds.width * 9 / 16 / 2
         addSubview(gradientView)
         gradientView.translatesAutoresizingMaskIntoConstraints = false

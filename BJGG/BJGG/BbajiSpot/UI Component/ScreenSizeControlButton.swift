@@ -40,7 +40,7 @@ final class ScreenSizeControlButton: UIButton {
         
         let image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         self.setImage(image, for: .normal)
-        self.addTarget(self, action: #selector(pressScreenSizeControlButton), for: .touchUpInside)
+        self.addTarget(self, action: #selector(didPressScreenSizeControlButton), for: .touchUpInside)
         
     }
     
@@ -48,7 +48,7 @@ final class ScreenSizeControlButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func pressScreenSizeControlButton() {
+    @objc private func didPressScreenSizeControlButton() {
         self.setImage(screenSizeStatus.changeButtonImage(), for: .normal)
         self.delegate?.changeScreenSize(screenSizeStatus: screenSizeStatus)
     }

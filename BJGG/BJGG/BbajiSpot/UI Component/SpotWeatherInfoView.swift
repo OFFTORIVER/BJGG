@@ -14,17 +14,18 @@ final class SpotWeatherInfoView: UIView {
     private let currentWeatherIcon = UIImageView()
     private let spotWeatherInfoViewDivideLine = UIView()
     
-    var rainInfoLabel = UILabel()
-    private var spotTodayWeatherCollectionView: SpotTodayWeatherCollectionView!
+    private var rainInfoLabel = UILabel()
+    private let weatherAddressLabel = UILabel()
+    private var spotTodayWeatherCollectionView: UICollectionView!
     private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)] = []
     
     private var spotWeatherAPIInfoView: SpotWeatherAPIInfoView!
 
-    required init() {
+    override init(frame: CGRect) {
         
         super.init(frame: CGRect.zero)
         
-        layoutConfigure()
+        configure()
         
         registerCollectionView()
         setupCollectionViewDelegate()
@@ -36,35 +37,35 @@ final class SpotWeatherInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func layoutConfigure() {
-        let defaultMargin: CGFloat = BbajiConstraints.viewInset
-        let defaultMargin2: CGFloat = BbajiConstraints.componentOffset
-        
-        let weatherAddressLabel = UILabel()
+    private func configure() {
+        configureLayout()
+        configureStyle()
+        configureComponent()
+    }
+    
+    private func configureLayout() {
         
         self.addSubview(weatherAddressLabel)
-        
         weatherAddressLabel.snp.makeConstraints({ make in
-            make.leading.equalTo(self.snp.leading).inset(defaultMargin)
-            make.top.equalTo(self.snp.top).inset(defaultMargin)
+            make.leading.equalTo(self.snp.leading).inset(BbajiConstraints.viewInset)
+            make.top.equalTo(self.snp.top).inset(BbajiConstraints.viewInset)
             make.height.equalTo(18)
         })
         
-        labelSetting(label: weatherAddressLabel, text: BbajiInfo().getCompactAddress(), font: .bbajiFont(.body1), alignment: .left)
-        weatherAddressLabel.textColor = .bbagaGray2
-        
         self.addSubview(currentWeatherIconAndLabel)
-        
         currentWeatherIconAndLabel.snp.makeConstraints({ make in
-            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(defaultMargin2)
+            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(160)
             make.height.equalTo(64)
         })
         
-        [currentWeatherIcon, currentTemperatureLabel].forEach({
+        [
+            currentWeatherIcon,
+            currentTemperatureLabel
+        ].forEach {
             currentWeatherIconAndLabel.addSubview($0)
-        })
+        }
         
         currentWeatherIcon.snp.makeConstraints({ make in
             make.leading.equalTo(currentWeatherIconAndLabel.snp.leading)
@@ -79,38 +80,27 @@ final class SpotWeatherInfoView: UIView {
             make.width.equalTo(100)
         })
         
-        labelSetting(label: currentTemperatureLabel, text: "--°", font: .bbajiFont(.heading1), alignment: .center)
-        
-        currentTemperatureLabel.textColor = .bbagaGray1
-        
         self.addSubview(rainInfoLabel)
-        
         rainInfoLabel.snp.makeConstraints({ make in
-            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(defaultMargin2)
+            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(18)
         })
         
-        labelSetting(label: rainInfoLabel, text: "", font: .bbajiFont(.body1), alignment: .center)
-        
         self.addSubview(spotWeatherInfoViewDivideLine)
         spotWeatherInfoViewDivideLine.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading)
-            make.top.equalTo(rainInfoLabel.snp.bottom).offset(defaultMargin)
+            make.top.equalTo(rainInfoLabel.snp.bottom).offset(BbajiConstraints.viewInset)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(2)
         })
         
-        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
-        
-        self.layer.cornerRadius = 16
-        
         let collectionViewLayer = UICollectionViewFlowLayout()
         collectionViewLayer.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         collectionViewLayer.scrollDirection = .horizontal
         
-        spotTodayWeatherCollectionView = SpotTodayWeatherCollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
+        spotTodayWeatherCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
         
         self.addSubview(spotTodayWeatherCollectionView)
         spotTodayWeatherCollectionView.snp.makeConstraints({ make in
@@ -131,6 +121,26 @@ final class SpotWeatherInfoView: UIView {
         })
         
         spotWeatherAPIInfoView.setDefaultUI()
+    }
+    
+    private func configureComponent() {
+        self.layer.cornerRadius = 16
+        
+        weatherAddressLabel.text = BbajiInfo().getCompactAddress()
+        currentTemperatureLabel.text =  "--°"
+
+    }
+    
+    private func configureStyle() {
+        weatherAddressLabel.configureLabelStyle(font: .bbajiFont(.body1), alignment: .left)
+        weatherAddressLabel.textColor = .bbagaGray2
+        
+        currentTemperatureLabel.configureLabelStyle(font: .bbajiFont(.heading1), alignment: .center)
+        currentTemperatureLabel.textColor = .bbagaGray1
+        
+        rainInfoLabel.configureLabelStyle( font: .bbajiFont(.body1), alignment: .center)
+        
+        spotWeatherInfoViewDivideLine.backgroundColor = .bbagaBack
     }
     
     private func registerCollectionView() {
@@ -161,15 +171,25 @@ final class SpotWeatherInfoView: UIView {
     }
     
     func setRainInfoLabelTextAndColor(text: String) {
+        let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
+        currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
+        
         rainInfoLabel.text = text
         let rainInfoLabelSplitText = rainInfoLabel.text?.components(separatedBy: "시")
         guard let timeDataStr = rainInfoLabelSplitText?[0] else { return }
-        makeTimeAsBlackColor(label: rainInfoLabel, timeStr: timeDataStr)
+        setRainInfoLabelColor(label: rainInfoLabel, timeStr: timeDataStr)
     }
     
     func spotWeatherInfoViewComponentHidden(isHidden: Bool) {
-        [currentTemperatureLabel, currentWeatherIconAndLabel,
-         rainInfoLabel,currentWeatherIcon, spotWeatherInfoViewDivideLine,  spotTodayWeatherCollectionView].forEach({ $0?.isHidden = isHidden})
+        [
+            currentTemperatureLabel,
+            currentWeatherIconAndLabel,
+            rainInfoLabel,currentWeatherIcon,
+            spotWeatherInfoViewDivideLine,
+            spotTodayWeatherCollectionView
+        ].forEach({
+            $0?.isHidden = isHidden
+        })
     }
 }
 
@@ -206,50 +226,24 @@ extension SpotWeatherInfoView: UICollectionViewDelegate, UICollectionViewDataSou
             timeStr = "--"
         }
         
-        if currentRainPercentStr == "0%" {
-            cell.layoutConfigure(isRain: false)
-            cell.currentRainPercentLabel.text = ""
-        } else {
-            cell.layoutConfigure(isRain: true)
-            labelSetting(label: cell.currentRainPercentLabel, text: currentRainPercentStr, font: .bbajiFont(.rainyCaption), alignment: .center)
-            cell.currentRainPercentLabel.textColor = .bbagaRain
-        }
-        
-        if currentWeatherImgName != "" {
-            cell.currentWeatherImgView.image = UIImage(named: currentWeatherImgName)
-        }
-        
-        labelSetting(label: cell.temperatureLabel, text: temperatureStr, font: .bbajiFont(.heading5), alignment: .center)
-        labelSetting(label: cell.timeLabel, text: timeStr, font: .bbajiFont(.body1), alignment: .center)
-        if idx == 0 {
-            cell.temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
-            cell.timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
-            cell.temperatureLabel.textColor = .bbagaGray1
-            cell.timeLabel.textColor = .bbagaGray1
-        } else {
-            cell.temperatureLabel.textColor = .bbagaGray2
-            cell.timeLabel.textColor = .bbagaGray2
-        }
+        let isRain = currentRainPercentStr != "0%"
+        let rainText = isRain ? currentRainPercentStr : ""
+        cell.configureLayout(isRain: isRain)
+        cell.componentConfigure(rainPercentText: rainText, tempText: temperatureStr, timeText: timeStr, weatherImage: currentWeatherImgName)
+        cell.configureLabelStyle(index: idx)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("CLICKED!")
     }
 }
 
 extension SpotWeatherInfoView {
-    func makeTimeAsBlackColor(label: UILabel, timeStr: String) {
-        // label 전체 텍스트의 기본 컬러를 bbagaGray2로 설정
+    func setRainInfoLabelColor(label: UILabel, timeStr: String) {
+        
         label.textColor = .bbagaGray2
         guard let text = label.text else { return }
         let attributedString = NSMutableAttributedString(string: text)
         
-        // label 일부분에 입힐 컬러를 bbagaGray1으로 설정
         attributedString.addAttribute(.foregroundColor, value: UIColor.bbagaGray1, range: (text as NSString).range(of: "\(timeStr)시"))
-        let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
-        currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
-        // label에 Color 입히기
+
         label.attributedText = attributedString
     }
     

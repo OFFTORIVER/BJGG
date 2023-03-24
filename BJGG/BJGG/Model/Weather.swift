@@ -204,7 +204,6 @@ struct WeatherItem: Decodable {
 
 struct WeatherItems: Decodable {
     let item: [WeatherItem]
-    
 
     func requestWeatherDataSet(_ weatherItems: [WeatherItem]) -> [(time: String, iconName: String, temp: String, probability: String)] {
         var weatherData = [(time: String, iconName: String, temp: String, probability: String)]()
@@ -291,16 +290,9 @@ struct WeatherItems: Decodable {
     }
     
     private var current: (day: String, time: Int) {
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd HHmm"
-        formatter.locale = Locale(identifier: "ko_kr")
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-
-        let currentDayAndTime = formatter.string(from: now).split(separator: " ")
-        let currentDay = String(currentDayAndTime[0])
-        let time = Int(currentDayAndTime[1])!
-        let calculatedTime = (time / 100) * 100
+        let currentDayAndTime = Date.currentWeatherTime
+        let currentDay = String(currentDayAndTime.days)
+        let calculatedTime = (currentDayAndTime.time / 100) * 100
         
         return (currentDay, calculatedTime)
     }
@@ -309,16 +301,7 @@ struct WeatherItems: Decodable {
         var filteredItem = [WeatherItem]()
         
         var currentHour: String {
-            let now = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMdd HHmm"
-            formatter.locale = Locale(identifier: "ko_kr")
-            formatter.timeZone = TimeZone(abbreviation: "KST")
-            
-            let str = formatter.string(from: now)
-            let time = str.split(separator: " ").map{ Int($0)! }[1]
-            
-            let calculatedTime = (time / 100) * 100
+            let calculatedTime = current.time
             
             if calculatedTime == 0 {
                 return "0000"

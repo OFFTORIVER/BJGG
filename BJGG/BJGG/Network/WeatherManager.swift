@@ -13,57 +13,6 @@ enum WeatherManagerError: Error {
 }
 
 struct WeatherManager {
-    private let today: String = {
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd HHmm"
-        formatter.locale = Locale(identifier: "ko_kr")
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-        
-        let str = formatter.string(from: now)
-        
-        let time = str.split(separator: " ").map{ Int($0)! }[1]
-        
-        switch time {
-        case 0..<300:
-            let day = str.split(separator: " ").map{ Int($0)! }[0]
-            return String(day-1)
-            
-        default:
-            return str.split(separator: " ").map{ String($0) }[0]
-        }
-    }()
-    
-    private let nowTime: String = {
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd HHmm"
-        formatter.locale = Locale(identifier: "ko_kr")
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-        
-        let str = formatter.string(from: now)
-        let time = str.split(separator: " ").map{ Int($0)! }[1]
-        
-        switch time {
-        case 300..<600:
-            return "0200"
-        case 600..<900:
-            return "0500"
-        case 900..<1200:
-            return "0800"
-        case 1200..<1500:
-            return "1100"
-        case 1500..<1800:
-            return "1400"
-        case 1800..<2100:
-            return "1700"
-        case 2100...2400:
-            return "2000"
-        default:
-            return "2300"
-        }
-    }()
-    
     private func requestWeather(nx: Int, ny: Int, numberOfRow: Int) async throws -> Weather {
         guard let privatePlist = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
             throw PlistError.bundleError
@@ -74,7 +23,7 @@ struct WeatherManager {
         }
         
         let weatherAPIKey = dictionary["weatherAPIKey"] as! String
-        let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(weatherAPIKey)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(today)&base_time=\(nowTime)&nx=\(nx)&ny=\(ny)"
+        let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(weatherAPIKey)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(Date.requestDay)&base_time=\(Date.requestTime)&nx=\(nx)&ny=\(ny)"
         
         guard let url = URL(string: urlString) else {
             throw PlistError.stringCastingError
@@ -164,4 +113,43 @@ struct WeatherManager {
 //            completionHandler(true, output.response)
 //        }.resume()
 //    }
+}
+
+fileprivate extension Date {
+    static var requestDay: String {
+        let date = Date.currentWeatherTime
+        let day = date.days
+        let time = date.time
+        
+        switch time {
+        case 0..<300:
+            return String(day-1)
+            
+        default:
+            return String(day)
+        }
+    }
+    
+    static var requestTime: String {
+        let time = Date.currentWeatherTime.time
+        
+        switch time {
+        case 300..<600:
+            return "0200"
+        case 600..<900:
+            return "0500"
+        case 900..<1200:
+            return "0800"
+        case 1200..<1500:
+            return "1100"
+        case 1500..<1800:
+            return "1400"
+        case 1800..<2100:
+            return "1700"
+        case 2100...2400:
+            return "2000"
+        default:
+            return "2300"
+        }
+    }
 }
