@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol BbajiListViewDelegate {
+    func pushBbajiSpotViewController()
+}
+
+typealias ListInfo = (locationName: String, name: String, backgroundImageName: String)
+typealias ListWeather = (iconName: String, temp: String)
+
 final class BbajiListView: UICollectionView {
     var bbajiListViewDelegate: BbajiListViewDelegate?
     
@@ -92,10 +99,3 @@ extension BbajiListView {
         backgroundColor = .bbagaGray4
     }
 }
-
-protocol BbajiListViewDelegate {
-    func pushBbajiSpotViewController()
-}
-
-typealias ListInfo = (locationName: String, name: String, backgroundImageName: String)
-typealias ListWeather = (iconName: String, temp: String)
