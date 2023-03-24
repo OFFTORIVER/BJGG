@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 
+typealias BbajiHomeWeather = (time: String, iconName: String, temp: String, probability: String)
+
 final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiTitleView = BbajiTitleView()
     private lazy var bbajiListView = BbajiListView()
@@ -162,5 +164,3 @@ private extension BbajiHomeViewController {
         return listWeatherArray
     }
 }
-
-typealias BbajiHomeWeather = (time: String, iconName: String, temp: String, probability: String)
