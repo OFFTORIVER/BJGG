@@ -42,10 +42,9 @@
 		553F0F9428E212B300FD9CDA /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F8B28E212B300FD9CDA /* Pretendard-ExtraLight.otf */; };
 		553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */; };
 		553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9928E49DF800FD9CDA /* BbajiListView.swift */; };
-		553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */; };
-		553F0F9F28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */; };
-		553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */; };
-		553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */; };
+		553F0F9F28E4AEA300FD9CDA /* BbajiListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0F9E28E4AEA300FD9CDA /* BbajiListCell.swift */; };
+		553F0FA128E4C58600FD9CDA /* BbajiListCellShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA028E4C58600FD9CDA /* BbajiListCellShadowView.swift */; };
+		553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA228E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift */; };
 		553F0FA728E9E11E00FD9CDA /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA628E9E11E00FD9CDA /* Weather.swift */; };
 		553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */; };
 		558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */; };
@@ -55,6 +54,7 @@
 		55CB0AB128BA4FA10045644C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB028BA4FA10045644C /* Assets.xcassets */; };
 		55CB0AB428BA4FA10045644C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */; };
 		55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */; };
+		55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */; };
 		55F0AE6129BF5DE4003B5EEE /* Date+Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */; };
 		55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE6429C04C50003B5EEE /* WeatherTime.swift */; };
 /* End PBXBuildFile section */
@@ -94,10 +94,9 @@
 		553F0F8B28E212B300FD9CDA /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiTitleView.swift; sourceTree = "<group>"; };
 		553F0F9928E49DF800FD9CDA /* BbajiListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListView.swift; sourceTree = "<group>"; };
-		553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCollectionView.swift; sourceTree = "<group>"; };
-		553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCollectionViewCell.swift; sourceTree = "<group>"; };
-		553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowGradientView.swift; sourceTree = "<group>"; };
-		553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		553F0F9E28E4AEA300FD9CDA /* BbajiListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCell.swift; sourceTree = "<group>"; };
+		553F0FA028E4C58600FD9CDA /* BbajiListCellShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCellShadowView.swift; sourceTree = "<group>"; };
+		553F0FA228E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiListCellPreviewView.swift; sourceTree = "<group>"; };
 		553F0FA628E9E11E00FD9CDA /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		55CB0AB328BA4FA10045644C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55CB0AB528BA4FA10045644C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewController.swift; sourceTree = "<group>"; };
+		55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeBackgroundImageView.swift; sourceTree = "<group>"; };
 		55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Weather.swift"; sourceTree = "<group>"; };
 		55F0AE6429C04C50003B5EEE /* WeatherTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,8 +201,8 @@
 		553F0F9628E49D7F00FD9CDA /* BbajiHome */ = {
 			isa = PBXGroup;
 			children = (
-				553F0F9B28E49E2900FD9CDA /* UI Component */,
 				55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */,
+				553F0F9B28E49E2900FD9CDA /* UI Component */,
 			);
 			path = BbajiHome;
 			sourceTree = "<group>";
@@ -211,11 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				553F0F9728E49DC200FD9CDA /* BbajiTitleView.swift */,
-				553F0F9928E49DF800FD9CDA /* BbajiListView.swift */,
-				553F0FA028E4C58600FD9CDA /* ShadowGradientView.swift */,
-				553F0FA228E4D5AA00FD9CDA /* PreviewView.swift */,
-				553F0F9C28E4AD7500FD9CDA /* BbajiListCollectionView.swift */,
-				553F0F9E28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift */,
+				55F0AE8729C44C59003B5EEE /* BbajiListView */,
+				55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */,
 			);
 			path = "UI Component";
 			sourceTree = "<group>";
@@ -284,6 +281,17 @@
 				3A4A81FC28EEF86800D1FA20 /* Private.plist */,
 			);
 			path = BJGG;
+			sourceTree = "<group>";
+		};
+		55F0AE8729C44C59003B5EEE /* BbajiListView */ = {
+			isa = PBXGroup;
+			children = (
+				553F0F9928E49DF800FD9CDA /* BbajiListView.swift */,
+				553F0F9E28E4AEA300FD9CDA /* BbajiListCell.swift */,
+				553F0FA028E4C58600FD9CDA /* BbajiListCellShadowView.swift */,
+				553F0FA228E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift */,
+			);
+			path = BbajiListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,11 +388,11 @@
 				553F0FA728E9E11E00FD9CDA /* Weather.swift in Sources */,
 				3A7E3BE528D766D700F6416A /* SpotLiveCameraView.swift in Sources */,
 				3A7E3BE328D7663300F6416A /* BbajiSpotViewController.swift in Sources */,
+				553F0FA128E4C58600FD9CDA /* BbajiListCellShadowView.swift in Sources */,
 				3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift in Sources */,
-				553F0FA128E4C58600FD9CDA /* ShadowGradientView.swift in Sources */,
 				55F0AE6129BF5DE4003B5EEE /* Date+Weather.swift in Sources */,
 				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
-				553F0FA328E4D5AA00FD9CDA /* PreviewView.swift in Sources */,
+				553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */,
 				3AA636E529B391FF006BB5EF /* LiveMarkView.swift in Sources */,
 				558D99D929A5D8F900D633BF /* Constraints.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
@@ -402,13 +410,13 @@
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
-				553F0F9D28E4AD7500FD9CDA /* BbajiListCollectionView.swift in Sources */,
 				553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
 				3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
-				553F0F9F28E4AEA300FD9CDA /* BbajiListCollectionViewCell.swift in Sources */,
+				553F0F9F28E4AEA300FD9CDA /* BbajiListCell.swift in Sources */,
+				55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
