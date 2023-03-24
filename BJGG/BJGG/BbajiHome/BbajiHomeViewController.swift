@@ -157,7 +157,7 @@ private extension BbajiHomeViewController {
     func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [BbajiListWeather] {
         var listWeatherArray: [BbajiListWeather] = []
         for weather in weatherData {
-            let listWeather = ListWeather(weather.iconName, weather.temp)
+            let listWeather = BbajiListWeather(weather.iconName, weather.temp)
             listWeatherArray.append(listWeather)
         }
         
