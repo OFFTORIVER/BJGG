@@ -11,16 +11,16 @@ protocol BbajiListViewDelegate {
     func pushBbajiSpotViewController()
 }
 
-typealias ListInfo = (locationName: String, name: String, backgroundImageName: String)
-typealias ListWeather = (iconName: String, temp: String)
+typealias BbajiListInfo = (locationName: String, name: String, backgroundImageName: String)
+typealias BbajiListWeather = (iconName: String, temp: String)
 
 final class BbajiListView: UICollectionView {
     var bbajiListViewDelegate: BbajiListViewDelegate?
     
-    private var listWeatherArray: [ListWeather] = []
-    private var listInfoArray: [ListInfo] = []
+    private var listWeatherArray: [BbajiListWeather] = []
+    private var listInfoArray: [BbajiListInfo] = []
     
-    func configure(_ listWeatherArray: [ListWeather], listInfoArray: [ListInfo]) {
+    func configure(_ listWeatherArray: [BbajiListWeather], listInfoArray: [BbajiListInfo]) {
         configureStyle()
         configureWeatherArray(listWeatherArray)
         configureInfoArray(listInfoArray)
@@ -82,11 +82,11 @@ extension BbajiListView: UICollectionViewDataSource {
 }
 
 extension BbajiListView {
-    func configureWeatherArray(_ listWeatherArray: [(ListWeather)]) {
+    func configureWeatherArray(_ listWeatherArray: [(BbajiListWeather)]) {
         self.listWeatherArray = listWeatherArray
     }
     
-    func configureInfoArray(_ infoArray: [ListInfo]) {
+    func configureInfoArray(_ infoArray: [BbajiListInfo]) {
         self.listInfoArray = infoArray
     }
     

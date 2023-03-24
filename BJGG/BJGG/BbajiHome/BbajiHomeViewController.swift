@@ -144,8 +144,8 @@ private extension BbajiHomeViewController {
         }
     }
     
-    func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [ListInfo] {
-        var listInfoArray: [ListInfo] = []
+    func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [BbajiListInfo] {
+        var listInfoArray: [BbajiListInfo] = []
         for info in bbajiInfoArray {
             let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
             listInfoArray.append(listInfo)
@@ -154,8 +154,8 @@ private extension BbajiHomeViewController {
         return listInfoArray
     }
     
-    func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [ListWeather] {
-        var listWeatherArray: [ListWeather] = []
+    func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [BbajiListWeather] {
+        var listWeatherArray: [BbajiListWeather] = []
         for weather in weatherData {
             let listWeather = ListWeather(weather.iconName, weather.temp)
             listWeatherArray.append(listWeather)
