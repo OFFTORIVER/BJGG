@@ -38,22 +38,7 @@ extension BbajiHomeViewController: BbajiListViewDelegate {
     }
 }
 
-private extension BbajiHomeViewController {
-    private func requestWeatherData() async throws -> [BbajiHomeWeather] {
-        weatherManager = WeatherManager()
-
-        let bbajiCoorX = bbajiInfoArray[0].getCoordinate().x
-        let bbajiCoorY = bbajiInfoArray[0].getCoordinate().y
-        var data: [BbajiHomeWeather] = []
-        
-        if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
-            let weatherSet = weatherItems.requestCurrentWeatherItem()
-            data = weatherItems.requestWeatherDataSet(weatherSet)
-        }
-        
-        return data
-    }
-    
+extension BbajiHomeViewController {
     func configureComponent() {
         Task {
             do {
@@ -72,6 +57,23 @@ private extension BbajiHomeViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+private extension BbajiHomeViewController {
+    private func requestWeatherData() async throws -> [BbajiHomeWeather] {
+        weatherManager = WeatherManager()
+
+        let bbajiCoorX = bbajiInfoArray[0].getCoordinate().x
+        let bbajiCoorY = bbajiInfoArray[0].getCoordinate().y
+        var data: [BbajiHomeWeather] = []
+        
+        if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
+            let weatherSet = weatherItems.requestCurrentWeatherItem()
+            data = weatherItems.requestWeatherDataSet(weatherSet)
+        }
+        
+        return data
     }
     
     func configureDelegate() {

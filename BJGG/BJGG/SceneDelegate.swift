@@ -29,8 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 if let rootVC = self.window?.rootViewController as? UINavigationController {
                     if rootVC.viewControllers.count == 1 {
                         if let vc = rootVC.viewControllers[0] as? BbajiHomeViewController {
-                            vc.requestAPI()
-                            vc.bbajiListView.reloadCollectionView()
+                            vc.configureComponent()
                             return
                         }
                     } else if rootVC.viewControllers.count == 2 {
