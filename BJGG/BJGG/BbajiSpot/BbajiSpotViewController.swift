@@ -10,7 +10,7 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     
-    private let liveCameraView = SpotLiveCameraView()
+    let liveCameraView = SpotLiveCameraView()
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
     private var spotInfoView: SpotInfoView = {
@@ -133,7 +133,7 @@ final class BbajiSpotViewController: UIViewController {
         view.backgroundColor = .bbagaBack
     }
     
-    private func configureComponent() {
+    func configureComponent() {
         
         liveMarkView.liveMarkActive(to: false)
         

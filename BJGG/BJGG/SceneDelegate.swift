@@ -23,8 +23,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = launchScreen
         window.makeKeyAndVisible()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-            self.window?.rootViewController = navigationController
+        NetworkManager.shared.startMonitoring(window: window) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.window?.rootViewController = navigationController
+                if let rootVC = self.window?.rootViewController as? UINavigationController {
+                    if rootVC.viewControllers.count == 1 {
+                        if let vc = rootVC.viewControllers[0] as? BbajiHomeViewController {
+                            vc.configureComponent()
+                            return
+                        }
+                    } else if rootVC.viewControllers.count == 2 {
+                        if let vc = rootVC.viewControllers[1] as? BbajiSpotViewController {
+                            vc.configureComponent()
+                            return
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -46,8 +61,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
