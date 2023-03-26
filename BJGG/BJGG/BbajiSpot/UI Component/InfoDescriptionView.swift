@@ -9,7 +9,13 @@ import UIKit
 
 final class InfoDescriptionView: UIView {
     
-    let descriptionLabel = UILabel()
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .bbagaBlue
+        label.configureLabelStyle(font: .bbajiFont(.button1), alignment: .left)
+        return label
+    }()
+    
     private let descriptionImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -23,7 +29,6 @@ final class InfoDescriptionView: UIView {
     
     private func configure() {
         configureLayout()
-        configureStyle()
     }
     
     private func configureLayout() {
@@ -42,11 +47,6 @@ final class InfoDescriptionView: UIView {
             make.centerY.equalTo(descriptionImageView.snp.centerY)
             make.height.equalTo(18)
         })
-    }
-    
-    private func configureStyle() {
-        descriptionLabel.textColor = .bbagaBlue
-        descriptionLabel.configureLabelStyle(font: .bbajiFont(.button1), alignment: .left)
     }
     
     func configureComponent(imageName: String, description: String) {
