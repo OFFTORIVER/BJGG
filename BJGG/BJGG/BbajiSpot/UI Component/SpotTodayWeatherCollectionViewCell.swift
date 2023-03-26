@@ -77,7 +77,6 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         
     }
     
-    
     func configureLabelStyle(index: Int) {
         var textColor: UIColor = .bbagaGray2
         if index == 0 {
@@ -94,6 +93,5 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         
         temperatureLabel.textColor = textColor
         timeLabel.textColor = textColor
-        
     }
 }

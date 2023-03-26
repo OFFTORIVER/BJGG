@@ -1,5 +1,5 @@
 //
-//  BbajiListCollectionViewCell.swift
+//  BbajiListCell.swift
 //  BJGG
 //
 //  Created by 이재웅 on 2022/09/29.
@@ -8,9 +8,40 @@
 import UIKit
 import SnapKit
 
-final class BbajiListCollectionViewCell: UICollectionViewCell {
+final class BbajiListCell: UICollectionViewCell {
     static var id: String {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last!
+    }
+    
+    func configure(_ indexPathRow: Int, locationName: String? = nil, bbajiName: String? = nil, backgroundImageName: String? = nil, iconName: String? = nil, temp: String? = nil) {
+        configureLayout()
+        configureStyle()
+        
+        if let imageName = backgroundImageName {
+            backgroundImageView.image = UIImage(named: imageName)
+        }
+        
+        if let locationName = locationName {
+            locationLabel.text = locationName
+        }
+        
+        if let bbajiName = bbajiName {
+            nameLabel.text = bbajiName
+        }
+        
+        if let iconName = iconName {
+            weatherImageView.image = UIImage(named: iconName)
+        }
+        
+        if let temp = temp {
+            tempLabel.text = "\(temp)º"
+        }
+        
+        if indexPathRow != 1 {
+            previewView.isHidden = true
+        } else {
+            tempLabel.isHidden = true
+        }
     }
     
     private lazy var backgroundImageView: UIImageView = {
@@ -20,8 +51,8 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let shadowView = ShadowGradientView()
-    private let previewView = PreviewView()
+    private let shadowView = BbajiListCellShadowView()
+    private let previewView = BbajiListCellPreviewView()
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
@@ -55,38 +86,7 @@ final class BbajiListCollectionViewCell: UICollectionViewCell {
     }()
 }
 
-extension BbajiListCollectionViewCell {
-    func configure(_ indexPathRow: Int, bbajiInfo: BbajiInfo?, iconName: String?, temp: String?) {
-        configureLayout()
-        
-        layer.cornerRadius = 10.0
-        layer.masksToBounds = true
-        
-        if let bbajiInfo = bbajiInfo {
-            let backgroundImageName = bbajiInfo.getThumbnailImgName()
-            let locationName = bbajiInfo.getAddress()
-            let name = bbajiInfo.getName()
-            
-            backgroundImageView.image = UIImage(named: backgroundImageName)
-            locationLabel.text = locationName
-            nameLabel.text = name
-        }
-        
-        if let iconName = iconName {
-            weatherImageView.image = UIImage(named: iconName)
-        }
-        
-        if let temp = temp {
-            tempLabel.text = "\(temp)º"
-        }
-        
-        if indexPathRow != 1 {
-            previewView.isHidden = true
-        } else {
-            tempLabel.isHidden = true
-        }
-    }
-    
+extension BbajiListCell {
     private func configureLayout() {
         let iconWidth: CGFloat = 28.0
         
@@ -136,7 +136,11 @@ extension BbajiListCollectionViewCell {
         previewView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+    }
+    
+    private func configureStyle() {
+        layer.cornerRadius = 10.0
+        layer.masksToBounds = true
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  PreviewView.swift
+//  BbajiListCellPreviewView.swift
 //  BJGG
 //
 //  Created by 이재웅 on 2022/09/29.
@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-class PreviewView: UIView {
-    private lazy var fadeView: UIView = {
+final class BbajiListCellPreviewView: UIView {
+    private let fadeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(rgb: 0x272727)
         view.layer.opacity = 0.9
@@ -17,7 +17,7 @@ class PreviewView: UIView {
         return view
     }()
     
-    private lazy var noticeLabel: UILabel = {
+    private let noticeLabel: UILabel = {
         let label = UILabel()
         label.text = "다음 빠지는 어디로 가까?"
         label.font = .bbajiFont(.heading4)
@@ -26,9 +26,8 @@ class PreviewView: UIView {
         return label
     }()
     
-    private lazy var logoImageView: UIImageView = {
+    private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.image = UIImage(named: "subLogo")
         
         return imageView
@@ -43,7 +42,9 @@ class PreviewView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension BbajiListCellPreviewView {
     private func configureLayout() {
         [
             fadeView,

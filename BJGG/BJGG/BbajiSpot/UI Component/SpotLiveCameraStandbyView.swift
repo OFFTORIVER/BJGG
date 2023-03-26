@@ -11,8 +11,22 @@ import UIKit
 
 final class SpotLiveCameraStandbyView: UIView {
     
-    private let mainLabel = UILabel()
-    private let subLabel = UILabel()
+    private let mainLabel: UILabel = {
+        let label = UILabel()
+        guard let mainLabelFont = UIFont(name: "esamanruOTFBold", size: 100), let subLabelFont = UIFont(name: "esamanruOTFBold", size: 20) else { return  UILabel() }
+        label.configureLabelStyle(font: mainLabelFont, alignment: .center)
+        label.textColor = .bbagaBlue
+        return label
+    }()
+    
+    private let subLabel: UILabel = {
+        let label = UILabel()
+        guard let mainLabelFont = UIFont(name: "esamanruOTFBold", size: 100), let subLabelFont = UIFont(name: "esamanruOTFBold", size: 20) else { return UILabel() }
+        label.configureLabelStyle(font: subLabelFont, alignment: .center)
+        label.textColor = .bbagaGray3
+        return label
+    }()
+    
     private var timer: Timer?
     
     override init(frame: CGRect) {
@@ -51,14 +65,6 @@ final class SpotLiveCameraStandbyView: UIView {
     private func configureStyle() {
         self.alpha = 1.0
         self.backgroundColor = .black.withAlphaComponent(0.3)
-        
-        guard let mainLabelFont = UIFont(name: "esamanruOTFBold", size: 100), let subLabelFont = UIFont(name: "esamanruOTFBold", size: 20) else { return }
-        
-        mainLabel.configureLabelStyle(font: mainLabelFont, alignment: .center)
-        mainLabel.textColor = .bbagaBlue
-        
-        subLabel.configureLabelStyle(font: subLabelFont, alignment: .center)
-        subLabel.textColor = .bbagaGray3
     }
     
     private func configureComponent() {

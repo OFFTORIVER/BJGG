@@ -9,8 +9,21 @@ import UIKit
 
 final class SpotWeatherAPIInfoView: UIView {
     
-    private let currentAPIInfoLabel = UILabel()
-    private let currentAPIInfoLabelDeco = UIImageView()
+    private let currentAPIInfoLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        label.textColor = .bbagaBlue
+        label.text = "오늘의 날씨는..."
+        return label
+    }()
+    
+    private let currentAPIInfoLabelDeco: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "subLogo")
+        view.alpha = 0
+        view.isHidden = true
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
@@ -48,18 +61,10 @@ final class SpotWeatherAPIInfoView: UIView {
     private func configureStyle() {
         self.layer.cornerRadius = 16
         self.clipsToBounds = true
-        
-        currentAPIInfoLabelDeco.image = UIImage(named: "subLogo")
-        currentAPIInfoLabelDeco.alpha = 0
-        
-        currentAPIInfoLabel.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
-        currentAPIInfoLabel.textColor = .bbagaBlue
     }
     
     func setDefaultUI() {
         backgroundColor = .black.withAlphaComponent(0.7)
-        currentAPIInfoLabelDeco.isHidden = true
-        currentAPIInfoLabel.text = "오늘의 날씨는..."
     }
     
     func setCurrentUI(weatherAPIIsSuccess: Bool) {

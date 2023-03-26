@@ -10,7 +10,13 @@ import SnapKit
 
 final class LiveMarkView: UIView {
 
-    private var liveLabel: UILabel = UILabel()
+    private lazy var liveLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabelStyle(font: .systemFont(ofSize: 12, weight: .medium), alignment: .center)
+        label.textColor = .clear
+        label.text = "LIVE"
+        return label
+    }()
     
     override init(frame: CGRect  =  CGRect()) {
         super.init(frame: frame)
@@ -25,8 +31,6 @@ final class LiveMarkView: UIView {
     
     private func configure() {
         configureLayout()
-        configureStyle()
-        configureComponent()
     }
 
     private func configureLayout() {
@@ -39,16 +43,6 @@ final class LiveMarkView: UIView {
         }
     }
     
-    
-    private func configureStyle() {
-        liveLabel.configureLabelStyle(font: .systemFont(ofSize: 12, weight: .medium), alignment: .center)
-        liveLabel.textColor = .clear
-    }
-    
-    private func configureComponent() {
-        liveLabel.text = "LIVE"
-    }
-
     func setUpLiveLabelRadius(to: CGFloat) {
         self.layer.cornerRadius = to
     }
