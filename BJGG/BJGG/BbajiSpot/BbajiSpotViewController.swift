@@ -184,7 +184,6 @@ final class BbajiSpotViewController: UIViewController {
         }
     }
     
-    
     private func setUpLiveCameraViewConstraints(screenStatus: ScreenSizeStatus) {
         
         let safeArea = view.safeAreaLayoutGuide

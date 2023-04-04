@@ -13,6 +13,8 @@
 		3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A81FC28EEF86800D1FA20 /* Private.plist */; };
 		3A53021629DC26CA00888CFA /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A53021529DC26CA00888CFA /* CombineCocoa */; };
 		3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021729DC272300888CFA /* SpotViewModel.swift */; };
+		3A53021A29DC649B00888CFA /* Combine+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */; };
+		3A53021C29DC64D400888CFA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021B29DC64D400888CFA /* UIView+.swift */; };
 		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
 		3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
@@ -68,6 +70,8 @@
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
 		3A4A81FC28EEF86800D1FA20 /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		3A53021729DC272300888CFA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
+		3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+GestureRecognizer.swift"; sourceTree = "<group>"; };
+		3A53021B29DC64D400888CFA /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
 		3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+DeviceCheck.swift"; sourceTree = "<group>"; };
 		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */,
 				3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */,
 				55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */,
+				3A53021B29DC64D400888CFA /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				558D99D829A5D8F900D633BF /* Constraints.swift */,
+				3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -419,6 +425,7 @@
 				553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */,
 				3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
+				3A53021C29DC64D400888CFA /* UIView+.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
@@ -426,6 +433,7 @@
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
 				3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */,
+				3A53021A29DC649B00888CFA /* Combine+GestureRecognizer.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
 				553F0F9F28E4AEA300FD9CDA /* BbajiListCell.swift in Sources */,
 				55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */,

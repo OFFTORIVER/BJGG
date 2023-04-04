@@ -5,6 +5,8 @@
 //  Created by 황정현 on 2023/03/04.
 //
 
+import Combine
+import CombineCocoa
 import UIKit
 
 protocol ScreenSizeControlButtonDelegate: AnyObject {
@@ -34,22 +36,31 @@ final class ScreenSizeControlButton: UIButton {
     var screenSizeStatus: ScreenSizeStatus = .normal
     
     weak var delegate: ScreenSizeControlButtonDelegate?
+    private var cancellables = Set<AnyCancellable>()
     
     override init(frame: CGRect = CGRect()) {
         super.init(frame: frame)
-        
-        let image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        self.setImage(image, for: .normal)
-        self.addTarget(self, action: #selector(didPressScreenSizeControlButton), for: .touchUpInside)
-        
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func didPressScreenSizeControlButton() {
-        self.setImage(screenSizeStatus.changeButtonImage(), for: .normal)
-        self.delegate?.changeScreenSize(screenSizeStatus: screenSizeStatus)
+    private func configure() {
+        configureStyle()
+        configureAction()
+    }
+    
+    private func configureStyle() {
+        let image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        self.setImage(image, for: .normal)
+    }
+    
+    private func configureAction() {
+        self.tapPublisher.sink { [self] in
+            setImage(screenSizeStatus.changeButtonImage(), for: .normal)
+            delegate?.changeScreenSize(screenSizeStatus: screenSizeStatus)
+        }.store(in: &cancellables)
     }
 }

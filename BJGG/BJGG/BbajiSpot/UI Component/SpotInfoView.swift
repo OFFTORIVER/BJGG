@@ -5,6 +5,7 @@
 //  Created by 황정현 on 2022/09/18.
 //
 
+import Combine
 import UIKit
 
 final class SpotInfoView: UIView {
@@ -37,6 +38,8 @@ final class SpotInfoView: UIView {
         view.configureComponent(imageName: "telephone.png", description: bbajiInfo.getContact())
         return view
     }()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,16 +103,12 @@ final class SpotInfoView: UIView {
     }
     
     private func configureAction() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showContactLinkOption(_:)))
-        contactInfoView.descriptionLabel.addGestureRecognizer(tapGestureRecognizer)
-        contactInfoView.descriptionLabel.isUserInteractionEnabled = true
-    }
-    
-    @objc func showContactLinkOption(_ sender: UITapGestureRecognizer) {
-        let phoneNumber:Int = Int(bbajiInfo.getContact().components(separatedBy: ["-"]).joined()) ?? 01000000000
-        if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
-           UIApplication.shared.canOpenURL(url as URL) {
-            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-        }
+        contactInfoView.gesture().sink { [self] _ in
+            let phoneNumber:Int = Int(bbajiInfo.getContact().components(separatedBy: ["-"]).joined()) ?? 01000000000
+            if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
+               UIApplication.shared.canOpenURL(url as URL) {
+                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            }
+        }.store(in: &cancellables)
     }
 }

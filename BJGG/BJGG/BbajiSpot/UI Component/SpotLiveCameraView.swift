@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import Combine
 import SnapKit
 import UIKit
 
@@ -54,6 +55,8 @@ final class SpotLiveCameraView: UIView {
     private var playerItemContext = 0
 
     private var playerItem: AVPlayerItem?
+    
+    private var cancellables = Set<AnyCancellable>()
     
     override init(frame: CGRect  =  CGRect()) {
         super.init(frame: frame)
@@ -121,9 +124,13 @@ final class SpotLiveCameraView: UIView {
     }
     
     private func configureAction() {
-        let touchGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoPlayerScreen))
-        self.addGestureRecognizer(touchGesture)
-        reloadButton.addTarget(self, action: #selector(didPressReloadButton), for: .touchUpInside)
+        reloadButton.tapPublisher.sink { [self] _ in
+            reloadLiveCameraView()
+        }.store(in: &cancellables)
+        
+        self.gesture().sink { [self] _ in
+            controlStatus.changeControlStatus(view: videoPlayerControlView)
+        }.store(in: &cancellables)
     }
     
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
@@ -216,13 +223,6 @@ final class SpotLiveCameraView: UIView {
         stanbyView.reloadStandbyView()
     }
     
-    @objc private func didTapVideoPlayerScreen() {
-        controlStatus.changeControlStatus(view: videoPlayerControlView)
-    }
-    
-    @objc private func didPressReloadButton() {
-        reloadLiveCameraView()
-    }
 }
 
 extension SpotLiveCameraView {
