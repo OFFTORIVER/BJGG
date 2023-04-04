@@ -11,6 +11,8 @@
 		3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
 		3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A81FC28EEF86800D1FA20 /* Private.plist */; };
+		3A53021629DC26CA00888CFA /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A53021529DC26CA00888CFA /* CombineCocoa */; };
+		3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021729DC272300888CFA /* SpotViewModel.swift */; };
 		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
 		3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
@@ -55,9 +57,9 @@
 		55CB0AB128BA4FA10045644C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB028BA4FA10045644C /* Assets.xcassets */; };
 		55CB0AB428BA4FA10045644C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */; };
 		55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */; };
-		55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */; };
 		55F0AE6129BF5DE4003B5EEE /* Date+Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */; };
 		55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE6429C04C50003B5EEE /* WeatherTime.swift */; };
+		55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,7 @@
 		3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
 		3A4A81FC28EEF86800D1FA20 /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
+		3A53021729DC272300888CFA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
 		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
 		3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+DeviceCheck.swift"; sourceTree = "<group>"; };
 		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
@@ -110,9 +113,9 @@
 		55CB0AB328BA4FA10045644C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55CB0AB528BA4FA10045644C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewController.swift; sourceTree = "<group>"; };
-		55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeBackgroundImageView.swift; sourceTree = "<group>"; };
 		55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Weather.swift"; sourceTree = "<group>"; };
 		55F0AE6429C04C50003B5EEE /* WeatherTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTime.swift; sourceTree = "<group>"; };
+		55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeBackgroundImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A53021629DC26CA00888CFA /* CombineCocoa in Frameworks */,
 				3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +145,7 @@
 		3A7E3BE028D7657800F6416A /* BbajiSpot */ = {
 			isa = PBXGroup;
 			children = (
+				3A53021729DC272300888CFA /* SpotViewModel.swift */,
 				3A7E3BE128D765B500F6416A /* UI Component */,
 				3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */,
 			);
@@ -315,6 +320,7 @@
 			name = BJGG;
 			packageProductDependencies = (
 				3A7E3BD928D739CF00F6416A /* SnapKit */,
+				3A53021529DC26CA00888CFA /* CombineCocoa */,
 			);
 			productName = BJGG;
 			productReference = 55CB0AA428BA4F9F0045644C /* BJGG.app */;
@@ -346,6 +352,7 @@
 			mainGroup = 55CB0A9B28BA4F9F0045644C;
 			packageReferences = (
 				3A7E3BD828D739CF00F6416A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3A53021429DC26CA00888CFA /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 			);
 			productRefGroup = 55CB0AA528BA4F9F0045644C /* Products */;
 			projectDirPath = "";
@@ -398,6 +405,7 @@
 				553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */,
 				3AA636E529B391FF006BB5EF /* LiveMarkView.swift in Sources */,
 				558D99D929A5D8F900D633BF /* Constraints.swift in Sources */,
+				3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* InfoDescriptionView.swift in Sources */,
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,

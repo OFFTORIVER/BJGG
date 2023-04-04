@@ -5,6 +5,7 @@
 //  Created by 황정현 on 2022/09/18.
 //
 
+import Combine
 import UIKit
 import SnapKit
 
@@ -33,6 +34,9 @@ final class BbajiSpotViewController: UIViewController {
     
     private var screenWidth: CGFloat = CGFloat()
     private var firstAttempt: Bool = true
+    
+    private var viewModel = SpotViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +68,7 @@ final class BbajiSpotViewController: UIViewController {
         configureComponent()
         configureDelegate()
         configureNotification()
+        bind(viewModel: viewModel)
     }
     
     private func configureLayout() {
@@ -92,7 +97,7 @@ final class BbajiSpotViewController: UIViewController {
         })
         
         view.addSubview(infoScrollView)
-        infoScrollView.snp.makeConstraints({make in
+        infoScrollView.snp.makeConstraints({ make in
             make.top.equalTo(liveCameraView.snp.bottom)
             make.leading.equalTo(safeArea.snp.leading)
             make.trailing.equalTo(safeArea.snp.trailing)
@@ -134,43 +139,7 @@ final class BbajiSpotViewController: UIViewController {
     }
     
     func configureComponent() {
-        
         liveMarkView.liveMarkActive(to: false)
-        
-        let weatherManager = WeatherManager()
-        
-        Task {
-            do {
-                let weatherItems = try await weatherManager.request24HWeather(nx: 61, ny: 126).response.body.items
-                let weatherSet = weatherItems.request24HourWeatherItem()
-                let rainData = weatherItems.requestRainInfoText()
-                let weatherData = weatherItems.requestWeatherDataSet(weatherSet)
-                
-                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherInfoTuple: weatherData)
-                spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
-                spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
-            } catch {
-                spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: false, weatherInfoTuple: [])
-                
-                if let weatherManagerError = error as? WeatherManagerError {
-                    switch weatherManagerError {
-                    case .networkError(let message):
-                        print(message)
-                    case .apiError(let message):
-                        print(message)
-                    }
-                } else if let decodingError = error as? DecodingError {
-                    switch decodingError {
-                    case .dataCorrupted(let context):
-                        print(context.codingPath, context.debugDescription, context.underlyingError ?? "", separator: "\n")
-                    default:
-                        print(decodingError.localizedDescription)
-                    }
-                } else {
-                    print(error.localizedDescription)
-                }
-            }
-        }
     }
     
     private func configureDelegate() {
@@ -183,6 +152,21 @@ final class BbajiSpotViewController: UIViewController {
         
         notificationCenter.addObserver(self, selector: #selector(toBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(toForeground),name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    private func bind(viewModel: SpotViewModel) {
+        Task {
+            let output = await viewModel.transform()
+            
+            output?.weatherData.sink { [weak self] weatherData in
+                self?.spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherData: weatherData)
+                self?.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
+            }.store(in: &cancellables)
+            
+            output?.rainData.sink { [weak self] rainData in
+                self?.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
+            }.store(in: &cancellables)
+        }
     }
     
     @objc private func toBackground() {
@@ -199,6 +183,7 @@ final class BbajiSpotViewController: UIViewController {
             
         }
     }
+    
     
     private func setUpLiveCameraViewConstraints(screenStatus: ScreenSizeStatus) {
         
@@ -245,12 +230,14 @@ final class BbajiSpotViewController: UIViewController {
     }
 }
 
+// MARK: ViewModel 편입부
 extension BbajiSpotViewController: SpotLiveCameraViewDelegate {
     func videoIsReadyToPlay() {
         liveMarkView.liveMarkActive(to: true)
     }
 }
 
+// MARK: ViewModel 편입부
 extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
 {
     func changeScreenSize(screenSizeStatus: ScreenSizeStatus) {
