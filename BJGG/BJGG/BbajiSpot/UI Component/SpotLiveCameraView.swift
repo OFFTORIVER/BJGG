@@ -16,11 +16,8 @@ protocol SpotLiveCameraViewDelegate: AnyObject {
 
 final class SpotLiveCameraView: UIView {
     
-    var controlStatus: ControlStatus = .hidden
-    
-    
-    var videoPlayerControlView: SpotLiveCameraControlView = {
-        let view = SpotLiveCameraControlView()
+    lazy var videoPlayerControlView: SpotLiveCameraControlView = {
+        let view = SpotLiveCameraControlView(viewModel: viewModel)
         view.alpha = 0.0
         return view
     }()
@@ -56,12 +53,15 @@ final class SpotLiveCameraView: UIView {
 
     private var playerItem: AVPlayerItem?
     
+    private let viewModel: SpotViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    override init(frame: CGRect  =  CGRect()) {
-        super.init(frame: frame)
+    init(viewModel: SpotViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: CGRect.zero)
 
         configure()
+        bind(viewModel: viewModel)
         playVideo()
     }
     
@@ -129,10 +129,16 @@ final class SpotLiveCameraView: UIView {
         }.store(in: &cancellables)
         
         self.gesture().sink { [self] _ in
-            controlStatus.changeControlStatus(view: videoPlayerControlView)
+            viewModel.changeControlStatus()
         }.store(in: &cancellables)
     }
     
+    private func bind(viewModel: SpotViewModel) {
+        viewModel.controlStatus.sink { [self] status in
+            status.changeControlStatusView(view: videoPlayerControlView)
+        }.store(in: &cancellables)
+        
+    }
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
         let asset = AVAsset(url: url)
         
@@ -177,6 +183,7 @@ final class SpotLiveCameraView: UIView {
             case .readyToPlay:
                 print(".readyToPlay")
                 delegate?.videoIsReadyToPlay()
+                
                 player?.play()
             case .failed:
                 stanbyView.stopLoadingAnimation()
@@ -223,26 +230,4 @@ final class SpotLiveCameraView: UIView {
         stanbyView.reloadStandbyView()
     }
     
-}
-
-extension SpotLiveCameraView {
-    enum ControlStatus {
-        case exist
-        case hidden
-        
-        mutating func changeControlStatus(view: UIView) {
-            switch self {
-            case .exist:
-                UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
-                    view.alpha = 0.0
-                })
-                self = .hidden
-            case .hidden:
-                UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
-                    view.alpha = 1.0
-                })
-                self = .exist
-            }
-        }
-    }
 }

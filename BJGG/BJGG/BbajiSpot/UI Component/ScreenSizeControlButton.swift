@@ -9,38 +9,16 @@ import Combine
 import CombineCocoa
 import UIKit
 
-protocol ScreenSizeControlButtonDelegate: AnyObject {
-    func changeScreenSize(screenSizeStatus: ScreenSizeStatus)
-}
-
-enum ScreenSizeStatus {
-    case normal
-    case full
-    
-    mutating func changeButtonImage() -> UIImage {
-        switch self {
-        case .normal:
-            self = .full
-            let image = UIImage(systemName: "arrow.down.right.and.arrow.up.left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-            return image!
-        case .full:
-            self = .normal
-            let image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-            return image!
-        }
-    }
-}
-
 final class ScreenSizeControlButton: UIButton {
     
-    var screenSizeStatus: ScreenSizeStatus = .normal
-    
-    weak var delegate: ScreenSizeControlButtonDelegate?
+    private var viewModel: SpotViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    override init(frame: CGRect = CGRect()) {
-        super.init(frame: frame)
+    init(viewModel: SpotViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: CGRect.zero)
         configure()
+        bind(viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -59,8 +37,13 @@ final class ScreenSizeControlButton: UIButton {
     
     private func configureAction() {
         self.tapPublisher.sink { [self] in
-            setImage(screenSizeStatus.changeButtonImage(), for: .normal)
-            delegate?.changeScreenSize(screenSizeStatus: screenSizeStatus)
+            viewModel.changeScreenSizeStatus()
+        }.store(in: &cancellables)
+    }
+    
+    private func bind(viewModel: SpotViewModel) {
+        viewModel.screenSizeStatus.sink { [weak self] status in
+            self?.setImage(status.changeButtonImage(), for: .normal)
         }.store(in: &cancellables)
     }
 }

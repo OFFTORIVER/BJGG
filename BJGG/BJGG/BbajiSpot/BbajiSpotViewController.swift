@@ -11,7 +11,7 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     
-    let liveCameraView = SpotLiveCameraView()
+    lazy var liveCameraView = SpotLiveCameraView(viewModel: viewModel)
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
     private var spotInfoView: SpotInfoView = {
@@ -45,19 +45,19 @@ final class BbajiSpotViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        switch liveCameraView.videoPlayerControlView.screenSizeControlButton.screenSizeStatus {
+        switch viewModel.screenSizeStatus.value {
         case .full:
             return true
-        case .normal:
+        case .normal, .origin:
             return false
         }
     }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
-        switch liveCameraView.videoPlayerControlView.screenSizeControlButton.screenSizeStatus {
+        switch viewModel.screenSizeStatus.value {
         case .full:
             return true
-        case .normal:
+        case .normal, .origin:
             return false
         }
     }
@@ -140,11 +140,11 @@ final class BbajiSpotViewController: UIViewController {
     
     func configureComponent() {
         liveMarkView.liveMarkActive(to: false)
+        setUpLiveCameraViewConstraints(screenStatus: .normal)
     }
     
     private func configureDelegate() {
         liveCameraView.delegate = self
-        liveCameraView.videoPlayerControlView.screenSizeControlButton.delegate = self
     }
     
     private func configureNotification() {
@@ -167,6 +167,11 @@ final class BbajiSpotViewController: UIViewController {
                 self?.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
         }
+        
+        viewModel.screenSizeStatus.sink { [weak self] status in
+            if status == .origin { return }
+            self?.changeScreenSize(screenSizeStatus: status)
+        }.store(in: &cancellables)
     }
     
     @objc private func toBackground() {
@@ -191,7 +196,7 @@ final class BbajiSpotViewController: UIViewController {
         liveMarkView.snp.removeConstraints()
         
         switch screenStatus {
-        case .normal:
+        case .normal, .origin:
             let liveCameraViewHeight = screenWidth * 9 / 16
             
             liveCameraView.snp.makeConstraints({ make in
@@ -211,7 +216,7 @@ final class BbajiSpotViewController: UIViewController {
             
             let liveCameraviewHeight = UIScreen.main.bounds.width
             let liveCameraViewWidth = liveCameraviewHeight * 16 / 9
-
+            
             liveCameraView.snp.makeConstraints({ make in
                 make.top.equalTo(view.snp.top)
                 make.bottom.equalTo(view.snp.bottom)
@@ -236,8 +241,7 @@ extension BbajiSpotViewController: SpotLiveCameraViewDelegate {
     }
 }
 
-// MARK: ViewModel 편입부
-extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
+extension BbajiSpotViewController
 {
     func changeScreenSize(screenSizeStatus: ScreenSizeStatus) {
         var infoViewAlphaValue: CGFloat = 1.0
@@ -245,7 +249,7 @@ extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
         var orientationValue: String = "portrait"
         var navigationBarHiddenStatus: Bool = false
         switch screenSizeStatus {
-        case .normal:
+        case .normal, .origin:
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.orientationLock = .portrait
             }
@@ -253,7 +257,7 @@ extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.orientationLock = .landscapeRight
             }
-
+            
             infoViewAlphaValue = 0.0
             orientationValue = "landscapeRight"
             backgroundColor = .black
@@ -267,6 +271,7 @@ extension BbajiSpotViewController: ScreenSizeControlButtonDelegate
         }
         
         navigationController?.setNavigationBarHidden(navigationBarHiddenStatus, animated: true)
+        
         setUpLiveCameraViewConstraints(screenStatus: screenSizeStatus)
         UIView.animate(withDuration: 0.3, delay: TimeInterval(0.0), animations: { [self] in
             infoScrollView.alpha = infoViewAlphaValue
