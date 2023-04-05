@@ -5,6 +5,7 @@
 //  Created by 황정현 on 2023/03/04.
 //
 
+import Combine
 import UIKit
 import SnapKit
 
@@ -18,11 +19,15 @@ final class LiveMarkView: UIView {
         return label
     }()
     
-    override init(frame: CGRect  =  CGRect()) {
-        super.init(frame: frame)
-
-        backgroundColor = UIColor.lightGray
+    private let viewModel: SpotViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: SpotViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: CGRect.zero)
+        
         configure()
+        bind(viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -31,6 +36,7 @@ final class LiveMarkView: UIView {
     
     private func configure() {
         configureLayout()
+        configureStyle()
     }
 
     private func configureLayout() {
@@ -43,10 +49,28 @@ final class LiveMarkView: UIView {
         }
     }
     
+    private func configureStyle() {
+        backgroundColor = UIColor.lightGray
+    }
+    
+    private func bind(viewModel: SpotViewModel) {
+        viewModel.readyToPlay.sink { [weak self] status in
+            if status == .readyToPlay {
+                self?.liveMarkActive(to: true)
+            } else {
+                self?.liveMarkActive(to: false)
+            }
+            
+        }.store(in: &cancellables)
+    }
+    
     func setUpLiveLabelRadius(to: CGFloat) {
         self.layer.cornerRadius = to
     }
-    
+}
+
+// MARK: ViewModel 호출 메소드
+extension LiveMarkView {
     func liveMarkActive(to active: Bool) {
         let currentColor = backgroundColor
         var targetBackgroundColor: UIColor? = currentColor
@@ -67,4 +91,5 @@ final class LiveMarkView: UIView {
             self.isHidden = !active
         })
     }
+
 }

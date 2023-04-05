@@ -27,7 +27,7 @@ final class BbajiSpotViewController: UIViewController {
     }()
     
     private lazy var liveMarkView: LiveMarkView = {
-        let view = LiveMarkView()
+        let view = LiveMarkView(viewModel: viewModel)
         view.setUpLiveLabelRadius(to: screenWidth / 36)
         return view
     }()
@@ -42,6 +42,11 @@ final class BbajiSpotViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        liveCameraView.stanbyView.stopLoadingAnimation()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -66,7 +71,6 @@ final class BbajiSpotViewController: UIViewController {
         configureLayout()
         configureStyle()
         configureComponent()
-        configureDelegate()
         configureNotification()
         bind(viewModel: viewModel)
     }
@@ -143,10 +147,6 @@ final class BbajiSpotViewController: UIViewController {
         setUpLiveCameraViewConstraints(screenStatus: .normal)
     }
     
-    private func configureDelegate() {
-        liveCameraView.delegate = self
-    }
-    
     private func configureNotification() {
         let notificationCenter = NotificationCenter.default
         
@@ -182,9 +182,7 @@ final class BbajiSpotViewController: UIViewController {
     
     @objc private func toForeground() {
         if !firstAttempt {
-            liveCameraView.playVideo()
-            liveCameraView.changeReloadButtonActiveStatus(as: false)
-            liveCameraView.stanbyView.reloadStandbyView()
+            viewModel.isReadyToPlay(as: .origin)
             
         }
     }
@@ -231,13 +229,6 @@ final class BbajiSpotViewController: UIViewController {
                 make.height.equalTo(screenWidth / 18)
             })
         }
-    }
-}
-
-// MARK: ViewModel 편입부
-extension BbajiSpotViewController: SpotLiveCameraViewDelegate {
-    func videoIsReadyToPlay() {
-        liveMarkView.liveMarkActive(to: true)
     }
 }
 

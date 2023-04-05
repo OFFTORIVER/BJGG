@@ -9,48 +9,6 @@ import Combine
 import CombineCocoa
 import UIKit
 
-struct WeatherData {
-    let time: String
-    let iconName: String
-    let temp: String
-    let probability: String
-}
-
-enum ScreenSizeStatus {
-    case normal
-    case full
-    case origin
-    
-    func changeButtonImage() -> UIImage {
-        switch self {
-        case .normal, .origin:
-            let image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-            return image!
-        case .full:
-            let image = UIImage(systemName: "arrow.down.right.and.arrow.up.left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-            return image!
-        }
-    }
-}
-
-enum ControlStatus {
-    case exist
-    case hidden
-    
-    func changeControlStatusView(view: UIView) {
-        switch self {
-        case .exist:
-            UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
-                view.alpha = 0.0
-            })
-        case .hidden:
-            UIView.animate(withDuration: 0.2, delay: TimeInterval(0.0), animations: {
-                view.alpha = 1.0
-            })
-        }
-    }
-}
-
 protocol OutputOnlyViewModelType {
     associatedtype Output
     
@@ -61,7 +19,7 @@ final class SpotViewModel: OutputOnlyViewModelType {
     
     var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
     var screenSizeStatus: CurrentValueSubject<ScreenSizeStatus, Never> = CurrentValueSubject(.origin)
-    var readyToPlay: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
+    var readyToPlay: CurrentValueSubject<PlayerStatus, Never> = CurrentValueSubject(.origin)
     
     let weatherManager: WeatherManager
 
@@ -127,5 +85,9 @@ final class SpotViewModel: OutputOnlyViewModelType {
         } else {
             controlStatus.send(.hidden)
         }
+    }
+    
+    func isReadyToPlay(as status: PlayerStatus) {
+        readyToPlay.send(status)
     }
 }

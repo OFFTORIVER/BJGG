@@ -10,10 +10,6 @@ import Combine
 import SnapKit
 import UIKit
 
-protocol SpotLiveCameraViewDelegate: AnyObject {
-    func videoIsReadyToPlay()
-}
-
 final class SpotLiveCameraView: UIView {
     
     lazy var videoPlayerControlView: SpotLiveCameraControlView = {
@@ -33,8 +29,6 @@ final class SpotLiveCameraView: UIView {
         button.setImage(image, for: .normal)
         return button
     }()
-    
-    weak var delegate: SpotLiveCameraViewDelegate?
     
     var player: AVPlayer? {
         get {
@@ -62,7 +56,6 @@ final class SpotLiveCameraView: UIView {
 
         configure()
         bind(viewModel: viewModel)
-        playVideo()
     }
     
     required init?(coder: NSCoder) {
@@ -125,7 +118,7 @@ final class SpotLiveCameraView: UIView {
     
     private func configureAction() {
         reloadButton.tapPublisher.sink { [self] _ in
-            reloadLiveCameraView()
+            viewModel.isReadyToPlay(as: .origin)
         }.store(in: &cancellables)
         
         self.gesture().sink { [self] _ in
@@ -138,7 +131,23 @@ final class SpotLiveCameraView: UIView {
             status.changeControlStatusView(view: videoPlayerControlView)
         }.store(in: &cancellables)
         
+        viewModel.readyToPlay.sink { [self] status in
+            switch status {
+            case .origin:
+                playVideo()
+                changeReloadButtonActiveStatus(as: false)
+                stanbyView.reloadStandbyView()
+            case .readyToPlay:
+                changeReloadButtonActiveStatus(as: false)
+                stanbyView.changeStandbyView(isStandbyNeed: false)
+            case .failed:
+                changeReloadButtonActiveStatus(as: true)
+                stanbyView.stopLoadingAnimation()
+                stanbyView.changeStandbyView(isStandbyNeed: true)
+            }
+        }.store(in: &cancellables)
     }
+    
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
         let asset = AVAsset(url: url)
         
@@ -182,52 +191,40 @@ final class SpotLiveCameraView: UIView {
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
-                delegate?.videoIsReadyToPlay()
-                
+                viewModel.isReadyToPlay(as: .readyToPlay)
                 player?.play()
             case .failed:
-                stanbyView.stopLoadingAnimation()
-                changeReloadButtonActiveStatus(as: true)
+                viewModel.isReadyToPlay(as: .failed)
                 print(".failed")
             case .unknown:
                 print(".unknown")
-                stanbyView.stopLoadingAnimation()
-                changeReloadButtonActiveStatus(as: true)
+                viewModel.isReadyToPlay(as: .failed)
             @unknown default:
                 print("@unknown default")
             }
-            stanbyView.changeStandbyView(as: status)
         }
     }
     
-    func play(with url: URL) {
+    private func play(with url: URL) {
         setUpAsset(with: url) { [weak self] (asset: AVAsset) in
             self?.setUpPlayerItem(with: asset)
         }
     }
     
-    func playVideo() {
+    private func playVideo() {
         interactionEnableStatus(as: true)
         guard let url = URL(string: videoURL) else { return }
         self.play(with: url)
     }
     
-    func replay() {
-        playerLayer.player?.play()
-    }
-    
-    func interactionEnableStatus(as isActive: Bool) {
+    private func interactionEnableStatus(as isActive: Bool) {
         self.isUserInteractionEnabled = isActive
     }
-    
-    func changeReloadButtonActiveStatus(as active: Bool) {
+}
+
+// MARK: ViewModel 호출 메소드
+extension SpotLiveCameraView {
+    private func changeReloadButtonActiveStatus(as active: Bool) {
         reloadButton.isHidden = !active
     }
-    
-    func reloadLiveCameraView() {
-        self.playVideo()
-        changeReloadButtonActiveStatus(as: false)
-        stanbyView.reloadStandbyView()
-    }
-    
 }

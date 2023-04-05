@@ -17,6 +17,7 @@ final class SpotLiveCameraStandbyView: UIView {
         guard let mainLabelFont = UIFont(name: "esamanruOTFBold", size: 100), let subLabelFont = UIFont(name: "esamanruOTFBold", size: 20) else { return  UILabel() }
         label.configureLabelStyle(font: mainLabelFont, alignment: .center)
         label.textColor = .bbagaBlue
+        label.text = "물"
         return label
     }()
     
@@ -25,6 +26,7 @@ final class SpotLiveCameraStandbyView: UIView {
         guard let mainLabelFont = UIFont(name: "esamanruOTFBold", size: 100), let subLabelFont = UIFont(name: "esamanruOTFBold", size: 20) else { return UILabel() }
         label.configureLabelStyle(font: subLabelFont, alignment: .center)
         label.textColor = .bbagaGray3
+        label.text = "이 들어오는 중이에요"
         return label
     }()
     
@@ -43,7 +45,6 @@ final class SpotLiveCameraStandbyView: UIView {
     private func configure() {
         configureLayout()
         configureStyle()
-        configureComponent()
     }
     
     func configureLayout() {
@@ -68,14 +69,10 @@ final class SpotLiveCameraStandbyView: UIView {
         self.alpha = 1.0
         self.backgroundColor = .black.withAlphaComponent(0.3)
     }
-    
-    private func configureComponent() {
-        mainLabel.text = "물"
-        subLabel.text = "이 들어오는 중이에요"
-        
-        makeLoadingAnimation()
-    }
-    
+}
+
+// MARK: ViewModel 호출 메소드
+extension SpotLiveCameraStandbyView {
     func reloadStandbyView() {
         self.alpha = 1.0
         mainLabel.textColor = .bbagaBlue
@@ -85,16 +82,15 @@ final class SpotLiveCameraStandbyView: UIView {
         makeLoadingAnimation()
     }
     
-    func changeStandbyView(as status: AVPlayerItem.Status) {
-        switch status {
-        case .readyToPlay:
-            UIView.animate(withDuration: 0.7, animations: {
-                self.alpha = 0.0
-            })
-        default:
+    func changeStandbyView(isStandbyNeed: Bool) {
+        if isStandbyNeed {
             backgroundColor = UIColor(rgb: 0x4C4C4C)
             mainLabel.textColor = UIColor(rgb: 0x626262)
             subLabel.text = "을 불러오지 못했어요"
+        } else {
+            UIView.animate(withDuration: 0.7, animations: {
+                self.alpha = 0.0
+            })
         }
     }
     
@@ -122,4 +118,5 @@ final class SpotLiveCameraStandbyView: UIView {
         timer?.connect().cancel()
         timer = nil
     }
+
 }
