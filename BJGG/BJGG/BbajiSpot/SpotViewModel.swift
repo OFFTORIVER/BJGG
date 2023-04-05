@@ -19,7 +19,7 @@ final class SpotViewModel: OutputOnlyViewModelType {
     
     var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
     var screenSizeStatus: CurrentValueSubject<ScreenSizeStatus, Never> = CurrentValueSubject(.origin)
-    var readyToPlay: CurrentValueSubject<PlayerStatus, Never> = CurrentValueSubject(.origin)
+    var playStatus: CurrentValueSubject<PlayStatus, Never> = CurrentValueSubject(.origin)
     
     let weatherManager: WeatherManager
 
@@ -87,7 +87,7 @@ final class SpotViewModel: OutputOnlyViewModelType {
         }
     }
     
-    func isReadyToPlay(as status: PlayerStatus) {
-        readyToPlay.send(status)
+    func changePlayStatus(as status: PlayStatus) {
+        playStatus.send(status)
     }
 }

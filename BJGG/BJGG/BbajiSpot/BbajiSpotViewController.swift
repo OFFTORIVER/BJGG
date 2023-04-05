@@ -182,7 +182,7 @@ final class BbajiSpotViewController: UIViewController {
     
     @objc private func toForeground() {
         if !firstAttempt {
-            viewModel.isReadyToPlay(as: .origin)
+            viewModel.changePlayStatus(as: .origin)
             
         }
     }

@@ -54,7 +54,7 @@ final class LiveMarkView: UIView {
     }
     
     private func bind(viewModel: SpotViewModel) {
-        viewModel.readyToPlay.sink { [weak self] status in
+        viewModel.playStatus.sink { [weak self] status in
             if status == .readyToPlay {
                 self?.liveMarkActive(to: true)
             } else {

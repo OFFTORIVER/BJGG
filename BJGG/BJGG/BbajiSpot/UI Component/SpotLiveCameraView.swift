@@ -118,7 +118,7 @@ final class SpotLiveCameraView: UIView {
     
     private func configureAction() {
         reloadButton.tapPublisher.sink { [self] _ in
-            viewModel.isReadyToPlay(as: .origin)
+            viewModel.changePlayStatus(as: .origin)
         }.store(in: &cancellables)
         
         self.gesture().sink { [self] _ in
@@ -131,7 +131,7 @@ final class SpotLiveCameraView: UIView {
             status.changeControlStatusView(view: videoPlayerControlView)
         }.store(in: &cancellables)
         
-        viewModel.readyToPlay.sink { [self] status in
+        viewModel.playStatus.sink { [self] status in
             switch status {
             case .origin:
                 playVideo()
@@ -191,14 +191,14 @@ final class SpotLiveCameraView: UIView {
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
-                viewModel.isReadyToPlay(as: .readyToPlay)
+                viewModel.changePlayStatus(as: .readyToPlay)
                 player?.play()
             case .failed:
-                viewModel.isReadyToPlay(as: .failed)
+                viewModel.changePlayStatus(as: .failed)
                 print(".failed")
             case .unknown:
                 print(".unknown")
-                viewModel.isReadyToPlay(as: .failed)
+                viewModel.changePlayStatus(as: .failed)
             @unknown default:
                 print("@unknown default")
             }
