@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import Combine
 import SnapKit
 import UIKit
 
@@ -27,7 +28,8 @@ final class SpotLiveCameraStandbyView: UIView {
         return label
     }()
     
-    private var timer: Timer?
+    private var timer: Timer.TimerPublisher?
+    private var cancellables = Set<AnyCancellable>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,20 +102,24 @@ final class SpotLiveCameraStandbyView: UIView {
         let text = "이 들어오는 중이에요"
         subLabel.text = "\(text)."
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [self] (timer) in
-            var string: String {
-                switch subLabel.text {
-                case "\(text).":       return "\(text).."
-                case "\(text)..":      return "\(text)..."
-                case "\(text)...":     return "\(text)."
-                default:                return "\(text)"
+        timer = Timer.publish(every: 0.5, tolerance: 0.9, on: .main, in: .default)
+        timer?
+            .autoconnect()
+            .sink { [self] counter in
+                var string: String {
+                    switch subLabel.text {
+                    case "\(text).":       return "\(text).."
+                    case "\(text)..":      return "\(text)..."
+                    case "\(text)...":     return "\(text)."
+                    default:                return "\(text)"
+                    }
                 }
-            }
-            subLabel.text = string
-        }
+                subLabel.text = string
+            }.store(in: &cancellables)
     }
     
     func stopLoadingAnimation() {
-        timer?.invalidate()
+        timer?.connect().cancel()
+        timer = nil
     }
 }
