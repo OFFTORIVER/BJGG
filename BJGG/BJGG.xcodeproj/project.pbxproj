@@ -15,6 +15,10 @@
 		3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021729DC272300888CFA /* SpotViewModel.swift */; };
 		3A53021A29DC649B00888CFA /* Combine+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */; };
 		3A53021C29DC64D400888CFA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021B29DC64D400888CFA /* UIView+.swift */; };
+		3A53022329DD9EB500888CFA /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53022229DD9EB500888CFA /* WeatherData.swift */; };
+		3A53022529DD9ED800888CFA /* ScreenSizeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53022429DD9ED800888CFA /* ScreenSizeStatus.swift */; };
+		3A53022729DD9EEC00888CFA /* ControlStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53022629DD9EEC00888CFA /* ControlStatus.swift */; };
+		3A53022929DD9EF700888CFA /* PlayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53022829DD9EF700888CFA /* PlayStatus.swift */; };
 		3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */; };
 		3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */; };
 		3A7E3BDA28D739CF00F6416A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7E3BD928D739CF00F6416A /* SnapKit */; };
@@ -72,6 +76,10 @@
 		3A53021729DC272300888CFA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
 		3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+GestureRecognizer.swift"; sourceTree = "<group>"; };
 		3A53021B29DC64D400888CFA /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		3A53022229DD9EB500888CFA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		3A53022429DD9ED800888CFA /* ScreenSizeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSizeStatus.swift; sourceTree = "<group>"; };
+		3A53022629DD9EEC00888CFA /* ControlStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlStatus.swift; sourceTree = "<group>"; };
+		3A53022829DD9EF700888CFA /* PlayStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayStatus.swift; sourceTree = "<group>"; };
 		3A5E18F228E4570000CBEDE3 /* UILabel+CopyLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CopyLabelText.swift"; sourceTree = "<group>"; };
 		3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+DeviceCheck.swift"; sourceTree = "<group>"; };
 		3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiInfo.swift; sourceTree = "<group>"; };
@@ -135,9 +143,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A53022129DD9EA200888CFA /* BbajiSpot */ = {
+			isa = PBXGroup;
+			children = (
+				3A53022229DD9EB500888CFA /* WeatherData.swift */,
+				3A53022429DD9ED800888CFA /* ScreenSizeStatus.swift */,
+				3A53022629DD9EEC00888CFA /* ControlStatus.swift */,
+				3A53022829DD9EF700888CFA /* PlayStatus.swift */,
+			);
+			path = BbajiSpot;
+			sourceTree = "<group>";
+		};
 		3A7E3BDB28D7427E00F6416A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A53022129DD9EA200888CFA /* BbajiSpot */,
 				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
 				553F0FA628E9E11E00FD9CDA /* Weather.swift */,
 				55F0AE6429C04C50003B5EEE /* WeatherTime.swift */,
@@ -407,11 +427,13 @@
 				553F0FA128E4C58600FD9CDA /* BbajiListCellShadowView.swift in Sources */,
 				3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift in Sources */,
 				55F0AE6129BF5DE4003B5EEE /* Date+Weather.swift in Sources */,
+				3A53022329DD9EB500888CFA /* WeatherData.swift in Sources */,
 				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
 				553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */,
 				3AA636E529B391FF006BB5EF /* LiveMarkView.swift in Sources */,
 				558D99D929A5D8F900D633BF /* Constraints.swift in Sources */,
 				3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */,
+				3A53022529DD9ED800888CFA /* ScreenSizeStatus.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* InfoDescriptionView.swift in Sources */,
 				55CB0AA828BA4F9F0045644C /* AppDelegate.swift in Sources */,
@@ -421,8 +443,10 @@
 				553F0F8228E2100000FD9CDA /* UIFont+CustomFont.swift in Sources */,
 				3A7E3BE928D7670000F6416A /* SpotInfoView.swift in Sources */,
 				3AA636E329B390EE006BB5EF /* ScreenSizeControlButton.swift in Sources */,
+				3A53022929DD9EF700888CFA /* PlayStatus.swift in Sources */,
 				3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */,
 				553F0F9828E49DC200FD9CDA /* BbajiTitleView.swift in Sources */,
+				3A53022729DD9EEC00888CFA /* ControlStatus.swift in Sources */,
 				3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A53021C29DC64D400888CFA /* UIView+.swift in Sources */,
@@ -654,6 +678,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A53021429DC26CA00888CFA /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		3A7E3BD828D739CF00F6416A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -665,6 +697,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A53021529DC26CA00888CFA /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A53021429DC26CA00888CFA /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
 		3A7E3BD928D739CF00F6416A /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A7E3BD828D739CF00F6416A /* XCRemoteSwiftPackageReference "SnapKit" */;
