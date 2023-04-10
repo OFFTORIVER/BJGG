@@ -90,4 +90,12 @@ final class SpotViewModel: OutputOnlyViewModelType {
     func changePlayStatus(as status: PlayStatus) {
         playStatus.send(status)
     }
+    
+    func callBbaji(to phoneNumberStr: String) {
+        let phoneNumber:Int = Int(phoneNumberStr.components(separatedBy: ["-"]).joined()) ?? 01000000000
+        if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
+           UIApplication.shared.canOpenURL(url as URL) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    }
 }

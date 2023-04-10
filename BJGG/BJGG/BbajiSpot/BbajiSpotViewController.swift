@@ -14,8 +14,8 @@ final class BbajiSpotViewController: UIViewController {
     lazy var liveCameraView = SpotLiveCameraView(viewModel: viewModel)
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
-    private var spotInfoView: SpotInfoView = {
-        let view = SpotInfoView()
+    private lazy var spotInfoView: SpotInfoView = {
+        let view = SpotInfoView(viewModel: viewModel)
         view.backgroundColor = .bbagaGray4
         return view
     }()

@@ -39,10 +39,12 @@ final class SpotInfoView: UIView {
         return view
     }()
     
+    private let viewModel: SpotViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: SpotViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: CGRect.zero)
         
         configure()
     }
@@ -104,11 +106,7 @@ final class SpotInfoView: UIView {
     
     private func configureAction() {
         contactInfoView.gesture().sink { [self] _ in
-            let phoneNumber:Int = Int(bbajiInfo.getContact().components(separatedBy: ["-"]).joined()) ?? 01000000000
-            if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
-               UIApplication.shared.canOpenURL(url as URL) {
-                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-            }
+            viewModel.callBbaji(to: bbajiInfo.getContact())
         }.store(in: &cancellables)
     }
 }
