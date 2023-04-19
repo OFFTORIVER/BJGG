@@ -29,7 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 if let rootVC = self.window?.rootViewController as? UINavigationController {
                     if rootVC.viewControllers.count == 1 {
                         if let vc = rootVC.viewControllers[0] as? BbajiHomeViewController {
-                            vc.configureComponent()
+                            //TODO: 코드 사용법 문의 후 재수정 필요 (현재 BbajiHomeViewController에서 configureComponenet 제거상태)
+//                            vc.configureComponent()
                             return
                         }
                     } else if rootVC.viewControllers.count == 2 {
