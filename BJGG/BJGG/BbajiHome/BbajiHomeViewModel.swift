@@ -17,7 +17,7 @@ final class BbajiHomeViewModel: ObservableObject {
         fetchBbajiHomeWeather(weatherManager: weatherManager)
     }
     
-    func fetchBbajiHomeWeather(weatherManager: WeatherManager) {
+    private func fetchBbajiHomeWeather(weatherManager: WeatherManager) {
         let bbajiInfo = BbajiInfo()
         let bbajiCoord = bbajiInfo.getCoordinate()
         

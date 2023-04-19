@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 typealias BbajiHomeWeather = (time: String, iconName: String, temp: String, probability: String)
 
@@ -19,10 +20,26 @@ final class BbajiHomeViewController: UIViewController {
     private let bbajiInfoArray = [BbajiInfo()]
     private var weatherData: [BbajiHomeWeather] = []
     
+    private let viewModel = BbajiHomeViewModel()
+    private var cancellable = Set<AnyCancellable>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
+        
+        let listInfoArray = convertToListInfoArray(from: bbajiInfoArray)
+        
+        viewModel.$homeWeather
+            .receive(on: DispatchQueue.main)
+            .map { [weak self] homeWeathers in
+                return self?.convertToListWeatherArray(from: homeWeathers) ?? []
+            }
+            .sink { [weak self] listWeathers in
+                print("sink success")
+                self?.bbajiListView.configure(listWeathers, listInfoArray: listInfoArray)
+            }
+            .store(in: &cancellable)
     }
     
     private func configure() {
@@ -40,42 +57,11 @@ extension BbajiHomeViewController: BbajiListViewDelegate {
 
 extension BbajiHomeViewController {
     func configureComponent() {
-        Task {
-            do {
-                weatherData = try await requestWeatherData()
-                bbajiListView.configure(
-                    convertToListWeatherArray(from: weatherData),
-                    listInfoArray: convertToListInfoArray(from: bbajiInfoArray)
-                )
-            } catch WeatherManagerError.apiError(let message) {
-                print(message)
-            } catch WeatherManagerError.networkError(let message) {
-                print(message)
-            } catch DecodingError.dataCorrupted(let description) {
-                print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+
     }
 }
 
 private extension BbajiHomeViewController {
-    private func requestWeatherData() async throws -> [BbajiHomeWeather] {
-        weatherManager = WeatherManager()
-
-        let bbajiCoorX = bbajiInfoArray[0].getCoordinate().x
-        let bbajiCoorY = bbajiInfoArray[0].getCoordinate().y
-        var data: [BbajiHomeWeather] = []
-        
-        if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
-            let weatherSet = weatherItems.requestCurrentWeatherItem()
-            data = weatherItems.requestWeatherDataSet(weatherSet)
-        }
-        
-        return data
-    }
-    
     func configureDelegate() {
         bbajiListView.bbajiListViewDelegate = self
     }
@@ -156,7 +142,7 @@ private extension BbajiHomeViewController {
         return listInfoArray
     }
     
-    func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [BbajiListWeather] {
+    func convertToListWeatherArray(from weatherData: [BbajiHomeWeather]) -> [BbajiListWeather] {
         var listWeatherArray: [BbajiListWeather] = []
         for weather in weatherData {
             let listWeather = BbajiListWeather(weather.iconName, weather.temp)
