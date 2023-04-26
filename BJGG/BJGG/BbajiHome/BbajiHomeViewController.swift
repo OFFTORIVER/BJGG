@@ -15,31 +15,25 @@ final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiTitleView = BbajiTitleView()
     private lazy var bbajiListView = BbajiListView()
     private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
-
-    private var weatherManager: WeatherManager?
-    private let bbajiInfoArray = [BbajiInfo()]
-    private var weatherData: [BbajiHomeWeather] = []
     
-    private let viewModel = BbajiHomeViewModel()
+    private let viewModel: BbajiHomeViewModel
     private var cancellable = Set<AnyCancellable>()
+    
+    init(viewMdoel: BbajiHomeViewModel = BbajiHomeViewModel()) {
+        self.viewModel = viewMdoel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
         
-        let listInfoArray = convertToListInfoArray(from: bbajiInfoArray)
-        
-        viewModel.$homeWeather
-            .receive(on: DispatchQueue.main)
-            .map { [weak self] homeWeathers in
-                return self?.convertToListWeatherArray(from: homeWeathers) ?? []
-            }
-            .sink { [weak self] listWeathers in
-                print("sink success")
-                self?.bbajiListView.configure(listWeathers, listInfoArray: listInfoArray)
-            }
-            .store(in: &cancellable)
+        self.bbajiListView.configure(viewModel.listWeather, listInfoArray: viewModel.info)
     }
     
     private func configure() {
@@ -130,25 +124,5 @@ private extension BbajiHomeViewController {
             $0.height.equalTo(24.0)
             $0.bottom.equalTo(noticeLabel.snp.top)
         }
-    }
-    
-    func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [BbajiListInfo] {
-        var listInfoArray: [BbajiListInfo] = []
-        for info in bbajiInfoArray {
-            let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
-            listInfoArray.append(listInfo)
-        }
-        
-        return listInfoArray
-    }
-    
-    func convertToListWeatherArray(from weatherData: [BbajiHomeWeather]) -> [BbajiListWeather] {
-        var listWeatherArray: [BbajiListWeather] = []
-        for weather in weatherData {
-            let listWeather = BbajiListWeather(weather.iconName, weather.temp)
-            listWeatherArray.append(listWeather)
-        }
-        
-        return listWeatherArray
     }
 }
