@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol BbajiListViewDelegate {
+protocol BbajiListViewDelegate: AnyObject {
     func pushBbajiSpotViewController()
 }
 
@@ -15,7 +15,7 @@ typealias BbajiListInfo = (locationName: String, name: String, backgroundImageNa
 typealias BbajiListWeather = (iconName: String, temp: String)
 
 final class BbajiListView: UICollectionView {
-    var bbajiListViewDelegate: BbajiListViewDelegate?
+    weak var bbajiListViewDelegate: BbajiListViewDelegate?
     
     private var listWeatherArray: [BbajiListWeather] = []
     private var listInfoArray: [BbajiListInfo] = []
