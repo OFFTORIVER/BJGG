@@ -8,8 +8,8 @@
 import Combine
 
 final class BbajiHomeViewModel: ObservableObject {
-    @Published var listWeather: [BbajiListWeather] = []
-    @Published var info: [BbajiListInfo] = []
+    @Published private(set)var listWeather: [BbajiListWeather] = []
+    @Published private(set)var info: [BbajiListInfo] = []
     
     private var cancellable = Set<AnyCancellable>()
     
