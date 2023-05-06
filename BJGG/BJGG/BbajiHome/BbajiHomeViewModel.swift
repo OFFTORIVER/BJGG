@@ -11,24 +11,35 @@ final class BbajiHomeViewModel: ObservableObject {
     @Published private(set)var listWeather: [BbajiListWeather] = []
     @Published private(set)var info: [BbajiListInfo] = []
     
+    var fetchWeatherCompleted = PassthroughSubject<Bool, Never>()
+    private var bbajiInfo = CurrentValueSubject<BbajiInfo, Never>(BbajiInfo())
     private var cancellable = Set<AnyCancellable>()
+    private var weatherManager: WeatherManager!
     
     init(weatherManager: WeatherManager = WeatherManager()) {
+        self.weatherManager = weatherManager
+    }
+    
+    func viewDidLoad() {
+        bbajiInfo.sink { [weak self] info in
+            guard let self = self else { return }
+            
+            self.fetchWeatherItems(weatherManager: self.weatherManager, bbajiInfo: info)
+        }
+        .store(in: &cancellable)
+    }
+    
+    private func fetchWeatherItems(weatherManager: WeatherManager, bbajiInfo: BbajiInfo) {
+        let bbajiCoord = bbajiInfo.getCoordinate()
+        
         Task {
-            let weatherItems = try await fetchWeatherItems(weatherManager: weatherManager)
+            let weatherItems = try await weatherManager.requestCurrentTimeWeather(nx: bbajiCoord.x, ny: bbajiCoord.y).response.body.items
             let weatherItemArray = weatherItems.requestCurrentWeatherItem()
             let homeWeatherArray = weatherItems.requestWeatherDataSet(weatherItemArray)
             listWeather = convertToListWeatherArray(from: homeWeatherArray)
+            info = convertToListInfoArray(from: [BbajiInfo()])
+            fetchWeatherCompleted.send(true)
         }
-        
-        info = convertToListInfoArray(from: [BbajiInfo()])
-    }
-    
-    private func fetchWeatherItems(weatherManager: WeatherManager) async throws -> WeatherItems {
-        let bbajiInfo = BbajiInfo()
-        let bbajiCoord = bbajiInfo.getCoordinate()
-        let weatherItems = try await weatherManager.requestCurrentTimeWeather(nx: bbajiCoord.x, ny: bbajiCoord.y).response.body.items
-        return weatherItems
     }
     
     private func convertToListWeatherArray(from homeWeatherArray: [BbajiHomeWeather]) -> [BbajiListWeather] {

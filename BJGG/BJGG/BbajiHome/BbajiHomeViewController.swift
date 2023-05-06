@@ -30,10 +30,18 @@ final class BbajiHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.viewDidLoad()
         configure()
         
-        self.bbajiListView.configure(viewModel.listWeather, listInfoArray: viewModel.info)
+        viewModel.fetchWeatherCompleted
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] complete in
+                guard let self = self else { return }
+                if complete {
+                    self.bbajiListView.configure(self.viewModel.listWeather, listInfoArray: self.viewModel.info)
+                }
+            }
+            .store(in: &cancellable)
     }
     
     private func configure() {
