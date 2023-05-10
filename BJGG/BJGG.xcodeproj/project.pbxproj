@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A02267E2A0BAD3D008370FC /* ServiceInfoDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A02267D2A0BAD3D008370FC /* ServiceInfoDescriptionView.swift */; };
 		3A0226802A0BB1CA008370FC /* BbajiServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A02267F2A0BB1CA008370FC /* BbajiServiceInfo.swift */; };
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
 		3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A02267D2A0BAD3D008370FC /* ServiceInfoDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoDescriptionView.swift; sourceTree = "<group>"; };
 		3A02267F2A0BB1CA008370FC /* BbajiServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiServiceInfo.swift; sourceTree = "<group>"; };
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -129,6 +131,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A02267C2A0B844D008370FC /* AvailableService */ = {
+			isa = PBXGroup;
+			children = (
+				3A02267D2A0BAD3D008370FC /* ServiceInfoDescriptionView.swift */,
+			);
+			path = AvailableService;
+			sourceTree = "<group>";
+		};
 		3A7E3BDB28D7427E00F6416A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 		3A7E3BE128D765B500F6416A /* UI Component */ = {
 			isa = PBXGroup;
 			children = (
+				3A02267C2A0B844D008370FC /* AvailableService */,
 				3A7E3BE428D766D700F6416A /* SpotLiveCameraView.swift */,
 				3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */,
 				3AA636E029B390B6006BB5EF /* SpotLiveCameraControlView.swift */,
@@ -401,6 +412,7 @@
 				553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */,
 				3AA636E529B391FF006BB5EF /* LiveMarkView.swift in Sources */,
 				3A0226802A0BB1CA008370FC /* BbajiServiceInfo.swift in Sources */,
+				3A02267E2A0BAD3D008370FC /* ServiceInfoDescriptionView.swift in Sources */,
 				558D99D929A5D8F900D633BF /* Constraints.swift in Sources */,
 				558CECEA28DC64EF00AFCF50 /* UIColor+CustomColor.swift in Sources */,
 				3AD87FB228D892D300ABD2E4 /* InfoDescriptionView.swift in Sources */,
