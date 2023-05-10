@@ -11,20 +11,11 @@ protocol BbajiListViewDelegate: AnyObject {
     func pushBbajiSpotViewController()
 }
 
-typealias BbajiListInfo = (locationName: String, name: String, backgroundImageName: String)
-typealias BbajiListWeather = (iconName: String, temp: String)
-
 final class BbajiListView: UICollectionView {
     weak var bbajiListViewDelegate: BbajiListViewDelegate?
     
-    private var listWeatherArray: [BbajiListWeather] = []
-    private var listInfoArray: [BbajiListInfo] = []
-    
-    func configure(_ listWeatherArray: [BbajiListWeather], listInfoArray: [BbajiListInfo]) {
+    private func configure() {
         configureStyle()
-        configureWeatherArray(listWeatherArray)
-        configureInfoArray(listInfoArray)
-        reloadData()
     }
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -33,6 +24,8 @@ final class BbajiListView: UICollectionView {
         
         delegate = self
         register(BbajiListCell.self, forCellWithReuseIdentifier: BbajiListCell.id)
+        
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -57,14 +50,6 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
 }
 
 extension BbajiListView {
-    func configureWeatherArray(_ listWeatherArray: [(BbajiListWeather)]) {
-        self.listWeatherArray = listWeatherArray
-    }
-    
-    func configureInfoArray(_ infoArray: [BbajiListInfo]) {
-        self.listInfoArray = infoArray
-    }
-    
     private func configureStyle() {
         layer.cornerRadius = 10.0
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

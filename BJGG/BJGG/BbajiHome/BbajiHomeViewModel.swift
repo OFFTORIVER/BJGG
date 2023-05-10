@@ -8,11 +8,8 @@
 import Combine
 
 final class BbajiHomeViewModel: ObservableObject {
-    @Published private(set)var listWeather: [BbajiListWeather] = []
-    @Published private(set)var info: [BbajiListInfo] = []
     @Published private(set)var weatherNows: [BbajiWeatherNow] = []
     
-    var fetchWeatherCompleted = PassthroughSubject<Bool, Never>()
     private var bbajiInfo = CurrentValueSubject<BbajiInfo, Never>(BbajiInfo())
     private var cancellable = Set<AnyCancellable>()
     private var weatherManager: WeatherManager!
@@ -36,39 +33,25 @@ final class BbajiHomeViewModel: ObservableObject {
         Task {
             let weatherItems = try await weatherManager.requestCurrentTimeWeather(nx: bbajiCoord.x, ny: bbajiCoord.y).response.body.items
             let weatherItemArray = weatherItems.requestCurrentWeatherItem()
-            let homeWeatherArray = weatherItems.requestWeatherDataSet(weatherItemArray)
-            listWeather = convertToListWeatherArray(from: homeWeatherArray)
-            info = convertToListInfoArray(from: [BbajiInfo()])
+            guard let weatherData = weatherItems.requestWeatherDataSet(weatherItemArray).first else {
+                print("[BbajiHomeViewModel] 날씨 데이터 오류")
+                return
+            }
             
-            let weatherNow = BbajiWeatherNow(locationName: info[0].locationName, name: info[0].name, backgroundImageName: info[0].backgroundImageName, iconName: listWeather[0].iconName, temp: listWeather[0].temp)
+            let weatherNow = BbajiWeatherNow(
+                locationName: bbajiInfo.getCompactAddress(),
+                name: bbajiInfo.getName(),
+                backgroundImageName: bbajiInfo.getThumbnailImgName(),
+                iconName: weatherData.iconName,
+                temp: weatherData.temp)
+            
             weatherNows.append(weatherNow)
-            fetchWeatherCompleted.send(true)
         }
-    }
-    
-    private func convertToListWeatherArray(from homeWeatherArray: [BbajiHomeWeather]) -> [BbajiListWeather] {
-        var listWeatherArray: [BbajiListWeather] = []
-        for homeWeather in homeWeatherArray {
-            let listWeather = BbajiListWeather(homeWeather.iconName, homeWeather.temp)
-            listWeatherArray.append(listWeather)
-        }
-        
-        return listWeatherArray
-    }
-    
-    private func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [BbajiListInfo] {
-        var listInfoArray: [BbajiListInfo] = []
-        for info in bbajiInfoArray {
-            let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
-            listInfoArray.append(listInfo)
-        }
-        
-        return listInfoArray
     }
 }
 
 extension BbajiHomeViewModel {
-    struct BbajiWeatherNow: Hashable {
+    struct BbajiWeatherNow {
         let locationName: String
         let name: String
         let backgroundImageName: String

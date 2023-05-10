@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 import Combine
 
-typealias BbajiHomeWeather = (time: String, iconName: String, temp: String, probability: String)
-
 final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiTitleView = BbajiTitleView()
     private lazy var bbajiListView = BbajiListView()
