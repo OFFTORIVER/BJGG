@@ -32,7 +32,6 @@ final class BbajiListView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: layout)
         
         delegate = self
-        dataSource = self
         register(BbajiListCell.self, forCellWithReuseIdentifier: BbajiListCell.id)
     }
     
@@ -51,33 +50,9 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 0, bottom: BbajiConstraints.componentOffset, right: 0)
     }
-}
-
-extension BbajiListView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return UIDevice.current.hasNotch ? 2 : 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCell.id, for: indexPath) as? BbajiListCell else { return UICollectionViewCell() }
-        
-        if indexPath.row < listWeatherArray.count && indexPath.row < listInfoArray.count {
-            let weatherData = listWeatherArray[indexPath.row]
-            let info = listInfoArray[indexPath.row]
-            
-            cell.configure(indexPath.row, locationName: info.locationName, bbajiName: info.name, backgroundImageName: info.backgroundImageName, iconName: weatherData.iconName, temp: weatherData.temp)
-        } else {
-            cell.configure(indexPath.row)
-        }
-        
-        return cell
-    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let idx = indexPath.row
-        if idx == 0 {
-            bbajiListViewDelegate?.pushBbajiSpotViewController()
-        }
+        bbajiListViewDelegate?.pushBbajiSpotViewController()
     }
 }
 

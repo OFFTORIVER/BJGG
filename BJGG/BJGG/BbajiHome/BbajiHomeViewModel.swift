@@ -10,6 +10,7 @@ import Combine
 final class BbajiHomeViewModel: ObservableObject {
     @Published private(set)var listWeather: [BbajiListWeather] = []
     @Published private(set)var info: [BbajiListInfo] = []
+    @Published private(set)var weatherNows: [BbajiWeatherNow] = []
     
     var fetchWeatherCompleted = PassthroughSubject<Bool, Never>()
     private var bbajiInfo = CurrentValueSubject<BbajiInfo, Never>(BbajiInfo())
@@ -38,6 +39,9 @@ final class BbajiHomeViewModel: ObservableObject {
             let homeWeatherArray = weatherItems.requestWeatherDataSet(weatherItemArray)
             listWeather = convertToListWeatherArray(from: homeWeatherArray)
             info = convertToListInfoArray(from: [BbajiInfo()])
+            
+            let weatherNow = BbajiWeatherNow(locationName: info[0].locationName, name: info[0].name, backgroundImageName: info[0].backgroundImageName, iconName: listWeather[0].iconName, temp: listWeather[0].temp)
+            weatherNows.append(weatherNow)
             fetchWeatherCompleted.send(true)
         }
     }
@@ -60,5 +64,15 @@ final class BbajiHomeViewModel: ObservableObject {
         }
         
         return listInfoArray
+    }
+}
+
+extension BbajiHomeViewModel {
+    struct BbajiWeatherNow: Hashable {
+        let locationName: String
+        let name: String
+        let backgroundImageName: String
+        let iconName: String
+        let temp: String
     }
 }

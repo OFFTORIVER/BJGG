@@ -33,15 +33,12 @@ final class BbajiHomeViewController: UIViewController {
         viewModel.viewDidLoad()
         configure()
         
-        viewModel.fetchWeatherCompleted
+        viewModel.$weatherNows
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] complete in
-                guard let self = self else { return }
-                if complete {
-                    self.bbajiListView.configure(self.viewModel.listWeather, listInfoArray: self.viewModel.info)
-                }
-            }
-            .store(in: &cancellable)
+            .sink { [weak self] _ in
+            guard let self = self else { return }
+            self.bbajiListView.reloadData()
+        }.store(in: &cancellable)
     }
     
     private func configure() {
@@ -50,6 +47,27 @@ final class BbajiHomeViewController: UIViewController {
         configureComponent()
     }
 }
+
+extension BbajiHomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return UIDevice.current.hasNotch ? 2 : 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCell.id, for: indexPath) as? BbajiListCell else { return UICollectionViewCell() }
+        
+        if indexPath.row < viewModel.weatherNows.count {
+            let weatherNow = viewModel.weatherNows[indexPath.row]
+            
+            cell.configure(indexPath.row, locationName: weatherNow.locationName, bbajiName: weatherNow.name, backgroundImageName: weatherNow.backgroundImageName, iconName: weatherNow.iconName, temp: weatherNow.temp)
+        } else {
+            cell.configure(indexPath.row)
+        }
+        
+        return cell
+    }
+}
+
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
     func pushBbajiSpotViewController() {
@@ -66,6 +84,7 @@ extension BbajiHomeViewController {
 private extension BbajiHomeViewController {
     func configureDelegate() {
         bbajiListView.bbajiListViewDelegate = self
+        bbajiListView.dataSource = self
     }
     
     func configureLayout() {
