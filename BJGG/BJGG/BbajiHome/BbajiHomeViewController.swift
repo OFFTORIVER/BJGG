@@ -68,7 +68,7 @@ extension BbajiHomeViewController: UICollectionViewDataSource {
 
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
-    func pushBbajiSpotViewController() {
+    func didSelectItem() {
         self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
     }
 }
