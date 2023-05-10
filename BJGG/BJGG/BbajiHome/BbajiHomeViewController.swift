@@ -28,9 +28,13 @@ final class BbajiHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
         configure()
+        bind()
         
+        viewModel.viewDidLoad()
+    }
+    
+    private func bind() {
         viewModel.$weatherNows
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
