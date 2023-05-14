@@ -11,9 +11,19 @@ final class SpotInfoView: UIView {
     
     private let bbajiInfo = BbajiInfo()
     
+    private lazy var spotRiverNameLabel: UILabel = {
+        let label = UILabel()
+        let font = UIFont(name: UIFont.Pretendard.semiBold.rawValue, size: 14.0) ?? UIFont()
+        label.configureLabelStyle(font: font, alignment: .left)
+        label.textColor = .bbagaGray2
+        // TODO: BbajiInfo Model 수정 시 함께 변경하기
+        label.text = "한강"
+        return label
+    }()
+    
     private lazy var spotNameLabel: UILabel = {
         let label = UILabel()
-        label.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .center)
+        label.configureLabelStyle(font: .bbajiFont(.heading2), alignment: .left)
         label.textColor = .bbagaGray1
         label.text = bbajiInfo.getName()
         return label
@@ -50,7 +60,6 @@ final class SpotInfoView: UIView {
     
     private func configure() {
         configureLayout()
-        configureStyle()
         configureAction()
     }
     
@@ -58,16 +67,23 @@ final class SpotInfoView: UIView {
         
         let defaultMargin: CGFloat = BbajiConstraints.viewInset
         
-        self.addSubview(spotNameLabel)
-        spotNameLabel.snp.makeConstraints({ make in
+        self.addSubview(spotRiverNameLabel)
+        spotRiverNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(self.snp.top).inset(defaultMargin)
             make.centerX.equalTo(self.snp.centerX)
-            make.height.equalTo(32)
-        })
+            make.height.equalTo(17)
+        }
+        
+        self.addSubview(spotNameLabel)
+        spotNameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(self.snp.leading).inset(defaultMargin)
+            make.top.equalTo(spotRiverNameLabel.snp.bottom).offset(BbajiConstraints.iconOffset)
+            make.centerX.equalTo(self.snp.centerX)
+            make.height.equalTo(29)
+        }
         
         self.addSubview(divideLine)
-        
         divideLine.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading)
             make.top.equalTo(spotNameLabel.snp.bottom).offset(defaultMargin)
@@ -83,20 +99,16 @@ final class SpotInfoView: UIView {
         addressInfoView.snp.makeConstraints({ make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(divideLine.snp.bottom).offset(defaultMargin)
-            make.height.equalTo(18)
+            make.height.equalTo(20)
             make.width.equalTo(180)
         })
         
         contactInfoView.snp.makeConstraints({ make in
             make.leading.equalTo(addressInfoView.snp.leading)
-            make.top.equalTo(addressInfoView.snp.bottom).offset(12)
-            make.height.equalTo(18)
+            make.top.equalTo(addressInfoView.snp.bottom).offset(BbajiConstraints.componentOffset)
+            make.height.equalTo(20)
             make.width.equalTo(180)
         })
-    }
-    
-    private func configureStyle() {
-        self.layer.cornerRadius = 16
     }
     
     private func configureAction() {

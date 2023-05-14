@@ -115,10 +115,10 @@ final class BbajiSpotViewController: UIViewController {
         ].forEach({ infoScrollContentView.addSubview($0) })
 
         spotInfoView.snp.makeConstraints({ make in
-            make.top.equalTo(infoScrollContentView.snp.top).inset(viewToViewMargin)
-            make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
-            make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
-            make.height.equalTo(UIDevice.current.hasNotch ? 163 : 147)
+            make.top.equalTo(infoScrollContentView.snp.top)
+            make.leading.equalTo(infoScrollContentView.snp.leading)
+            make.trailing.equalTo(infoScrollContentView.snp.trailing)
+            make.height.equalTo(108 + BbajiConstraints.viewInset * 4)
         })
 
         spotWeatherInfoView.snp.makeConstraints({ make in
