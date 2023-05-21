@@ -165,18 +165,22 @@ final class BbajiSpotViewController: UIViewController {
     }
     
     private func bind(viewModel: SpotViewModel) {
-        Task {
-            let output = await viewModel.transform()
-            
-            output?.weatherData.sink { [weak self] weatherData in
-                self?.spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherData: weatherData)
-                self?.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
+        viewModel.$weatherData
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] weatherData in
+                guard let self = self,
+                      let weatherData = weatherData else { return }
+                self.spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherData: weatherData)
+                self.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
             }.store(in: &cancellables)
-            
-            output?.rainData.sink { [weak self] rainData in
-                self?.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
+        
+        viewModel.$rainData
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] rainData in
+                guard let self = self,
+                let rainData = rainData else { return }
+                self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
-        }
         
         viewModel.screenSizeStatus.sink { [weak self] status in
             if status == .origin { return }

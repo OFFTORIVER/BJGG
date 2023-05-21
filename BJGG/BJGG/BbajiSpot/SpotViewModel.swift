@@ -30,24 +30,25 @@ final class SpotViewModel: OutputOnlyViewModelType {
     
     init() {
         weatherManager = WeatherManager()
+        receiveBbajiWeatherData()
     }
-     
-    func transform() async -> Output? {
-        let taskResult = Task { () -> Output? in
+    
+    func receiveBbajiWeatherData() {
+        Task {
             do {
                 let weatherItems = try await self.weatherManager.request24HWeather(nx: 61, ny: 126).response.body.items
-                let weatherSet = Just(weatherItems.request24HourWeatherItem())
-                let rainData = Just(weatherItems.requestRainInfoText())
-                let rawWeatherData = Just(weatherItems.requestWeatherDataSet(weatherSet.output))
-                
-                let weatherData = rawWeatherData.output.map({
+                let weatherSet = weatherItems.request24HourWeatherItem()
+                let rawWeatherData = weatherItems.requestWeatherDataSet(weatherSet)
+                let weatherData = rawWeatherData.map({
                     (rawData) -> WeatherData in
                     return WeatherData(time: rawData.time, iconName: rawData.iconName, temp: rawData.temp, probability: rawData.probability)
                 })
                 
-                return Output(rainData: rainData.eraseToAnyPublisher(), weatherData: Just(weatherData).eraseToAnyPublisher())
-            } catch {
+                let rainData = weatherItems.requestRainInfoText()
                 
+                self.weatherData = weatherData
+                self.rainData = rainData
+            } catch {
                 if let weatherManagerError = error as? WeatherManagerError {
                     switch weatherManagerError {
                     case .networkError(let message):
@@ -66,9 +67,7 @@ final class SpotViewModel: OutputOnlyViewModelType {
                     print(error.localizedDescription)
                 }
             }
-            return nil
         }
-        return await taskResult.value
     }
     
     func changeScreenSizeStatus() {
