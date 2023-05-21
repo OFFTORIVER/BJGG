@@ -10,7 +10,6 @@
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
 		3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
-		3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A81FC28EEF86800D1FA20 /* Private.plist */; };
 		3A53021629DC26CA00888CFA /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A53021529DC26CA00888CFA /* CombineCocoa */; };
 		3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021729DC272300888CFA /* SpotViewModel.swift */; };
 		3A53021A29DC649B00888CFA /* Combine+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */; };
@@ -34,7 +33,7 @@
 		3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E629B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift */; };
 		3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */; };
 		3AD87FB228D892D300ABD2E4 /* InfoDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FB128D892D300ABD2E4 /* InfoDescriptionView.swift */; };
-		42600D5928EF200B00D114BC /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5828EF200B00D114BC /* Private.plist */; };
+		3AF6950D2A1A2905001CA915 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6950C2A1A2905001CA915 /* Private.plist */; };
 		42600D5F28EF322500D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5E28EF322500D114BC /* Settings.bundle */; };
 		553F0F7D28E20DD600FD9CDA /* esamanru OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */; };
 		553F0F7E28E20DD800FD9CDA /* esamanru OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */; };
@@ -72,7 +71,6 @@
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
-		3A4A81FC28EEF86800D1FA20 /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		3A53021729DC272300888CFA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
 		3A53021929DC649B00888CFA /* Combine+GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+GestureRecognizer.swift"; sourceTree = "<group>"; };
 		3A53021B29DC64D400888CFA /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -94,7 +92,7 @@
 		3AA636E629B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraGradientView.swift; sourceTree = "<group>"; };
 		3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraStandbyView.swift; sourceTree = "<group>"; };
 		3AD87FB128D892D300ABD2E4 /* InfoDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDescriptionView.swift; sourceTree = "<group>"; };
-		42600D5828EF200B00D114BC /* Private.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
+		3AF6950C2A1A2905001CA915 /* Private.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		42600D5E28EF322500D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Light.otf"; sourceTree = "<group>"; };
 		553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Medium.otf"; sourceTree = "<group>"; };
@@ -311,8 +309,7 @@
 				55CB0AB028BA4FA10045644C /* Assets.xcassets */,
 				55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */,
 				55CB0AB528BA4FA10045644C /* Info.plist */,
-				42600D5828EF200B00D114BC /* Private.plist */,
-				3A4A81FC28EEF86800D1FA20 /* Private.plist */,
+				3AF6950C2A1A2905001CA915 /* Private.plist */,
 			);
 			path = BJGG;
 			sourceTree = "<group>";
@@ -396,9 +393,8 @@
 			files = (
 				42600D5F28EF322500D114BC /* Settings.bundle in Resources */,
 				553F0F9428E212B300FD9CDA /* Pretendard-ExtraLight.otf in Resources */,
+				3AF6950D2A1A2905001CA915 /* Private.plist in Resources */,
 				553F0F7F28E20DDA00FD9CDA /* esamanru OTF Medium.otf in Resources */,
-				42600D5928EF200B00D114BC /* Private.plist in Resources */,
-				3A4A81FD28EEF86800D1FA20 /* Private.plist in Resources */,
 				553F0F9228E212B300FD9CDA /* Pretendard-Bold.otf in Resources */,
 				553F0F8C28E212B300FD9CDA /* Pretendard-Regular.otf in Resources */,
 				553F0F8D28E212B300FD9CDA /* Pretendard-SemiBold.otf in Resources */,

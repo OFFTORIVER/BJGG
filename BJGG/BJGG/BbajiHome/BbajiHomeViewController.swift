@@ -34,7 +34,7 @@ final class BbajiHomeViewController: UIViewController {
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
     func pushBbajiSpotViewController() {
-        self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
+        self.navigationController?.pushViewController(BbajiSpotViewController(viewModel: SpotViewModel()), animated: true)
     }
 }
 

@@ -35,8 +35,18 @@ final class BbajiSpotViewController: UIViewController {
     private var screenWidth: CGFloat = CGFloat()
     private var firstAttempt: Bool = true
     
-    private var viewModel = SpotViewModel()
+    private var viewModel: SpotViewModel
     private var cancellables = Set<AnyCancellable>()
+
+    init(viewModel: SpotViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
