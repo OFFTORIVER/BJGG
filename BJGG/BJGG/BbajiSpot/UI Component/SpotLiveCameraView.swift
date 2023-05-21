@@ -75,7 +75,6 @@ final class SpotLiveCameraView: UIView {
         configureLayout()
         configureStyle()
         configureComponent()
-        configureAction()
     }
     
     private func configureLayout() {
@@ -118,19 +117,16 @@ final class SpotLiveCameraView: UIView {
         interactionEnableStatus(as: true)
     }
     
-    private func configureAction() {
-        reloadButton.tapPublisher.sink { [self] _ in
-            viewModel.changePlayStatus(as: .origin)
-        }.store(in: &cancellables)
-    }
-    
     private func bind(viewModel: SpotViewModel) {
         
         let tapGesture = UITapGestureRecognizer()
         addGestureRecognizer(tapGesture)
+        
         let input = SpotViewModel.Input(
             cameraViewTapGesture: tapGesture.tapPublisher,
-            screenSizeButtonTapPublisher: nil
+            reloadButtonTapPublisher: reloadButton.tapPublisher,
+            screenSizeButtonTapPublisher: nil,
+            playStatus: nil
         )
         
         let output = viewModel.transform(input: input)
@@ -141,16 +137,22 @@ final class SpotLiveCameraView: UIView {
             status.changeControlStatusView(view: self.videoPlayerControlView)
         }.store(in: &cancellables)
         
-        viewModel.playStatus.sink { [self] status in
+        
+        viewModel.$playStatus.sink { [self] status in
             switch status {
             case .origin:
+                print("ORIGIN")
                 playVideo()
                 changeReloadButtonActiveStatus(as: false)
                 stanbyView.reloadStandbyView()
+                viewModel.changePlayStatus(as: .readyToPlay)
             case .readyToPlay:
+                print("READY TO PLAY")
                 changeReloadButtonActiveStatus(as: false)
                 stanbyView.changeStandbyView(isStandbyNeed: false)
+                player?.play()
             case .failed:
+                print("FAILED")
                 changeReloadButtonActiveStatus(as: true)
                 stanbyView.stopLoadingAnimation()
                 stanbyView.changeStandbyView(isStandbyNeed: true)
@@ -198,20 +200,12 @@ final class SpotLiveCameraView: UIView {
             }
 
             interactionEnableStatus(as: true)
-            switch status {
-            case .readyToPlay:
-                print(".readyToPlay")
-                viewModel.changePlayStatus(as: .readyToPlay)
-                player?.play()
-            case .failed:
-                viewModel.changePlayStatus(as: .failed)
-                print(".failed")
-            case .unknown:
-                print(".unknown")
-                viewModel.changePlayStatus(as: .failed)
-            @unknown default:
-                print("@unknown default")
-            }
+            let input = SpotViewModel.Input(
+                cameraViewTapGesture: nil,
+                reloadButtonTapPublisher: nil,
+                screenSizeButtonTapPublisher: nil,
+                playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>(status))
+            _ = viewModel.transform(input: input)
         }
     }
     

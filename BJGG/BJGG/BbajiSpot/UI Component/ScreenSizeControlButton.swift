@@ -37,7 +37,10 @@ final class ScreenSizeControlButton: UIButton {
     private func bind(viewModel: SpotViewModel) {
         let input = SpotViewModel.Input(
             cameraViewTapGesture: nil,
-            screenSizeButtonTapPublisher: self.tapPublisher)
+            reloadButtonTapPublisher: nil,
+            screenSizeButtonTapPublisher: self.tapPublisher,
+            playStatus: nil
+        )
 
         _ = viewModel.transform(input: input)
         viewModel.$screenSizeStatus

@@ -5,29 +5,34 @@
 //  Created by 황정현 on 2023/04/04.
 //
 
+import AVFoundation
 import Combine
 import UIKit
 
-protocol OutputOnlyViewModelType {
+protocol ViewModelType {
+    associatedtype Input
     associatedtype Output
     
-    func transform() async -> Output?
+    func transform(input: Input) -> Output
 }
 
-final class SpotViewModel {
+final class SpotViewModel: ViewModelType {
     @Published private(set) var weatherData: [WeatherData]?
     @Published private(set) var rainData: String?
     @Published private(set) var screenSizeStatus: ScreenSizeStatus = .origin
+    @Published private(set) var playStatus: PlayStatus = .origin
     
     private var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
-    var playStatus: CurrentValueSubject<PlayStatus, Never> = CurrentValueSubject(.origin)
+//    var playStatus: CurrentValueSubject<PlayStatus, Never> = CurrentValueSubject(.origin)
     
     let weatherManager: WeatherManager
     private var cancellables = Set<AnyCancellable>()
     
     struct Input {
         let cameraViewTapGesture: AnyPublisher<UITapGestureRecognizer, Never>?
+        let reloadButtonTapPublisher: AnyPublisher<Void, Never>?
         let screenSizeButtonTapPublisher: AnyPublisher<Void, Never>?
+        let playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>?
     }
     
     struct Output {
@@ -94,15 +99,36 @@ final class SpotViewModel {
     
     func changePlayStatus(as status: PlayStatus) {
         changeControlStatus()
-        playStatus.send(status)
+        playStatus = status
     }
     
     func transform(input: Input) -> Output {
         input.cameraViewTapGesture?.sink {[weak self] _ in
             self?.changeControlStatus()
         }.store(in: &cancellables)
+        
+        input.reloadButtonTapPublisher?.sink{ [weak self] _ in
+            self?.changePlayStatus(as: .origin)
+        }.store(in: &cancellables)
+        
         input.screenSizeButtonTapPublisher?.sink { [weak self] _ in
             self?.changeScreenSizeStatus()
+        }.store(in: &cancellables)
+        
+        input.playStatus?.sink { [weak self] status in
+            switch status {
+            case .readyToPlay:
+                print(".readyToPlay")
+                self?.changePlayStatus(as: .readyToPlay)
+            case .failed:
+                self?.changePlayStatus(as: .failed)
+                print(".failed")
+            case .unknown:
+                print(".unknown")
+                self?.changePlayStatus(as: .failed)
+            @unknown default:
+                print("@unknown default")
+            }
         }.store(in: &cancellables)
         
         return Output(controlStatus: controlStatus)
