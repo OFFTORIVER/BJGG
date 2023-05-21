@@ -14,17 +14,22 @@ protocol OutputOnlyViewModelType {
     func transform() async -> Output?
 }
 
-final class SpotViewModel: OutputOnlyViewModelType {
+final class SpotViewModel {
+    @Published private(set) var weatherData: [WeatherData]?
+    @Published private(set) var rainData: String?
     
     var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
     var screenSizeStatus: CurrentValueSubject<ScreenSizeStatus, Never> = CurrentValueSubject(.origin)
     var playStatus: CurrentValueSubject<PlayStatus, Never> = CurrentValueSubject(.origin)
     
     let weatherManager: WeatherManager
-
+    
+    struct Input {
+        let cameraViewTapGesture: AnyPublisher<UITapGestureRecognizer, Never>?
+    }
+    
     struct Output {
-        let rainData: AnyPublisher<String, Never>
-        let weatherData: AnyPublisher<[WeatherData], Never>
+        var controlStatus: CurrentValueSubject<ControlStatus, Never>
     }
     
     init() {
@@ -86,7 +91,17 @@ final class SpotViewModel: OutputOnlyViewModelType {
     }
     
     func changePlayStatus(as status: PlayStatus) {
+        changeControlStatus()
         playStatus.send(status)
+    }
+    
+    func transform(input: Input) -> Output {
+        Task {
+            input.cameraViewTapGesture?.sink {[weak self] _ in
+                self?.changeControlStatus()
+            }
+        }
+        return Output(controlStatus: controlStatus)
     }
     
     func callBbaji(to phoneNumberStr: String) {

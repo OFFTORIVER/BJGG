@@ -7,6 +7,7 @@
 
 import AVFoundation
 import Combine
+import CombineCocoa
 import SnapKit
 import UIKit
 
@@ -106,6 +107,7 @@ final class SpotLiveCameraView: UIView {
     
     private func configureStyle() {
         self.backgroundColor = .black
+        self.isUserInteractionEnabled = true
     }
     
     private func configureComponent() {
@@ -120,15 +122,22 @@ final class SpotLiveCameraView: UIView {
         reloadButton.tapPublisher.sink { [self] _ in
             viewModel.changePlayStatus(as: .origin)
         }.store(in: &cancellables)
-        
-        self.gesture().sink { [self] _ in
-            viewModel.changeControlStatus()
-        }.store(in: &cancellables)
     }
     
     private func bind(viewModel: SpotViewModel) {
-        viewModel.controlStatus.sink { [self] status in
-            status.changeControlStatusView(view: videoPlayerControlView)
+        
+        let tapGesture = UITapGestureRecognizer()
+        addGestureRecognizer(tapGesture)
+        let input = SpotViewModel.Input(
+            cameraViewTapGesture: tapGesture.tapPublisher
+        )
+        
+        let output = viewModel.transform(input: input)
+        output.controlStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+            guard let self = self else { return }
+            status.changeControlStatusView(view: self.videoPlayerControlView)
         }.store(in: &cancellables)
         
         viewModel.playStatus.sink { [self] status in
