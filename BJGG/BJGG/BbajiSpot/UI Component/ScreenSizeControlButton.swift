@@ -27,7 +27,6 @@ final class ScreenSizeControlButton: UIButton {
     
     private func configure() {
         configureStyle()
-        configureAction()
     }
     
     private func configureStyle() {
@@ -35,15 +34,16 @@ final class ScreenSizeControlButton: UIButton {
         self.setImage(image, for: .normal)
     }
     
-    private func configureAction() {
-        self.tapPublisher.sink { [self] in
-            viewModel.changeScreenSizeStatus()
-        }.store(in: &cancellables)
-    }
-    
     private func bind(viewModel: SpotViewModel) {
-        viewModel.screenSizeStatus.sink { [weak self] status in
-            self?.setImage(status.changeButtonImage(), for: .normal)
-        }.store(in: &cancellables)
+        let input = SpotViewModel.Input(
+            cameraViewTapGesture: nil,
+            screenSizeButtonTapPublisher: self.tapPublisher)
+
+        _ = viewModel.transform(input: input)
+        viewModel.$screenSizeStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                self?.setImage(status.changeButtonImage(), for: .normal)
+            }.store(in: &cancellables)
     }
 }

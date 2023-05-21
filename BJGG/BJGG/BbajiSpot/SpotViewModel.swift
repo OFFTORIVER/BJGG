@@ -17,15 +17,17 @@ protocol OutputOnlyViewModelType {
 final class SpotViewModel {
     @Published private(set) var weatherData: [WeatherData]?
     @Published private(set) var rainData: String?
+    @Published private(set) var screenSizeStatus: ScreenSizeStatus = .origin
     
-    var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
-    var screenSizeStatus: CurrentValueSubject<ScreenSizeStatus, Never> = CurrentValueSubject(.origin)
+    private var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
     var playStatus: CurrentValueSubject<PlayStatus, Never> = CurrentValueSubject(.origin)
     
     let weatherManager: WeatherManager
+    private var cancellables = Set<AnyCancellable>()
     
     struct Input {
         let cameraViewTapGesture: AnyPublisher<UITapGestureRecognizer, Never>?
+        let screenSizeButtonTapPublisher: AnyPublisher<Void, Never>?
     }
     
     struct Output {
@@ -75,10 +77,10 @@ final class SpotViewModel {
     }
     
     func changeScreenSizeStatus() {
-        if screenSizeStatus.value == .normal || screenSizeStatus.value == .origin {
-            screenSizeStatus.send(.full)
+        if screenSizeStatus == .normal || screenSizeStatus == .origin {
+            screenSizeStatus = .full
         } else {
-            screenSizeStatus.send(.normal)
+            screenSizeStatus = .normal
         }
     }
     
@@ -96,11 +98,13 @@ final class SpotViewModel {
     }
     
     func transform(input: Input) -> Output {
-        Task {
-            input.cameraViewTapGesture?.sink {[weak self] _ in
-                self?.changeControlStatus()
-            }
-        }
+        input.cameraViewTapGesture?.sink {[weak self] _ in
+            self?.changeControlStatus()
+        }.store(in: &cancellables)
+        input.screenSizeButtonTapPublisher?.sink { [weak self] _ in
+            self?.changeScreenSizeStatus()
+        }.store(in: &cancellables)
+        
         return Output(controlStatus: controlStatus)
     }
     

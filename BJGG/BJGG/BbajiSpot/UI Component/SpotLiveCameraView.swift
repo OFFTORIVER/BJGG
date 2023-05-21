@@ -129,7 +129,8 @@ final class SpotLiveCameraView: UIView {
         let tapGesture = UITapGestureRecognizer()
         addGestureRecognizer(tapGesture)
         let input = SpotViewModel.Input(
-            cameraViewTapGesture: tapGesture.tapPublisher
+            cameraViewTapGesture: tapGesture.tapPublisher,
+            screenSizeButtonTapPublisher: nil
         )
         
         let output = viewModel.transform(input: input)

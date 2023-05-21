@@ -60,21 +60,29 @@ final class BbajiSpotViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        switch viewModel.screenSizeStatus.value {
-        case .full:
-            return true
-        case .normal, .origin:
-            return false
-        }
+        var isStatusBarHidden = false
+        viewModel.$screenSizeStatus.sink { status in
+            switch status {
+            case .full:
+                isStatusBarHidden = true
+            case .normal, .origin:
+                isStatusBarHidden = false
+            }
+        }.store(in: &cancellables)
+        return isStatusBarHidden
     }
-    
+
     override var prefersHomeIndicatorAutoHidden: Bool {
-        switch viewModel.screenSizeStatus.value {
-        case .full:
-            return true
-        case .normal, .origin:
-            return false
-        }
+        var isHomeIndicatorAutoHidden = false
+        viewModel.$screenSizeStatus.sink { status in
+            switch status {
+            case .full:
+                isHomeIndicatorAutoHidden = true
+            case .normal, .origin:
+                isHomeIndicatorAutoHidden = false
+            }
+        }.store(in: &cancellables)
+       return isHomeIndicatorAutoHidden
     }
     
     private func configure() {
@@ -182,9 +190,11 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
         
-        viewModel.screenSizeStatus.sink { [weak self] status in
-            if status == .origin { return }
-            self?.changeScreenSize(screenSizeStatus: status)
+        viewModel.$screenSizeStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                if status == .origin { return }
+                self?.changeScreenSize(screenSizeStatus: status)
         }.store(in: &cancellables)
     }
     
