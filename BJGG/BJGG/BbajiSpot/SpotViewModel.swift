@@ -6,7 +6,6 @@
 //
 
 import Combine
-import CombineCocoa
 import UIKit
 
 protocol OutputOnlyViewModelType {
