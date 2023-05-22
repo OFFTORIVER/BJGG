@@ -138,26 +138,27 @@ final class SpotLiveCameraView: UIView {
         }.store(in: &cancellables)
         
         
-        viewModel.$playStatus.sink { [self] status in
-            switch status {
-            case .origin:
-                print("ORIGIN")
-                playVideo()
-                changeReloadButtonActiveStatus(as: false)
-                stanbyView.reloadStandbyView()
-                viewModel.changePlayStatus(as: .readyToPlay)
-            case .readyToPlay:
-                print("READY TO PLAY")
-                changeReloadButtonActiveStatus(as: false)
-                stanbyView.changeStandbyView(isStandbyNeed: false)
-                player?.play()
-            case .failed:
-                print("FAILED")
-                changeReloadButtonActiveStatus(as: true)
-                stanbyView.stopLoadingAnimation()
-                stanbyView.changeStandbyView(isStandbyNeed: true)
-            }
-        }.store(in: &cancellables)
+        viewModel.$playStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [self] status in
+                switch status {
+                case .origin:
+                    print("ORIGIN")
+                    playVideo()
+                    changeReloadButtonActiveStatus(as: false)
+                    stanbyView.reloadStandbyView()
+                case .readyToPlay:
+                    print("READY TO PLAY")
+                    changeReloadButtonActiveStatus(as: false)
+                    stanbyView.changeStandbyView(isStandbyNeed: false)
+                    player?.play()
+                case .failed:
+                    print("FAILED")
+                    changeReloadButtonActiveStatus(as: true)
+                    stanbyView.stopLoadingAnimation()
+                    stanbyView.changeStandbyView(isStandbyNeed: true)
+                }
+            }.store(in: &cancellables)
     }
     
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {

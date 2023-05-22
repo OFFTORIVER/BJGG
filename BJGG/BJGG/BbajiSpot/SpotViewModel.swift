@@ -121,8 +121,8 @@ final class SpotViewModel: ViewModelType {
                 print(".readyToPlay")
                 self?.changePlayStatus(as: .readyToPlay)
             case .failed:
-                self?.changePlayStatus(as: .failed)
                 print(".failed")
+                self?.changePlayStatus(as: .failed)
             case .unknown:
                 print(".unknown")
                 self?.changePlayStatus(as: .failed)
