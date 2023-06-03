@@ -14,7 +14,7 @@ final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiListView = BbajiListView()
     private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
     
-    private let viewModel: BbajiHomeViewModel
+    let viewModel: BbajiHomeViewModel
     private var cancellable = Set<AnyCancellable>()
     
     init(viewMdoel: BbajiHomeViewModel = BbajiHomeViewModel()) {
