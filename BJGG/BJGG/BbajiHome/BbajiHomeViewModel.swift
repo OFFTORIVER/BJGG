@@ -19,34 +19,34 @@ final class BbajiHomeViewModel: ObservableObject {
     }
     
     func viewDidLoad() {
-        bbajiInfo.sink { [weak self] info in
-            guard let self = self else { return }
-            
-            self.fetchWeatherItems(weatherManager: self.weatherManager, bbajiInfo: info)
-        }
-        .store(in: &cancellable)
+        fetchWeatherNows()
     }
     
-    private func fetchWeatherItems(weatherManager: WeatherManager, bbajiInfo: BbajiInfo) {
-        let bbajiCoord = bbajiInfo.getCoordinate()
-        
-        Task {
-            let weatherItems = try await weatherManager.requestCurrentTimeWeather(nx: bbajiCoord.x, ny: bbajiCoord.y).response.body.items
-            let weatherItemArray = weatherItems.requestCurrentWeatherItem()
-            guard let weatherData = weatherItems.requestWeatherDataSet(weatherItemArray).first else {
-                print("[BbajiHomeViewModel] 날씨 데이터 오류")
-                return
+    func fetchWeatherNows() {
+        bbajiInfo.sink { [weak self] info in
+            guard let self = self else { return }
+            let bbajiCoord = info.getCoordinate()
+            
+            Task { [weak self] in
+                guard let self = self else { return }
+                let weatherItems = try await self.weatherManager.requestCurrentTimeWeather(nx: bbajiCoord.x, ny: bbajiCoord.y).response.body.items
+                let weatherItemArray = weatherItems.requestCurrentWeatherItem()
+                guard let weatherData = weatherItems.requestWeatherDataSet(weatherItemArray).first else {
+                    print("[BbajiHomeViewModel] 날씨 데이터 오류")
+                    return
+                }
+                
+                let weatherNow = BbajiWeatherNow(
+                    locationName: info.getCompactAddress(),
+                    name: info.getName(),
+                    backgroundImageName: info.getThumbnailImgName(),
+                    iconName: weatherData.iconName,
+                    temp: weatherData.temp)
+                
+                self.weatherNows = [weatherNow]
             }
-            
-            let weatherNow = BbajiWeatherNow(
-                locationName: bbajiInfo.getCompactAddress(),
-                name: bbajiInfo.getName(),
-                backgroundImageName: bbajiInfo.getThumbnailImgName(),
-                iconName: weatherData.iconName,
-                temp: weatherData.temp)
-            
-            weatherNows.append(weatherNow)
         }
+        .store(in: &cancellable)
     }
 }
 
