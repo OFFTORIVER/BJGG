@@ -14,7 +14,7 @@ import UIKit
 final class SpotLiveCameraView: UIView {
     
     lazy var videoPlayerControlView: SpotLiveCameraControlView = {
-        let view = SpotLiveCameraControlView(viewModel: viewModel)
+        let view = SpotLiveCameraControlView(spotViewModel: spotViewModel ?? SpotViewModel())
         view.alpha = 0.0
         return view
     }()
@@ -48,15 +48,17 @@ final class SpotLiveCameraView: UIView {
 
     private var playerItem: AVPlayerItem?
     
-    private let viewModel: SpotViewModel
+    private var spotViewModel: SpotViewModel?
+    private var liveCameraViewModel: SpotLiveCameraViewModel?
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SpotViewModel) {
-        self.viewModel = viewModel
+    init(spotViewModel: SpotViewModel, liveCameraViewModel: SpotLiveCameraViewModel) {
         super.init(frame: CGRect.zero)
-
+        
+        self.spotViewModel = spotViewModel
+        self.liveCameraViewModel = liveCameraViewModel
         configure()
-        bind(viewModel: viewModel)
+        bind(viewModel: liveCameraViewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -117,15 +119,14 @@ final class SpotLiveCameraView: UIView {
         interactionEnableStatus(as: true)
     }
     
-    private func bind(viewModel: SpotViewModel) {
+    private func bind(viewModel: SpotLiveCameraViewModel) {
         
         let tapGesture = UITapGestureRecognizer()
         addGestureRecognizer(tapGesture)
         
-        let input = SpotViewModel.Input(
+        let input = SpotLiveCameraViewModel.Input(
             cameraViewTapGesture: tapGesture.tapPublisher,
             reloadButtonTapPublisher: reloadButton.tapPublisher,
-            screenSizeButtonTapPublisher: nil,
             playStatus: nil
         )
         
@@ -201,12 +202,13 @@ final class SpotLiveCameraView: UIView {
             }
 
             interactionEnableStatus(as: true)
-            let input = SpotViewModel.Input(
+            let input = SpotLiveCameraViewModel.Input(
                 cameraViewTapGesture: nil,
                 reloadButtonTapPublisher: nil,
-                screenSizeButtonTapPublisher: nil,
-                playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>(status))
-            _ = viewModel.transform(input: input)
+                playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>(status)
+            )
+            
+            _ = liveCameraViewModel?.transform(input: input)
         }
     }
     

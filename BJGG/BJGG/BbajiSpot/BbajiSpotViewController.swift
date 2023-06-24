@@ -11,11 +11,11 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     
-    lazy var liveCameraView = SpotLiveCameraView(viewModel: viewModel)
+    lazy var liveCameraView = SpotLiveCameraView(spotViewModel: spotViewModel, liveCameraViewModel: SpotLiveCameraViewModel())
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
     private lazy var spotInfoView: SpotInfoView = {
-        let view = SpotInfoView(viewModel: viewModel)
+        let view = SpotInfoView(infoViewModel: SpotInfoViewModel(info: BbajiInfo()))
         view.backgroundColor = .bbagaGray4
         return view
     }()
@@ -27,7 +27,7 @@ final class BbajiSpotViewController: UIViewController {
     }()
     
     private lazy var liveMarkView: LiveMarkView = {
-        let view = LiveMarkView(viewModel: viewModel)
+        let view = LiveMarkView(liveCameraViewModel: SpotLiveCameraViewModel())
         view.setUpLiveLabelRadius(to: screenWidth / 36)
         return view
     }()
@@ -35,11 +35,13 @@ final class BbajiSpotViewController: UIViewController {
     private var screenWidth: CGFloat = CGFloat()
     private var firstAttempt: Bool = true
     
-    private var viewModel: SpotViewModel
+    private var dataViewModel: SpotWeatherViewModel
+    private var spotViewModel: SpotViewModel
     private var cancellables = Set<AnyCancellable>()
 
-    init(viewModel: SpotViewModel) {
-        self.viewModel = viewModel
+    init(dataViewModel: SpotWeatherViewModel, spotViewModel: SpotViewModel) {
+        self.dataViewModel = dataViewModel
+        self.spotViewModel = spotViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,7 +63,7 @@ final class BbajiSpotViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         var isStatusBarHidden = false
-        viewModel.$screenSizeStatus.sink { status in
+        spotViewModel.$screenSizeStatus.sink { status in
             switch status {
             case .full:
                 isStatusBarHidden = true
@@ -74,7 +76,7 @@ final class BbajiSpotViewController: UIViewController {
 
     override var prefersHomeIndicatorAutoHidden: Bool {
         var isHomeIndicatorAutoHidden = false
-        viewModel.$screenSizeStatus.sink { status in
+        spotViewModel.$screenSizeStatus.sink { status in
             switch status {
             case .full:
                 isHomeIndicatorAutoHidden = true
@@ -89,8 +91,7 @@ final class BbajiSpotViewController: UIViewController {
         configureLayout()
         configureStyle()
         configureComponent()
-        configureNotification()
-        bind(viewModel: viewModel)
+        bind(viewModel: spotViewModel)
     }
     
     private func configureLayout() {
@@ -165,15 +166,8 @@ final class BbajiSpotViewController: UIViewController {
         setUpLiveCameraViewConstraints(screenStatus: .normal)
     }
     
-    private func configureNotification() {
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(self, selector: #selector(toBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(toForeground),name: UIApplication.willEnterForegroundNotification, object: nil)
-    }
-    
     private func bind(viewModel: SpotViewModel) {
-        viewModel.$weatherData
+        dataViewModel.$weatherData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherData in
                 guard let self = self,
@@ -182,7 +176,7 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
             }.store(in: &cancellables)
         
-        viewModel.$rainData
+        dataViewModel.$rainData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rainData in
                 guard let self = self,
@@ -190,25 +184,31 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
         
+        // MARK: $screenSizeStatus
         viewModel.$screenSizeStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 if status == .origin { return }
                 self?.changeScreenSize(screenSizeStatus: status)
         }.store(in: &cancellables)
-    }
-    
-    @objc private func toBackground() {
-        firstAttempt = false
-        liveMarkView.liveMarkActive(to: false)
-        liveCameraView.stanbyView.stopLoadingAnimation()
-    }
-    
-    @objc private func toForeground() {
-        if !firstAttempt {
-            viewModel.changePlayStatus(as: .origin)
-            
-        }
+        
+        let input = SpotViewModel.Input(
+            screenSizeButtonTapPublisher: nil,
+            willEnterForeground: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification), didEnterBackground: NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.willEnterForeground?
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] willEnterForeground in
+                if willEnterForeground {
+                    self?.liveMarkView.liveMarkActive(to: false)
+                    self?.liveCameraView.stanbyView.stopLoadingAnimation()
+                } else {
+//                    viewModel.changePlayStatus(as: .origin)
+                }
+            }.store(in: &cancellables)
     }
     
     private func setUpLiveCameraViewConstraints(screenStatus: ScreenSizeStatus) {

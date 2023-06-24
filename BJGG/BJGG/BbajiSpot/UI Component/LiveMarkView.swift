@@ -19,15 +19,15 @@ final class LiveMarkView: UIView {
         return label
     }()
     
-    private let viewModel: SpotViewModel
+    private let liveCameraViewModel: SpotLiveCameraViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SpotViewModel) {
-        self.viewModel = viewModel
+    init(liveCameraViewModel: SpotLiveCameraViewModel) {
+        self.liveCameraViewModel = liveCameraViewModel
         super.init(frame: CGRect.zero)
         
         configure()
-        bind(viewModel: viewModel)
+        bind(viewModel: liveCameraViewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -53,14 +53,10 @@ final class LiveMarkView: UIView {
         backgroundColor = UIColor.lightGray
     }
     
-    private func bind(viewModel: SpotViewModel) {
-        viewModel.$playStatus.sink { [weak self] status in
-            if status == .readyToPlay {
-                self?.liveMarkActive(to: true)
-            } else {
-                self?.liveMarkActive(to: false)
-            }
-            
+    private func bind(viewModel: SpotLiveCameraViewModel) {
+        liveCameraViewModel.$playStatus.sink { [weak self] status in
+            let isActive = status == .readyToPlay
+            self?.liveMarkActive(to: isActive)
         }.store(in: &cancellables)
     }
     
@@ -69,7 +65,6 @@ final class LiveMarkView: UIView {
     }
 }
 
-// MARK: ViewModel 호출 메소드
 extension LiveMarkView {
     func liveMarkActive(to active: Bool) {
         let currentColor = backgroundColor

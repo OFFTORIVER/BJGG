@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
+		3A1D45C22A46A66900DFA036 /* SpotLiveCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D45C12A46A66900DFA036 /* SpotLiveCameraViewModel.swift */; };
+		3A1D45C42A46B94900DFA036 /* SpotWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D45C32A46B94900DFA036 /* SpotWeatherViewModel.swift */; };
+		3A1D45C62A46C2FC00DFA036 /* SpotInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D45C52A46C2FC00DFA036 /* SpotInfoViewModel.swift */; };
 		3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
 		3A53021629DC26CA00888CFA /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A53021529DC26CA00888CFA /* CombineCocoa */; };
@@ -69,6 +72,9 @@
 
 /* Begin PBXFileReference section */
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		3A1D45C12A46A66900DFA036 /* SpotLiveCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraViewModel.swift; sourceTree = "<group>"; };
+		3A1D45C32A46B94900DFA036 /* SpotWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherViewModel.swift; sourceTree = "<group>"; };
+		3A1D45C52A46C2FC00DFA036 /* SpotInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoViewModel.swift; sourceTree = "<group>"; };
 		3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotWeatherAPIInfoView.swift; sourceTree = "<group>"; };
 		3A53021729DC272300888CFA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
@@ -167,7 +173,10 @@
 		3A7E3BE028D7657800F6416A /* BbajiSpot */ = {
 			isa = PBXGroup;
 			children = (
+				3A1D45C32A46B94900DFA036 /* SpotWeatherViewModel.swift */,
+				3A1D45C12A46A66900DFA036 /* SpotLiveCameraViewModel.swift */,
 				3A53021729DC272300888CFA /* SpotViewModel.swift */,
+				3A1D45C52A46C2FC00DFA036 /* SpotInfoViewModel.swift */,
 				3A7E3BE128D765B500F6416A /* UI Component */,
 				3A7E3BE228D7663300F6416A /* BbajiSpotViewController.swift */,
 			);
@@ -446,6 +455,8 @@
 				3AA636A029A65F3F006BB5EF /* PlistError.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A53021C29DC64D400888CFA /* UIView+.swift in Sources */,
+				3A1D45C62A46C2FC00DFA036 /* SpotInfoViewModel.swift in Sources */,
+				3A1D45C22A46A66900DFA036 /* SpotLiveCameraViewModel.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */,
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
@@ -456,6 +467,7 @@
 				3A53021A29DC649B00888CFA /* Combine+GestureRecognizer.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
 				553F0F9F28E4AEA300FD9CDA /* BbajiListCell.swift in Sources */,
+				3A1D45C42A46B94900DFA036 /* SpotWeatherViewModel.swift in Sources */,
 				55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

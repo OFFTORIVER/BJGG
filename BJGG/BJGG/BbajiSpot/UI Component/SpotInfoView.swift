@@ -39,14 +39,15 @@ final class SpotInfoView: UIView {
         return view
     }()
     
-    private let viewModel: SpotViewModel
+    private let infoViewModel: SpotInfoViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SpotViewModel) {
-        self.viewModel = viewModel
+    init(infoViewModel: SpotInfoViewModel) {
+        self.infoViewModel = infoViewModel
         super.init(frame: CGRect.zero)
         
         configure()
+        bind(viewModel: infoViewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -56,7 +57,6 @@ final class SpotInfoView: UIView {
     private func configure() {
         configureLayout()
         configureStyle()
-        configureAction()
     }
     
     private func configureLayout() {
@@ -104,9 +104,14 @@ final class SpotInfoView: UIView {
         self.layer.cornerRadius = 16
     }
     
-    private func configureAction() {
-        contactInfoView.gesture().sink { [self] _ in
-            viewModel.callBbaji(to: bbajiInfo.getContact())
-        }.store(in: &cancellables)
+    private func bind(viewModel: SpotInfoViewModel) {
+        let tapGesture = UITapGestureRecognizer()
+        contactInfoView.addGestureRecognizer(tapGesture)
+        
+        let input = SpotInfoViewModel.Input(
+            contactTapGesture: tapGesture.tapPublisher
+        )
+        
+        viewModel.transform(input: input)
     }
 }

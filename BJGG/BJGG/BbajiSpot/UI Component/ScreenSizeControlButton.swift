@@ -11,14 +11,14 @@ import UIKit
 
 final class ScreenSizeControlButton: UIButton {
     
-    private var viewModel: SpotViewModel
+    private var spotViewModel: SpotViewModel?
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SpotViewModel) {
-        self.viewModel = viewModel
+    init(spotViewModel: SpotViewModel) {
         super.init(frame: CGRect.zero)
+        self.spotViewModel = spotViewModel
         configure()
-        bind(viewModel: viewModel)
+        bind(viewModel: spotViewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -36,13 +36,13 @@ final class ScreenSizeControlButton: UIButton {
     
     private func bind(viewModel: SpotViewModel) {
         let input = SpotViewModel.Input(
-            cameraViewTapGesture: nil,
-            reloadButtonTapPublisher: nil,
             screenSizeButtonTapPublisher: self.tapPublisher,
-            playStatus: nil
+            willEnterForeground: nil,
+            didEnterBackground: nil
         )
 
         _ = viewModel.transform(input: input)
+        
         viewModel.$screenSizeStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
