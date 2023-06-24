@@ -31,7 +31,7 @@ final class SpotLiveCameraView: UIView {
         return button
     }()
     
-    var player: AVPlayer? {
+    private var player: AVPlayer? {
         get {
             return playerLayer.player
         }
@@ -40,7 +40,7 @@ final class SpotLiveCameraView: UIView {
         }
     }
         
-    var playerLayer: AVPlayerLayer {
+    private var playerLayer: AVPlayerLayer {
         return layer as! AVPlayerLayer
     }
     
@@ -49,7 +49,7 @@ final class SpotLiveCameraView: UIView {
     private var playerItem: AVPlayerItem?
     
     private var spotViewModel: SpotViewModel?
-    private var liveCameraViewModel: SpotLiveCameraViewModel?
+    var liveCameraViewModel: SpotLiveCameraViewModel?
     private var cancellables = Set<AnyCancellable>()
     
     init(spotViewModel: SpotViewModel, liveCameraViewModel: SpotLiveCameraViewModel) {
