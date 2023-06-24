@@ -199,14 +199,14 @@ final class BbajiSpotViewController: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.willEnterForeground?
+        output.willEnterForeground
             .receive(on: DispatchQueue.main)
             .sink { [weak self] willEnterForeground in
                 if willEnterForeground {
+                    self?.liveCameraView.liveCameraViewModel?.changePlayStatus(as: .origin)
+                } else {
                     self?.liveMarkView.liveMarkActive(to: false)
                     self?.liveCameraView.stanbyView.stopLoadingAnimation()
-                } else {
-//                    viewModel.changePlayStatus(as: .origin)
                 }
             }.store(in: &cancellables)
     }

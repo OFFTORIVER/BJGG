@@ -28,7 +28,7 @@ final class SpotViewModel: ViewModelType {
     }
     
     struct Output {
-        var willEnterForeground: CurrentValueSubject<Bool, Never>?
+        var willEnterForeground: PassthroughSubject<Bool, Never>
     }
     
     func changeScreenSizeStatus() {
@@ -40,20 +40,20 @@ final class SpotViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        var willEnterForeground: Bool = false
+        let willEnterForeground = PassthroughSubject<Bool, Never>()
         
         input.screenSizeButtonTapPublisher?.sink { [weak self] _ in
             self?.changeScreenSizeStatus()
         }.store(in: &cancellables)
         
         input.didEnterBackground?.sink { _ in
-            willEnterForeground = false
+            willEnterForeground.send(false)
         }.store(in: &cancellables)
         
         input.willEnterForeground?.sink { _ in
-            willEnterForeground = true
+            willEnterForeground.send(true)
         }.store(in: &cancellables)
         
-        return Output(willEnterForeground: CurrentValueSubject(willEnterForeground))
+        return Output(willEnterForeground: willEnterForeground)
     }
 }

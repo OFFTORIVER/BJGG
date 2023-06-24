@@ -16,7 +16,6 @@ final class SpotLiveCameraControlView: UIView {
     private lazy var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton(spotViewModel: spotViewModel ?? SpotViewModel())
     
     private var spotViewModel: SpotViewModel?
-    private var cancellables = Set<AnyCancellable>()
     
     init(spotViewModel: SpotViewModel) {
         super.init(frame: CGRect.zero)

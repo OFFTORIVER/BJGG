@@ -56,7 +56,7 @@ final class SpotLiveCameraViewModel: ViewModelType {
         return Output(controlStatus: controlStatus)
     }
     
-    func changeControlStatus() {
+    private func changeControlStatus() {
         if controlStatus.value == .hidden {
             controlStatus.send(.exist)
         } else {
