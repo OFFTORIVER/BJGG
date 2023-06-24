@@ -14,7 +14,7 @@ protocol ActionViewModelType {
     func transform(input: Input)
 }
 
-final class SpotInfoViewModel: ViewModelType {
+final class SpotInfoViewModel: ActionViewModelType {
     private let bbajiInfo: BbajiInfo
     private var cancellables = Set<AnyCancellable>()
     
