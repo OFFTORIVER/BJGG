@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BbajiListViewDelegate {
-    func pushBbajiSpotViewController()
+    func pushBbajiSpotViewController(index: Int)
 }
 
 typealias BbajiListInfo = (locationName: String, name: String, backgroundImageName: String)
@@ -76,7 +76,7 @@ extension BbajiListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.row
         if idx == 0 {
-            bbajiListViewDelegate?.pushBbajiSpotViewController()
+            bbajiListViewDelegate?.pushBbajiSpotViewController(index: idx)
         }
     }
 }

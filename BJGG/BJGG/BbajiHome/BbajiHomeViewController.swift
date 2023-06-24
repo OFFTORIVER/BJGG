@@ -33,8 +33,8 @@ final class BbajiHomeViewController: UIViewController {
 }
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
-    func pushBbajiSpotViewController() {
-        self.navigationController?.pushViewController(BbajiSpotViewController(dataViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel()), animated: true)
+    func pushBbajiSpotViewController(index: Int) {
+        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: bbajiInfoArray[index]), weatherViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel(), liveCameraViewModel: SpotLiveCameraViewModel()), animated: true)
     }
 }
 
