@@ -11,7 +11,7 @@ import SnapKit
 
 final class BbajiSpotViewController: UIViewController {
     
-    lazy var liveCameraView = SpotLiveCameraView(spotViewModel: spotViewModel, liveCameraViewModel: SpotLiveCameraViewModel())
+    lazy var liveCameraView = SpotLiveCameraView(spotViewModel: spotViewModel ?? SpotViewModel(), liveCameraViewModel: liveCameraViewModel ?? SpotLiveCameraViewModel())
     private let infoScrollView = UIScrollView()
     private let infoScrollContentView = UIView()
     private lazy var spotInfoView: SpotInfoView = {
@@ -27,7 +27,7 @@ final class BbajiSpotViewController: UIViewController {
     }()
     
     private lazy var liveMarkView: LiveMarkView = {
-        let view = LiveMarkView(liveCameraViewModel: SpotLiveCameraViewModel())
+        let view = LiveMarkView(liveCameraViewModel: liveCameraViewModel ?? SpotLiveCameraViewModel())
         view.setUpLiveLabelRadius(to: screenWidth / 36)
         return view
     }()
@@ -35,15 +35,18 @@ final class BbajiSpotViewController: UIViewController {
     private var screenWidth: CGFloat = CGFloat()
     private var firstAttempt: Bool = true
     
-    private var dataViewModel: SpotWeatherViewModel
-    private var spotViewModel: SpotViewModel
+    private var infoViewModel: SpotInfoViewModel?
+    private var weatherViewModel: SpotWeatherViewModel?
+    private var spotViewModel: SpotViewModel?
+    private var liveCameraViewModel: SpotLiveCameraViewModel?
     private var cancellables = Set<AnyCancellable>()
 
-    init(dataViewModel: SpotWeatherViewModel, spotViewModel: SpotViewModel) {
-        self.dataViewModel = dataViewModel
-        self.spotViewModel = spotViewModel
-        
+    init(infoViewModel: SpotInfoViewModel, weatherViewModel: SpotWeatherViewModel, spotViewModel: SpotViewModel, liveCameraViewModel: SpotLiveCameraViewModel) {
         super.init(nibName: nil, bundle: nil)
+        self.infoViewModel = infoViewModel
+        self.weatherViewModel = weatherViewModel
+        self.spotViewModel = spotViewModel
+        self.liveCameraViewModel = liveCameraViewModel
     }
     
     required init?(coder: NSCoder) {
@@ -63,7 +66,7 @@ final class BbajiSpotViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         var isStatusBarHidden = false
-        spotViewModel.$screenSizeStatus.sink { status in
+        spotViewModel?.$screenSizeStatus.sink { status in
             switch status {
             case .full:
                 isStatusBarHidden = true
@@ -76,7 +79,7 @@ final class BbajiSpotViewController: UIViewController {
 
     override var prefersHomeIndicatorAutoHidden: Bool {
         var isHomeIndicatorAutoHidden = false
-        spotViewModel.$screenSizeStatus.sink { status in
+        spotViewModel?.$screenSizeStatus.sink { status in
             switch status {
             case .full:
                 isHomeIndicatorAutoHidden = true
@@ -91,7 +94,7 @@ final class BbajiSpotViewController: UIViewController {
         configureLayout()
         configureStyle()
         configureComponent()
-        bind(viewModel: spotViewModel)
+        bind(weatherViewModel: weatherViewModel, spotViewModel: spotViewModel)
     }
     
     private func configureLayout() {
@@ -166,8 +169,8 @@ final class BbajiSpotViewController: UIViewController {
         setUpLiveCameraViewConstraints(screenStatus: .normal)
     }
     
-    private func bind(viewModel: SpotViewModel) {
-        dataViewModel.$weatherData
+    private func bind(weatherViewModel: SpotWeatherViewModel?, spotViewModel: SpotViewModel?) {
+        weatherViewModel?.$weatherData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherData in
                 guard let self = self,
@@ -176,7 +179,7 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
             }.store(in: &cancellables)
         
-        dataViewModel.$rainData
+        weatherViewModel?.$rainData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rainData in
                 guard let self = self,
@@ -184,8 +187,7 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
         
-        // MARK: $screenSizeStatus
-        viewModel.$screenSizeStatus
+        spotViewModel?.$screenSizeStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 if status == .origin { return }
@@ -197,7 +199,7 @@ final class BbajiSpotViewController: UIViewController {
             willEnterForeground: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification), didEnterBackground: NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
         )
         
-        let output = viewModel.transform(input: input)
+        guard let output = spotViewModel?.transform(input: input) else { return }
         
         output.willEnterForeground
             .receive(on: DispatchQueue.main)

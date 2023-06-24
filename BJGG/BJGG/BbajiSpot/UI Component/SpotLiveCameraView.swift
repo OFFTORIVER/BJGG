@@ -125,7 +125,7 @@ final class SpotLiveCameraView: UIView {
         addGestureRecognizer(tapGesture)
         
         let input = SpotLiveCameraViewModel.Input(
-            cameraViewTapGesture: tapGesture.tapPublisher,
+            cameraViewTapPublisher: tapGesture.tapPublisher,
             reloadButtonTapPublisher: reloadButton.tapPublisher,
             playStatus: nil
         )
@@ -203,7 +203,7 @@ final class SpotLiveCameraView: UIView {
 
             interactionEnableStatus(as: true)
             let input = SpotLiveCameraViewModel.Input(
-                cameraViewTapGesture: nil,
+                cameraViewTapPublisher: nil,
                 reloadButtonTapPublisher: nil,
                 playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>(status)
             )

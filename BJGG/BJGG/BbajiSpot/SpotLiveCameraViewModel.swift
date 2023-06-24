@@ -17,18 +17,17 @@ final class SpotLiveCameraViewModel: ViewModelType {
     private var cancellables = Set<AnyCancellable>()
     
     struct Input {
-        let cameraViewTapGesture: AnyPublisher<UITapGestureRecognizer, Never>?
+        let cameraViewTapPublisher: AnyPublisher<UITapGestureRecognizer, Never>?
         let reloadButtonTapPublisher: AnyPublisher<Void, Never>?
         let playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>?
     }
     
     struct Output {
         var controlStatus: CurrentValueSubject<ControlStatus, Never>
-        var willEnterForeground: CurrentValueSubject<Bool, Never>?
     }
     
     func transform(input: Input) -> Output {
-        input.cameraViewTapGesture?.sink {[weak self] _ in
+        input.cameraViewTapPublisher?.sink {[weak self] _ in
             self?.changeControlStatus()
         }.store(in: &cancellables)
         

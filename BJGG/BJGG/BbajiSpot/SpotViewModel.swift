@@ -31,14 +31,6 @@ final class SpotViewModel: ViewModelType {
         var willEnterForeground: PassthroughSubject<Bool, Never>
     }
     
-    func changeScreenSizeStatus() {
-        if screenSizeStatus == .normal || screenSizeStatus == .origin {
-            screenSizeStatus = .full
-        } else {
-            screenSizeStatus = .normal
-        }
-    }
-    
     func transform(input: Input) -> Output {
         let willEnterForeground = PassthroughSubject<Bool, Never>()
         
@@ -55,5 +47,13 @@ final class SpotViewModel: ViewModelType {
         }.store(in: &cancellables)
         
         return Output(willEnterForeground: willEnterForeground)
+    }
+    
+    func changeScreenSizeStatus() {
+        if screenSizeStatus == .normal || screenSizeStatus == .origin {
+            screenSizeStatus = .full
+        } else {
+            screenSizeStatus = .normal
+        }
     }
 }
