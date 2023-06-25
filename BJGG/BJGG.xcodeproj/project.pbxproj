@@ -26,6 +26,7 @@
 		3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */; };
 		3AD87FB228D892D300ABD2E4 /* InfoDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FB128D892D300ABD2E4 /* InfoDescriptionView.swift */; };
 		42600D5F28EF322500D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5E28EF322500D114BC /* Settings.bundle */; };
+		5510CA4429E58FF200A1AF36 /* BbajiHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5510CA4329E58FF200A1AF36 /* BbajiHomeViewModel.swift */; };
 		553F0F7D28E20DD600FD9CDA /* esamanru OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */; };
 		553F0F7E28E20DD800FD9CDA /* esamanru OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */; };
 		553F0F7F28E20DDA00FD9CDA /* esamanru OTF Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */; };
@@ -78,6 +79,7 @@
 		3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraStandbyView.swift; sourceTree = "<group>"; };
 		3AD87FB128D892D300ABD2E4 /* InfoDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDescriptionView.swift; sourceTree = "<group>"; };
 		42600D5E28EF322500D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		5510CA4329E58FF200A1AF36 /* BbajiHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewModel.swift; sourceTree = "<group>"; };
 		553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Light.otf"; sourceTree = "<group>"; };
 		553F0F7B28E20DCB00FD9CDA /* esamanru OTF Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Medium.otf"; sourceTree = "<group>"; };
 		553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Bold.otf"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				55CB0ABB28BB41C60045644C /* BbajiHomeViewController.swift */,
+				5510CA4329E58FF200A1AF36 /* BbajiHomeViewModel.swift */,
 				553F0F9B28E49E2900FD9CDA /* UI Component */,
 			);
 			path = BbajiHome;
@@ -410,6 +413,7 @@
 				3A7E3BE728D766EC00F6416A /* SpotWeatherInfoView.swift in Sources */,
 				553F0FA928E9E80D00FD9CDA /* WeatherManager.swift in Sources */,
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
+				5510CA4429E58FF200A1AF36 /* BbajiHomeViewModel.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
 				3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
