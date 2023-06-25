@@ -33,7 +33,7 @@ struct BbajiInfo: Encodable {
             let link = try liveCameraURLInitialize()
             liveCameraURL = link
         } catch {
-            if let error = error as? PlistError {
+            if let error = error as? ConfigError {
                 print(error.rawValue)
             }
         }
@@ -53,19 +53,10 @@ struct BbajiInfo: Encodable {
     }
         
     private func liveCameraURLInitialize() throws -> String {
-        guard let privatePlist = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
-            throw PlistError.bundleError
+        guard let key = Bundle.main.object(forInfoDictionaryKey: "HLS_KEY") as? String else {
+            throw ConfigError.stringCastingError
         }
-        
-        guard let dictionary = NSDictionary(contentsOf: privatePlist) else {
-            throw PlistError.dictionaryCastingError
-        }
-        
-        guard let link: String = dictionary["hlsLink"] as? String else {
-            throw PlistError.stringCastingError
-        }
-        
-        return link
+        return key
     }
     
     func getName() -> String { return name }
