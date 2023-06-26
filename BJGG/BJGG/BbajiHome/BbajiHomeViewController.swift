@@ -46,7 +46,6 @@ final class BbajiHomeViewController: UIViewController {
     private func configure() {
         configureLayout()
         configureDelegate()
-        configureComponent()
     }
 }
 
@@ -72,14 +71,9 @@ extension BbajiHomeViewController: UICollectionViewDataSource {
 
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
-    func didSelectItem() {
-        self.navigationController?.pushViewController(BbajiSpotViewController(), animated: true)
-    }
-}
-
-extension BbajiHomeViewController {
-    func configureComponent() {
-
+    func didSelectItem(index: Int) {
+        // TODO: BbajiHomeViewModel에서 [BbajiInfo]의 데이터 넘김을 바탕으로 SpotInfoViewModel 초기화하기
+        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo()), weatherViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel(), liveCameraViewModel: SpotLiveCameraViewModel()), animated: true)
     }
 }
 

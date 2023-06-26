@@ -5,16 +5,21 @@
 //  Created by 황정현 on 2023/03/04.
 //
 
+import Combine
+import CombineCocoa
 import UIKit
 import SnapKit
 
 final class SpotLiveCameraControlView: UIView {
 
     private var gradientView: SpotLiveCameraGradientView = SpotLiveCameraGradientView()
-    var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton()
+    private lazy var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton(spotViewModel: spotViewModel ?? SpotViewModel())
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var spotViewModel: SpotViewModel?
+    
+    init(spotViewModel: SpotViewModel) {
+        super.init(frame: CGRect.zero)
+        self.spotViewModel = spotViewModel
         configureLayout()
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BbajiListViewDelegate: AnyObject {
-    func didSelectItem()
+    func didSelectItem(index: Int)
 }
 
 final class BbajiListView: UICollectionView {
@@ -45,7 +45,10 @@ extension BbajiListView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        bbajiListViewDelegate?.didSelectItem()
+        let idx = indexPath.row
+        if idx == 0 {
+            bbajiListViewDelegate?.didSelectItem(index: idx)
+        }
     }
 }
 
