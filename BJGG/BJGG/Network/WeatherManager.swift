@@ -14,19 +14,13 @@ enum WeatherManagerError: Error {
 
 struct WeatherManager {
     private func requestWeather(nx: Int, ny: Int, numberOfRow: Int) async throws -> Weather {
-        guard let privatePlist = Bundle.main.url(forResource: "Private", withExtension: "plist") else {
-            throw PlistError.bundleError
+        guard let weatherAPIKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY") as? String else {
+            throw ConfigError.stringCastingError
         }
-        
-        guard let dictionary = NSDictionary(contentsOf: privatePlist) else {
-            throw PlistError.dictionaryCastingError
-        }
-        
-        let weatherAPIKey = dictionary["weatherAPIKey"] as! String
         let urlString = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=\(weatherAPIKey)&numOfRows=\(numberOfRow)&pageNo=1&dataType=JSON&base_date=\(Date.requestDay)&base_time=\(Date.requestTime)&nx=\(nx)&ny=\(ny)"
         
         guard let url = URL(string: urlString) else {
-            throw PlistError.stringCastingError
+            throw WeatherManagerError.apiError("WeatherManager API Error : URL 변환 실패")
         }
         
         var request = URLRequest(url: url)

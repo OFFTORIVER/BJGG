@@ -7,77 +7,80 @@
 
 import UIKit
 import SnapKit
-
-typealias BbajiHomeWeather = (time: String, iconName: String, temp: String, probability: String)
+import Combine
 
 final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiTitleView = BbajiTitleView()
     private lazy var bbajiListView = BbajiListView()
     private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
-
-    private var weatherManager: WeatherManager?
-    private let bbajiInfoArray = [BbajiInfo()]
-    private var weatherData: [BbajiHomeWeather] = []
+    
+    let viewModel: BbajiHomeViewModel
+    private var cancellable = Set<AnyCancellable>()
+    
+    init(viewMdoel: BbajiHomeViewModel = BbajiHomeViewModel()) {
+        self.viewModel = viewMdoel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configure()
+        bind()
+        
+        viewModel.viewDidLoad()
+    }
+    
+    private func bind() {
+        viewModel.$weatherNows
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+            guard let self = self else { return }
+            self.bbajiListView.reloadData()
+        }.store(in: &cancellable)
     }
     
     private func configure() {
         configureLayout()
         configureDelegate()
-        configureComponent()
     }
 }
+
+extension BbajiHomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return UIDevice.current.hasNotch ? 2 : 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BbajiListCell.id, for: indexPath) as? BbajiListCell else { return UICollectionViewCell() }
+        
+        if indexPath.row < viewModel.weatherNows.count {
+            let weatherNow = viewModel.weatherNows[indexPath.row]
+            
+            cell.configure(indexPath.row, locationName: weatherNow.locationName, bbajiName: weatherNow.name, backgroundImageName: weatherNow.backgroundImageName, iconName: weatherNow.iconName, temp: weatherNow.temp)
+        } else {
+            cell.configure(indexPath.row)
+        }
+        
+        return cell
+    }
+}
+
 
 extension BbajiHomeViewController: BbajiListViewDelegate {
-    func pushBbajiSpotViewController(index: Int) {
-        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: bbajiInfoArray[index]), weatherViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel(), liveCameraViewModel: SpotLiveCameraViewModel()), animated: true)
-    }
-}
-
-extension BbajiHomeViewController {
-    func configureComponent() {
-        Task {
-            do {
-                weatherData = try await requestWeatherData()
-                bbajiListView.configure(
-                    convertToListWeatherArray(from: weatherData),
-                    listInfoArray: convertToListInfoArray(from: bbajiInfoArray)
-                )
-            } catch WeatherManagerError.apiError(let message) {
-                print(message)
-            } catch WeatherManagerError.networkError(let message) {
-                print(message)
-            } catch DecodingError.dataCorrupted(let description) {
-                print(description.codingPath, description.debugDescription, description.underlyingError ?? "", separator: "\n")
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+    func didSelectItem(index: Int) {
+        // TODO: BbajiHomeViewModel에서 [BbajiInfo]의 데이터 넘김을 바탕으로 SpotInfoViewModel 초기화하기
+        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo()), weatherViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel(), liveCameraViewModel: SpotLiveCameraViewModel()), animated: true)
     }
 }
 
 private extension BbajiHomeViewController {
-    private func requestWeatherData() async throws -> [BbajiHomeWeather] {
-        weatherManager = WeatherManager()
-
-        let bbajiCoorX = bbajiInfoArray[0].getCoordinate().x
-        let bbajiCoorY = bbajiInfoArray[0].getCoordinate().y
-        var data: [BbajiHomeWeather] = []
-        
-        if let weatherItems = try await weatherManager?.requestCurrentTimeWeather(nx: bbajiCoorX, ny: bbajiCoorY).response.body.items {
-            let weatherSet = weatherItems.requestCurrentWeatherItem()
-            data = weatherItems.requestWeatherDataSet(weatherSet)
-        }
-        
-        return data
-    }
-    
     func configureDelegate() {
         bbajiListView.bbajiListViewDelegate = self
+        bbajiListView.dataSource = self
     }
     
     func configureLayout() {
@@ -144,25 +147,5 @@ private extension BbajiHomeViewController {
             $0.height.equalTo(24.0)
             $0.bottom.equalTo(noticeLabel.snp.top)
         }
-    }
-    
-    func convertToListInfoArray(from bbajiInfoArray: [BbajiInfo]) -> [BbajiListInfo] {
-        var listInfoArray: [BbajiListInfo] = []
-        for info in bbajiInfoArray {
-            let listInfo = (info.getAddress(), info.getName(), info.getThumbnailImgName())
-            listInfoArray.append(listInfo)
-        }
-        
-        return listInfoArray
-    }
-    
-    func convertToListWeatherArray(from weatherData: [(time: String, iconName: String, temp: String, probability: String)]) -> [BbajiListWeather] {
-        var listWeatherArray: [BbajiListWeather] = []
-        for weather in weatherData {
-            let listWeather = BbajiListWeather(weather.iconName, weather.temp)
-            listWeatherArray.append(listWeather)
-        }
-        
-        return listWeatherArray
     }
 }
