@@ -78,9 +78,8 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
     }
     
     func configureLabelStyle(index: Int) {
-        var textColor: UIColor = .bbagaGray2
+        let textColor: UIColor = index == 0 ? .bbagaGray1: .bbagaGray2
         if index == 0 {
-            textColor = .bbagaGray1
             temperatureLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
             timeLabel.font = UIFont(name: UIFont.Pretendard.bold.rawValue, size: 15.0) ?? UIFont()
         } else {

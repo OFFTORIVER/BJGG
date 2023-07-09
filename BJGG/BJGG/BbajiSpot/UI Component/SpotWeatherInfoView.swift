@@ -39,7 +39,7 @@ final class SpotWeatherInfoView: UIView {
     }()
     
     private var spotTodayWeatherCollectionView: UICollectionView!
-    private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)] = []
+    private var currentWeatherInfo: [WeatherData] = []
     
     private var spotWeatherAPIInfoView: SpotWeatherAPIInfoView!
 
@@ -158,9 +158,9 @@ final class SpotWeatherInfoView: UIView {
         spotTodayWeatherCollectionView.delegate = self
     }
     
-    func reloadWeatherData(weatherAPIIsSuccess: Bool, weatherInfoTuple:  [(time: String, iconName: String, temp: String, probability: String)]) {
+    func reloadWeatherData(weatherAPIIsSuccess: Bool, weatherData: [WeatherData]) {
         
-        currentWeatherInfo = weatherInfoTuple
+        currentWeatherInfo = weatherData
         if weatherAPIIsSuccess {
             UIView.animate(withDuration: 0.1, delay: 0.2, animations: {
                 self.spotWeatherInfoViewComponentHidden(isHidden: false)

@@ -5,6 +5,7 @@
 //  Created by 황정현 on 2022/09/18.
 //
 
+import Combine
 import UIKit
 
 final class SpotInfoView: UIView {
@@ -48,10 +49,15 @@ final class SpotInfoView: UIView {
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private let infoViewModel: SpotInfoViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(infoViewModel: SpotInfoViewModel) {
+        self.infoViewModel = infoViewModel
+        super.init(frame: CGRect.zero)
         
         configure()
+        bind(viewModel: infoViewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -60,7 +66,7 @@ final class SpotInfoView: UIView {
     
     private func configure() {
         configureLayout()
-        configureAction()
+        configureStyle()
     }
     
     private func configureLayout() {
@@ -111,17 +117,18 @@ final class SpotInfoView: UIView {
         })
     }
     
-    private func configureAction() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showContactLinkOption(_:)))
-        contactInfoView.descriptionLabel.addGestureRecognizer(tapGestureRecognizer)
-        contactInfoView.descriptionLabel.isUserInteractionEnabled = true
+    private func configureStyle() {
+        self.layer.cornerRadius = 16
     }
     
-    @objc func showContactLinkOption(_ sender: UITapGestureRecognizer) {
-        let phoneNumber:Int = Int(bbajiInfo.getContact().components(separatedBy: ["-"]).joined()) ?? 01000000000
-        if let url = NSURL(string: "tel://0" + "\(phoneNumber)"),
-           UIApplication.shared.canOpenURL(url as URL) {
-            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-        }
+    private func bind(viewModel: SpotInfoViewModel) {
+        let tapGesture = UITapGestureRecognizer()
+        contactInfoView.addGestureRecognizer(tapGesture)
+        
+        let input = SpotInfoViewModel.Input(
+            contactTapGesture: tapGesture.tapPublisher
+        )
+        
+        viewModel.transform(input: input)
     }
 }
