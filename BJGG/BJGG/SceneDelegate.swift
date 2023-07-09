@@ -5,12 +5,13 @@
 //  Created by 이재웅 on 2022/08/27.
 //
 
+//import Combine
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
@@ -23,24 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = launchScreen
         window.makeKeyAndVisible()
         
-        NetworkManager.shared.startMonitoring(window: window) {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-                self.window?.rootViewController = navigationController
-                if let rootVC = self.window?.rootViewController as? UINavigationController {
-                    if rootVC.viewControllers.count == 1 {
-                        if let vc = rootVC.viewControllers[0] as? BbajiHomeViewController {
-                            vc.viewModel.fetchWeatherNows()
-                            return
-                        }
-                    } else if rootVC.viewControllers.count == 2 {
-                        if let vc = rootVC.viewControllers[1] as? BbajiSpotViewController {
-                            vc.configureComponent()
-                            return
-                        }
-                    }
-                }
-            }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            self.window?.rootViewController = navigationController
         }
+        
+        NetworkManager.shared.refactorStartMonitoring(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

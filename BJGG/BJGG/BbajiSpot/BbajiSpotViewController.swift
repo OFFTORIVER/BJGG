@@ -36,7 +36,7 @@ final class BbajiSpotViewController: UIViewController {
     private var firstAttempt: Bool = true
     
     private var infoViewModel: SpotInfoViewModel?
-    private var weatherViewModel: SpotWeatherViewModel?
+    var weatherViewModel: SpotWeatherViewModel?
     private var spotViewModel: SpotViewModel?
     private var liveCameraViewModel: SpotLiveCameraViewModel?
     private var cancellables = Set<AnyCancellable>()
