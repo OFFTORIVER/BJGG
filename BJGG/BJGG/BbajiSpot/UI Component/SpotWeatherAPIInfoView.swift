@@ -42,20 +42,20 @@ final class SpotWeatherAPIInfoView: UIView {
     
     private func configureLayout() {
         self.addSubview(currentAPIInfoLabel)
-        currentAPIInfoLabel.snp.makeConstraints({ make in
+        currentAPIInfoLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.width.equalTo(300)
             make.height.equalTo(30)
-        })
+        }
         
         self.addSubview(currentAPIInfoLabelDeco)
-        currentAPIInfoLabelDeco.snp.makeConstraints({ make in
+        currentAPIInfoLabelDeco.snp.makeConstraints { make in
             make.leading.equalTo(currentAPIInfoLabel.snp.leading)
             make.bottom.equalTo(currentAPIInfoLabel.snp.top)
             make.width.equalTo(71)
             make.height.equalTo(24)
-        })
+        }
     }
     
     private func configureStyle() {

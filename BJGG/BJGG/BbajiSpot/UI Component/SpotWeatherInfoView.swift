@@ -39,7 +39,7 @@ final class SpotWeatherInfoView: UIView {
     }()
     
     private var spotTodayWeatherCollectionView: UICollectionView!
-    private var currentWeatherInfo: [(time: String, iconName: String, temp: String, probability: String)] = []
+    private var currentWeatherInfo: [WeatherData] = []
     
     private var spotWeatherAPIInfoView: SpotWeatherAPIInfoView!
 
@@ -67,55 +67,53 @@ final class SpotWeatherInfoView: UIView {
     private func configureLayout() {
         
         self.addSubview(weatherAddressLabel)
-        weatherAddressLabel.snp.makeConstraints({ make in
+        weatherAddressLabel.snp.makeConstraints{ make in
             make.leading.equalTo(self.snp.leading).inset(BbajiConstraints.viewInset)
             make.top.equalTo(self.snp.top).inset(BbajiConstraints.viewInset)
             make.height.equalTo(18)
-        })
+        }
         
         self.addSubview(currentWeatherIconAndLabel)
-        currentWeatherIconAndLabel.snp.makeConstraints({ make in
+        currentWeatherIconAndLabel.snp.makeConstraints { make in
             make.top.equalTo(weatherAddressLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(160)
             make.height.equalTo(64)
-        })
+        }
         
         [
             currentWeatherIcon,
             currentTemperatureLabel
-        ].forEach {
-            currentWeatherIconAndLabel.addSubview($0)
-        }
+        ].forEach { currentWeatherIconAndLabel.addSubview($0) }
         
-        currentWeatherIcon.snp.makeConstraints({ make in
+        currentWeatherIcon.snp.makeConstraints { make in
             make.leading.equalTo(currentWeatherIconAndLabel.snp.leading)
             make.top.equalTo(currentWeatherIconAndLabel.snp.top)
             make.centerY.equalTo(currentWeatherIconAndLabel.snp.centerY)
             make.width.height.equalTo(64)
-        })
+        }
         
-        currentTemperatureLabel.snp.makeConstraints({ make in
+        currentTemperatureLabel.snp.makeConstraints { make in
             make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(BbajiConstraints.iconOffset)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
             make.width.equalTo(100)
-        })
+        }
         
         self.addSubview(rainInfoLabel)
-        rainInfoLabel.snp.makeConstraints({ make in
+        rainInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(18)
-        })
+        }
         
         self.addSubview(spotWeatherInfoViewDivideLine)
-        spotWeatherInfoViewDivideLine.snp.makeConstraints({ make in
+        spotWeatherInfoViewDivideLine.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading)
             make.top.equalTo(rainInfoLabel.snp.bottom).offset(BbajiConstraints.viewInset)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(2)
-        })
+        }
         
         let collectionViewLayer = UICollectionViewFlowLayout()
         collectionViewLayer.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -124,12 +122,12 @@ final class SpotWeatherInfoView: UIView {
         spotTodayWeatherCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayer)
         
         self.addSubview(spotTodayWeatherCollectionView)
-        spotTodayWeatherCollectionView.snp.makeConstraints({ make in
+        spotTodayWeatherCollectionView.snp.makeConstraints { make in
             make.top.equalTo(spotWeatherInfoViewDivideLine.snp.bottom)
             make.bottom.equalTo(self.snp.bottom)
             make.leading.equalTo(self.snp.leading)
             make.centerX.equalTo(self.snp.centerX)
-        })
+        }
         
         spotTodayWeatherCollectionView.layer.cornerRadius = 16
         spotTodayWeatherCollectionView.backgroundColor = .bbagaGray4
@@ -137,9 +135,9 @@ final class SpotWeatherInfoView: UIView {
         spotWeatherAPIInfoView = SpotWeatherAPIInfoView()
         self.addSubview(spotWeatherAPIInfoView)
         
-        spotWeatherAPIInfoView.snp.makeConstraints({ make in
+        spotWeatherAPIInfoView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalTo(self)
-        })
+        }
         
         spotWeatherAPIInfoView.setDefaultUI()
     }
@@ -158,9 +156,9 @@ final class SpotWeatherInfoView: UIView {
         spotTodayWeatherCollectionView.delegate = self
     }
     
-    func reloadWeatherData(weatherAPIIsSuccess: Bool, weatherInfoTuple:  [(time: String, iconName: String, temp: String, probability: String)]) {
+    func reloadWeatherData(weatherAPIIsSuccess: Bool, weatherData: [WeatherData]) {
         
-        currentWeatherInfo = weatherInfoTuple
+        currentWeatherInfo = weatherData
         if weatherAPIIsSuccess {
             UIView.animate(withDuration: 0.1, delay: 0.2, animations: {
                 self.spotWeatherInfoViewComponentHidden(isHidden: false)
@@ -193,9 +191,7 @@ final class SpotWeatherInfoView: UIView {
             rainInfoLabel,currentWeatherIcon,
             spotWeatherInfoViewDivideLine,
             spotTodayWeatherCollectionView
-        ].forEach({
-            $0?.isHidden = isHidden
-        })
+        ].forEach{ $0?.isHidden = isHidden }
     }
 }
 
