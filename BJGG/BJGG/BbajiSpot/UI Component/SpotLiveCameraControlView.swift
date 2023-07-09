@@ -40,12 +40,12 @@ final class SpotLiveCameraControlView: UIView {
         
         let screenSizeControlButtonSize = UIScreen.main.bounds.width / 12
         addSubview(screenSizeControlButton)
-        screenSizeControlButton.snp.makeConstraints({ make in
+        screenSizeControlButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.snp.bottom).offset(-4)
             make.trailing.equalTo(self.snp.trailing).offset(-4)
             make.width.equalTo(screenSizeControlButtonSize)
             make.height.equalTo(screenSizeControlButtonSize)
-        })
+        }
     }
 }
 

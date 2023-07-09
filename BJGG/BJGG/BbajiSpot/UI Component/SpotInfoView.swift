@@ -90,31 +90,29 @@ final class SpotInfoView: UIView {
         }
         
         self.addSubview(divideLine)
-        divideLine.snp.makeConstraints({ make in
+        divideLine.snp.makeConstraints{ make in
             make.leading.equalTo(self.snp.leading)
             make.top.equalTo(spotNameLabel.snp.bottom).offset(defaultMargin)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(2)
-        })
+        }
         
-        [addressInfoView, contactInfoView].forEach({
-            self.addSubview($0)
-        })
+        [addressInfoView, contactInfoView].forEach { self.addSubview($0) }
         
-        addressInfoView.snp.makeConstraints({ make in
+        addressInfoView.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
             make.top.equalTo(divideLine.snp.bottom).offset(defaultMargin)
             make.height.equalTo(20)
             make.width.equalTo(180)
-        })
+        }
         
-        contactInfoView.snp.makeConstraints({ make in
+        contactInfoView.snp.makeConstraints{ make in
             make.leading.equalTo(addressInfoView.snp.leading)
             make.top.equalTo(addressInfoView.snp.bottom).offset(BbajiConstraints.componentOffset)
             make.height.equalTo(20)
             make.width.equalTo(180)
-        })
+        }
     }
     
     private func configureStyle() {

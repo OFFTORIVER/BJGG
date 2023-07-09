@@ -49,20 +49,20 @@ final class SpotLiveCameraStandbyView: UIView {
     
     func configureLayout() {
         self.addSubview(mainLabel)
-        mainLabel.snp.makeConstraints({ make in
+        mainLabel.snp.makeConstraints { make in
             make.centerX.equalTo(self.snp.centerX)
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(100)
             make.height.equalTo(100)
-        })
+        }
         
         self.addSubview(subLabel)
-        subLabel.snp.makeConstraints({ make in
+        subLabel.snp.makeConstraints { make in
             make.top.equalTo(mainLabel.snp.bottom).inset(BbajiConstraints.iconOffset)
             make.centerX.equalTo(mainLabel)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(36)
-        })
+        }
     }
     
     private func configureStyle() {

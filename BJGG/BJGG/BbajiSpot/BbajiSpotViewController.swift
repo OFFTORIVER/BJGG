@@ -107,57 +107,57 @@ final class BbajiSpotViewController: UIViewController {
         screenWidth = viewWidth
 
         view.addSubview(liveCameraView)
-        liveCameraView.snp.makeConstraints({ make in
+        liveCameraView.snp.makeConstraints { make in
             make.centerX.equalTo(safeArea.snp.centerX)
             make.top.equalTo(safeArea.snp.top)
             make.width.equalTo(safeArea.snp.width)
             make.height.equalTo(liveCameraViewHeight)
-        })
+        }
         
         view.addSubview(liveMarkView)
-        liveMarkView.snp.makeConstraints({ make in
+        liveMarkView.snp.makeConstraints { make in
             make.leading.equalTo(liveCameraView.snp.leading).inset(8)
             make.top.equalTo(liveCameraView.snp.top).inset(8)
             make.width.equalTo(screenWidth / 8)
             make.height.equalTo(screenWidth / 18)
-        })
+        }
         
         view.addSubview(infoScrollView)
-        infoScrollView.snp.makeConstraints({ make in
+        infoScrollView.snp.makeConstraints { make in
             make.top.equalTo(liveCameraView.snp.bottom)
             make.leading.equalTo(safeArea.snp.leading)
             make.trailing.equalTo(safeArea.snp.trailing)
             make.bottom.equalTo(safeArea.snp.bottom)
-        })
+        }
         
         infoScrollView.addSubview(infoScrollContentView)
-        infoScrollContentView.snp.makeConstraints({ make in
+        infoScrollContentView.snp.makeConstraints { make in
             make.top.equalTo(infoScrollView.snp.top)
             make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width)
             make.height.equalTo(UIDevice.current.hasNotch ? 508 : 508 - 32)
-        })
+        }
         infoScrollView.showsVerticalScrollIndicator = false
         
         [
             spotInfoView,
             spotWeatherInfoView
-        ].forEach({ infoScrollContentView.addSubview($0) })
+        ].forEach { infoScrollContentView.addSubview($0) }
 
-        spotInfoView.snp.makeConstraints({ make in
+        spotInfoView.snp.makeConstraints { make in
             make.top.equalTo(infoScrollContentView.snp.top)
             make.leading.equalTo(infoScrollContentView.snp.leading)
             make.trailing.equalTo(infoScrollContentView.snp.trailing)
             make.height.equalTo(108 + BbajiConstraints.viewInset * 4)
-        })
+        }
 
-        spotWeatherInfoView.snp.makeConstraints({ make in
+        spotWeatherInfoView.snp.makeConstraints { make in
             make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
             make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
             make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
             make.height.equalTo(UIDevice.current.hasNotch ? 306 : 290)
-        })
+        }
     }
     
     private func configureStyle() {
@@ -223,37 +223,36 @@ final class BbajiSpotViewController: UIViewController {
         case .normal, .origin:
             let liveCameraViewHeight = screenWidth * 9 / 16
             
-            liveCameraView.snp.makeConstraints({ make in
+            liveCameraView.snp.makeConstraints { make in
                 make.centerX.equalTo(safeArea.snp.centerX)
                 make.top.equalTo(safeArea.snp.top)
                 make.width.equalTo(safeArea.snp.width)
                 make.height.equalTo(liveCameraViewHeight)
-            })
+            }
             
-            liveMarkView.snp.makeConstraints({ make in
+            liveMarkView.snp.makeConstraints { make in
                 make.leading.equalTo(liveCameraView.snp.leading).offset(8)
                 make.top.equalTo(liveCameraView.snp.top).offset(8)
                 make.width.equalTo(screenWidth / 8)
                 make.height.equalTo(screenWidth / 18)
-            })
+            }
         case .full:
-            
             let liveCameraviewHeight = UIScreen.main.bounds.width
             let liveCameraViewWidth = liveCameraviewHeight * 16 / 9
             
-            liveCameraView.snp.makeConstraints({ make in
+            liveCameraView.snp.makeConstraints { make in
                 make.top.equalTo(view.snp.top)
                 make.bottom.equalTo(view.snp.bottom)
                 make.centerX.equalTo(safeArea.snp.centerX)
                 make.width.equalTo(liveCameraViewWidth)
-            })
+            }
             
-            liveMarkView.snp.makeConstraints({ make in
+            liveMarkView.snp.makeConstraints { make in
                 make.leading.equalTo(liveCameraView.snp.leading).offset(16)
                 make.top.equalTo(liveCameraView.snp.top).offset(16)
                 make.width.equalTo(screenWidth / 8)
                 make.height.equalTo(screenWidth / 18)
-            })
+            }
         }
     }
 }
