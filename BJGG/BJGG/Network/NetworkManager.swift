@@ -32,7 +32,6 @@ final class NetworkManager {
     }
     
     func stopMonitoring() {
-        print("STOP")
         monitor.cancel()
     }
     
