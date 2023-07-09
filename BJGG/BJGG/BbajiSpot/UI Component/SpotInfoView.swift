@@ -66,7 +66,6 @@ final class SpotInfoView: UIView {
     
     private func configure() {
         configureLayout()
-        configureStyle()
     }
     
     private func configureLayout() {
@@ -113,10 +112,6 @@ final class SpotInfoView: UIView {
             make.height.equalTo(20)
             make.width.equalTo(180)
         }
-    }
-    
-    private func configureStyle() {
-        self.layer.cornerRadius = 16
     }
     
     private func bind(viewModel: SpotInfoViewModel) {
