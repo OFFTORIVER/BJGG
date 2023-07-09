@@ -14,7 +14,7 @@ final class NetworkManager {
     
     private init() { }
     
-    func refactorStartMonitoring(window: UIWindow) {
+    func startMonitoring(window: UIWindow) {
         Task {
             for await path in monitor.paths() {
                 switch path.status {
@@ -32,13 +32,14 @@ final class NetworkManager {
     }
     
     func stopMonitoring() {
+        print("STOP")
         monitor.cancel()
     }
     
     private func showNetworkStatusAlert(window: UIWindow) {
         let alert = UIAlertController(title: nil, message: "인터넷에 연결되어 있지 않습니다.\n네트워크 연결을 확인하세요.", preferredStyle: .alert)
         let action = UIAlertAction(title: "재시도", style: .default, handler: { _ in
-            self.refactorStartMonitoring(window: window)
+            self.startMonitoring(window: window)
         })
         alert.addAction(action)
         
