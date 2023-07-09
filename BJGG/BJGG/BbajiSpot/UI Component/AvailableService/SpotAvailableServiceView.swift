@@ -36,12 +36,12 @@ final class SpotAvailableServiceView: UIView {
     
     private func configureLayout() {
         addSubview(titleLabel)
-        titleLabel.snp.makeConstraints({ make in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(BbajiConstraints.viewInset)
             make.leading.equalTo(self.snp.leading).offset(BbajiConstraints.viewInset)
             make.trailing.equalTo(self.snp.trailing).offset(BbajiConstraints.viewInset)
             make.width.equalTo(17)
-        })
+        }
     }
     
     private func configureStyle() {
@@ -55,21 +55,21 @@ final class SpotAvailableServiceView: UIView {
             let view = ServiceInfoDescriptionView()
             
             addSubview(view)
-            view.snp.makeConstraints({ make in
+            view.snp.makeConstraints { make in
                 make.bottom.equalTo(self.snp.bottom).offset(-BbajiConstraints.viewInset)
                 make.width.equalTo(32)
                 make.height.equalTo(50)
-            })
+            }
             
             if let standardView = standardView {
-                view.snp.makeConstraints({
+                view.snp.makeConstraints {
                     $0.leading.equalTo(standardView.snp.trailing).offset(BbajiConstraints.viewInset)
-                })
+                }
             }
             else {
-                view.snp.makeConstraints({
+                view.snp.makeConstraints {
                     $0.leading.equalTo(self.snp.leading).offset(BbajiConstraints.viewInset)
-                })
+                }
             }
             
             view.configureComponent(serviceInfo: serviceInfo)

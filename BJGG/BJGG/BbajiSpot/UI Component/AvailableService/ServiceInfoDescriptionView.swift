@@ -34,23 +34,21 @@ final class ServiceInfoDescriptionView: UIView {
     }
     
     private func configureLayout() {
-        [descriptionImageView, descriptionLabel].forEach({
-            self.addSubview($0)
-        })
+        [descriptionImageView, descriptionLabel].forEach { self.addSubview($0) }
         
-        descriptionImageView.snp.makeConstraints({ make in
+        descriptionImageView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(32)
             make.height.equalTo(32)
-        })
+        }
         
-        descriptionLabel.snp.makeConstraints({ make in
+        descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionImageView.snp.bottom).offset(6)
             make.centerX.equalTo(descriptionImageView.snp.centerX)
             make.width.equalTo(38)
             make.height.equalTo(12)
-        })
+        }
     }
     
     func configureComponent(serviceInfo: BbajiServiceInfo) {
