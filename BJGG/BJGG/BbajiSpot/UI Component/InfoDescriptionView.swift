@@ -32,21 +32,19 @@ final class InfoDescriptionView: UIView {
     }
     
     private func configureLayout() {
-        [descriptionImageView, descriptionLabel].forEach({
-            self.addSubview($0)
-        })
+        [descriptionImageView, descriptionLabel].forEach { self.addSubview($0) }
         
-        descriptionImageView.snp.makeConstraints({ make in
+        descriptionImageView.snp.makeConstraints { make in
             make.width.equalTo(20)
             make.height.equalTo(20)
             make.centerY.equalTo(self.snp.centerY)
-        })
+        }
         
-        descriptionLabel.snp.makeConstraints({ make in
+        descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(descriptionImageView.snp.trailing).offset(BbajiConstraints.iconOffset)
             make.centerY.equalTo(descriptionImageView.snp.centerY)
             make.height.equalTo(18)
-        })
+        }
     }
     
     func configureComponent(imageName: String, description: String) {

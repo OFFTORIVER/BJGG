@@ -30,40 +30,40 @@ final class SpotTodayWeatherCollectionViewCell: UICollectionViewCell {
         self.addSubview(currentRainPercentLabel)
         self.addSubview(currentWeatherImgView)
         if isRain {
-            currentRainPercentLabel.snp.remakeConstraints({ make in
+            currentRainPercentLabel.snp.remakeConstraints { make in
                 make.top.equalTo(self.snp.top)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.equalTo(48)
                 make.height.equalTo(19)
-            })
-            currentWeatherImgView.snp.remakeConstraints({ make in
+            }
+            currentWeatherImgView.snp.remakeConstraints { make in
                 make.top.equalTo(currentRainPercentLabel.snp.bottom)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.height.equalTo(28)
-            })
+            }
         } else {
-            currentWeatherImgView.snp.remakeConstraints({ make in
+            currentWeatherImgView.snp.remakeConstraints { make in
                 make.top.equalTo(self.snp.top)
                 make.centerX.equalTo(self.snp.centerX)
                 make.width.height.equalTo(48)
-            })
+            }
         }
         
         self.addSubview(temperatureLabel)
-        temperatureLabel.snp.remakeConstraints({ make in
+        temperatureLabel.snp.remakeConstraints { make in
             make.top.equalTo(currentWeatherImgView.snp.bottom).offset(BbajiConstraints.iconOffset)
             make.centerX.equalTo(currentWeatherImgView.snp.centerX)
             make.height.equalTo(22)
             make.width.equalTo(60)
-        })
+        }
         
         self.addSubview(timeLabel)
-        timeLabel.snp.remakeConstraints({ make in
+        timeLabel.snp.remakeConstraints { make in
             make.top.equalTo(temperatureLabel.snp.bottom).offset(2)
             make.centerX.equalTo(temperatureLabel.snp.centerX)
             make.height.equalTo(18)
             make.width.equalTo(60)
-        })
+        }
     }
     
     func componentConfigure(rainPercentText: String, tempText: String, timeText: String, weatherImage: String) {
