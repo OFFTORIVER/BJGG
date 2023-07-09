@@ -23,7 +23,6 @@ final class ServiceInfoDescriptionView: UIView {
         super.init(frame: frame)
         
         configure()
-//        backgroundColor = .yellow
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -52,7 +51,6 @@ final class ServiceInfoDescriptionView: UIView {
     }
     
     func configureComponent(serviceInfo: BbajiServiceInfo) {
-        print(serviceInfo.rawValue)
         descriptionImageView.image = UIImage(named: serviceInfo.rawValue)
         descriptionLabel.text = serviceInfo.serviceInfoName()
     }
