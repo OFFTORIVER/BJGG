@@ -82,28 +82,28 @@ final class SpotLiveCameraView: UIView {
     private func configureLayout() {
         
         addSubview(videoPlayerControlView)
-        videoPlayerControlView.snp.makeConstraints({ make in
+        videoPlayerControlView.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing)
             make.top.equalTo(self.snp.top)
             make.bottom.equalTo(self.snp.bottom)
-        })
+        }
         
         addSubview(stanbyView)
-        stanbyView.snp.makeConstraints({ make in
+        stanbyView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top)
             make.bottom.equalTo(self.snp.bottom)
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing)
-        })
+        }
         
         addSubview(reloadButton)
-        reloadButton.snp.makeConstraints({ make in
+        reloadButton.snp.makeConstraints { make in
             make.centerX.equalTo(self.snp.centerX)
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(100)
             make.height.equalTo(100)
-        })
+        }
     }
     
     private func configureStyle() {

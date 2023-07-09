@@ -23,7 +23,7 @@ final class SpotInfoViewModel: ActionViewModelType {
     }
     
     func transform(input: Input) {
-        input.contactTapGesture?.sink {[weak self] _ in
+        input.contactTapGesture?.sink { [weak self] _ in
             self?.openContact()
         }.store(in: &cancellables)
     }
