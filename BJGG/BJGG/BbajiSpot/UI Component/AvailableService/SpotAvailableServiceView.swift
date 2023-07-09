@@ -19,6 +19,14 @@ final class SpotAvailableServiceView: UIView {
         return label
     }()
     
+    private lazy var serviceStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = BbajiConstraints.viewInset
+        view.alignment = .leading
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -42,6 +50,12 @@ final class SpotAvailableServiceView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(BbajiConstraints.viewInset)
             make.width.equalTo(17)
         }
+        
+        addSubview(serviceStackView)
+        serviceStackView.snp.makeConstraints { make in
+            make.bottom.equalTo(self.snp.bottom).offset(-BbajiConstraints.viewInset)
+            make.leading.equalTo(self.snp.leading).offset(BbajiConstraints.viewInset)
+        }
     }
     
     private func configureStyle() {
@@ -49,33 +63,18 @@ final class SpotAvailableServiceView: UIView {
     }
     
     private func configureComponent(serviceInfoList: [BbajiServiceInfo]) {
-        
-        var standardView: ServiceInfoDescriptionView?
         for serviceInfo in serviceInfoList {
             let view = ServiceInfoDescriptionView()
             
-            addSubview(view)
+            serviceStackView.addArrangedSubview(view)
             view.snp.makeConstraints { make in
-                make.bottom.equalTo(self.snp.bottom).offset(-BbajiConstraints.viewInset)
+                make.bottom.equalTo(serviceStackView.snp.bottom)
                 make.width.equalTo(32)
                 make.height.equalTo(50)
             }
             
-            if let standardView = standardView {
-                view.snp.makeConstraints {
-                    $0.leading.equalTo(standardView.snp.trailing).offset(BbajiConstraints.viewInset)
-                }
-            }
-            else {
-                view.snp.makeConstraints {
-                    $0.leading.equalTo(self.snp.leading).offset(BbajiConstraints.viewInset)
-                }
-            }
-            
             view.configureComponent(serviceInfo: serviceInfo)
-            standardView = view
         }
-        
     }
     func bind() {
         
