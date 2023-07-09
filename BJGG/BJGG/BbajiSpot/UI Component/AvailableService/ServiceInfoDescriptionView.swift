@@ -43,7 +43,7 @@ final class ServiceInfoDescriptionView: UIView {
         }
         
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionImageView.snp.bottom).offset(6)
+            make.top.equalTo(descriptionImageView.snp.bottom).offset(BbajiConstraints.iconNameOffset)
             make.centerX.equalTo(descriptionImageView.snp.centerX)
             make.width.equalTo(38)
             make.height.equalTo(12)
