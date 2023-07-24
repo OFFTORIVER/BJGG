@@ -151,6 +151,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06B1AFE72A6EA59D00CA712A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				062064962A6D854C00B441CF /* WeatherDTO.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		3A53022129DD9EA200888CFA /* BbajiSpot */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +176,6 @@
 				3A53022129DD9EA200888CFA /* BbajiSpot */,
 				3A7E3BDE28D748B000F6416A /* BbajiInfo.swift */,
 				553F0FA628E9E11E00FD9CDA /* Weather.swift */,
-				062064962A6D854C00B441CF /* WeatherDTO.swift */,
 				55F0AE6429C04C50003B5EEE /* WeatherTime.swift */,
 				3AA6369F29A65F3F006BB5EF /* XCConfigError.swift */,
 			);
@@ -318,6 +325,7 @@
 				553F0F9628E49D7F00FD9CDA /* BbajiHome */,
 				3A7E3BDB28D7427E00F6416A /* Model */,
 				558D99DB29A5FF1800D633BF /* Network */,
+				06B1AFE72A6EA59D00CA712A /* Entities */,
 				55CB0AA728BA4F9F0045644C /* AppDelegate.swift */,
 				558D99DA29A5D8FE00D633BF /* Utilities */,
 				55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */,
