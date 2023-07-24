@@ -8,9 +8,9 @@
 import Foundation
 
 protocol Forecastable {
-    func makeWeatherForecast()
+    func makeWeatherForecast(weathers: [ComputableWeather])
 }
 
 class ForecastManager: Forecastable {
-    func makeWeatherForecast() { }
+    func makeWeatherForecast(weathers: [ComputableWeather]) { }
 }
