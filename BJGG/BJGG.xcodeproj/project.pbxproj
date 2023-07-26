@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		062064972A6D854C00B441CF /* WeatherDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062064962A6D854C00B441CF /* WeatherDTO.swift */; };
+		066579182A714BC700AA3852 /* ForecastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066579172A714BC700AA3852 /* ForecastManagerTests.swift */; };
 		06B1AFE92A6EA5F700CA712A /* ForecastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */; };
 		06B1AFEC2A6EA8D400CA712A /* ComputableWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */; };
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
@@ -74,8 +75,20 @@
 		55F0AE7E29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F0AE7D29C1BC55003B5EEE /* BbajiHomeBackgroundImageView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		066579192A714BC700AA3852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55CB0A9C28BA4F9F0045644C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55CB0AA328BA4F9F0045644C;
+			remoteInfo = BJGG;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		062064962A6D854C00B441CF /* WeatherDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDTO.swift; sourceTree = "<group>"; };
+		066579152A714BC700AA3852 /* BJGGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BJGGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		066579172A714BC700AA3852 /* ForecastManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManagerTests.swift; sourceTree = "<group>"; };
 		06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManager.swift; sourceTree = "<group>"; };
 		06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputableWeather.swift; sourceTree = "<group>"; };
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -143,6 +156,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		066579122A714BC700AA3852 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55CB0AA128BA4F9F0045644C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +175,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		066579162A714BC700AA3852 /* BJGGTests */ = {
+			isa = PBXGroup;
+			children = (
+				066579172A714BC700AA3852 /* ForecastManagerTests.swift */,
+			);
+			path = BJGGTests;
+			sourceTree = "<group>";
+		};
 		06B1AFE72A6EA59D00CA712A /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +338,7 @@
 			children = (
 				42600D5E28EF322500D114BC /* Settings.bundle */,
 				55CB0AA628BA4F9F0045644C /* BJGG */,
+				066579162A714BC700AA3852 /* BJGGTests */,
 				55CB0AA528BA4F9F0045644C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -318,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				55CB0AA428BA4F9F0045644C /* BJGG.app */,
+				066579152A714BC700AA3852 /* BJGGTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -357,6 +387,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		066579142A714BC700AA3852 /* BJGGTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0665791B2A714BC700AA3852 /* Build configuration list for PBXNativeTarget "BJGGTests" */;
+			buildPhases = (
+				066579112A714BC700AA3852 /* Sources */,
+				066579122A714BC700AA3852 /* Frameworks */,
+				066579132A714BC700AA3852 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0665791A2A714BC700AA3852 /* PBXTargetDependency */,
+			);
+			name = BJGGTests;
+			productName = BJGGTests;
+			productReference = 066579152A714BC700AA3852 /* BJGGTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		55CB0AA328BA4F9F0045644C /* BJGG */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55CB0AB828BA4FA10045644C /* Build configuration list for PBXNativeTarget "BJGG" */;
@@ -385,9 +433,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					066579142A714BC700AA3852 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 55CB0AA328BA4F9F0045644C;
+					};
 					55CB0AA328BA4F9F0045644C = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -411,11 +463,19 @@
 			projectRoot = "";
 			targets = (
 				55CB0AA328BA4F9F0045644C /* BJGG */,
+				066579142A714BC700AA3852 /* BJGGTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		066579132A714BC700AA3852 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55CB0AA228BA4F9F0045644C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,6 +502,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		066579112A714BC700AA3852 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				066579182A714BC700AA3852 /* ForecastManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55CB0AA028BA4F9F0045644C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,6 +566,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0665791A2A714BC700AA3852 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55CB0AA328BA4F9F0045644C /* BJGG */;
+			targetProxy = 066579192A714BC700AA3852 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		55CB0AB228BA4FA10045644C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -510,6 +586,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0665791C2A714BC700AA3852 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8B3RT7D582;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jaewoong.BJGGTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BJGG.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BJGG";
+			};
+			name = Debug;
+		};
+		0665791D2A714BC700AA3852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8B3RT7D582;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jaewoong.BJGGTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BJGG.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BJGG";
+			};
+			name = Release;
+		};
 		55CB0AB628BA4FA10045644C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -691,6 +807,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0665791B2A714BC700AA3852 /* Build configuration list for PBXNativeTarget "BJGGTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0665791C2A714BC700AA3852 /* Debug */,
+				0665791D2A714BC700AA3852 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		55CB0A9F28BA4F9F0045644C /* Build configuration list for PBXProject "BJGG" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
