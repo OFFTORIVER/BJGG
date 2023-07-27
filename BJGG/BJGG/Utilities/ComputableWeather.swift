@@ -23,6 +23,7 @@ enum SkyCondition {
 }
 
 enum PrecipitationType {
+    case none
     case rainy
     case sleet
     case snowy
