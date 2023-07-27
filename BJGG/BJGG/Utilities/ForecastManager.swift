@@ -8,9 +8,23 @@
 import Foundation
 
 protocol Forecastable {
-    func makeWeatherForecast(weathers: [ComputableWeather])
+    func makeWeatherForecast(weathers: [ComputableWeather]) throws
+    func isRaining(weather: ComputableWeather) -> Bool
+}
+
+enum ForecastableError: Error {
+    case emptyData
 }
 
 class ForecastManager: Forecastable {
-    func makeWeatherForecast(weathers: [ComputableWeather]) { }
+    func makeWeatherForecast(weathers: [ComputableWeather]) throws { }
+    
+    func isRaining(weather: ComputableWeather) -> Bool {
+        switch weather.precipitationType {
+        case .none:
+            return true
+        default:
+            return false
+        }
+    }
 }
