@@ -22,9 +22,9 @@ class ForecastManager: Forecastable {
     func isRaining(weather: ComputableWeather) -> Bool {
         switch weather.precipitationType {
         case .none:
-            return true
-        default:
             return false
+        default:
+            return true
         }
     }
 }

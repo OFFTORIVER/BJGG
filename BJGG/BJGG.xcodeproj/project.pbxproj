@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		062064972A6D854C00B441CF /* WeatherDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062064962A6D854C00B441CF /* WeatherDTO.swift */; };
 		066579182A714BC700AA3852 /* ForecastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066579172A714BC700AA3852 /* ForecastManagerTests.swift */; };
-		0665791F2A7287B200AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665791E2A7287B200AA3852 /* StubWeather.swift */; };
-		066579212A7287EF00AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665791E2A7287B200AA3852 /* StubWeather.swift */; };
+		0665799F2A77F39200AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665799E2A77F39200AA3852 /* StubWeather.swift */; };
+		066579A72A77F50A00AA3852 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 066579A62A77F50A00AA3852 /* CombineCocoa */; };
 		06B1AFE92A6EA5F700CA712A /* ForecastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */; };
 		06B1AFEC2A6EA8D400CA712A /* ComputableWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */; };
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
@@ -89,9 +89,9 @@
 
 /* Begin PBXFileReference section */
 		062064962A6D854C00B441CF /* WeatherDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDTO.swift; sourceTree = "<group>"; };
-		066579152A714BC700AA3852 /* BJGGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BJGGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		066579152A714BC700AA3852 /* BJGGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BJGGTests.xctest; path = "/Users/jaewoonglee/Documents/Develop/AppleDeveloperAcademy/GoToBBAGI/BJGG/BJGG/build/Debug-iphoneos/BJGGTests.xctest"; sourceTree = "<absolute>"; };
 		066579172A714BC700AA3852 /* ForecastManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManagerTests.swift; sourceTree = "<group>"; };
-		0665791E2A7287B200AA3852 /* StubWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubWeather.swift; sourceTree = "<group>"; };
+		0665799E2A77F39200AA3852 /* StubWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubWeather.swift; sourceTree = "<group>"; };
 		06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManager.swift; sourceTree = "<group>"; };
 		06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputableWeather.swift; sourceTree = "<group>"; };
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		558D99D829A5D8F900D633BF /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BJGG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BJGG.app; path = "/Users/jaewoonglee/Documents/Develop/AppleDeveloperAcademy/GoToBBAGI/BJGG/BJGG/build/Debug-iphoneos/BJGG.app"; sourceTree = "<absolute>"; };
 		55CB0AA728BA4F9F0045644C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		55CB0AB028BA4FA10045644C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				066579A72A77F50A00AA3852 /* CombineCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,9 +191,16 @@
 		066579202A7287B900AA3852 /* Stub */ = {
 			isa = PBXGroup;
 			children = (
-				0665791E2A7287B200AA3852 /* StubWeather.swift */,
+				0665799E2A77F39200AA3852 /* StubWeather.swift */,
 			);
 			path = Stub;
+			sourceTree = "<group>";
+		};
+		066579A52A77F50A00AA3852 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		06B1AFE72A6EA59D00CA712A /* Entities */ = {
@@ -351,17 +359,8 @@
 				42600D5E28EF322500D114BC /* Settings.bundle */,
 				55CB0AA628BA4F9F0045644C /* BJGG */,
 				066579162A714BC700AA3852 /* BJGGTests */,
-				55CB0AA528BA4F9F0045644C /* Products */,
+				066579A52A77F50A00AA3852 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		55CB0AA528BA4F9F0045644C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				55CB0AA428BA4F9F0045644C /* BJGG.app */,
-				066579152A714BC700AA3852 /* BJGGTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		55CB0AA628BA4F9F0045644C /* BJGG */ = {
@@ -413,6 +412,9 @@
 				0665791A2A714BC700AA3852 /* PBXTargetDependency */,
 			);
 			name = BJGGTests;
+			packageProductDependencies = (
+				066579A62A77F50A00AA3852 /* CombineCocoa */,
+			);
 			productName = BJGGTests;
 			productReference = 066579152A714BC700AA3852 /* BJGGTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -470,7 +472,7 @@
 				3A7E3BD828D739CF00F6416A /* XCRemoteSwiftPackageReference "SnapKit" */,
 				3A53021429DC26CA00888CFA /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 			);
-			productRefGroup = 55CB0AA528BA4F9F0045644C /* Products */;
+			productRefGroup = 55CB0A9B28BA4F9F0045644C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -518,7 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0665791F2A7287B200AA3852 /* StubWeather.swift in Sources */,
+				0665799F2A77F39200AA3852 /* StubWeather.swift in Sources */,
 				066579182A714BC700AA3852 /* ForecastManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,7 +561,6 @@
 				3A53022729DD9EEC00888CFA /* ControlStatus.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A53021C29DC64D400888CFA /* UIView+.swift in Sources */,
-				066579212A7287EF00AA3852 /* StubWeather.swift in Sources */,
 				3A1D45C62A46C2FC00DFA036 /* SpotInfoViewModel.swift in Sources */,
 				3A1D45C22A46A66900DFA036 /* SpotLiveCameraViewModel.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
@@ -870,6 +871,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		066579A62A77F50A00AA3852 /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A53021429DC26CA00888CFA /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
 		3A53021529DC26CA00888CFA /* CombineCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A53021429DC26CA00888CFA /* XCRemoteSwiftPackageReference "CombineCocoa" */;
