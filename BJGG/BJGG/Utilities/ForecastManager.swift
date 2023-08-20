@@ -11,6 +11,13 @@ protocol Forecastable {
     func makeWeatherForecast(weathers: [ComputableWeather]) throws
     func isRaining(weather: ComputableWeather) -> Bool
     func willPrecipitationChangeIn24hours(weathers: [ComputableWeather]) throws -> ComputableWeather?
+    func checkDaysAreEqual(leftDay: Int, rightDay: Int) -> EqualDaysResult
+}
+
+enum EqualDaysResult {
+    case equalDays
+    case rightIsLate
+    case leftIsLate
 }
 
 enum ForecastableError: Error {
@@ -51,5 +58,17 @@ class ForecastManager: Forecastable {
         }
         
         return nil
+    }
+    
+    func checkDaysAreEqual(leftDay: Int, rightDay: Int) -> EqualDaysResult {
+        if leftDay < rightDay {
+            return .rightIsLate
+        }
+        
+        if leftDay > rightDay {
+            return .leftIsLate
+        }
+        
+        return .equalDays
     }
 }

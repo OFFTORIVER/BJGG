@@ -159,4 +159,40 @@ final class ForecastManagerTests: XCTestCase {
         XCTAssertEqual(snowyExpectation?.precipitationType, .snowy)
     }
     
+    
+    func test_checkDaysAreEqual_when_sameDays() {
+        //given
+        let leftDay = 20230820
+        let rightDay = leftDay
+        
+        //when
+        let expectation = sut.checkDaysAreEqual(leftDay: leftDay, rightDay: rightDay)
+        
+        //then
+        XCTAssertEqual(expectation, .equalDays)
+    }
+    
+    func test_checkDaysAreEqual_when_leftDayIsLate() {
+        //given
+        let leftDay = 20230820
+        let rightDay = leftDay - 1
+        
+        //when
+        let expectation = sut.checkDaysAreEqual(leftDay: leftDay, rightDay: rightDay)
+        
+        //then
+        XCTAssertEqual(expectation, .leftIsLate)
+    }
+    
+    func test_checkDaysAreEqual_when_rightDayIsLate() {
+        //given
+        let leftDay = 20230820
+        let rightDay = leftDay + 1
+        
+        //when
+        let expectation = sut.checkDaysAreEqual(leftDay: leftDay, rightDay: rightDay)
+        
+        //then
+        XCTAssertEqual(expectation, .rightIsLate)
+    }
 }
