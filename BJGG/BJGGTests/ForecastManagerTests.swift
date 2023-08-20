@@ -19,7 +19,7 @@ final class ForecastManagerTests: XCTestCase {
         sut = nil
     }
 
-    func test_isRaining_when_precipitationTypeIsNone() throws {
+    func test_isRaining_when_precipitationTypeIsNone() {
         //given
         let noneTypeWeather = StubWeather.makePrecipitationTypeStub(precipitationType: .none)
         
@@ -30,7 +30,7 @@ final class ForecastManagerTests: XCTestCase {
         XCTAssertFalse(expectation)
     }
     
-    func test_isRaining_when_precipitationTypeIsNotNone() throws {
+    func test_isRaining_when_precipitationTypeIsNotNone() {
         //given
         let rainyTypeWeather = StubWeather.makePrecipitationTypeStub(precipitationType: .rainy)
         let snowyTypeWeather = StubWeather.makePrecipitationTypeStub(precipitationType: .snowy)
@@ -46,4 +46,117 @@ final class ForecastManagerTests: XCTestCase {
         XCTAssertTrue(snowyExpectation)
         XCTAssertTrue(sleetExpectation)
     }
+    
+    func test_willPrecipitationChangeIn24hours_when_emptyWeathers() throws {
+        //given
+        let emptyWeathers: [ComputableWeather] = []
+        var emptyError: Error?
+        
+        //when
+        XCTAssertThrowsError(try sut.willPrecipitationChangeIn24hours(weathers: emptyWeathers)) {
+            emptyError = $0
+        }
+        
+        //then
+        XCTAssertTrue(emptyError is ForecastableError)
+        XCTAssertEqual(emptyError as? ForecastableError, .emptyData)
+    }
+    
+    func test_willPrecipitationChangeIn24hours_when_singleWeather() throws {
+        //given
+        let singleWeather: [ComputableWeather] = [StubWeather.makePrecipitationTypeStub(precipitationType: .none)]
+        var singleError: Error?
+        
+        //when
+        XCTAssertThrowsError(try sut.willPrecipitationChangeIn24hours(weathers: singleWeather)) {
+            singleError = $0
+        }
+        
+        //then
+        XCTAssertTrue(singleError is ForecastableError)
+        XCTAssertEqual(singleError as? ForecastableError, .singleWeather)
+    }
+    
+    func test_willPrecipitationChangeIn24hours_when_weatherNoChange() throws {
+        //given
+        var noneWeathers: [ComputableWeather] = []
+        var somePrecipitationWeathers: [ComputableWeather] = []
+        
+        let somePrecipitations: [PrecipitationType] = [.rainy, .sleet, .snowy]
+        
+        for i in 0...24 {
+            noneWeathers.append(StubWeather.makePrecipitationTypeStub(precipitationType: .none))
+            somePrecipitationWeathers.append(StubWeather.makePrecipitationTypeStub(precipitationType: somePrecipitations[i % 3]))
+        }
+        
+        //when
+        let noneExpectation = try sut.willPrecipitationChangeIn24hours(weathers: noneWeathers)
+        let somePrecipitationsExpectation = try sut.willPrecipitationChangeIn24hours(weathers: somePrecipitationWeathers)
+        
+        //then
+        XCTAssertNil(noneExpectation)
+        XCTAssertNil(somePrecipitationsExpectation)
+    }
+    
+    func test_willPrecipitationChangeIn24hours_when_fromSunnyToAnother() throws {
+        //given
+        let date = 20230820
+        let times = [Int](0...24)
+        let rainingTime = 12
+        let sleetTime = 18
+        let snowyTime = 9
+        var rainWeathers: [ComputableWeather] = []
+        var sleetWeathers: [ComputableWeather] = []
+        var snowyWeathers: [ComputableWeather] = []
+        
+        for time in times {
+            let weather = StubWeather.makePrecipitationTypeStub(
+                date: date,
+                time: time,
+                precipitationType: time >= rainingTime ? .rainy : .none
+            )
+            
+            rainWeathers.append(weather)
+        }
+        
+        for time in times {
+            let weather = StubWeather.makePrecipitationTypeStub(
+                date: date,
+                time: time,
+                precipitationType: time >= sleetTime ? .sleet : .none
+            )
+            
+            sleetWeathers.append(weather)
+        }
+        
+        for time in times {
+            let weather = StubWeather.makePrecipitationTypeStub(
+                date: date,
+                time: time,
+                precipitationType: time >= snowyTime ? .snowy : .none
+            )
+            
+            snowyWeathers.append(weather)
+        }
+        
+        //when
+        let rainyExpectation = try sut.willPrecipitationChangeIn24hours(weathers: rainWeathers)
+        let sleetExpectation = try sut.willPrecipitationChangeIn24hours(weathers: sleetWeathers)
+        let snowyExpectation = try sut.willPrecipitationChangeIn24hours(weathers: snowyWeathers)
+        
+        //then
+        XCTAssertNotNil(rainyExpectation)
+        XCTAssertNotNil(sleetExpectation)
+        XCTAssertNotNil(snowyExpectation)
+        
+        XCTAssertEqual(rainyExpectation?.time, rainingTime)
+        XCTAssertEqual(rainyExpectation?.precipitationType, .rainy)
+        
+        XCTAssertEqual(sleetExpectation?.time, sleetTime)
+        XCTAssertEqual(sleetExpectation?.precipitationType, .sleet)
+        
+        XCTAssertEqual(snowyExpectation?.time, snowyTime)
+        XCTAssertEqual(snowyExpectation?.precipitationType, .snowy)
+    }
+    
 }

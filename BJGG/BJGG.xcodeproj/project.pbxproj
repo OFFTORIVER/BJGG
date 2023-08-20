@@ -11,6 +11,7 @@
 		066579182A714BC700AA3852 /* ForecastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066579172A714BC700AA3852 /* ForecastManagerTests.swift */; };
 		0665799F2A77F39200AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665799E2A77F39200AA3852 /* StubWeather.swift */; };
 		066579A72A77F50A00AA3852 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 066579A62A77F50A00AA3852 /* CombineCocoa */; };
+		066579A92A7D1D4000AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665799E2A77F39200AA3852 /* StubWeather.swift */; };
 		06B1AFE92A6EA5F700CA712A /* ForecastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */; };
 		06B1AFEC2A6EA8D400CA712A /* ComputableWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */; };
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
@@ -539,6 +540,7 @@
 				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
 				553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */,
 				3AA636E529B391FF006BB5EF /* LiveMarkView.swift in Sources */,
+				066579A92A7D1D4000AA3852 /* StubWeather.swift in Sources */,
 				558D99D929A5D8F900D633BF /* Constraints.swift in Sources */,
 				3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */,
 				3A53022529DD9ED800888CFA /* ScreenSizeStatus.swift in Sources */,
