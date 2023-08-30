@@ -26,15 +26,14 @@ extension UIFont {
         case thin = "Pretendard-Thin"
     }
     
-    // TODO: 추가된 Font에 대해서 PR 작성 시 값 명시해두기
     enum BbajiFontStyle {
         case heading1
         case heading2
         case heading3
         case heading4
         case heading5
-        case heading6 // << NEW
-        case heading7 // << NEW
+        case heading6
+        case heading7
         case body1
         case button1
         case rainyCaption

@@ -11,7 +11,7 @@ final class BbajiConstraints {
     // label 간 간격 constraint
     static let space4: CGFloat = 4.0
     
-    static let space6: CGFloat = 6 // << NEW
+    static let space6: CGFloat = 6.0
     
     // icon 간 간격 constraint
     static let space8: CGFloat = 8.0
@@ -25,7 +25,7 @@ final class BbajiConstraints {
     // view와 내부 component 간 간격 constraint
     static let viewInset: CGFloat = UIDevice.current.hasNotch ? 20.0 : 16.0
     
-    static let space20: CGFloat = 20 // << NEW
+    static let space20: CGFloat = 20.0
     
     private init() { }
 }
