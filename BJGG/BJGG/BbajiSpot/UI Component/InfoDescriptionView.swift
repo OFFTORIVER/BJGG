@@ -41,7 +41,7 @@ final class InfoDescriptionView: UIView {
         }
         
         descriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(descriptionImageView.snp.trailing).offset(BbajiConstraints.iconOffset)
+            make.leading.equalTo(descriptionImageView.snp.trailing).offset(BbajiConstraints.space8)
             make.centerY.equalTo(descriptionImageView.snp.centerY)
             make.height.equalTo(18)
         }

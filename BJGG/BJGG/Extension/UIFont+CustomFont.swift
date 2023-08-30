@@ -26,12 +26,15 @@ extension UIFont {
         case thin = "Pretendard-Thin"
     }
     
+    // TODO: 추가된 Font에 대해서 PR 작성 시 값 명시해두기
     enum BbajiFontStyle {
         case heading1
         case heading2
         case heading3
         case heading4
         case heading5
+        case heading6 // << NEW
+        case heading7 // << NEW
         case body1
         case button1
         case rainyCaption
@@ -40,7 +43,7 @@ extension UIFont {
     static func bbajiFont(_ style: BbajiFontStyle) -> UIFont {
         switch style {
         case .heading1:
-            return UIFont(name: Pretendard.black.rawValue, size: 54.0) ?? UIFont()
+            return UIFont(name: Pretendard.black.rawValue, size: 48.0) ?? UIFont()
         case .heading2:
             return UIFont(name: Esamanru.bold.rawValue, size: 25.0) ?? UIFont()
         case .heading3:
@@ -49,6 +52,10 @@ extension UIFont {
             return UIFont(name: Esamanru.bold.rawValue, size: 22.0) ?? UIFont()
         case .heading5:
             return UIFont(name: Pretendard.medium.rawValue, size: 20.0) ?? UIFont()
+        case .heading6:
+            return UIFont(name: Esamanru.bold.rawValue, size: 22.0) ?? UIFont()
+        case .heading7:
+            return UIFont(name: Pretendard.bold.rawValue, size: 16.0) ?? UIFont()
         case .body1:
             return UIFont(name: Pretendard.medium.rawValue, size: 15.0) ?? UIFont()
         case .button1:

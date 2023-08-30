@@ -96,15 +96,15 @@ private extension BbajiHomeViewController {
         
         bbajiTitleView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(51.0)
-            $0.leading.equalToSuperview().inset(BbajiConstraints.superViewInset)
-            $0.trailing.equalToSuperview().inset(BbajiConstraints.superViewInset)
+            $0.leading.equalToSuperview().inset(BbajiConstraints.space16)
+            $0.trailing.equalToSuperview().inset(BbajiConstraints.space16)
             $0.height.equalTo(90.0)
         }
         
         bbajiListView.snp.makeConstraints {
             $0.top.equalTo(bbajiTitleView.snp.bottom).offset(198.0)
-            $0.leading.equalToSuperview().inset(BbajiConstraints.superViewInset)
-            $0.trailing.equalToSuperview().inset(BbajiConstraints.superViewInset)
+            $0.leading.equalToSuperview().inset(BbajiConstraints.space16)
+            $0.trailing.equalToSuperview().inset(BbajiConstraints.space16)
             $0.bottom.equalToSuperview()
         }
         
