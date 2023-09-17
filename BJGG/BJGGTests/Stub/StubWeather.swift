@@ -18,12 +18,12 @@ struct StubWeather: ComputableWeather {
 }
 
 extension StubWeather {
-    static func makePrecipitationTypeStub(date: Int = 0, time: Int = 0, precipitationType: PrecipitationType) -> StubWeather {
+    static func makePrecipitationTypeStub(date: Int = 0, time: Int = 0, skyCondition: SkyCondition = .sunny, precipitationType: PrecipitationType) -> StubWeather {
         StubWeather(
             date: date,
             time: time,
             temperature: 0.0,
-            skyCondition: .sunny,
+            skyCondition: skyCondition,
             precipitationPercentage: 0.0,
             precipitationType: precipitationType
         )

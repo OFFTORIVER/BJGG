@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Forecastable {
-    func makeWeatherForecast(weathers: [ComputableWeather]) throws
+    func makeWeatherForecast(weathers: [ComputableWeather]) throws -> ForecastResult
     func isRaining(weather: ComputableWeather) -> Bool
     func willPrecipitationChangeIn24hours(weathers: [ComputableWeather]) throws -> ComputableWeather?
     func checkDaysAreEqual(leftDay: Int, rightDay: Int) -> EqualDaysResult
@@ -25,8 +25,81 @@ enum ForecastableError: Error {
     case singleWeather
 }
 
+struct ForecastResult {
+    let type: ForecastResultType
+    let expectedTime: Int?
+}
+
+enum ForecastResultType {
+    case cleanToday
+    case notRainyToday
+    case rainyToday
+    case sleetToday
+    case snowyToday
+    case cleanTomorrow
+    case notRainyTomorrow
+    case rainyTomorrow
+    case sleetTomorrow
+    case snowyTomorrow
+    case willBeCleanToday
+    case willBeRainyToday
+    case willBeSleetToday
+    case willBeSnowyToday
+    case willBeCleanTomorrow
+    case willBeRainyTomorrow
+    case willBeSleetTomorrow
+    case willBeSnowyTomorrow
+}
+
 class ForecastManager: Forecastable {
-    func makeWeatherForecast(weathers: [ComputableWeather]) throws { }
+    func makeWeatherForecast(weathers: [ComputableWeather]) throws -> ForecastResult {
+        guard let currentWeather = weathers.first else { throw ForecastableError.emptyData }
+        guard weathers.count > 1 else { throw ForecastableError.singleWeather }
+        
+        let expectedWeather = try? willPrecipitationChangeIn24hours(weathers: weathers)
+        
+        let resultType: ForecastResultType
+        
+        // 현재 날씨가 그대로 유지될 경우
+        guard let expectedWeather else {
+            switch currentWeather.precipitationType {
+            case .none:
+                if currentWeather.skyCondition == .sunny {
+                    resultType = isLeft3HoursOverToday(time: currentWeather.time) ? .cleanToday : .cleanTomorrow
+                } else {
+                    resultType = isLeft3HoursOverToday(time: currentWeather.time) ? .notRainyToday : .notRainyTomorrow
+                }
+            case .rainy:
+                resultType = isLeft3HoursOverToday(time: currentWeather.time) ?  .rainyToday : .rainyTomorrow
+            case .sleet:
+                resultType = isLeft3HoursOverToday(time: currentWeather.time) ?  .sleetToday : .sleetTomorrow
+            case .snowy:
+                resultType = isLeft3HoursOverToday(time: currentWeather.time) ?  .snowyToday : .snowyTomorrow
+            }
+            
+            return ForecastResult(
+                type: resultType,
+                expectedTime: nil
+            )
+        }
+        
+        // 현재 날씨에서 변경될 경우
+        switch expectedWeather.precipitationType {
+        case .none:
+            resultType = checkDaysAreEqual(leftDay: currentWeather.date, rightDay: expectedWeather.date) == .equalDays ? .willBeCleanToday : .willBeCleanTomorrow
+        case .rainy:
+            resultType = checkDaysAreEqual(leftDay: currentWeather.date, rightDay: expectedWeather.date) == .equalDays ? .willBeRainyToday : .willBeRainyTomorrow
+        case .sleet:
+            resultType = checkDaysAreEqual(leftDay: currentWeather.date, rightDay: expectedWeather.date) == .equalDays ? .willBeSleetToday : .willBeSleetTomorrow
+        case .snowy:
+            resultType = checkDaysAreEqual(leftDay: currentWeather.date, rightDay: expectedWeather.date) == .equalDays ? .willBeSnowyToday : .willBeSnowyTomorrow
+        }
+        
+        return ForecastResult(
+            type: resultType,
+            expectedTime: expectedWeather.time
+        )
+    }
     
     func isRaining(weather: ComputableWeather) -> Bool {
         switch weather.precipitationType {
@@ -70,5 +143,9 @@ class ForecastManager: Forecastable {
         }
         
         return .equalDays
+    }
+    
+    private func isLeft3HoursOverToday(time: Int) -> Bool {
+        return time < 21
     }
 }
