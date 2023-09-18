@@ -52,6 +52,7 @@ enum ForecastResultType {
 }
 
 class ForecastManager: Forecastable {
+    /// yyyyMMdd 형태의 date 변수, HH 형태의 time 변수에 의해 정렬되어 있는 weathers를 파라미터에 대입할 때, 예보 예상 결과를 나타내는 ForecastResult를 리턴하는 날씨 예보 알고리즘 메소드
     func makeWeatherForecast(weathers: [ComputableWeather]) throws -> ForecastResult {
         guard let currentWeather = weathers.first else { throw ForecastableError.emptyData }
         guard weathers.count > 1 else { throw ForecastableError.singleWeather }
@@ -101,6 +102,7 @@ class ForecastManager: Forecastable {
         )
     }
     
+    /// weather 파라미터가 강수상태인지 아닌지 Bool 타입을 리턴해 알려주는 메소드
     func isRaining(weather: ComputableWeather) -> Bool {
         switch weather.precipitationType {
         case .none:
@@ -133,6 +135,7 @@ class ForecastManager: Forecastable {
         return nil
     }
     
+    /// leftDay와 rightDay가 같은 일자인지 또는 어느 날이 늦은 날인지 알려주는 메소드.
     func checkDaysAreEqual(leftDay: Int, rightDay: Int) -> EqualDaysResult {
         if leftDay < rightDay {
             return .rightIsLate
