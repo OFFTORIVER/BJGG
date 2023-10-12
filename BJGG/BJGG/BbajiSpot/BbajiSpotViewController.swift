@@ -156,7 +156,6 @@ final class BbajiSpotViewController: UIViewController {
             make.top.equalTo(spotInfoView.snp.bottom).offset(BbajiConstraints.space6)
             make.leading.equalTo(infoScrollContentView.snp.leading)
             make.trailing.equalTo(infoScrollContentView.snp.trailing)
-//            make.height.equalTo(UIDevice.current.hasNotch ? 306 : 290)
             make.height.equalTo(UIDevice.current.hasNotch ? 311 : 295)
         }
     }
