@@ -37,7 +37,6 @@ final class SpotWeatherAPIInfoView: UIView {
     
     private func configure() {
         configureLayout()
-        configureStyle()
     }
     
     private func configureLayout() {
@@ -56,11 +55,6 @@ final class SpotWeatherAPIInfoView: UIView {
             make.width.equalTo(71)
             make.height.equalTo(24)
         }
-    }
-    
-    private func configureStyle() {
-        self.layer.cornerRadius = 16
-        self.clipsToBounds = true
     }
     
     func setDefaultUI() {

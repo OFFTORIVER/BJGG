@@ -83,7 +83,7 @@ final class SpotInfoView: UIView {
         self.addSubview(spotNameLabel)
         spotNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading).inset(defaultMargin)
-            make.top.equalTo(spotRiverNameLabel.snp.bottom).offset(BbajiConstraints.iconOffset)
+            make.top.equalTo(spotRiverNameLabel.snp.bottom).offset(BbajiConstraints.space8)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(29)
         }
@@ -108,7 +108,7 @@ final class SpotInfoView: UIView {
         
         contactInfoView.snp.makeConstraints{ make in
             make.leading.equalTo(addressInfoView.snp.leading)
-            make.top.equalTo(addressInfoView.snp.bottom).offset(BbajiConstraints.componentOffset)
+            make.top.equalTo(addressInfoView.snp.bottom).offset(BbajiConstraints.space12)
             make.height.equalTo(20)
             make.width.equalTo(180)
         }

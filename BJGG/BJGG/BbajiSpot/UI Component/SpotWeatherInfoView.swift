@@ -13,11 +13,38 @@ final class SpotWeatherInfoView: UIView {
         label.configureLabelStyle(font: .bbajiFont(.heading1), alignment: .center)
         label.textColor = .bbagaGray1
         label.text =  "--°"
-         return label
-     }()
-
+        return label
+    }()
+    
     private let currentWeatherIconAndLabel = UIView()
     private let currentWeatherIcon = UIImageView()
+    
+    private let weatherRiverDivideLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .bbagaBlue
+        return view
+    }()
+    private let riverIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "waterTemperature")
+        return view
+    }()
+    private lazy var riverNameLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabelStyle(font: .bbajiFont(.heading7), alignment: .left)
+        label.textColor = .bbagaGray2
+        label.text = "한강" // TEST
+        return label
+    }()
+    private lazy var riverTemperatureLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabelStyle(font: .bbajiFont(.heading6), alignment: .left)
+        label.textColor = .bbagaGray1
+//        label.text =  "--°"
+        label.text =  "17°" // TEST
+        return label
+    }()
+    
     private let spotWeatherInfoViewDivideLine: UIView = {
         let view = UIView()
         view.backgroundColor = .bbagaBack
@@ -61,47 +88,77 @@ final class SpotWeatherInfoView: UIView {
     
     private func configure() {
         configureLayout()
-        configureComponent()
     }
     
     private func configureLayout() {
         
         self.addSubview(weatherAddressLabel)
         weatherAddressLabel.snp.makeConstraints{ make in
-            make.leading.equalTo(self.snp.leading).inset(BbajiConstraints.viewInset)
-            make.top.equalTo(self.snp.top).inset(BbajiConstraints.viewInset)
+            make.leading.equalTo(self.snp.leading).inset(BbajiConstraints.space20)
+            make.top.equalTo(self.snp.top).inset(BbajiConstraints.space20)
             make.height.equalTo(18)
         }
         
         self.addSubview(currentWeatherIconAndLabel)
         currentWeatherIconAndLabel.snp.makeConstraints { make in
-            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
+            make.top.equalTo(weatherAddressLabel.snp.bottom).offset(BbajiConstraints.space12)
             make.centerX.equalTo(self.snp.centerX)
-            make.width.equalTo(160)
-            make.height.equalTo(64)
+            make.width.equalTo(235)
+            make.height.equalTo(57)
         }
         
         [
             currentWeatherIcon,
-            currentTemperatureLabel
+            currentTemperatureLabel,
+            weatherRiverDivideLine,
+            riverIcon,
+            riverNameLabel,
+            riverTemperatureLabel
         ].forEach { currentWeatherIconAndLabel.addSubview($0) }
         
         currentWeatherIcon.snp.makeConstraints { make in
             make.leading.equalTo(currentWeatherIconAndLabel.snp.leading)
             make.top.equalTo(currentWeatherIconAndLabel.snp.top)
             make.centerY.equalTo(currentWeatherIconAndLabel.snp.centerY)
-            make.width.height.equalTo(64)
+            make.width.height.equalTo(57)
         }
         
         currentTemperatureLabel.snp.makeConstraints { make in
-            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(BbajiConstraints.iconOffset)
+            make.leading.equalTo(currentWeatherIcon.snp.trailing).offset(BbajiConstraints.space8)
             make.centerY.equalTo(currentWeatherIcon.snp.centerY)
-            make.width.equalTo(100)
+            make.width.equalTo(87)
+        }
+        
+        weatherRiverDivideLine.snp.makeConstraints { make in
+            make.leading.equalTo(currentTemperatureLabel.snp.trailing).offset(BbajiConstraints.space16)
+            make.top.equalTo(currentTemperatureLabel.snp.top)
+            make.bottom.equalTo(currentTemperatureLabel.snp.bottom)
+            make.width.equalTo(4)
+        }
+        
+        riverIcon.snp.makeConstraints { make in
+            make.leading.equalTo(weatherRiverDivideLine.snp.trailing).offset(BbajiConstraints.space16)
+            make.top.equalTo(currentWeatherIconAndLabel.snp.top).offset(BbajiConstraints.space4)x
+            make.width.height.equalTo(20)
+        }
+        
+        riverNameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(riverIcon.snp.trailing).offset(BbajiConstraints.space4)
+            make.centerY.equalTo(riverIcon.snp.centerY)
+            make.width.equalTo(64)
+            make.height.equalTo(20)
+        }
+        
+        riverTemperatureLabel.snp.makeConstraints { make in
+            make.leading.equalTo(riverIcon.snp.leading)
+            make.bottom.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.space4)
+            make.width.equalTo(48)
+            make.height.equalTo(24)
         }
         
         self.addSubview(rainInfoLabel)
         rainInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.componentOffset)
+            make.top.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.space20)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(18)
         }
@@ -109,10 +166,10 @@ final class SpotWeatherInfoView: UIView {
         self.addSubview(spotWeatherInfoViewDivideLine)
         spotWeatherInfoViewDivideLine.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading)
-            make.top.equalTo(rainInfoLabel.snp.bottom).offset(BbajiConstraints.viewInset)
+            make.top.equalTo(rainInfoLabel.snp.bottom).offset(BbajiConstraints.space20)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(self.snp.width)
-            make.height.equalTo(2)
+            make.height.equalTo(6)
         }
         
         let collectionViewLayer = UICollectionViewFlowLayout()
@@ -129,7 +186,6 @@ final class SpotWeatherInfoView: UIView {
             make.centerX.equalTo(self.snp.centerX)
         }
         
-        spotTodayWeatherCollectionView.layer.cornerRadius = 16
         spotTodayWeatherCollectionView.backgroundColor = .bbagaGray4
         
         spotWeatherAPIInfoView = SpotWeatherAPIInfoView()
@@ -140,11 +196,6 @@ final class SpotWeatherInfoView: UIView {
         }
         
         spotWeatherAPIInfoView.setDefaultUI()
-    }
-    
-    private func configureComponent() {
-        self.layer.cornerRadius = 16
-
     }
     
     private func registerCollectionView() {
