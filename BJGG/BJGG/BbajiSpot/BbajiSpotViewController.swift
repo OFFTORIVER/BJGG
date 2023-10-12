@@ -57,6 +57,7 @@ final class BbajiSpotViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
+        bindNetworkStatus()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -294,5 +295,26 @@ extension BbajiSpotViewController
             view.backgroundColor = backgroundColor
             view.layoutIfNeeded()
         })
+    }
+}
+
+private extension BbajiSpotViewController {
+    func bindNetworkStatus() {
+        NetworkManager.shared.$networkConnectionStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] networkConnectionStatus in
+                guard let networkStatus = networkConnectionStatus else { return }
+                switch networkStatus {
+                case .satisfied:
+                    self?.dismissPresentedAlert()
+                    self?.weatherViewModel?.receiveBbajiWeatherData()
+                case .unsatisfied:
+                    self?.showNetworkStatusAlert()
+                case .requiresConnection:
+                    self?.dismissPresentedAlert()
+                @unknown default:
+                    fatalError()
+                }
+            }.store(in: &cancellables)
     }
 }

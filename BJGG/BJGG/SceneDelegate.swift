@@ -27,8 +27,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             self.window?.rootViewController = navigationController
         }
-        
-        NetworkManager.shared.startMonitoring(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

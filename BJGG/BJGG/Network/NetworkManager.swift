@@ -9,56 +9,25 @@ import Network
 import UIKit
 
 final class NetworkManager {
+    @Published var networkConnectionStatus: NWPath.Status?
+    
     static let shared = NetworkManager()
+    
     private let monitor = NWPathMonitor()
     
-    private init() { }
+    private init() {
+        startMonitoring()
+    }
     
-    func startMonitoring(window: UIWindow) {
+    func startMonitoring() {
         Task {
             for await path in monitor.paths() {
-                switch path.status {
-                case .satisfied:
-                    DispatchQueue.main.async { [weak self] in
-                        self?.fetchData(window: window)
-                    }
-                default:
-                    DispatchQueue.main.async{ [weak self] in
-                        self?.showNetworkStatusAlert(window: window)
-                    }
-                }
+                networkConnectionStatus = path.status
             }
         }
     }
     
     func stopMonitoring() {
         monitor.cancel()
-    }
-    
-    private func showNetworkStatusAlert(window: UIWindow) {
-        let alert = UIAlertController(title: nil, message: "인터넷에 연결되어 있지 않습니다.\n네트워크 연결을 확인하세요.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "재시도", style: .default, handler: { _ in
-            self.startMonitoring(window: window)
-        })
-        alert.addAction(action)
-        
-        window.makeKeyAndVisible()
-        window.rootViewController?.present(alert, animated: true, completion: nil)
-    }
-    
-    private func fetchData(window: UIWindow) {
-        if let rootVC = window.rootViewController as? UINavigationController {
-            if rootVC.viewControllers.count == 1 {
-                if let vc = rootVC.viewControllers[0] as? BbajiHomeViewController {
-                    vc.viewModel.fetchWeatherNows()
-                    return
-                }
-            } else if rootVC.viewControllers.count == 2 {
-                if let vc = rootVC.viewControllers[1] as? BbajiSpotViewController {
-                    vc.weatherViewModel?.receiveBbajiWeatherData()
-                    return
-                }
-            }
-        }
     }
 }

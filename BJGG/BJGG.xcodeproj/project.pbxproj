@@ -36,6 +36,7 @@
 		3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E629B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift */; };
 		3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */; };
 		3AD87FB228D892D300ABD2E4 /* InfoDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD87FB128D892D300ABD2E4 /* InfoDescriptionView.swift */; };
+		3AF5BFC32AD7AA66004741CD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5BFC22AD7AA66004741CD /* UIViewController+.swift */; };
 		42600D5F28EF322500D114BC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42600D5E28EF322500D114BC /* Settings.bundle */; };
 		5510CA4429E58FF200A1AF36 /* BbajiHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5510CA4329E58FF200A1AF36 /* BbajiHomeViewModel.swift */; };
 		553F0F7D28E20DD600FD9CDA /* esamanru OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 553F0F7C28E20DCB00FD9CDA /* esamanru OTF Bold.otf */; };
@@ -98,6 +99,7 @@
 		3AA636E629B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraGradientView.swift; sourceTree = "<group>"; };
 		3AA636E829B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLiveCameraStandbyView.swift; sourceTree = "<group>"; };
 		3AD87FB128D892D300ABD2E4 /* InfoDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDescriptionView.swift; sourceTree = "<group>"; };
+		3AF5BFC22AD7AA66004741CD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		42600D5E28EF322500D114BC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5510CA4329E58FF200A1AF36 /* BbajiHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbajiHomeViewModel.swift; sourceTree = "<group>"; };
 		553F0F7A28E20DCB00FD9CDA /* esamanru OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "esamanru OTF Light.otf"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */,
 				55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */,
 				3A22023F2A56CC54009DB223 /* NWPathMonitor+.swift */,
+				3AF5BFC22AD7AA66004741CD /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				3A53022729DD9EEC00888CFA /* ControlStatus.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
 				3A1D45C62A46C2FC00DFA036 /* SpotInfoViewModel.swift in Sources */,
+				3AF5BFC32AD7AA66004741CD /* UIViewController+.swift in Sources */,
 				3A1D45C22A46A66900DFA036 /* SpotLiveCameraViewModel.swift in Sources */,
 				3A5E18F528E8A8A000CBEDE3 /* UIDevice+DeviceCheck.swift in Sources */,
 				55F0AE6529C04C50003B5EEE /* WeatherTime.swift in Sources */,

@@ -30,8 +30,7 @@ final class BbajiHomeViewController: UIViewController {
         super.viewDidLoad()
         configure()
         bind()
-        
-        viewModel.viewDidLoad()
+        bindNetworkStatus()
     }
     
     private func bind() {
@@ -147,5 +146,26 @@ private extension BbajiHomeViewController {
             $0.height.equalTo(24.0)
             $0.bottom.equalTo(noticeLabel.snp.top)
         }
+    }
+}
+
+private extension BbajiHomeViewController {
+    func bindNetworkStatus() {
+        NetworkManager.shared.$networkConnectionStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] networkConnectionStatus in
+                guard let networkStatus = networkConnectionStatus else { return }
+                switch networkStatus {
+                case .satisfied:
+                    self?.dismissPresentedAlert()
+                    self?.viewModel.fetchWeatherNows()
+                case .unsatisfied:
+                    self?.showNetworkStatusAlert()
+                case .requiresConnection:
+                    self?.dismissPresentedAlert()
+                @unknown default:
+                    fatalError()
+                }
+            }.store(in: &cancellable)
     }
 }
