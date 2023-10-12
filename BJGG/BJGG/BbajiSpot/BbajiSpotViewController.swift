@@ -188,6 +188,14 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
         
+        weatherViewModel?.$waterData
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] waterTemperatureData in
+                guard let self = self,
+                let waterTemperatureData = waterTemperatureData else { return }
+                self.spotWeatherInfoView.setCurrentWaterTemperature(as: waterTemperatureData.temperature)
+            }.store(in: &cancellables)
+        
         spotViewModel?.$screenSizeStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in

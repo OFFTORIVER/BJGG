@@ -31,17 +31,17 @@ final class SpotWeatherInfoView: UIView {
     }()
     private lazy var riverNameLabel: UILabel = {
         let label = UILabel()
-        label.configureLabelStyle(font: .bbajiFont(.heading7), alignment: .left)
+        label.configureLabelStyle(font: .bbajiFont(.heading8), alignment: .left)
         label.textColor = .bbagaGray2
-        label.text = "한강" // TEST
+        // TODO: BbajiInfo Model 수정 시 함께 변경
+        label.text = "한강"
         return label
     }()
     private lazy var riverTemperatureLabel: UILabel = {
         let label = UILabel()
-        label.configureLabelStyle(font: .bbajiFont(.heading6), alignment: .left)
+        label.configureLabelStyle(font: .bbajiFont(.heading7), alignment: .left)
         label.textColor = .bbagaGray1
-//        label.text =  "--°"
-        label.text =  "17°" // TEST
+        label.text =  "--°"
         return label
     }()
     
@@ -138,7 +138,7 @@ final class SpotWeatherInfoView: UIView {
         
         riverIcon.snp.makeConstraints { make in
             make.leading.equalTo(weatherRiverDivideLine.snp.trailing).offset(BbajiConstraints.space16)
-            make.top.equalTo(currentWeatherIconAndLabel.snp.top).offset(BbajiConstraints.space4)x
+            make.top.equalTo(currentWeatherIconAndLabel.snp.top).offset(BbajiConstraints.space4)
             make.width.height.equalTo(20)
         }
         
@@ -151,7 +151,7 @@ final class SpotWeatherInfoView: UIView {
         
         riverTemperatureLabel.snp.makeConstraints { make in
             make.leading.equalTo(riverIcon.snp.leading)
-            make.bottom.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.space4)
+            make.top.equalTo(riverIcon.snp.bottom).offset(BbajiConstraints.space6)
             make.width.equalTo(48)
             make.height.equalTo(24)
         }
@@ -303,6 +303,10 @@ extension SpotWeatherInfoView {
     func setCurrentWeatherImg() {
         let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
         currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
+    }
+    
+    func setCurrentWaterTemperature(as value: String) {
+        riverTemperatureLabel.text = "\(value)°"
     }
 }
 
