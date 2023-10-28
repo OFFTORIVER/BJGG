@@ -151,8 +151,8 @@ final class SpotWeatherInfoView: UIView {
         
         riverTemperatureLabel.snp.makeConstraints { make in
             make.leading.equalTo(riverIcon.snp.leading)
-            make.bottom.equalTo(currentWeatherIconAndLabel.snp.bottom).offset(BbajiConstraints.space4)
-            make.width.equalTo(48)
+            make.trailing.equalTo(riverNameLabel.snp.trailing)
+            make.top.equalTo(riverIcon.snp.bottom).offset(BbajiConstraints.space6)
             make.height.equalTo(24)
         }
         
