@@ -8,37 +8,67 @@
 import Foundation
 
 struct Water: Decodable {
-    let WPOSInformationTime: WaterDataResponse
+    let dataResponse: WaterDataResponse
+    
+    enum CodingKeys: String, CodingKey {
+        case dataResponse = "WPOSInformationTime"
+    }
     
     func extractWaterTemperature() -> [WaterData] {
-        let data = self.WPOSInformationTime.row.map {
-            WaterData(location: $0.SITE_ID, temperature: $0.W_TEMP)
+        let data = self.dataResponse.waterItemList.map {
+            WaterData(location: $0.siteID, temperature: $0.temperature)
         }
         return data
     }
 }
 
 struct WaterDataResponse: Decodable {
-    let list_total_count: Int
-    let RESULT: WaterResponseResult
-    let row: [WaterItem]
+    let listCount: Int
+    let responseResult: WaterResponseResult
+    let waterItemList: [WaterItem]
+    
+    enum CodingKeys: String, CodingKey {
+        case listCount = "list_total_count"
+        case responseResult = "RESULT"
+        case waterItemList = "row"
+    }
 }
 
 struct WaterResponseResult: Decodable {
-    let CODE: String
-    let MESSAGE: String
+    let resultCode: String
+    let message: String
+    
+    enum CodingKeys: String, CodingKey {
+        case resultCode = "CODE"
+        case message = "MESSAGE"
+    }
 }
 
 struct WaterItem: Decodable {
-    let MSR_DATE: String
-    let MSR_TIME: String
-    let SITE_ID: String
-    let W_TEMP: String
-    let W_PH: String
-    let W_DO: String
-    let W_TN: String
-    let W_TP: String
-    let W_TOC: String
-    let W_PHEN: String
-    let W_CN: String
+    let measureDate: String
+    let measureTime: String
+    let siteID: String
+    let temperature: String
+    let pHScale: String
+    let dissolvedOxygen: String
+    let totalNitrogen: String
+    let totalPhosphorus: String
+    let totalOrganicCarbon: String
+    let phenol: String
+    let cyanogen: String
+    
+    enum CodingKeys: String, CodingKey {
+        case measureDate = "MSR_DATE"
+        case measureTime = "MSR_TIME"
+        case siteID = "SITE_ID"
+        case temperature = "W_TEMP"
+        case pHScale = "W_PH"
+        case dissolvedOxygen = "W_DO"
+        case totalNitrogen = "W_TN"
+        case totalPhosphorus = "W_TP"
+        case totalOrganicCarbon = "W_TOC"
+        case phenol = "W_PHEN"
+        case cyanogen = "W_CN"
+        
+    }
 }
