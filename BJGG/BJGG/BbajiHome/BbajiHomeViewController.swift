@@ -14,11 +14,13 @@ final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiListView = BbajiListView()
     private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
     
-    let viewModel: BbajiHomeViewModel
+    private let viewModel: BbajiHomeViewModel
+    private let networkViewModel: NetworkViewModel
     private var cancellable = Set<AnyCancellable>()
     
-    init(viewMdoel: BbajiHomeViewModel = BbajiHomeViewModel()) {
-        self.viewModel = viewMdoel
+    init(viewModel: BbajiHomeViewModel = BbajiHomeViewModel(), networkViewModel: NetworkViewModel = NetworkViewModel()) {
+        self.viewModel = viewModel
+        self.networkViewModel = networkViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +32,6 @@ final class BbajiHomeViewController: UIViewController {
         super.viewDidLoad()
         configure()
         bind()
-        bindNetworkStatus()
     }
     
     private func bind() {
@@ -40,6 +41,18 @@ final class BbajiHomeViewController: UIViewController {
             guard let self = self else { return }
             self.bbajiListView.reloadData()
         }.store(in: &cancellable)
+        
+        networkViewModel.$isNetworkConnected
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isNetworkConnected in
+                guard let isNetworkConnected = isNetworkConnected else { return }
+                if isNetworkConnected {
+                    self?.dismissPresentedAlert()
+                    self?.viewModel.fetchWeatherNows()
+                } else {
+                    self?.showNetworkStatusAlert()
+                }
+            }.store(in: &cancellable)
     }
     
     private func configure() {
@@ -72,7 +85,7 @@ extension BbajiHomeViewController: UICollectionViewDataSource {
 extension BbajiHomeViewController: BbajiListViewDelegate {
     func didSelectItem(index: Int) {
         // TODO: BbajiHomeViewModel에서 [BbajiInfo]의 데이터 넘김을 바탕으로 SpotInfoViewModel 초기화하기
-        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo()), weatherViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel(), liveCameraViewModel: SpotLiveCameraViewModel()), animated: true)
+        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo()), networkViewModel: networkViewModel), animated: true)
     }
 }
 
@@ -146,26 +159,5 @@ private extension BbajiHomeViewController {
             $0.height.equalTo(24.0)
             $0.bottom.equalTo(noticeLabel.snp.top)
         }
-    }
-}
-
-private extension BbajiHomeViewController {
-    func bindNetworkStatus() {
-        NetworkManager.shared.$networkConnectionStatus
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] networkConnectionStatus in
-                guard let networkStatus = networkConnectionStatus else { return }
-                switch networkStatus {
-                case .satisfied:
-                    self?.dismissPresentedAlert()
-                    self?.viewModel.fetchWeatherNows()
-                case .unsatisfied:
-                    self?.showNetworkStatusAlert()
-                case .requiresConnection:
-                    self?.dismissPresentedAlert()
-                @unknown default:
-                    fatalError()
-                }
-            }.store(in: &cancellable)
     }
 }

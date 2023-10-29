@@ -39,14 +39,22 @@ final class BbajiSpotViewController: UIViewController {
     var weatherViewModel: SpotWeatherViewModel?
     private var spotViewModel: SpotViewModel?
     private var liveCameraViewModel: SpotLiveCameraViewModel?
+    private var networkViewModel: NetworkViewModel?
     private var cancellables = Set<AnyCancellable>()
 
-    init(infoViewModel: SpotInfoViewModel, weatherViewModel: SpotWeatherViewModel, spotViewModel: SpotViewModel, liveCameraViewModel: SpotLiveCameraViewModel) {
+    init(
+        infoViewModel: SpotInfoViewModel,
+        weatherViewModel: SpotWeatherViewModel = SpotWeatherViewModel(),
+        spotViewModel: SpotViewModel = SpotViewModel(),
+        liveCameraViewModel: SpotLiveCameraViewModel = SpotLiveCameraViewModel(),
+        networkViewModel: NetworkViewModel
+    ) {
         super.init(nibName: nil, bundle: nil)
         self.infoViewModel = infoViewModel
         self.weatherViewModel = weatherViewModel
         self.spotViewModel = spotViewModel
         self.liveCameraViewModel = liveCameraViewModel
+        self.networkViewModel = networkViewModel
     }
     
     required init?(coder: NSCoder) {
@@ -57,7 +65,6 @@ final class BbajiSpotViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        bindNetworkStatus()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,7 +102,7 @@ final class BbajiSpotViewController: UIViewController {
         configureLayout()
         configureStyle()
         configureComponent()
-        bind(weatherViewModel: weatherViewModel, spotViewModel: spotViewModel)
+        bind()
     }
     
     private func configureLayout() {
@@ -170,7 +177,7 @@ final class BbajiSpotViewController: UIViewController {
         setUpLiveCameraViewConstraints(screenStatus: .normal)
     }
     
-    private func bind(weatherViewModel: SpotWeatherViewModel?, spotViewModel: SpotViewModel?) {
+    private func bind() {
         weatherViewModel?.$weatherData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherData in
@@ -210,6 +217,18 @@ final class BbajiSpotViewController: UIViewController {
                 } else {
                     self?.liveMarkView.liveMarkActive(to: false)
                     self?.liveCameraView.stanbyView.stopLoadingAnimation()
+                }
+            }.store(in: &cancellables)
+        
+        networkViewModel?.$isNetworkConnected
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isNetworkConnected in
+                guard let isNetworkConnected = isNetworkConnected else { return }
+                if isNetworkConnected {
+                    self?.dismissPresentedAlert()
+                    self?.weatherViewModel?.receiveBbajiWeatherData()
+                } else {
+                    self?.showNetworkStatusAlert()
                 }
             }.store(in: &cancellables)
     }
@@ -295,26 +314,5 @@ extension BbajiSpotViewController
             view.backgroundColor = backgroundColor
             view.layoutIfNeeded()
         })
-    }
-}
-
-private extension BbajiSpotViewController {
-    func bindNetworkStatus() {
-        NetworkManager.shared.$networkConnectionStatus
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] networkConnectionStatus in
-                guard let networkStatus = networkConnectionStatus else { return }
-                switch networkStatus {
-                case .satisfied:
-                    self?.dismissPresentedAlert()
-                    self?.weatherViewModel?.receiveBbajiWeatherData()
-                case .unsatisfied:
-                    self?.showNetworkStatusAlert()
-                case .requiresConnection:
-                    self?.dismissPresentedAlert()
-                @unknown default:
-                    fatalError()
-                }
-            }.store(in: &cancellables)
     }
 }

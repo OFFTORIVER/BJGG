@@ -20,6 +20,7 @@
 		3A1D45C62A46C2FC00DFA036 /* SpotInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D45C52A46C2FC00DFA036 /* SpotInfoViewModel.swift */; };
 		3A2202402A56CC54009DB223 /* NWPathMonitor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A22023F2A56CC54009DB223 /* NWPathMonitor+.swift */; };
 		3A396BC029CC4D1C009B0545 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */; };
+		3A42EBA02AEE0F28000B49E1 /* NetworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42EB9F2AEE0F28000B49E1 /* NetworkViewModel.swift */; };
 		3A4A81F928EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A81F828EDB47600D1FA20 /* SpotWeatherAPIInfoView.swift */; };
 		3A53021629DC26CA00888CFA /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A53021529DC26CA00888CFA /* CombineCocoa */; };
 		3A53021829DC272300888CFA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53021729DC272300888CFA /* SpotViewModel.swift */; };
@@ -350,6 +351,7 @@
 			children = (
 				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
 				3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */,
+				3A42EB9F2AEE0F28000B49E1 /* NetworkViewModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -563,6 +565,7 @@
 				3AA636A029A65F3F006BB5EF /* XCConfigError.swift in Sources */,
 				3A53022729DD9EEC00888CFA /* ControlStatus.swift in Sources */,
 				3A5E18F328E4570000CBEDE3 /* UILabel+CopyLabelText.swift in Sources */,
+				3A42EBA02AEE0F28000B49E1 /* NetworkViewModel.swift in Sources */,
 				3A1D45C62A46C2FC00DFA036 /* SpotInfoViewModel.swift in Sources */,
 				3AF5BFC32AD7AA66004741CD /* UIViewController+.swift in Sources */,
 				3A1D45C22A46A66900DFA036 /* SpotLiveCameraViewModel.swift in Sources */,
