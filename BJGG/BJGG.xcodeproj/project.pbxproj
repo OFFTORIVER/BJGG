@@ -12,6 +12,8 @@
 		0665799F2A77F39200AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665799E2A77F39200AA3852 /* StubWeather.swift */; };
 		066579A72A77F50A00AA3852 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 066579A62A77F50A00AA3852 /* CombineCocoa */; };
 		066579A92A7D1D4000AA3852 /* StubWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665799E2A77F39200AA3852 /* StubWeather.swift */; };
+		069B29572AEE5CE8009AC189 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069B29562AEE5CE8009AC189 /* WeatherService.swift */; };
+		069B29592AEFF05A009AC189 /* Int+toString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069B29582AEFF059009AC189 /* Int+toString.swift */; };
 		06B1AFE92A6EA5F700CA712A /* ForecastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */; };
 		06B1AFEC2A6EA8D400CA712A /* ComputableWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */; };
 		3A124ABC28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */; };
@@ -90,9 +92,12 @@
 
 /* Begin PBXFileReference section */
 		062064962A6D854C00B441CF /* WeatherDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDTO.swift; sourceTree = "<group>"; };
-		066579152A714BC700AA3852 /* BJGGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BJGGTests.xctest; path = "/Users/jaewoonglee/Documents/Develop/AppleDeveloperAcademy/GoToBBAGI/BJGG/BJGG/build/Debug-iphoneos/BJGGTests.xctest"; sourceTree = "<absolute>"; };
 		066579172A714BC700AA3852 /* ForecastManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManagerTests.swift; sourceTree = "<group>"; };
 		0665799E2A77F39200AA3852 /* StubWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubWeather.swift; sourceTree = "<group>"; };
+		069B29542AEE409C009AC189 /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BJGG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		069B29552AEE409C009AC189 /* BJGGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BJGGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		069B29562AEE5CE8009AC189 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		069B29582AEFF059009AC189 /* Int+toString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+toString.swift"; sourceTree = "<group>"; };
 		06B1AFE82A6EA5F700CA712A /* ForecastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManager.swift; sourceTree = "<group>"; };
 		06B1AFEB2A6EA8D400CA712A /* ComputableWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputableWeather.swift; sourceTree = "<group>"; };
 		3A124ABB28DA037500D0EAA1 /* SpotTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -147,7 +152,6 @@
 		553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		558D99D829A5D8F900D633BF /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BJGG.app; path = "/Users/jaewoonglee/Documents/Develop/AppleDeveloperAcademy/GoToBBAGI/BJGG/BJGG/build/Debug-iphoneos/BJGG.app"; sourceTree = "<absolute>"; };
 		55CB0AA728BA4F9F0045644C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		55CB0AB028BA4FA10045644C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 				3A5E18F428E8A89F00CBEDE3 /* UIDevice+DeviceCheck.swift */,
 				55F0AE6029BF5DE4003B5EEE /* Date+Weather.swift */,
 				3A53021B29DC64D400888CFA /* UIView+.swift */,
+				069B29582AEFF059009AC189 /* Int+toString.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */,
+				069B29562AEE5CE8009AC189 /* WeatherService.swift */,
 				3A396BBF29CC4D1C009B0545 /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -361,6 +367,8 @@
 				55CB0AA628BA4F9F0045644C /* BJGG */,
 				066579162A714BC700AA3852 /* BJGGTests */,
 				066579A52A77F50A00AA3852 /* Frameworks */,
+				069B29542AEE409C009AC189 /* BJGG.app */,
+				069B29552AEE409C009AC189 /* BJGGTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -417,7 +425,7 @@
 				066579A62A77F50A00AA3852 /* CombineCocoa */,
 			);
 			productName = BJGGTests;
-			productReference = 066579152A714BC700AA3852 /* BJGGTests.xctest */;
+			productReference = 069B29552AEE409C009AC189 /* BJGGTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		55CB0AA328BA4F9F0045644C /* BJGG */ = {
@@ -438,7 +446,7 @@
 				3A53021529DC26CA00888CFA /* CombineCocoa */,
 			);
 			productName = BJGG;
-			productReference = 55CB0AA428BA4F9F0045644C /* BJGG.app */;
+			productReference = 069B29542AEE409C009AC189 /* BJGG.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -536,6 +544,7 @@
 				553F0FA128E4C58600FD9CDA /* BbajiListCellShadowView.swift in Sources */,
 				3AA636E929B4DE6D006BB5EF /* SpotLiveCameraStandbyView.swift in Sources */,
 				55F0AE6129BF5DE4003B5EEE /* Date+Weather.swift in Sources */,
+				069B29572AEE5CE8009AC189 /* WeatherService.swift in Sources */,
 				3A53022329DD9EB500888CFA /* WeatherData.swift in Sources */,
 				55CB0ABC28BB41C60045644C /* BbajiHomeViewController.swift in Sources */,
 				553F0FA328E4D5AA00FD9CDA /* BbajiListCellPreviewView.swift in Sources */,
@@ -572,6 +581,7 @@
 				3A7E3BDF28D748B000F6416A /* BbajiInfo.swift in Sources */,
 				5510CA4429E58FF200A1AF36 /* BbajiHomeViewModel.swift in Sources */,
 				553F0F9A28E49DF800FD9CDA /* BbajiListView.swift in Sources */,
+				069B29592AEFF05A009AC189 /* Int+toString.swift in Sources */,
 				3AA636E729B4C8CA006BB5EF /* SpotLiveCameraGradientView.swift in Sources */,
 				3A53021A29DC649B00888CFA /* Combine+GestureRecognizer.swift in Sources */,
 				55CB0AAA28BA4F9F0045644C /* SceneDelegate.swift in Sources */,
