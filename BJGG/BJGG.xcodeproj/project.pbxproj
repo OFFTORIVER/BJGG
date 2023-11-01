@@ -769,6 +769,7 @@
 		};
 		55CB0AB928BA4FA10045644C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A1D45C72A49816E00DFA036 /* Private.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -801,12 +802,13 @@
 		};
 		55CB0ABA28BA4FA10045644C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A1D45C72A49816E00DFA036 /* Private.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UAM52RQFW9;
+				DEVELOPMENT_TEAM = 8B3RT7D582;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BJGG/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "빠지가까";
