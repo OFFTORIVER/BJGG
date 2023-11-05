@@ -17,12 +17,14 @@ protocol ViewModelType {
 }
 
 final class SpotViewModel: ViewModelType {
-    @Published private(set) var screenSizeStatus: ScreenSizeStatus = .origin
-    
     private var cancellables = Set<AnyCancellable>()
+    private var networkManager: NetworkManager
+    
+    init(networkManager: NetworkManager = NetworkManager.shared) {
+        self.networkManager = networkManager
+    }
     
     struct Input {
-        let screenSizeButtonTapPublisher: AnyPublisher<Void, Never>?
         let willEnterForeground: NotificationCenter.Publisher?
         let didEnterBackground: NotificationCenter.Publisher?
     }
@@ -33,10 +35,6 @@ final class SpotViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         let willEnterForeground = PassthroughSubject<Bool, Never>()
-        
-        input.screenSizeButtonTapPublisher?.sink { [weak self] _ in
-            self?.changeScreenSizeStatus()
-        }.store(in: &cancellables)
         
         input.didEnterBackground?.sink { _ in
             willEnterForeground.send(false)
@@ -49,11 +47,7 @@ final class SpotViewModel: ViewModelType {
         return Output(willEnterForeground: willEnterForeground)
     }
     
-    func changeScreenSizeStatus() {
-        if screenSizeStatus == .normal || screenSizeStatus == .origin {
-            screenSizeStatus = .full
-        } else {
-            screenSizeStatus = .normal
-        }
+    func isNetworkConnected() -> Published<Bool?>.Publisher {
+        return networkManager.$isNetworkConnected
     }
 }

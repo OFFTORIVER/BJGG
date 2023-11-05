@@ -36,12 +36,18 @@ final class BbajiSpotViewController: UIViewController {
     private var firstAttempt: Bool = true
     
     private var infoViewModel: SpotInfoViewModel?
-    private var weatherViewModel: SpotWeatherViewModel?
+    var weatherViewModel: SpotWeatherViewModel?
     private var spotViewModel: SpotViewModel?
     private var liveCameraViewModel: SpotLiveCameraViewModel?
+    
     private var cancellables = Set<AnyCancellable>()
 
-    init(infoViewModel: SpotInfoViewModel, weatherViewModel: SpotWeatherViewModel, spotViewModel: SpotViewModel, liveCameraViewModel: SpotLiveCameraViewModel) {
+    init(
+        infoViewModel: SpotInfoViewModel,
+        weatherViewModel: SpotWeatherViewModel = SpotWeatherViewModel(),
+        spotViewModel: SpotViewModel = SpotViewModel(),
+        liveCameraViewModel: SpotLiveCameraViewModel = SpotLiveCameraViewModel()
+    ) {
         super.init(nibName: nil, bundle: nil)
         self.infoViewModel = infoViewModel
         self.weatherViewModel = weatherViewModel
@@ -66,7 +72,7 @@ final class BbajiSpotViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         var isStatusBarHidden = false
-        spotViewModel?.$screenSizeStatus.sink { status in
+        liveCameraViewModel?.$screenSizeStatus.sink { status in
             switch status {
             case .full:
                 isStatusBarHidden = true
@@ -79,7 +85,7 @@ final class BbajiSpotViewController: UIViewController {
 
     override var prefersHomeIndicatorAutoHidden: Bool {
         var isHomeIndicatorAutoHidden = false
-        spotViewModel?.$screenSizeStatus.sink { status in
+        liveCameraViewModel?.$screenSizeStatus.sink { status in
             switch status {
             case .full:
                 isHomeIndicatorAutoHidden = true
@@ -94,7 +100,7 @@ final class BbajiSpotViewController: UIViewController {
         configureLayout()
         configureStyle()
         configureComponent()
-        bind(weatherViewModel: weatherViewModel, spotViewModel: spotViewModel)
+        bind()
     }
     
     private func configureLayout() {
@@ -169,7 +175,7 @@ final class BbajiSpotViewController: UIViewController {
         setUpLiveCameraViewConstraints(screenStatus: .normal)
     }
     
-    private func bind(weatherViewModel: SpotWeatherViewModel?, spotViewModel: SpotViewModel?) {
+    private func bind() {
         weatherViewModel?.$weatherData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherData in
@@ -187,7 +193,7 @@ final class BbajiSpotViewController: UIViewController {
                 self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
             }.store(in: &cancellables)
         
-        spotViewModel?.$screenSizeStatus
+        liveCameraViewModel?.$screenSizeStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 if status == .origin { return }
@@ -195,7 +201,6 @@ final class BbajiSpotViewController: UIViewController {
         }.store(in: &cancellables)
         
         let input = SpotViewModel.Input(
-            screenSizeButtonTapPublisher: nil,
             willEnterForeground: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification), didEnterBackground: NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
         )
         
@@ -205,10 +210,22 @@ final class BbajiSpotViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] willEnterForeground in
                 if willEnterForeground {
-                    self?.liveCameraView.liveCameraViewModel?.changePlayStatus(as: .origin)
+                    self?.liveCameraView.changePlayStatus(as: .origin)
                 } else {
                     self?.liveMarkView.liveMarkActive(to: false)
                     self?.liveCameraView.stanbyView.stopLoadingAnimation()
+                }
+            }.store(in: &cancellables)
+        
+        spotViewModel?.isNetworkConnected()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isNetworkConnected in
+                guard let isNetworkConnected = isNetworkConnected else { return }
+                if isNetworkConnected {
+                    self?.dismissPresentedAlert()
+                    self?.weatherViewModel?.receiveBbajiWeatherData()
+                } else {
+                    self?.showNetworkStatusAlert()
                 }
             }.store(in: &cancellables)
     }
