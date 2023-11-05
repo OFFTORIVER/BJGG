@@ -13,6 +13,9 @@ final class BbajiConstraints {
     
     static let space6: CGFloat = 6.0
     
+    // icon과 icon 이름 간 간격 constraint
+    static let iconNameOffset: CGFloat = 6.0
+    
     // icon 간 간격 constraint
     static let space8: CGFloat = 8.0
     
