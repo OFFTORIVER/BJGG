@@ -13,13 +13,15 @@ import SnapKit
 final class SpotLiveCameraControlView: UIView {
 
     private var gradientView: SpotLiveCameraGradientView = SpotLiveCameraGradientView()
-    private lazy var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton(spotViewModel: spotViewModel ?? SpotViewModel())
+    private lazy var screenSizeControlButton: ScreenSizeControlButton = ScreenSizeControlButton(spotLiveCameraViewModel: spotLiveCameraViewModel)
     
     private var spotViewModel: SpotViewModel?
+    private var spotLiveCameraViewModel: SpotLiveCameraViewModel?
     
-    init(spotViewModel: SpotViewModel) {
+    init(spotViewModel: SpotViewModel?, spotLiveCameraViewModel: SpotLiveCameraViewModel?) {
         super.init(frame: CGRect.zero)
         self.spotViewModel = spotViewModel
+        self.spotLiveCameraViewModel = spotLiveCameraViewModel
         configureLayout()
     }
     

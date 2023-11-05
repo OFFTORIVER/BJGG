@@ -15,12 +15,10 @@ final class BbajiHomeViewController: UIViewController {
     private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
     
     private let viewModel: BbajiHomeViewModel
-    private let networkViewModel: NetworkViewModel
     private var cancellable = Set<AnyCancellable>()
     
-    init(viewModel: BbajiHomeViewModel = BbajiHomeViewModel(), networkViewModel: NetworkViewModel = NetworkViewModel()) {
+    init(viewModel: BbajiHomeViewModel = BbajiHomeViewModel()) {
         self.viewModel = viewModel
-        self.networkViewModel = networkViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +40,7 @@ final class BbajiHomeViewController: UIViewController {
             self.bbajiListView.reloadData()
         }.store(in: &cancellable)
         
-        networkViewModel.$isNetworkConnected
+        viewModel.isNetworkConnected()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isNetworkConnected in
                 guard let isNetworkConnected = isNetworkConnected else { return }
@@ -85,7 +83,9 @@ extension BbajiHomeViewController: UICollectionViewDataSource {
 extension BbajiHomeViewController: BbajiListViewDelegate {
     func didSelectItem(index: Int) {
         // TODO: BbajiHomeViewModel에서 [BbajiInfo]의 데이터 넘김을 바탕으로 SpotInfoViewModel 초기화하기
-        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo()), networkViewModel: networkViewModel), animated: true)
+        self.navigationController?.pushViewController(
+            BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo())),
+            animated: true)
     }
 }
 
