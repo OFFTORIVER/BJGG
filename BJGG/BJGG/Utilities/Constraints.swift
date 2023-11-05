@@ -11,6 +11,9 @@ final class BbajiConstraints {
     // label 간 간격 constraint
     static let labelOffset: CGFloat = 4.0
     
+    // icon과 icon 이름 간 간격 constraint
+    static let iconNameOffset: CGFloat = 6.0
+    
     // icon 간 간격 constraint
     static let iconOffset: CGFloat = 8.0
     

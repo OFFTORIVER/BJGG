@@ -20,6 +20,11 @@ final class BbajiSpotViewController: UIViewController {
         return view
     }()
     
+    private lazy var spotAvailableServiceView: SpotAvailableServiceView = {
+        let view = SpotAvailableServiceView()
+        return view
+    }()
+    
     private var spotWeatherInfoView: SpotWeatherInfoView = {
         let view = SpotWeatherInfoView()
         view.backgroundColor = .bbagaGray4
@@ -108,7 +113,6 @@ final class BbajiSpotViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         let viewWidth = UIScreen.main.bounds.width
         let defaultMargin = BbajiConstraints.superViewInset
-        let viewToViewMargin = BbajiConstraints.componentOffset
         let liveCameraViewHeight = viewWidth * 9 / 16
         screenWidth = viewWidth
 
@@ -142,12 +146,13 @@ final class BbajiSpotViewController: UIViewController {
             make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width)
-            make.height.equalTo(UIDevice.current.hasNotch ? 508 : 508 - 32)
+            make.height.equalTo(UIDevice.current.hasNotch ? 631 : 631 - 32)
         }
         infoScrollView.showsVerticalScrollIndicator = false
         
         [
             spotInfoView,
+            spotAvailableServiceView,
             spotWeatherInfoView
         ].forEach { infoScrollContentView.addSubview($0) }
 
@@ -158,8 +163,14 @@ final class BbajiSpotViewController: UIViewController {
             make.height.equalTo(108 + BbajiConstraints.viewInset * 4)
         }
 
+        spotAvailableServiceView.snp.makeConstraints { make in
+                make.top.equalTo(spotInfoView.snp.bottom).offset(BbajiConstraints.iconNameOffset)
+                make.leading.equalTo(infoScrollContentView.snp.leading)
+                make.trailing.equalTo(infoScrollContentView.snp.trailing)
+                make.height.equalTo(123)
+        }
         spotWeatherInfoView.snp.makeConstraints { make in
-            make.top.equalTo(spotInfoView.snp.bottom).offset(viewToViewMargin)
+            make.top.equalTo(spotAvailableServiceView.snp.bottom).offset(BbajiConstraints.iconNameOffset)
             make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
             make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
             make.height.equalTo(UIDevice.current.hasNotch ? 306 : 290)
