@@ -17,7 +17,7 @@ final class SpotInfoView: UIView {
         let font = UIFont(name: UIFont.Pretendard.semiBold.rawValue, size: 14.0) ?? UIFont()
         label.configureLabelStyle(font: font, alignment: .left)
         label.textColor = .bbagaGray2
-        // TODO: BbajiInfo Model 수정 시 함께 변경하기
+        // TODO: BbajiInfo Model 수정 시 함께 변경
         label.text = "한강"
         return label
     }()

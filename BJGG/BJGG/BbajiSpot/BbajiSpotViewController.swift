@@ -189,18 +189,23 @@ final class BbajiSpotViewController: UIViewController {
         weatherViewModel?.$weatherData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherData in
-                guard let self = self,
-                      let weatherData = weatherData else { return }
-                self.spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherData: weatherData)
-                self.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
+                guard let weatherData = weatherData else { return }
+                self?.spotWeatherInfoView.reloadWeatherData(weatherAPIIsSuccess: true, weatherData: weatherData)
+                self?.spotWeatherInfoView.setCurrentTemperatureLabelValue(temperatureStr: weatherData[0].temp)
             }.store(in: &cancellables)
         
         weatherViewModel?.$rainData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rainData in
-                guard let self = self,
-                let rainData = rainData else { return }
-                self.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
+                guard let rainData = rainData else { return }
+                self?.spotWeatherInfoView.setRainInfoLabelTextAndColor(text: rainData)
+            }.store(in: &cancellables)
+        
+        weatherViewModel?.$waterData
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] waterTemperatureData in
+                guard let waterTemperatureData = waterTemperatureData else { return }
+                self?.spotWeatherInfoView.setCurrentWaterTemperature(as: waterTemperatureData.temperature)
             }.store(in: &cancellables)
         
         liveCameraViewModel?.$screenSizeStatus

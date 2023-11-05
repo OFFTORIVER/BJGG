@@ -31,17 +31,17 @@ final class SpotWeatherInfoView: UIView {
     }()
     private lazy var riverNameLabel: UILabel = {
         let label = UILabel()
-        label.configureLabelStyle(font: .bbajiFont(.heading7), alignment: .left)
+        label.configureLabelStyle(font: .bbajiFont(.heading8), alignment: .left)
         label.textColor = .bbagaGray2
-        label.text = "한강" // TEST
+        // TODO: BbajiInfo Model 수정 시 함께 변경
+        label.text = "한강"
         return label
     }()
     private lazy var riverTemperatureLabel: UILabel = {
         let label = UILabel()
-        label.configureLabelStyle(font: .bbajiFont(.heading6), alignment: .left)
+        label.configureLabelStyle(font: .bbajiFont(.heading7), alignment: .left)
         label.textColor = .bbagaGray1
-//        label.text =  "--°"
-        label.text =  "17°" // TEST
+        label.text =  "--°"
         return label
     }()
     
@@ -303,6 +303,10 @@ extension SpotWeatherInfoView {
     func setCurrentWeatherImg() {
         let currentWeatherImgName = "\(currentWeatherInfo[0].iconName)"
         currentWeatherIcon.image = UIImage(named: currentWeatherImgName)
+    }
+    
+    func setCurrentWaterTemperature(as value: String) {
+        riverTemperatureLabel.text = "\(value)°"
     }
 }
 
