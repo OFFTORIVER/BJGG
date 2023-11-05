@@ -155,7 +155,6 @@
 		553F0FA828E9E80D00FD9CDA /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		558CECE928DC64EF00AFCF50 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		558D99D829A5D8F900D633BF /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		55CB0AA428BA4F9F0045644C /* BJGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BJGG.app; path = "/Users/jaewoonglee/Documents/Develop/AppleDeveloperAcademy/GoToBBAGI/BJGG/BJGG/build/Debug-iphoneos/BJGG.app"; sourceTree = "<absolute>"; };
 		55CB0AA728BA4F9F0045644C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55CB0AA928BA4F9F0045644C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		55CB0AB028BA4FA10045644C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };

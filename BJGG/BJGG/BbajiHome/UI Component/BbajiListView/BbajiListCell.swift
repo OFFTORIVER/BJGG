@@ -115,7 +115,7 @@ extension BbajiListCell {
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(BbajiConstraints.labelOffset)
+            $0.top.equalTo(locationLabel.snp.bottom).offset(BbajiConstraints.space4)
             $0.leading.equalTo(locationLabel.snp.leading)
             $0.bottom.equalToSuperview().inset(BbajiConstraints.viewInset)
         }
@@ -128,7 +128,7 @@ extension BbajiListCell {
         
         weatherImageView.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.top)
-            $0.trailing.equalTo(tempLabel.snp.leading).offset(-BbajiConstraints.labelOffset)
+            $0.trailing.equalTo(tempLabel.snp.leading).offset(-BbajiConstraints.space4)
             $0.width.equalTo(iconWidth)
             $0.height.equalTo(iconWidth)
         }

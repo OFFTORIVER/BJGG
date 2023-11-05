@@ -58,7 +58,7 @@ final class SpotLiveCameraStandbyView: UIView {
         
         self.addSubview(subLabel)
         subLabel.snp.makeConstraints { make in
-            make.top.equalTo(mainLabel.snp.bottom).inset(BbajiConstraints.iconOffset)
+            make.top.equalTo(mainLabel.snp.bottom).inset(BbajiConstraints.space8)
             make.centerX.equalTo(mainLabel)
             make.width.equalTo(self.snp.width)
             make.height.equalTo(36)

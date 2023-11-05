@@ -66,7 +66,7 @@ extension BbajiTitleView {
         }
         
         bbajiTitleDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(bbajiTitleNameLabel.snp.bottom).offset(BbajiConstraints.iconOffset)
+            $0.top.equalTo(bbajiTitleNameLabel.snp.bottom).offset(BbajiConstraints.space8)
             $0.centerX.equalToSuperview()
         }
     }

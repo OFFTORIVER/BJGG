@@ -112,7 +112,6 @@ final class BbajiSpotViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         let viewWidth = UIScreen.main.bounds.width
-        let defaultMargin = BbajiConstraints.superViewInset
         let liveCameraViewHeight = viewWidth * 9 / 16
         screenWidth = viewWidth
 
@@ -164,16 +163,16 @@ final class BbajiSpotViewController: UIViewController {
         }
 
         spotAvailableServiceView.snp.makeConstraints { make in
-                make.top.equalTo(spotInfoView.snp.bottom).offset(BbajiConstraints.iconNameOffset)
+                make.top.equalTo(spotInfoView.snp.bottom).offset(BbajiConstraints.space6)
                 make.leading.equalTo(infoScrollContentView.snp.leading)
                 make.trailing.equalTo(infoScrollContentView.snp.trailing)
                 make.height.equalTo(123)
         }
         spotWeatherInfoView.snp.makeConstraints { make in
-            make.top.equalTo(spotAvailableServiceView.snp.bottom).offset(BbajiConstraints.iconNameOffset)
-            make.leading.equalTo(infoScrollContentView.snp.leading).inset(defaultMargin)
-            make.trailing.equalTo(infoScrollContentView.snp.trailing).inset(defaultMargin)
-            make.height.equalTo(UIDevice.current.hasNotch ? 306 : 290)
+            make.top.equalTo(spotAvailableServiceView.snp.bottom).offset(BbajiConstraints.space6)
+            make.leading.equalTo(infoScrollContentView.snp.leading)
+            make.trailing.equalTo(infoScrollContentView.snp.trailing)
+            make.height.equalTo(UIDevice.current.hasNotch ? 311 : 295)
         }
     }
     
