@@ -81,7 +81,8 @@ final class SpotAvailableServiceView: UIView {
         // TODO: Networking Result Receive
         let providedServiceInfoList: [BbajiServiceInfo] = [
             BbajiServiceInfo.lockerRoom,
-            BbajiServiceInfo.buoy,
+            BbajiServiceInfo.equipmentRental,
+            BbajiServiceInfo.dogCompanion,
         ]
         
         configureComponent(serviceInfoList: providedServiceInfoList)

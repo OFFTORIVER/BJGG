@@ -11,6 +11,7 @@ import UIKit
 
 
 final class SpotLiveCameraViewModel: ViewModelType {
+    @Published private(set) var screenSizeStatus: ScreenSizeStatus = .origin
     @Published private(set) var playStatus: PlayStatus = .origin
     
     private var controlStatus: CurrentValueSubject<ControlStatus, Never> = CurrentValueSubject(.hidden)
@@ -19,6 +20,7 @@ final class SpotLiveCameraViewModel: ViewModelType {
     struct Input {
         let cameraViewTapPublisher: AnyPublisher<UITapGestureRecognizer, Never>?
         let reloadButtonTapPublisher: AnyPublisher<Void, Never>?
+        let screenSizeButtonTapPublisher: AnyPublisher<Void, Never>?
         let playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>?
     }
     
@@ -35,6 +37,9 @@ final class SpotLiveCameraViewModel: ViewModelType {
             self?.changePlayStatus(as: .origin)
         }.store(in: &cancellables)
         
+        input.screenSizeButtonTapPublisher?.sink { [weak self] _ in
+            self?.changeScreenSizeStatus()
+        }.store(in: &cancellables)
         
         input.playStatus?.sink { [weak self] status in
             switch status {
@@ -63,8 +68,17 @@ final class SpotLiveCameraViewModel: ViewModelType {
         }
     }
     
+    func changeScreenSizeStatus() {
+        if screenSizeStatus == .normal || screenSizeStatus == .origin {
+            screenSizeStatus = .full
+        } else {
+            screenSizeStatus = .normal
+        }
+    }
+    
     func changePlayStatus(as status: PlayStatus) {
         changeControlStatus()
         playStatus = status
     }
+
 }
