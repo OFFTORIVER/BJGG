@@ -14,11 +14,11 @@ final class BbajiHomeViewController: UIViewController {
     private lazy var bbajiListView = BbajiListView()
     private lazy var backgroundImageView = BbajiHomeBackgroundImageView()
     
-    let viewModel: BbajiHomeViewModel
+    private let viewModel: BbajiHomeViewModel
     private var cancellable = Set<AnyCancellable>()
     
-    init(viewMdoel: BbajiHomeViewModel = BbajiHomeViewModel()) {
-        self.viewModel = viewMdoel
+    init(viewModel: BbajiHomeViewModel = BbajiHomeViewModel()) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,8 +30,6 @@ final class BbajiHomeViewController: UIViewController {
         super.viewDidLoad()
         configure()
         bind()
-        
-        viewModel.viewDidLoad()
     }
     
     private func bind() {
@@ -41,6 +39,18 @@ final class BbajiHomeViewController: UIViewController {
             guard let self = self else { return }
             self.bbajiListView.reloadData()
         }.store(in: &cancellable)
+        
+        viewModel.isNetworkConnected()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isNetworkConnected in
+                guard let isNetworkConnected = isNetworkConnected else { return }
+                if isNetworkConnected {
+                    self?.dismissPresentedAlert()
+                    self?.viewModel.fetchWeatherNows()
+                } else {
+                    self?.showNetworkStatusAlert()
+                }
+            }.store(in: &cancellable)
     }
     
     private func configure() {
@@ -73,7 +83,9 @@ extension BbajiHomeViewController: UICollectionViewDataSource {
 extension BbajiHomeViewController: BbajiListViewDelegate {
     func didSelectItem(index: Int) {
         // TODO: BbajiHomeViewModel에서 [BbajiInfo]의 데이터 넘김을 바탕으로 SpotInfoViewModel 초기화하기
-        self.navigationController?.pushViewController(BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo()), weatherViewModel: SpotWeatherViewModel(), spotViewModel: SpotViewModel(), liveCameraViewModel: SpotLiveCameraViewModel()), animated: true)
+        self.navigationController?.pushViewController(
+            BbajiSpotViewController(infoViewModel: SpotInfoViewModel(info: BbajiInfo())),
+            animated: true)
     }
 }
 

@@ -13,9 +13,11 @@ final class BbajiHomeViewModel: ObservableObject {
     private var bbajiInfo = CurrentValueSubject<BbajiInfo, Never>(BbajiInfo())
     private var cancellable = Set<AnyCancellable>()
     private var weatherManager: WeatherManager
+    private var networkManager: NetworkManager
     
-    init(weatherManager: WeatherManager = WeatherManager()) {
+    init(weatherManager: WeatherManager = WeatherManager(), networkManager: NetworkManager = NetworkManager.shared) {
         self.weatherManager = weatherManager
+        self.networkManager = networkManager
     }
     
     func viewDidLoad() {
@@ -58,6 +60,10 @@ final class BbajiHomeViewModel: ObservableObject {
             }
         }
         .store(in: &cancellable)
+    }
+    
+    func isNetworkConnected() -> Published<Bool?>.Publisher {
+        return networkManager.$isNetworkConnected
     }
 }
 

@@ -14,7 +14,7 @@ import UIKit
 final class SpotLiveCameraView: UIView {
     
     lazy var videoPlayerControlView: SpotLiveCameraControlView = {
-        let view = SpotLiveCameraControlView(spotViewModel: spotViewModel ?? SpotViewModel())
+        let view = SpotLiveCameraControlView(spotViewModel: spotViewModel, spotLiveCameraViewModel: liveCameraViewModel)
         view.alpha = 0.0
         return view
     }()
@@ -49,7 +49,7 @@ final class SpotLiveCameraView: UIView {
     private var playerItem: AVPlayerItem?
     
     private var spotViewModel: SpotViewModel?
-    var liveCameraViewModel: SpotLiveCameraViewModel?
+    private var liveCameraViewModel: SpotLiveCameraViewModel?
     private var cancellables = Set<AnyCancellable>()
     
     init(spotViewModel: SpotViewModel, liveCameraViewModel: SpotLiveCameraViewModel) {
@@ -127,6 +127,7 @@ final class SpotLiveCameraView: UIView {
         let input = SpotLiveCameraViewModel.Input(
             cameraViewTapPublisher: tapGesture.tapPublisher,
             reloadButtonTapPublisher: reloadButton.tapPublisher,
+            screenSizeButtonTapPublisher: nil,
             playStatus: nil
         )
         
@@ -205,6 +206,7 @@ final class SpotLiveCameraView: UIView {
             let input = SpotLiveCameraViewModel.Input(
                 cameraViewTapPublisher: nil,
                 reloadButtonTapPublisher: nil,
+                screenSizeButtonTapPublisher: nil,
                 playStatus: CurrentValueSubject<AVPlayerItem.Status, Never>(status)
             )
             
@@ -229,9 +231,12 @@ final class SpotLiveCameraView: UIView {
     }
 }
 
-// MARK: ViewModel 호출 메소드
 extension SpotLiveCameraView {
     private func changeReloadButtonActiveStatus(as active: Bool) {
         reloadButton.isHidden = !active
+    }
+    
+    func changePlayStatus(as status: PlayStatus) {
+        liveCameraViewModel?.changePlayStatus(as: status)
     }
 }

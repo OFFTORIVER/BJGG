@@ -138,7 +138,7 @@ final class SpotWeatherInfoView: UIView {
         
         riverIcon.snp.makeConstraints { make in
             make.leading.equalTo(weatherRiverDivideLine.snp.trailing).offset(BbajiConstraints.space16)
-            make.top.equalTo(currentWeatherIconAndLabel.snp.top).offset(BbajiConstraints.space4)x
+            make.top.equalTo(currentWeatherIconAndLabel.snp.top).offset(BbajiConstraints.space4)
             make.width.height.equalTo(20)
         }
         
