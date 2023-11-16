@@ -35,7 +35,9 @@ extension UIFont {
         case heading6
         case heading7
         case heading8
+        case heading9
         case body1
+        case body2
         case button1
         case rainyCaption
     }
@@ -58,8 +60,12 @@ extension UIFont {
             return UIFont(name: Pretendard.bold.rawValue, size: 20.0) ?? UIFont()
         case .heading8:
             return UIFont(name: Pretendard.bold.rawValue, size: 16.0) ?? UIFont()
+        case .heading9:
+            return UIFont(name: Pretendard.bold.rawValue, size: 14.0) ?? UIFont()
         case .body1:
             return UIFont(name: Pretendard.medium.rawValue, size: 15.0) ?? UIFont()
+        case .body2:
+            return UIFont(name: Pretendard.medium.rawValue, size: 14.0) ?? UIFont()
         case .button1:
             return UIFont(name: Pretendard.medium.rawValue, size: 15.0) ?? UIFont()
         case .rainyCaption:

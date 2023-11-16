@@ -8,6 +8,7 @@
 import UIKit
 
 final class BbajiConstraints {
+    static let space2: CGFloat = 2.0
     // label 간 간격 constraint
     static let space4: CGFloat = 4.0
     
@@ -29,6 +30,8 @@ final class BbajiConstraints {
     static let viewInset: CGFloat = UIDevice.current.hasNotch ? 20.0 : 16.0
     
     static let space20: CGFloat = 20.0
+    
+    static let space32: CGFloat = 32.0
     
     private init() { }
 }
