@@ -55,10 +55,10 @@ final class UnderlineSegmentedControlView: UIView {
         return selectedSegmentPublisher.eraseToAnyPublisher()
     }
     
-    init(items: [Any]?) {
+    init(titleList: [String]?) {
         super.init(frame: .zero)
         configure()
-        configureSegments(items: items)
+        configureSegments(titleList: titleList)
         bind()
     }
     
@@ -101,15 +101,13 @@ final class UnderlineSegmentedControlView: UIView {
         self.backgroundColor = .bbagaGray4
     }
     
-    private func configureSegments(items: [Any]?) {
-        items?.forEach { item in
-            if let title = item as? String {
-                let button = UIButton()
-                buttonStackView.addArrangedSubview(button)
-                configureButtonStyle(title: title, button: button)
-                configureUnderlineViewXPosition(button: button)
-                segmentButtons.append(button)
-            }
+    private func configureSegments(titleList: [String]?) {
+        titleList?.forEach { title in
+            let button = UIButton()
+            buttonStackView.addArrangedSubview(button)
+            configureButtonStyle(title: title, button: button)
+            configureUnderlineViewXPosition(button: button)
+            segmentButtons.append(button)
         }
     }
     

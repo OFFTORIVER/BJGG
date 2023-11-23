@@ -26,7 +26,7 @@ final class BbajiSpotViewController: UIViewController {
     }()
     
     private var infoSegmentedControl: UnderlineSegmentedControlView = {
-        let view = UnderlineSegmentedControlView(items: [
+        let view = UnderlineSegmentedControlView(titleList: [
             "날씨/수온",
             "운영",
             "종목/가격",
