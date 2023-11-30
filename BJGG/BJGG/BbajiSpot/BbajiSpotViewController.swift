@@ -25,6 +25,17 @@ final class BbajiSpotViewController: UIViewController {
         return view
     }()
     
+    private var infoSegmentedControl: UnderlineSegmentedControlView = {
+        let view = UnderlineSegmentedControlView(titleList: [
+            "날씨/수온",
+            "운영",
+            "종목/가격",
+            "코치",
+            "보트"
+        ])
+        return view
+    }()
+    
     private var spotWeatherInfoView: SpotWeatherInfoView = {
         let view = SpotWeatherInfoView()
         view.backgroundColor = .bbagaGray4
@@ -38,7 +49,6 @@ final class BbajiSpotViewController: UIViewController {
     }()
     
     private var screenWidth: CGFloat = CGFloat()
-    private var firstAttempt: Bool = true
     
     private var infoViewModel: SpotInfoViewModel?
     var weatherViewModel: SpotWeatherViewModel?
@@ -145,13 +155,14 @@ final class BbajiSpotViewController: UIViewController {
             make.bottom.equalTo(infoScrollView.snp.bottom)
             make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width)
-            make.height.equalTo(UIDevice.current.hasNotch ? 631 : 631 - 32)
+            make.height.equalTo(UIDevice.current.hasNotch ? 674 : 674 - 32)
         }
         infoScrollView.showsVerticalScrollIndicator = false
         
         [
             spotInfoView,
             spotAvailableServiceView,
+            infoSegmentedControl,
             spotWeatherInfoView
         ].forEach { infoScrollContentView.addSubview($0) }
 
@@ -168,8 +179,15 @@ final class BbajiSpotViewController: UIViewController {
                 make.trailing.equalTo(infoScrollContentView.snp.trailing)
                 make.height.equalTo(123)
         }
-        spotWeatherInfoView.snp.makeConstraints { make in
+        
+        infoSegmentedControl.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(view.snp.horizontalEdges)
             make.top.equalTo(spotAvailableServiceView.snp.bottom).offset(BbajiConstraints.space6)
+            make.height.equalTo(43)
+        }
+        
+        spotWeatherInfoView.snp.makeConstraints { make in
+            make.top.equalTo(infoSegmentedControl.snp.bottom).offset(BbajiConstraints.space2)
             make.leading.equalTo(infoScrollContentView.snp.leading)
             make.trailing.equalTo(infoScrollContentView.snp.trailing)
             make.height.equalTo(UIDevice.current.hasNotch ? 311 : 295)
